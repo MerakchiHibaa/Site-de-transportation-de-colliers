@@ -6,7 +6,14 @@
 	text-decoration: none;
 }
 body {
-    height: 100vh;
+   
+    position:relative;
+
+    margin:0;
+    padding:0;
+    overflow:auto; 
+
+    height: 100%;
     font-weight: 400;
     background-color:gray;
    /* display: flex;
@@ -127,7 +134,7 @@ opacity: 1;
 
 
 /******************* MENU  ***********************/
-.menu-bar ul{
+ .menu-bar ul{
     display: inline-flex;
     list-style: none;
     color: white;
@@ -147,11 +154,11 @@ background-color: yellowgreen;
    
     background-color: crimson;
    
-   width: 100%;
+    width: 100%;
     z-index: 1;  
     
 }
-
+ 
 
 /*************************Forms***********************/
 
@@ -320,7 +327,14 @@ background-color: yellowgreen;
   /***************************footer**********************/
 
   footer {
-    color: #442502;
+    position: relative;
+   
+    height:60px;   /* Height of the footer */
+    
+    width:100%;
+
+    color: yellow;
+   bottom: 0;
     text-align: center;
     padding: 1rem;
     font-weight: bolder;
@@ -472,13 +486,24 @@ z-index: -10;    position: absolute;
 
 }
 .container-affich {
-    background-color: #0084a5;
-    margin: 0;
+     /**
+     position: relative;
+
+     width: 50%;
+     height: 100%;
+     float: right;
+     box-sizing: border-box;
+     background: rgba(0, 0, 0, .5);
+ 
+ 
+     **/
+   margin: 0;
     padding: 0 1.5rem;
     box-sizing: border-box;
 
     width: 100%;
     height: 100vh;
+    
     display: flex ; 
     align-items: center;
     justify-content: center;
@@ -487,10 +512,22 @@ z-index: -10;    position: absolute;
 
 
 .ann-affich {
-    width: 100%;
+    /*
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 40px;
+    box-sizing: border-box;
+    
+   */
+
+   
+   width: 100%; 
     max-width: 98rem ;
     padding: 5rem;
-    background-color: red;
+    background-color:green;
     box-shadow: 0 1.4rem 8rem rgba(0, 0, 0, 2);
     display: flex; 
     align-items: center;
@@ -502,7 +539,7 @@ z-index: -10;    position: absolute;
     min-width: 35rem;
     max-width: 35rem;
     height: 30rem;
-    transform: translateX(-8rem) ;
+    transform: translateX(-6rem) ;
     position: relative;
 }
 
@@ -601,3 +638,46 @@ z-index: -10;    position: absolute;
      
  }
  
+
+ /****************LeftBox styling ****************//
+
+ .leftBox-section {
+     width: 100%;
+     height: 100vh;
+     background-size: cover;
+ }
+
+ section .leftbox{
+     width: 50%;
+     height:100% ; 
+     float: left;
+     padding: 50px;
+     box-sizing: border-box;
+
+ }
+ section .leftbox .content {
+     color: #fff;
+     background: rgba(0, 0, 0, .5);
+     padding: 40px;
+     transition: .5s;
+
+ }
+ section .leftbox .content:hover {
+     background: #e91063;
+ }
+
+ section .leftbox .content h1 {
+     margin: 0;
+     padding: 0;
+     font-size: 50px;
+     text-transform: uppercase ;
+
+ }
+
+
+ section .leftbox  .content p{
+     margin: 10px 0 0;
+     padding: 0;
+ }
+
+
