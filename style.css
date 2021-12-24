@@ -49,14 +49,16 @@ filter: invert(0);
 
 .bar-buttons {
     vertical-align: middle;
+    overflow: hidden;
 
   background-color: yellowgreen;
     height: 5rem ;
    margin: 0px;
     padding: 2rem ;
+    float: right; 
+
  
 
-    float: right; 
 
 }
 .btn-up {
@@ -153,6 +155,10 @@ opacity: 1;
 
 
 .form{
+    background-color: #442502;
+    margin: 0 auto;
+    align-items: center;
+    align-content: center;
     /* margin: 500px;
       border:5px solid ;*/
      /* padding: 2rem;*/
@@ -163,7 +169,10 @@ opacity: 1;
       
   }
   .form__input, textarea{
+      background-color: #b2becd;
+     
       display: block;
+
   }
   .form__input{
     
@@ -321,16 +330,19 @@ opacity: 1;
 
 /*******************Slider*********************************************/
 .slider {
+    background-color: #a82dd1;
     width: 800px;
     height: 500px;
     border-radius: 10px;
     overflow: hidden;
+    margin: 0 auto;
+
 
 }
 
 .slides {
     width: 500%;
-    height: 500px;
+    height: 80%;
     display: flex;
 }
 
@@ -339,22 +351,29 @@ opacity: 1;
 }
 
 .slide {
-    width: 20%;
+
+    width: 30%;
     transition: 3s;
 }
 .slide img {
-    width: 800px;
-    height: 500px;
+    width: 100%;
+    height: 90%;
+    top: 0;
+    left: 0;
+   
 }
 
 
 /*Style for manual slide navigation*/
 
 .navigation-manual {
+    background-color: #0084a5;
     position: absolute;
+    overflow: hidden;
     width: 800px;
-    margin-top: 80px ; /*utiliser calc pour ectraire le margin des autres el*/
+    margin-top: 20rem ; /*utiliser calc pour ectraire le margin des autres el*/
     display: flex;
+   
     justify-content: center;
 
 }
@@ -363,6 +382,7 @@ opacity: 1;
     padding: 5px;
     border-radius: 10px;
     cursor: pointer;
+    background-color: transparent;
     transition: 1s;
 
 }
@@ -392,5 +412,51 @@ opacity: 1;
 
 #radio4:checked ~ .first{
     margin-left: -60%;
+
+}
+
+/* Stle for automatic navigation */
+
+.navigation-auto {
+z-index: -10;    position: absolute;
+    display: flex;
+    width: 800px;
+    justify-content: center;
+    margin-top: 46px;
+
+}
+.navigation-auto div {
+    border: 2px solid;
+    background-color: #000;
+    border-radius: 10px;
+    transition: 3s;
+
+
+}
+
+.navigation-auto div:not(:last-child){
+    margin-right: 40px;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn1{
+    background-color: black;
+    
+
+}
+#radio2:checked ~ .navigation-auto .auto-btn2{
+    background-color: black;
+    
+
+}
+
+#radio3:checked ~ .navigation-auto .auto-btn3{
+    background-color: black;
+    
+
+}
+
+#radio4:checked ~ .navigation-auto .auto-btn4{
+    background-color: black;
+    
 
 }
