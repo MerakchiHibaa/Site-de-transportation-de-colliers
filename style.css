@@ -1,0 +1,130 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
+}
+body {
+    font-weight: 400;
+    background-color:gray;
+	font-family: poppins, Arial, Helvetica, sans-serif;
+}
+.container{
+    height: 100%;
+}
+.logo {
+    width: 2rem;
+}
+
+.logo img {
+   
+background-color: brown;
+
+width: 5rem;
+
+float: left;
+filter: invert(0);
+}
+
+
+.bar-buttons {
+    vertical-align: middle;
+
+  background-color: yellowgreen;
+    height: 5rem ;
+   margin: 0px;
+    padding: 2rem ;
+ 
+
+    float: right; 
+
+}
+.btn-up {
+    vertical-align: middle;
+    z-index: 1;
+    padding: 2rem;
+  /*   margin-top: 50px;
+    padding-top: 50px; */
+}
+
+/* #btn-up{
+    text-decoration: none;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem;
+    display: inline-block;
+    font-size: 0.7rem;
+    position: relative;
+
+    
+
+    color: black;
+
+} */
+
+.btn-up {
+    color: black;
+    font-size: 1.25rem;
+   /*  margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 10px;
+    margin-right: 10px; */
+    margin: 2rem;
+    text-decoration: none;
+    padding: 1rem ;
+    position: relative;
+    
+
+}
+.btn-up::after, .btn-up::before {
+    border: 3px solid #000;
+    content: "";
+    position: absolute;
+    width: calc(100%);
+    height: calc(100%);
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: transform 0.3s ease;
+
+   
+
+}
+.btn-up:hover::after {
+    transform: translate(-7px, -7px);
+}
+.btn-up:hover::before {
+    transform: translate(7px, 7px);
+}
+
+
+.bar {
+background-color: transparent;
+opacity: 1;
+
+}
+
+
+/******************* MENU  ***********************/
+.menu-bar ul{
+    display: inline-flex;
+    list-style: none;
+    color: white;
+}
+.menu-bar li{
+  float: right;
+    width: 205px;
+    margin:5px 18px;
+    padding: 8px 16px;
+   
+}
+.menu-bar {
+    margin-top:4rem ;
+    padding: 8px 16px;
+   
+    background-color: crimson;
+   
+   width: 100%;
+    z-index: 1;  
+    
+}
