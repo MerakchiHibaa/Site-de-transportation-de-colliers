@@ -4,13 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Présentation</title>
 </head>
-<body>
-
-    <img src="" alt="Image"> 
-    <h1> Les objectifs de notre site web</h1>
-   <video src="" >  </video>
+<body id="presentation-body">
+    <section class="presentation-section"> 
+        <div class="box"> 
+            <div class="content">
+                <h1> Annonces </h1> 
+                <p> Cette artie explique ce qui existe dans cette partie :p</p>
+    <a id="presentation-btn" class="btn-up" href="#" onclick="playvideo('assets/video1.mp4')"> Who are we ?</a>
     
+            </div>
+        </div>
+        
+
+        
+
+    </section>
+    <div class="video" id="video-player"> 
+        <video width="100%" controls autoplay src="assets/video1.mp4" id="presentation-video">  </video>
+       <img src="assets/close-icon.png" alt="" class="close-btn" onclick="stopvideo()">
+    </div>
+    
+    <script> 
+let videoplayer =  document.getElementById('video-player') ; 
+let myvideo =  document.getElementById('myvideo') ; 
+let presentationbtn = document.getElementById('presentation-btn') ;
+
+function stopvideo() {
+    videoplayer.style.display="none" ; 
+    presentationbtn.style.zIndex = 1 ;
+
+}
+
+function playvideo(file) {
+  //  myvideo.src = file ; 
+    videoplayer.style.display = "block" ; 
+    presentationbtn.style.zIndex = -1 ;
+
+
+}
+
+     
+    </script>
+   
 </body>
 </html>
