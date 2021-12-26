@@ -89,10 +89,12 @@ $res = mysqli_query($conn, $query);
 
 else{
 ?>
-<form class="box" action="" method="POST">
-  <h1 class="box-logo box-title">
+<form class="box" action="./controllers/" method="POST">
+  
+<h1 class="box-logo box-title">
   </h1>
     <h1 class="box-title">S'inscrire</h1>
+    <input type="hidden" name="type" value ="register">
   <input type="text" class="box-input" name="nom" 
   placeholder="Nom" required />
   <input type="text" class="box-input" name="prenom" 
