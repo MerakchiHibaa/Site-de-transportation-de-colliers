@@ -32,26 +32,39 @@ require('database.php');
   $password = stripslashes($_REQUEST['password']);
   $password = mysqli_real_escape_string($conn, $password);
 
-  if(isset( $_REQUEST['transporteur'] ,  $_REQUEST['wilaya'] )) { 
-    $trasporteur = stripslashes($_REQUEST['transporteur']);
-  $transporteur = mysqli_real_escape_string($conn, $transporteur); 
+//  echo ($POST["wilaya"]) ;
 
-  $wilaya = stripslashes($_REQUEST['wilaya']);
-  $wilaya = mysqli_real_escape_string($conn, $wilaya); 
 
-  $query = "INSERT into `transporteur` (nom, prenom, email, numero, adresse, password )
-  VALUES ('$nom' , '$prenom' , '$email' , '$numero' ,  '$adresse' ,   '".hash('sha256', $password)."')";
+ 
 
-  $res = mysqli_query($conn, $query);
-
-  }
-  else {
-
+  if( (empty($_POST["transporteur"]) && ($_POST['wilaya']< 1) ) ) { 
+    echo("cheeeeckkkked") ;
     $query = "INSERT into `clients` (nom, prenom, email, numero, adresse, password)
     VALUES ('$nom' , '$prenom' , '$email' , '$numero' ,  '$adresse' ,   '".hash('sha256', $password)."')";
 
 $res = mysqli_query($conn, $query);
 
+    
+
+  }
+  else {
+  
+   
+
+
+    $transporteur = stripslashes($_REQUEST['transporteur']);
+    $transporteur = mysqli_real_escape_string($conn, $transporteur); 
+  
+    $wilaya = stripslashes($_REQUEST['wilaya']);
+    $wilaya = mysqli_real_escape_string($conn, $wilaya); 
+  
+    $query = "INSERT into `transporteur` (nom, prenom, email, numero, adresse, password )
+    VALUES ('$nom' , '$prenom' , '$email' , '$numero' ,  '$adresse' ,   '".hash('sha256', $password)."')";
+  
+    $res = mysqli_query($conn, $query);
+
+
+   
   }
 
   
