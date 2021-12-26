@@ -89,7 +89,7 @@ $res = mysqli_query($conn, $query);
 
 else{
 ?>
-<form class="box" action="./controllers/" method="POST">
+<form class="box" action="./controllers/clients.php" method="POST">
   
 <h1 class="box-logo box-title">
   </h1>

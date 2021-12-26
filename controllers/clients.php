@@ -2,6 +2,7 @@
 
 require_once '../models/clientmodel.php' ;
 class Clients {
+    private $clientmodel ; 
     public function register(){
 
     } 
