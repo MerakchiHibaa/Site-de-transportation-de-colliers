@@ -1,7 +1,7 @@
 <?php
-require_once './database.php';
+require_once '../Librairies/database.php';
 
-class ClientModel 
+/* class ClientModel 
 {
     
     public function __construct() {
@@ -9,7 +9,13 @@ class ClientModel
     }
 }
 
-
+public function findUser($nom , $prenom , $email) {
+    $query = "SELECT * `clients` where email ='$email' OR nom= '$nom' or prenom = '$prenom' ;";
+  
+  $res = mysqli_query($conn, $query);
+  if ($res )
+  }
+ */
 
   
 

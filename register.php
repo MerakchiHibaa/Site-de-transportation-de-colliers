@@ -99,7 +99,7 @@ else{
   placeholder="Nom" required />
   <input type="text" class="box-input" name="prenom" 
   placeholder="Prénom" required />
-  <input type="text" class="box-input" name="email" 
+  <input type="email" class="box-input" name="email" 
   placeholder="Email" required />
   <input type="text" class="box-input" name="numero" 
   placeholder="Numéro de téléphone" required />

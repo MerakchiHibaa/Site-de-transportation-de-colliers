@@ -81,44 +81,6 @@
 </div>
 <section class="container"> 
 
-
-
-    <!-- <div onclick="search()" class="search-btn">
-        <i class="fas fa-search"> </i>
-    </div>
-
-    <div onclick="" class="cancel-btn">
-        <i class="fas fa-times"> </i>
-    </div> -->
-
-
-
-<!-- <div id="form-search" class="form search"> 
-    <form  action="POST"> 
-   <div> 
-        <label class="custom-field recherche depart"> 
-            <input class="form__input" type="text"  required>
-            <span class="placeholder recherche"> Emplacement de départ </span>
-        </label>
-    </div>
-
-    <div> 
-
-    <label class="custom-field recherche arriver"> 
-        <input  class="form__input" type="text"  required>
-        <span class="placeholder recherche"> Emplacement d'arriver </span>
-
-    </label> 
-
-    </div>
-
-    <div>
-        <input id="rechercher" class="form__input" onclick="" type="submit" value="Rechercher">
-      </div>
-    </form>
-
-</div> -->
-
 <div id="mainButton">
 
 
@@ -137,7 +99,7 @@
 
 
 <div id="form-search" class="form search"> 
-    <form  action="POST" > 
+    <form  action="POST" class=""> 
    <div> 
         <label class="custom-field recherche depart"> 
             <input class="form__input" type="text"  required>
@@ -162,8 +124,12 @@
 </div>
 </div>
 
+
+</section>
+
+<div class="container-annonce"> 
 <!--begin section left box-->
-<section class="leftbox-section"> 
+<div class="leftbox-section"> 
     <div class="leftbox"> 
         <div class="content">
             <h1> Annonces </h1> 
@@ -174,31 +140,96 @@
     </div>
 
 
-<div class="container-affich"> 
+</div><!--end section left box-->
 
-<div class="ann-affich">
-    <div class="ann-affich_img">
-        <img src="assets/slider1.jpg" alt="">
+<div id="cardbody">
+
+
+    <div class="container-card"> 
+        <div class="card" style="background: url('../assets/slider1.jpg');">
+            <div class="content">
+               <h1 slot="header">Carte 1</h1>
+              <!--  <div class="card-img"> 
+                   <img src="../assets/bg.jpg" alt="">
+               </div> -->
+               <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+               <a href="#"> Afficher la suite</a>
+            </div>
+        </div>
+        <div class="card" style="background: url('https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=');" >
+           <div class="content">
+              <h1 slot="header">Carte 2</h1>
+              <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <a href="#"> Afficher la suite</a>
+           </div>
+       </div>
+       <div class="card" style="background: url('https://images.unsplash.com/photo-1479659929431-4342107adfc1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=');">
+           <div class="content">
+              <h1 slot="header">Carte 3</h1>
+              <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <a href="#"> Afficher la suite</a>
+           </div>
+       </div>
+       <div class="card" style="background: url('https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=');">
+           <div class="content">
+              <h1 slot="header">Carte 4</h1>
+              <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <a href="#"> Afficher la suite</a>
+           </div>
+       </div>
+
+
+
+
+
+
+       <div class="card" style="background: url('../assets/slider1.jpg');">
+        <div class="content">
+           <h1 slot="header">Carte 1</h1>
+          <!--  <div class="card-img"> 
+               <img src="../assets/bg.jpg" alt="">
+           </div> -->
+           <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+           <a href="#"> Afficher la suite</a>
+        </div>
     </div>
+    <div class="card" style="background: url('https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=');" >
+       <div class="content">
+          <h1 slot="header">Carte 2</h1>
+          <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <a href="#"> Afficher la suite</a>
+       </div>
+   </div>
+   <div class="card" style="background: url('https://images.unsplash.com/photo-1479659929431-4342107adfc1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=');">
+       <div class="content">
+          <h1 slot="header">Carte 3</h1>
+          <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <a href="#"> Afficher la suite</a>
+       </div>
+   </div>
+   <div class="card" style="background: url('https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=');">
+       <div class="content">
+          <h1 slot="header">Carte 4</h1>
+          <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <a href="#"> Afficher la suite</a>
+       </div>
+   </div>
+   
+    </div> <!--container card end-->
+   
 
-    <div class="ann-affich_post">
-        <h1 class="ann-affich_title"> Annoucement  1 </h1>
-    <p class="ann-affich_text"> this is an announcement, I will not show everything because there will be a button to click on if you want to know more :)</p>
-    <a  href="#" class="ann-affich_cta"> Afficher la suite </a>
-    </div> <!--ann-affich_post end-->
 
-    
-</div> <!--ann-affich-->
+</div>
 
-</div> <!--end contaainer-affich-->
-</section><!--end section left box-->
+</div> <!-- end of container-annonce-->
+
 
 
 <div class="buttons"> 
 <a href="#" class="btn-up"  > Comment ça fonctionne </a>
 </div>
 
-</section>
+<!-- </section> -->
 <footer>
     <div class="menu-bar"> 
         <ul> 
@@ -215,5 +246,16 @@
 
 
     <script  src="index.js"> </script>
+
+    <script type="text/javascript" src="vanilla-tilt.js"></script>
+    <script type="text/javascript">
+       VanillaTilt.init(document.querySelectorAll(".card"), {
+           max: 25,
+           speed: 400 ,
+          /*  glare:true , 
+           "max-glare" : 1 */
+       });
+    </script>
+
 </body>
 </html>
