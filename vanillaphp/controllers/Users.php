@@ -14,27 +14,78 @@
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             if (isset($_POST['updateProfile'])) {
-                
                 $data = [  //Init data
-                    'newnom' => trim($_POST['newnom']),
-                    'newprenom' => trim($_POST['newprenom']),
-                    'newadresse' => trim($_POST['newadresse']),
-                    'newemail' => trim($_POST['newemail']),
-                    'newnumero' => trim($_POST['newnumero']),
+                    'newnom' => trim($_POST['newnom']) ,
+                    'newprenom' => trim($_POST['newprenom'])  ,
+                    'newadresse' => trim($_POST['newadresse']) ,
+                    'newemail' => trim($_POST['newemail']) ,
+                    'newnumero' => trim($_POST['newnumero']) ,
                     'newpassword' => trim($_POST['newpassword']),
-                    'newpasswordrepeat' => trim($_POST['newpasswordrepeat']) ,
-                    'newprofileImage' => trim($_POST['newprofileImage'])
+                    'newpasswordrepeat' => trim($_POST['newpasswordrepeat'])  ,
+                    'newphoto' => $_FILES['newprofileImage']['name'] 
 
                 ];
 
-            if(strlen($data['newpassword']) < 6){
-                flash("register", "Choisissez un mot de passe plus long");
-                redirect("../profile.php");
-            } else if($data['newpassword'] !== $data['newpasswordrepeat']){
-                flash("register", "les mots de passe sont différents");
-                redirect("../profile.php");
+                if(empty($_POST['newnom'])){
+                 $data['newnom'] = $_SESSION['userNom'] ;
+
+                }
+                if(empty($_POST['newprenom'])){
+                $data['newprenom'] =  $_SESSION['userPrenom'] ; 
+
+                }
+                if(empty($_POST['newadresse'])){
+                  $data['newadresse'] =  $_SESSION['userAdresse'] ; 
+
+                }
+                if(empty($_POST['newemail'])){
+                  $data['newemail'] =  $_SESSION['userEmail'] ; 
+
+                }
+                if(empty($_POST['newnumero'])){
+                   $data['newnumero'] = $_SESSION['userNumero'] ;
+
+                }
+               
+                
+                if(!empty($_POST['newpassword']) AND empty($_POST['newpasswordrepeat']) ){ 
+                    echo"<h1> Veuillez confirmer votre mot de passe <h1>" ;
+                    redirect("../profile.php");
+                }
+                if(empty($_POST['newpassword'])){
+                    $data['newpassword'] = $_SESSION['userPassword'] ;
+                }
+ 
+                if(empty($_POST['newpasswordrepeat'])){
+                   $data['newpasswordrepeat'] = $_SESSION['userPassword'] ;
+
+                }
+                if(empty($_FILES['newprofileImage']['name'])){
+                    $data['newphoto'] = $_SESSION['userPhoto'] ;
+
+                }
+
+                
+               
+                echo"<h1> data email  ". $data['newemail'] ."  after  <h1>" ;
+
+
+                if(strlen($data['newpassword']) < 6){
+               /*  flash("register", "Choisissez un mot de passe plus long"); */
+                echo"<h1> Choisissez un mot de passe plus long<h1>" ;
+               /*  redirect("../profile.php"); */
+                } else if($data['newpassword'] !== $data['newpasswordrepeat']){
+                /* flash("register", "les mots de passe sont différents"); */
+                echo"<h1> Choisissez un mot de passe plus long<h1>" ;
+
+               /*  redirect("../profile.php");    */
             }
-            if( $this->userModel->updateProfile())  {
+                       
+            echo"<h1>je vais appeler le model  <h1>" ;
+
+            if( $this->userModel->updateProfile($data))  {
+                echo"<h1> UPDATEED <h1>" ;
+
                 redirect("../profile.php");
             }else{
                 die("Il y'a une erreur...");
@@ -194,6 +245,7 @@
 
     public function createUserSession($user){
         if ($user['typeuser'] == 'client') {
+
             $_SESSION['userID'] = $user['user']['ID_client'];
             $_SESSION['userType'] = $user['typeuser'];
             $_SESSION['userEmail'] = $user['user']['email'];
@@ -202,6 +254,8 @@
             $_SESSION['userAdresse'] = $user['user']['adresse'];
             $_SESSION['userNumero'] = $user['user']['numero'];
             $_SESSION['userPassword'] = $user['user']['password'];
+            $_SESSION['userPhoto'] = $user['user']['photo'];
+
 
             
             redirect("../signup.php");

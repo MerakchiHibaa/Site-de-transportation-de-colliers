@@ -90,66 +90,112 @@ class User {
 //register transporteur
 
 
-public function updateProfile() {
+public function updateProfile($data) {
     GLOBAL $msg ;
     $msg = '' ;
     GLOBAL $css_class;
     $css_class = '';
 
+    echo"<h1>data nom". $data['newnom']." after <h1>" ;
+    echo"<h1>data prenom". $data['newprenom']." after <h1>" ;
+    echo"<h1>data adresse". $data['newadresse']." after <h1>" ;
+    echo"<h1>data numero". $data['newnumero']." after <h1>" ;
+    echo"<h1>data email". $data['newemail']." after <h1>" ;
+    echo"<h1>data password". $data['newpassword']."  after <h1>" ;
+    echo"<h1>data repeat". $data['newpasswordrepeat']."  after <h1>" ;
+    echo"<h1>data photo". $data['newphoto']." after <h1>" ;
+
+
+
+    
+    //Bind values
+
        if (isset($_POST['updateProfile'])) {
-        $newnom = $_POST['newnom'] ;
+       /*  $newnom = $_POST['newnom'] ;
         $newprenom = $_POST['newprenom'] ;
         $newemail = $_POST['newemail'] ;
         $newadresse = $_POST['newadresse'] ;
-        $newnumero = $_POST['newnumero'] ;
+        $newnumero = $_POST['newnumero'] ; */
         $newprofileImage = time() . '_' . $_FILES['newprofileImage']['name'] ;
-        $newpassword = $_POST['newpassword'] ;
+      /*   $newpassword = $_POST['newpassword'] ; */
+
 /*         $newrepeatpassword = $_POST['newpasswordrepeat'] ;
  */        $target ="../usersImages/" . $newprofileImage ;
         //Bind values
-        $this->db->bind(':nom', $newnom);
-        $this->db->bind(':prenom', $newprenom);
-        $this->db->bind(':numero', $newnumero);
-        $this->db->bind(':email', $newemail);
-        $this->db->bind(':adresse', $newadresse);
-        $this->db->bind(':password', $newpassword);
-        
+       /*  echo"<h1>data nom". $data['newnom']." after <h1>" ;
+        echo"<h1>data prenom". $data['newprenom']." after <h1>" ;
+        echo"<h1>data adresse". $data['newadresse']." after <h1>" ;
+        echo"<h1>data numero". $data['newnumero']." after <h1>" ;
+        echo"<h1>data email". $data['newemail']." after <h1>" ;
+        echo"<h1>data password". $data['newpassword']."  after <h1>" ;
+        echo"<h1>data repeat". $data['newpasswordrepeat']."  after <h1>" ;
+        echo"<h1>data photo". $data['newphoto']." after <h1>" ;
+    
+     */
+   
+    echo"<h1>data photo". $data['newphoto']." after <h1>" ;
 
-        if ($_SESSION['userType'] == "client") {
+    if ($_SESSION['userType'] == "client") {
           
-            $this->db->query('UPDATE `clients` SET `nom`=:newnom,`prenom`=:newprenom,
-            `email`=:newemail,`numero`=:newnumero,`adresse`=:newadresse,`password`=:newpassword, `photo`=:newprofileImage') ;
-            
-           
+        $this->db->query('UPDATE `clients` SET `nom`=:nom,`prenom`=:prenom,
+        `email`=:email,`numero`=:numero,`adresse`=:adresse,`password`=:password, `photo`=:photo where ID_client = '.$_SESSION['userID'].';' ) ;
+        
+       
+    
+
+    }
+    else  {
+        $this->db->query('UPDATE `transporteur` SET `nom`=:nom,`prenom`=:prenom,
+        `email`=:email,`numero`=:numero,`adresse`=:adresse,`password`=:password, `photo`=:photo where ID_transporteur = '.$_SESSION['userID'].';' ) ;
         
 
-        }
-        else  {
-            $this->db->query('UPDATE `transporteur` SET `nom`=:newnom,`prenom`=:newprenom,
-            `email`=:newemail,`numero`=:newnumero,`adresse`=:newadresse,`password`=:newpassword, `photo`=:newprofileImage') ;
-            
+    }
 
-        }
+         $this->db->bind(':nom', $data['newnom']);
+        $this->db->bind(':prenom', $data['newprenom']);
+        $this->db->bind(':numero', $data['newnumero']);
+        $this->db->bind(':email', $data['newemail']);
+        $this->db->bind(':adresse', $data['newadresse']);
+        $this->db->bind(':password', $data['newpassword']);
+        $this->db->bind(':photo',  $data['newphoto'] );
+
+          
 
        if( move_uploaded_file($_FILES['newprofileImage']['tmp_name'] , $target) ) {
-        
+        echo"<h1> photoooooooooooo $newprofileImage afteeeeer <h1>" ;
+
         $msg ="Image téléchargée avec succés !" ; 
         $css_class = "alert-success" ; 
-        return true ; 
-        
-       }else {
-           $msg ="OOPS, il y'avait un problème..." ; 
-           $css_class = "alert-danger" ; 
-           return false ;
 
        }
+       
+       else {
+           $msg ="OOPS, il y'avait un problème avec le téléchargement de la photo..." ; 
+           $css_class = "alert-danger" ; 
+            
+       }
+       if(!$this->db->execute()){
+        return false;
+      } 
+
+
+
+
+      
+        $_SESSION['userEmail'] = $data['newemail'];
+        $_SESSION['userNom'] =  $data['newnom'] ;;
+        $_SESSION['userPrenom'] = $data['newprenom'];
+        $_SESSION['userAdresse'] =  $data['newadresse'];
+        $_SESSION['userNumero'] = $data['newnumero'];
+        $_SESSION['userPassword'] = $data['newpassword'];
+        $_SESSION['userPhoto'] =  $data['newphoto'];
+
+
+    return true ;
+  
 
          //Execute
-         if($this->db->execute()){
-            return true;
-        }else{
-            return false;
-        }
+         
 
 
 

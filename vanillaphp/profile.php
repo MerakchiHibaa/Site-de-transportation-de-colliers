@@ -46,9 +46,7 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
     justify-items: center;
     display: flex;
  ;" > Photo de profil</label>
-     <input type="file" name="newprofileImage" onchange="displayImage(this)" id="profileImage" class="form_control"  style="
-            display: none;
- ">
+     <input type="file" name="newprofileImage" onchange="displayImage(this)" id="profileImage" class="form_control"  style="display: none;">
     </div>
      
       <input class="form__input"  type="hidden" name="type" value ="updateProfile">
