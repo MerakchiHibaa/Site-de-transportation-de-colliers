@@ -27,6 +27,9 @@
 
    <input type="checkbox" class="box-input" name="transporteur" 
   placeholder="Transporteur"  />
+
+  <input type="checkbox" class="box-input" name="certifie" 
+  placeholder="Vous voulez etre un transporteur certifié?"  />
   
 
   

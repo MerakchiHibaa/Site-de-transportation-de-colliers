@@ -121,15 +121,23 @@ class User {
 
     //Reset Password
     public function resetPassword($newPwdHash, $tokenEmail){
-        $this->db->query('UPDATE users SET usersPwd=:pwd WHERE usersEmail=:email');
-        $this->db->bind(':pwd', $newPwdHash);
+        $this->db->query('UPDATE clients SET password=:password WHERE email=:email');
+        $this->db->bind(':password', $newPwdHash);
         $this->db->bind(':email', $tokenEmail);
 
         //Execute
         if($this->db->execute()){
             return true;
         }else{
+            $this->db->query('UPDATE transporteur SET password=:password WHERE email=:email');
+            $this->db->bind(':password', $newPwdHash);
+            $this->db->bind(':email', $tokenEmail);
+            if($this->db->execute()){
+                return true;
+            }else{
+
             return false;
+            }
         }
     }
 }

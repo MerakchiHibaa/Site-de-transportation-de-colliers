@@ -36,4 +36,16 @@ class affichModel {
     
     }  */
 }
+
+function selectAnnonce($offset) {
+    $this->db->query("SELECT * FROM annonces ") ;
+  
+      $annonces =  $this->db->resultSet() ; 
+     $depart =  $annonces[$offset]['pointDepart'] ; 
+    $arrive =  $annonces[$offset]['pointArrivee'] ; 
+
+
+
 }
+}
+

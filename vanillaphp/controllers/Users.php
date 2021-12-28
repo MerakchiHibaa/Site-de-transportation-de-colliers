@@ -53,6 +53,8 @@
                     'password' => trim($_POST['password']),
                     'passwordrepeat' => trim($_POST['passwordrepeat'])
                 ];
+                
+            
 
               }
            
@@ -112,6 +114,10 @@
             }
             else {
                 if($this->userModel->registerTransporteur($data)){
+                    if(!empty($_POST["certifie"] )) {
+                        redirect("../certifie.php");
+                    
+                    }
                     redirect("../signup.php");
                 }else{
                     die("Il y'a une erreur...");
@@ -156,8 +162,8 @@
 
     public function createUserSession($user){
         if ($user['typeuser'] == 'client') {
-            $_SESSION['usersId'] = $user['user']['ID_client'];
-            $_SESSION['usersEmail'] = $user['user']['email'];
+            $_SESSION['userID'] = $user['user']['ID_client'];
+            $_SESSION['userEmail'] = $user['user']['email'];
             redirect("../signup.php");
 
         }

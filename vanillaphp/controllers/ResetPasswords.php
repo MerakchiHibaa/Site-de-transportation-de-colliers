@@ -47,7 +47,7 @@ class ResetPasswords{
         //Will be used for confirmation once the database entry has been matched
         $token = random_bytes(32);
         //URL will vary depending on where the website is being hosted from
-        $url = 'http://localhost/login-system/create-new-password.php?selector='.$selector.'&validator='.bin2hex($token);
+        $url = 'http://localhost/projetweb/vanillaphp/create-new-password.php?selector='.$selector.'&validator='.bin2hex($token);
         //Expiration date will last for half an hour
         $expires = date("U") + 1800;
         if(!$this->resetModel->deleteEmail($usersEmail)){
@@ -111,7 +111,7 @@ class ResetPasswords{
         }
 
         $tokenEmail = $row->pwdResetEmail;
-        if(!$this->userModel->findUserByEmailOrUsername($tokenEmail, $tokenEmail)){
+        if(!$this->userModel->findUserByEmail($tokenEmail)['user'] ){
             flash("newReset", "There was an error");
             redirect($url);
         }
