@@ -96,9 +96,7 @@ public function updateProfile() {
     GLOBAL $css_class;
     $css_class = '';
 
-   
-    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    if (isset($_POST['updateProfile'])) {
+       if (isset($_POST['updateProfile'])) {
         $newnom = $_POST['newnom'] ;
         $newprenom = $_POST['newprenom'] ;
         $newemail = $_POST['newemail'] ;
@@ -106,18 +104,52 @@ public function updateProfile() {
         $newnumero = $_POST['newnumero'] ;
         $newprofileImage = time() . '_' . $_FILES['newprofileImage']['name'] ;
         $newpassword = $_POST['newpassword'] ;
-        $newrepeatpassword = $_POST['newpasswordrepeat'] ;
-        $target ="./usersImages/" . $newprofileImage ;
+/*         $newrepeatpassword = $_POST['newpasswordrepeat'] ;
+ */        $target ="../usersImages/" . $newprofileImage ;
+        //Bind values
+        $this->db->bind(':nom', $newnom);
+        $this->db->bind(':prenom', $newprenom);
+        $this->db->bind(':numero', $newnumero);
+        $this->db->bind(':email', $newemail);
+        $this->db->bind(':adresse', $newadresse);
+        $this->db->bind(':password', $newpassword);
         
+
+        if ($_SESSION['userType'] == "client") {
+          
+            $this->db->query('UPDATE `clients` SET `nom`=:newnom,`prenom`=:newprenom,
+            `email`=:newemail,`numero`=:newnumero,`adresse`=:newadresse,`password`=:newpassword, `photo`=:newprofileImage') ;
+            
+           
+        
+
+        }
+        else  {
+            $this->db->query('UPDATE `transporteur` SET `nom`=:newnom,`prenom`=:newprenom,
+            `email`=:newemail,`numero`=:newnumero,`adresse`=:newadresse,`password`=:newpassword, `photo`=:newprofileImage') ;
+            
+
+        }
+
        if( move_uploaded_file($_FILES['newprofileImage']['tmp_name'] , $target) ) {
+        
         $msg ="Image téléchargée avec succés !" ; 
         $css_class = "alert-success" ; 
+        return true ; 
         
        }else {
            $msg ="OOPS, il y'avait un problème..." ; 
            $css_class = "alert-danger" ; 
+           return false ;
 
        }
+
+         //Execute
+         if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
 
 
 
@@ -130,6 +162,7 @@ public function updateProfile() {
         $this->db->query('INSERT INTO transporteur (nom, prenom, numero, email, adresse, password) 
         VALUES (:nom, :prenom, :numero , :email, :adresse, :password)');
         //Bind values
+        
         $this->db->bind(':nom', $data['nom']);
         $this->db->bind(':prenom', $data['prenom']);
         $this->db->bind(':numero', $data['numero']);

@@ -1292,3 +1292,14 @@ body::after {
             padding-top: 12rem ;
             
         }
+
+
+
+        /*************styele the profile picture**********************************/
+
+        #profileDisplay {
+            display: block;
+            margin: 10px auto;
+            border-radius: 50% ;
+
+        }

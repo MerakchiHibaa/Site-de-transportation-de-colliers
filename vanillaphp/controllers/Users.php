@@ -12,7 +12,36 @@
         }
         public function updateProfile () {
 
-            $this->userModel->updateProfile() ; 
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            if (isset($_POST['updateProfile'])) {
+                
+                $data = [  //Init data
+                    'newnom' => trim($_POST['newnom']),
+                    'newprenom' => trim($_POST['newprenom']),
+                    'newadresse' => trim($_POST['newadresse']),
+                    'newemail' => trim($_POST['newemail']),
+                    'newnumero' => trim($_POST['newnumero']),
+                    'newpassword' => trim($_POST['newpassword']),
+                    'newpasswordrepeat' => trim($_POST['newpasswordrepeat']) ,
+                    'newprofileImage' => trim($_POST['newprofileImage'])
+
+                ];
+
+            if(strlen($data['newpassword']) < 6){
+                flash("register", "Choisissez un mot de passe plus long");
+                redirect("../profile.php");
+            } else if($data['newpassword'] !== $data['newpasswordrepeat']){
+                flash("register", "les mots de passe sont différents");
+                redirect("../profile.php");
+            }
+            if( $this->userModel->updateProfile())  {
+                redirect("../profile.php");
+            }else{
+                die("Il y'a une erreur...");
+            } 
+
+        }  
+
         }
         
         public function register(){
@@ -212,6 +241,9 @@
             case 'login':
                 $init->login();
                 break;
+            case 'updateProfile':
+                $init-> updateProfile() ;
+                break ;
             default:
             redirect("../index.php");
         }
