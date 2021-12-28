@@ -35,7 +35,7 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
 
          <?php  } ?>
          <div class="profile-img">
-<img src="./usersImages/standard.jpg" onclick="triggerClick()" id="profileDisplay" alt="" width="50%" style=" display: block;
+<img src="./usersImages/<?php echo $_SESSION['userPhoto'] ; ?>" onclick="triggerClick()" id="profileDisplay" alt="" width="50%" style=" display: block;
             margin: 10px auto;
             border-radius: 50% ;
 ">
