@@ -1282,3 +1282,13 @@ body::after {
         .container-annonce {
             display: block;
         }
+
+
+
+        /**********************************Style the profile page**************************************/
+        #form-profile-div {
+            margin-top: 10rem;
+            border: 1px solid;
+            padding-top: 12rem ;
+            
+        }

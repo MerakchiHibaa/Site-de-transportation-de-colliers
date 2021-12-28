@@ -10,8 +10,11 @@
         public function __construct(){
             $this->userModel = new User;
         }
+        public function updateProfile () {
 
-       
+            $this->userModel->updateProfile() ; 
+        }
+        
         public function register(){
             $typeuser = '' ;
             //Process form
@@ -163,7 +166,15 @@
     public function createUserSession($user){
         if ($user['typeuser'] == 'client') {
             $_SESSION['userID'] = $user['user']['ID_client'];
+            $_SESSION['userType'] = $user['typeuser'];
             $_SESSION['userEmail'] = $user['user']['email'];
+            $_SESSION['userNom'] = $user['user']['nom'];
+            $_SESSION['userPrenom'] = $user['user']['prenom'];
+            $_SESSION['userAdresse'] = $user['user']['adresse'];
+            $_SESSION['userNumero'] = $user['user']['numero'];
+            $_SESSION['userPassword'] = $user['user']['password'];
+
+            
             redirect("../signup.php");
 
         }

@@ -7,10 +7,12 @@ class User {
 
     public function __construct(){
         $this->db = new Database;
+        
     }
 
     //Find user by email or username
     public function findUserByEmail($email){
+       
         $typeuser='' ;
         $this->db->query('SELECT * FROM clients WHERE email = :email');
         $this->db->bind(':email', $email);
@@ -86,6 +88,44 @@ class User {
         }
     }
 //register transporteur
+
+
+public function updateProfile() {
+    GLOBAL $msg ;
+    $msg = '' ;
+    GLOBAL $css_class;
+    $css_class = '';
+
+   
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    if (isset($_POST['updateProfile'])) {
+        $newnom = $_POST['newnom'] ;
+        $newprenom = $_POST['newprenom'] ;
+        $newemail = $_POST['newemail'] ;
+        $newadresse = $_POST['newadresse'] ;
+        $newnumero = $_POST['newnumero'] ;
+        $newprofileImage = time() . '_' . $_FILES['newprofileImage']['name'] ;
+        $newpassword = $_POST['newpassword'] ;
+        $newrepeatpassword = $_POST['newpasswordrepeat'] ;
+        $target ="./usersImages/" . $newprofileImage ;
+        
+       if( move_uploaded_file($_FILES['newprofileImage']['tmp_name'] , $target) ) {
+        $msg ="Image téléchargée avec succés !" ; 
+        $css_class = "alert-success" ; 
+        
+       }else {
+           $msg ="OOPS, il y'avait un problème..." ; 
+           $css_class = "alert-danger" ; 
+
+       }
+
+
+
+    }
+
+
+}
+
     public function registerTransporteur($data){
         $this->db->query('INSERT INTO transporteur (nom, prenom, numero, email, adresse, password) 
         VALUES (:nom, :prenom, :numero , :email, :adresse, :password)');
