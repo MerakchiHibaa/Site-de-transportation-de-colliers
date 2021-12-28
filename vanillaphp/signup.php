@@ -64,7 +64,7 @@ echo "<select  multiple name='wilaya[]'>" ;
 foreach($ARRAY as $row){
   $row = $row['wilaya'];
   echo $row ;
- echo ("<option value='$row' selected> $row </option> ");
+ echo ("<option value='$row' > $row </option> ");
 
    //echo $rows['wilaya'] ;
    //echo "inside while" ;

@@ -11,19 +11,50 @@ class User {
 
     //Find user by email or username
     public function findUserByEmail($email){
+        $typeuser='' ;
         $this->db->query('SELECT * FROM clients WHERE email = :email');
         $this->db->bind(':email', $email);
 
-        $row = $this->db->single();
+        $user = $this->db->single();
+      
+        
 
+
+        
         //Check row
-        if($this->db->rowCount() > 0){
+        if($this->db->rowCount() > 0){ //user is client
+            $typeuser = 'client' ;
+/*             echo"<h1>content of row->user->email ".$row->user->email." and row->user->id".$row->user->ID_client." inside find by </h1>" ; 
+ */      /*   $row =  ['user' => $user , 'typeuser' => $typeuser] ; */
+ $row = new stdClass();
+
+ $row->user =  $user ;
+ $user = json_decode(json_encode($user), true) ;
+ echo"<h1>content of row-> ".$user['email'] ." and user".$user['password']." inside find by </h1>" ; 
+
+
+ $row->typeuser =  $typeuser ;
+/*    $row =json_encode(['user' => $user , 'typeuser' => $typeuser]); */
+ $row =json_decode(json_encode($row), true) ; 
+ echo"<h1>content of row->user->email ".$row['typeuser'] ." and row->user->id".$row['user']['password']." inside find by </h1>" ; 
+
             return $row;
         }else{
             $this->db->query('SELECT * FROM transporteur WHERE email = :email');
             $this->db->bind(':email', $email);
             $row = $this->db->single();
-            if($this->db->rowCount() > 0){
+            if($this->db->rowCount() > 0){ //user is transporteur
+                $typeuser = 'transporteur' ;
+                $row = new stdClass();
+
+                $row->user =  $user ;
+                $user = json_decode(json_encode($user), true) ;
+
+                $row->typeuser =  $typeuser ;
+                $row =json_decode(json_encode($row), true) ; 
+
+            /*    $row =json_encode(['user' => $user , 'typeuser' => $typeuser]); */
+            $row =json_encode($row , true ) ;
                 return $row;
             }
             else{
@@ -34,27 +65,6 @@ class User {
 
     
  
-
-public function affichWilaya() {
-    flash("", "Email invalide");
-
-    $this->db->query("SELECT * FROM wilaya ") ;
- $options ="" ; 
- if($this->db->execute()){
-    echo "<select  multiple name='wilaya[]'>" ;
-
-    if($this->db->rowCount() > 0) {
-        while($rows  = $this->db->resultSet()) {
-            $row = $rows['wilaya'];
-            echo $row ;
-           echo ("<option value='$row' selected> $row </option> ");
- 
-             //echo $rows['wilaya'] ;
-             //echo "inside while" ;
-          }
-    }
-    echo "</select>" ;}
-} 
 
     //Register client
     public function registerClient($data){
@@ -96,12 +106,12 @@ public function affichWilaya() {
     }
 
     //Login user
-    public function login($nameOrEmail, $password){
-        $row = $this->findUserByEmailOrUsername($nameOrEmail, $nameOrEmail);
+    public function login($email, $password){
+        $row = $this->findUserByEmail($email);
 
         if($row == false) return false;
 
-        $hashedPassword = $row->usersPwd;
+        $hashedPassword = $row['user']['password'];
         if(password_verify($password, $hashedPassword)){
             return $row;
         }else{

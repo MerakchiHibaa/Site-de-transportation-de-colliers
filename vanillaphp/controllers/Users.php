@@ -11,10 +11,7 @@
             $this->userModel = new User;
         }
 
-        function affichWilaya() {
-            $this->userModel->affichWilaya() ; 
-                }
-
+       
         public function register(){
             $typeuser = '' ;
             //Process form
@@ -22,7 +19,13 @@
             //Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            if( (empty($_POST["transporteur"]) && empty($_POST['wilaya']) ) ) { 
+            if( (empty($_POST["transporteur"]) || empty($_POST['wilaya']) ) ) { 
+
+                if(!empty($_POST["transporteur"] )) {
+                    flash("register", "Si vovus voulez etre un transporteur, veuillez remplir les wilayas sil vous plait");
+
+                }
+                else { 
                 echo("cheeeeckkkked") ;
                 $typeuser ='client' ;
                 $data = [  //Init data
@@ -34,6 +37,7 @@
                     'password' => trim($_POST['password']),
                     'passwordrepeat' => trim($_POST['passwordrepeat'])
                 ];
+            }
 
               }
               else {   //Init data
@@ -100,7 +104,7 @@
 
             if($typeuser == 'client') {
                 if($this->userModel->registerClient($data)){
-                    redirect("../login.php");
+                    redirect("../signup.php");
                 }else{
                     die("Il y'a une erreur...");
                 }
@@ -108,7 +112,7 @@
             }
             else {
                 if($this->userModel->registerTransporteur($data)){
-                    redirect("../login.php");
+                    redirect("../signup.php");
                 }else{
                     die("Il y'a une erreur...");
                 }
@@ -123,20 +127,20 @@
 
         //Init data
         $data=[
-            'name/email' => trim($_POST['name/email']),
-            'usersPwd' => trim($_POST['usersPwd'])
+            'email' => trim($_POST['email']),
+            'password' => trim($_POST['password'])
         ];
 
-        if(empty($data['name/email']) || empty($data['usersPwd'])){
+        if(empty($data['email']) || empty($data['password'])){
             flash("login", "Please fill out all inputs");
             header("location: ../login.php");
             exit();
         }
 
         //Check for user/email
-        if($this->userModel->findUserByEmailOrUsername($data['name/email'], $data['name/email'])){
+        if($this->userModel->findUserByEmail($data['email'])){
             //User Found
-            $loggedInUser = $this->userModel->login($data['name/email'], $data['usersPwd']);
+            $loggedInUser = $this->userModel->login($data['email'], $data['password']);
             if($loggedInUser){
                 //Create session
                 $this->createUserSession($loggedInUser);
@@ -151,14 +155,23 @@
     }
 
     public function createUserSession($user){
-        $_SESSION['usersId'] = $user->usersId;
-        $_SESSION['email'] = $user->email;
-        redirect("../index.php");
+        if ($user['typeuser'] == 'client') {
+            $_SESSION['usersId'] = $user['user']['ID_client'];
+            $_SESSION['usersEmail'] = $user['user']['email'];
+            redirect("../signup.php");
+
+        }
+        else {
+            $_SESSION['usersId'] =  $user['user']['ID_transporteur'] ;
+            $_SESSION['email'] =  $user['user']['email'];
+            redirect("../signup.php");
+
+        }
+      
     }
 
     public function logout(){
         unset($_SESSION['usersId']);
-        unset($_SESSION['usersName']);
         unset($_SESSION['usersEmail']);
         session_destroy();
         redirect("../index.php");
@@ -168,21 +181,7 @@
     $init = new Users;
 
 
-     function invoke()  
-    {  
-         if (isset($_GET['signup']))  
-         {  
-              // no special book is requested, we'll show a list of all available books  
-              $books = $this->userModel->affichWilaya();  
-/*               include '../signup /booklist.php'; 
- */         } 
-         else 
-         { 
-              // show the requested book 
-              /* $book = $this->model->getBook($_GET['book']); 
-              include 'view/viewbook.php';   */
-         }  
-    }  
+    
 
 
 
