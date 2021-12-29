@@ -10,6 +10,7 @@ class User {
         
     }
 
+    
     //Find user by email or username
     public function findUserByEmail($email){
        
@@ -66,7 +67,40 @@ class User {
     }
 
     
- 
+    public function addAnnonce($data) {
+        $this->db->query('INSERT INTO annonces (pointdepart,  pointarrivee, id_user, moyentransport, poidsmin, poidsmax, volumemin , volumemax , typetransport , latitudedepart , longitudedepart, latitudearrivee, longitudearrivee) 
+        VALUES (:pointdepart, :pointarrivee, :id_user, :moyentransport, :poidsmin, :poidsmax, :volumemin , :volumemax , :typetransport, :latitudedepart, :longitudedepart, :latitudearrivee, :longitudearrivee)');
+       
+
+        $this->db->bind(':id_user', $_SESSION['userID']);
+        $this->db->bind(':latitudedepart', $data['latitudedepart']);
+        $this->db->bind(':longitudedepart', $data['longitudedepart']);
+        $this->db->bind(':latitudearrivee', $data['latitudearrivee']);
+        $this->db->bind(':longitudearrivee', $data['longitudearrivee']);
+        $this->db->bind(':typetransport', $data['typetransport']);
+        $this->db->bind(':volumemin', $data['volumemin']);
+        $this->db->bind(':volumemax', $data['volumemax']);
+        $this->db->bind(':poidsmin', $data['poidsmin']);
+        $this->db->bind(':poidsmax', $data['poidsmax']);
+        $this->db->bind(':moyentransport', $data['moyentransport']);
+        $this->db->bind(':pointarrivee', $data['pointarrivee']);
+        $this->db->bind(':pointdepart', $data['pointdepart']);
+
+
+
+
+       
+
+         //Bind values
+      
+        //Execute
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
 
     //Register client
     public function registerClient($data){

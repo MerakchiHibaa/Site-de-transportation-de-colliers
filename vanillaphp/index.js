@@ -95,4 +95,40 @@ function displayImage(e) {
 
 
 
+function getCoordinates(){
+    let adresseDepart = document.getElementById('pointdepart').value ; 
+
+    let adresseArrivee = document.getElementById('pointarrivee').value ;
+
+    let latitudedepart = document.getElementById('latitudedepart') ;
+    let longitudedepart = document.getElementById('longitudearrivee') ;
+
+    let latitudearrivee = document.getElementById('latitudearrivee') ;
+    let longitudearrivee = document.getElementById('latitudearrivee') ;
+
+    let URL = "https://geocoder.ls.hereapi.com/6.2/geocode.json?searchtext="+adresseDepart+"&apiKey=iK_k5qbfo9wdhfxz0rJp3NSn485xuHeAnLMckU190Qk&gen=9";
+    let URL2 = "https://geocoder.ls.hereapi.com/6.2/geocode.json?searchtext="+adresseArrivee+"&apiKey=iK_k5qbfo9wdhfxz0rJp3NSn485xuHeAnLMckU190Qk&gen=9";
+
+    let xmlHttp = new XMLHttpRequest() ; 
+    let xmlHttp2 = new XMLHttpRequest() ; 
+
+    xmlHttp.open("GET" , URL , false) ; 
+    xmlHttp2.open("GET" , URL2 , false) ; 
+ 
+    xmlHttp.send(null) ;
+    xmlHttp2.send(null) ;
+
+    let json = JSON.parse(xmlHttp.responseText) ; 
+    let json2 = JSON.parse(xmlHttp2.responseText) ; 
+
+     latitudeDepart.value =  json.Response.View[0].Result[0].Location.DisplayPosition.Latitude ; ;
+     longitudeDepart.value =json.Response.View[0].Result[0].Location.DisplayPosition.Longitude ;
+    
+     latitudeArrivee.value = json2.Response.View[0].Result[0].Location.DisplayPosition.Latitude ;
+     longitudeArrivee.value = json2.Response.View[0].Result[0].Location.DisplayPosition.Longitude ;
+
+   // document.getElementById()
+
+}
+
  

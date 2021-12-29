@@ -10,6 +10,52 @@
         public function __construct(){
             $this->userModel = new User;
         }
+
+        public function addAnnonce() {
+            if (isset($_POST['addannonce'])) {
+                $data = [  //Init data
+
+                          
+                    'latitudedepart' => trim($_POST['latitudedepart']) ,
+                    'longitudedepart' => trim($_POST['longitudedepart']) ,
+                    'latitudearrivee' => trim($_POST['latitudearrivee']) ,
+                    'longitudearrivee' => trim($_POST['longitudearrivee']) ,
+                    'typetransport' => trim($_POST['typetransport']) ,
+                    'volumemin' => trim($_POST['volumemin'])  ,
+                    'volumemax' => trim($_POST['volumemax']) ,
+                    'poidsmin' => trim($_POST['poidsmin'])  ,
+                    'poidsmax' => trim($_POST['poidsmax']) ,
+                    'moyentransport' => trim($_POST['moyentransport']),
+                    'pointarrivee' => trim($_POST['pointarrivee']),
+                    'pointdepart' => trim($_POST['pointdepart']),
+
+                ];
+                if(floatval($_POST['volumemin']) > floatval($_POST['volumemax']) ) {
+                    flash("addAnnonce", "le volume minimale ne peut pas etre plus grand que le volume maximal"); 
+                    echo"<h1>le volume minimale ne peut pas etre plus grand que le volume maximal <h1>" ;
+                    redirect("../annonces.php");
+
+
+                }
+                if(floatval($_POST['poidsmin']) > floatval($_POST['poidsmax']) ) {
+                    flash("addAnnonce", "le poids minimale ne peut pas etre plus grand que le poids maximal"); 
+                    echo"<h1>le poids minimale ne peut pas etre plus grand que le poids maximal <h1>" ;
+                    redirect("../annonces.php");
+
+                }
+
+                if( $this->userModel->addAnnonce($data))  {
+                    echo"<h1> annonce ajoutée <h1>" ;
+                    
+    
+                  /*   redirect("../profile.php"); */
+                }else{
+                    die("Il y'a une erreur...");
+                } 
+            }
+
+        }
+
         public function updateProfile () {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -71,11 +117,11 @@
 
 
                 if(strlen($data['newpassword']) < 6){
-               /*  flash("register", "Choisissez un mot de passe plus long"); */
+                 flash("register", "Choisissez un mot de passe plus long"); 
                 echo"<h1> Choisissez un mot de passe plus long<h1>" ;
-               /*  redirect("../profile.php"); */
+                 redirect("../profile.php"); 
                 } else if($data['newpassword'] !== $data['newpasswordrepeat']){
-                /* flash("register", "les mots de passe sont différents"); */
+                 flash("register", "les mots de passe sont différents"); 
                 echo"<h1> Choisissez un mot de passe plus long<h1>" ;
 
                /*  redirect("../profile.php");    */
@@ -85,6 +131,7 @@
 
             if( $this->userModel->updateProfile($data))  {
                 echo"<h1> UPDATEED <h1>" ;
+                
 
                 redirect("../profile.php");
             }else{
@@ -298,6 +345,8 @@
             case 'updateProfile':
                 $init-> updateProfile() ;
                 break ;
+            case 'addannonce': 
+                $init-> addAnnonce();    
             default:
             redirect("../index.php");
         }
