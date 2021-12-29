@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html , body {
+    display: grid;
+    height: 100%;
+    place-content: center;
+    text-align: center;
+    background: #000;
+}
+
+.container-rate {
+    width: 400px;
+    background: #111;
+    padding: 20px 30px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.container-rate .star-widget input {
+    display: none;
+}
+
+.star-widget label {
+    font-size: 2rem;
+    color: #444;
+    padding: 10px;
+    float: right;
+    transition: all 0.2s ease;
+
+}
+
+input:not(:checked) ~ label:hover ,
+input:not(:checked) ~ label:hover ~ label {
+    font-size: 2rem;
+    color: #444;
+    padding: 10px;
+    float: right;
+    color: #fd4;
+
+}
+
+input:checked ~label {
+    color: #fd4;
+
+
+}
+
+
+input#rate-5:checked ~label {
+    color: #fe7;
+    text-shadow: 0 0 20px #952;
+
+
+}
+input#rate-1:checked ~ .form-rate header:before { 
+    content: "c'était horrible 😠";
+     
+
+}
+
+input#rate-2:checked ~ .form-rate header:before { 
+    content: "J'ai pas trop aimé 😒";
+     
+
+}
+
+input#rate-3:checked ~ .form-rate header:before { 
+    content: "ça c'est bien passé 😌";
+     
+
+}
+
+input#rate-4:checked ~ .form-rate header:before { 
+    content: "J'ai aimé 😊";
+     
+
+}
+
+input#rate-5:checked ~ .form-rate header:before { 
+    content: "J'ai adoré 😍";
+     
+
+}
+
+.container-rate .form-rate {
+    display: none;
+}
+input:checked ~ .form-rate {
+    display: block;
+}
+.form-rate header {
+    width: 100%;
+    font-size: 2rem;
+    color: #fe7;
+    font-weight: 500;
+    margin: 5px 0 20px 0;
+    text-align: center;
+    transition: all 0.2s ease;
+
+
+}
+
+
+.form-rate .textarea-rate {
+    height: 100px;
+    width: 100% ;
+    overflow: hidden;
+}
+
+.form-rate .textarea-rate textarea {
+    height: 100%;
+    width: 100%;
+    color: #eee;
+    outline: none;
+    border: 1px solid #333;
+    background: #222;
+    padding: 10px;
+    font-size: .8rem;
+    resize: none;
+
+}
+
+.form-rate .btn-rate {
+    height: 45px;
+    width: 100%;
+    margin: 15px 0;
+
+
+
+}
+
+.form-rate .btn-rate button {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #444;
+    outline: none;
+    background: #222;
+    color: #999;
+    font-size: 1rem;
+    font-weight: 600 ;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3 ease;
+}
+
+.form-rate .btn-rate button:hover {
+     background: #1b1b1b;
+
+}
+
+.container-rate .text-form {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 500;
+
+
+}
+.container-rate .post-rate {
+    display: none;
+    
+}
