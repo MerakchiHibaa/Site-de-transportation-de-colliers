@@ -157,14 +157,16 @@ input:checked ~ .form-rate {
 
 }
 
-.container-rate .text-form {
-    font-size: 1rem;
+.container-rate .text-rate   {
+    font-size: 1.5rem;
     color: #666;
     font-weight: 500;
 
 
 }
-.container-rate .post-rate {
+#post-rate {
     display: none;
     
 }
+
+
