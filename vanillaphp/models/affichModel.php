@@ -47,5 +47,14 @@ function selectAnnonce($offset) {
 
 
 }
+
+public function selectAllUserData() {
+    $this->db->query("SELECT * FROM users ORDER BY ID_user DESC");
+    return  $this->db->resultSet() ; 
+    
+
+    
+}
+
 }
 

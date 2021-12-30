@@ -17,7 +17,21 @@
 
                 }
 
+
+
+                public function selectAllUserDat(){
+                   
+                  }
+                
+        function selectAllUserData() {
+            
+           return $this->model->selectAllUserData() ; 
+            
+        }
+
             }
+
+            
 
 
  
