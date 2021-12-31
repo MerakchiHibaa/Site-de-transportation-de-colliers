@@ -156,15 +156,15 @@ $_controller = new affichControl();
 
           <div style="width:600px; margin:0px auto">
 
-          <form class="" action="" method="POST">
+          <form class="" action="./controllers/Users.php" method="POST">
               <div class="form-group">
                 <label for="name">Nom</label>
-                <input type="text" name="name" value="<?php echo $getUinfo['nom']; ?>" class="form-control">
+                <input type="text" name="nom" value="<?php echo $getUinfo['nom']; ?>" class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="name">Prénom</label>
-                <input type="text" name="name" value="<?php echo $getUinfo['prenom']; ?>" class="form-control">
+                <input type="text" name="prenom" value="<?php echo $getUinfo['prenom']; ?>" class="form-control">
               </div>
 
               <div class="form-group">
@@ -185,7 +185,7 @@ $_controller = new affichControl();
               
                 <div class="form-group">
                   <label for="sel1">Le type de l'utilisateur</label>
-                  <select class="form-control" name="roleid" id="roleid">
+                  <select class="form-control" name="type" id="type">
 
                   <?php
 
@@ -195,23 +195,65 @@ $_controller = new affichControl();
                 <?php }elseif($getUinfo['type'] == 'transporteur'){?>
                   <option value="1">Client</option>
                   <option value="2" selected='selected'>Transporteur</option>
-                <?php } ?>
+               
 
 
                   </select>
+
+                  <?php
+                 
+
+                  include_once './controllers/affichControl.php';
+                  
+                  
+                  $_controller = new affichControl();
+                  $ARRAY = $_controller->affichWilaya(); 
+                  
+                  /* $rows = implode ("SEPARATOR", $ARRAY);
+                   */
+                  
+                  /* $array = json_decode(json_encode($ARRAY), true); */
+                  
+                  
+                   
+                  
+                  echo "<select class='form-control' multiple name='wilaya[]'>" ;
+                  
+                  foreach($ARRAY as $row){
+                    $ID_wilaya =  $row['ID_wilaya']; 
+                    
+                    $roww = $row['wilaya'];
+                    echo ("<option value='$roww' > $roww </option> ");
+
+                     
+                   /*  if( $_controller->userWilayaSelected($getUinfo['ID_user'] , $ID_wilaya)){
+                      echo ("<option value='$roww' selected > $roww </option> ");
+                    }  
+                    else {
+                      echo ("<option value='$roww' > $roww </option> ");
+
+                    } */                  
+                  
+                     
+                   }
+                  
+                  
+                  echo "</select>" ; 
+                  
+                 } ?>
                 </div>
               </div>
 
-          <?php ?>
-            <input type="hidden" name="typeuseradmin" value="<?php echo $getUinfo['type']; ?>">
-          <?php  ?>
+              <input type="hidden" name="type" value="updateuseradmin">
 
-  
+            <input type="hidden" name="updateiduser" value="<?php echo $getUinfo['ID_user']; ?>">
+         
+
 
 
               <div class="form-group">
-                <button type="submit" name="update" class="btn btn-success">Update</button>
-                <a class="btn btn-primary" href="changepass.php?id=<?php echo $getUinfo['ID_user'];?>">Password change</a>
+                <button type="submit" name="updateuseradmin" class="btn btn-success">Modifier</button>
+                <a class="btn btn-primary" href="changepass.php?id=<?php echo $getUinfo['ID_user'];?>">Changer le mot de passe</a>
               </div>
              
 
@@ -229,6 +271,9 @@ $_controller = new affichControl();
 
       </div>
     </div>
+    <script> 
+    const 
+  </script>
 
 
   <?php

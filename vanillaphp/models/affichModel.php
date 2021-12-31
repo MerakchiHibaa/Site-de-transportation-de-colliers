@@ -56,6 +56,19 @@ public function selectAllUserData() {
     
 }
 
+public  function userWilayaSelected($ID_user , $ID_wilaya) {
+    $this->db->query("SELECT * FROM user_wilaya where ID_User = :ID_user and ID_wilaya = :ID_wilaya");
+    $this->db->bind(':ID_user', $ID_user);
+    $this->db->bind(':ID_wilaya', $ID_wilaya);
+
+    if($this->db->execute()){
+        return true;
+    }else{
+        return false;
+    } 
+
+}
+
 
 
 

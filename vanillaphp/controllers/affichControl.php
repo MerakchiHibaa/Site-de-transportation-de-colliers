@@ -17,6 +17,12 @@
 
                 }
 
+        public function userWilayaSelected() {
+          return $this->model->userWilayaSelected() ; 
+
+
+        }
+
 
 
                 public function selectAllUserDat(){
