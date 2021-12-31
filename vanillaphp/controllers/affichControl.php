@@ -136,31 +136,48 @@
               $init->loginAdmin();
               break;
             
-          default:
-          redirect("./adminProfile.php");
-      }
+         /*  default:
+          redirect("./index.php");*/
+      } 
     }
       
   else{
-      switch($_GET['q']){
+    switch($_SERVER['QUERY_STRING']) {
+      case 'logout':
+        $init->logout();
+        break;
+     case 'ID_user':
+      $ID_user = $_GET['ID_user'];
+      break ; 
+    case 'remove' :
+      $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
+      $init->deleteUserById($remove) ;
+    case 'changeStatut': 
+      $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['changeStatut']);
+      $init->userChangeStatut( $ID_user,$etat) ;
+
+  }
+
+    /*   switch($_GET['q']){
           //we add cases for get here
           case 'logout':
               $init->logout();
               break;
-          case 'ID_user':
+           case 'ID_user':
             $ID_user = $_GET['ID_user'];
-            break ;
+            break ; 
           case 'remove' :
             $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
             $init->deleteUserById($remove) ;
           case 'changeStatut': 
+            $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['changeStatut']);
             $init->userChangeStatut( $ID_user,$etat) ;
+ */
 
 
-
-          default:
-          redirect("./adminProfile.php");
-      }
+        /*   default:
+          redirect("./index.php");  }*/
+      
   }
   
   

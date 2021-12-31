@@ -272,6 +272,132 @@ public function updateProfile($data) {
         }
     }
 
+
+
+    //changer statut par admin
+
+
+    
+public function userAttente($ID_user) {
+    $this->db->query("UPDATE users SET
+  
+    statut='en attente'
+    WHERE ID_user = :ID_user");
+
+    $this->db->bind(':ID_user', $ID_user);
+    if ($this->db->execute())  {
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Success !</strong> User account Diactivated Successfully !</div>';
+
+     }else{
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+ <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ <strong>Error !</strong> Data not Diactivated !</div>';
+
+         return $_SESSION['msg'] ;
+     }
+}
+ public function userTraitement($ID_user) {
+    $this->db->query("UPDATE users SET
+  
+    statut='en cours de traitement'
+    WHERE ID_user = :ID_user");
+
+    $this->db->bind(':ID_user', $ID_user);
+    if ($this->db->execute())  {
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Success !</strong> User account Diactivated Successfully !</div>';
+
+     }else{
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+ <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ <strong>Error !</strong> Data not Diactivated !</div>';
+
+         return $_SESSION['msg'] ;
+     }
+
+ }
+
+ public function userValider($ID_user) {
+    $this->db->query("UPDATE users SET
+  
+    statut='valide'
+    WHERE ID_user = :ID_user");
+
+    $this->db->bind(':ID_user', $ID_user);
+    if ($this->db->execute())  {
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Success !</strong> User account Diactivated Successfully !</div>';
+
+     }else{
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+ <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ <strong>Error !</strong> Data not Diactivated !</div>';
+
+         return $_SESSION['msg'] ;
+     }
+
+ }
+
+ public function userRefuser($ID_user) {
+    $this->db->query("UPDATE users SET
+  
+    statut='refuse'
+    WHERE ID_user = :ID_user");
+
+    $this->db->bind(':ID_user', $ID_user);
+    if ($this->db->execute())  {
+       echo "<script>location.href='./adminProfile.php';</script>";
+       $_SESSION['msg'] = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Success !</strong> User account Diactivated Successfully !</div>';
+
+     }else{
+       echo "<script>location.href='./adminProfile.php';</script>";
+       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+ <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ <strong>Error !</strong> Data not Diactivated !</div>';
+
+         return $_SESSION['msg'] ;
+     }
+
+ }
+
+ public function userCertifier($ID_user) {
+    $this->db->query("UPDATE users SET
+    statut='certifie'
+    WHERE ID_user = :ID_user");
+
+    $this->db->bind(':ID_user', $ID_user);
+    if ($this->db->execute())  {
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Success !</strong> User account Diactivated Successfully !</div>';
+
+     }else{
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+ <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ <strong>Error !</strong> Data not Diactivated !</div>';
+
+         return $_SESSION['msg'] ;
+     }
+
+ }
+
+
+
+
     //Reset Password
     public function resetPassword($newPwdHash, $tokenEmail){
         $this->db->query('UPDATE clients SET password=:password WHERE email=:email');

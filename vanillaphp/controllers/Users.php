@@ -317,12 +317,54 @@
       
     }
 
+    public function sendRate() {
+        
+
+    }
+
     public function logout(){
-        unset($_SESSION['usersId']);
-        unset($_SESSION['usersEmail']);
+        unset($_SESSION['userID']);
+        unset($_SESSION['userEmail']);
         session_destroy();
         redirect("../index.php");
     }
+
+
+    public function userChangeStatut(){
+       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+       echo "<h1> before the empty</h1>" ;
+
+        if (!empty($_POST['selectstatut'])  ) {
+            echo "<h1> inside userchange controller</h1>" ;
+            $ID_user = trim($_POST['ID_user']) ;
+            $etat = trim($_POST['selectstatut']) ;
+            echo "<h1> ID_user is " .$ID_user." etatt ".$etat. "</h1>" ;
+
+        if($etat == '1') {
+          return $this->userModel->userAttente( $ID_user) ;
+
+        }
+        if($etat == '2') {
+          
+          return $this->userModel->userTraitement( $ID_user) ;
+
+        }
+        if($etat == '3') {
+          return $this->userModel->userValider( $ID_user) ;
+
+          
+        }
+
+        if($etat == '4') {
+          return $this->userModel->userRefuser($ID_user) ;   
+        }
+        if($etat == '5') {
+            return $this->userModel->userCertifier($ID_user) ;   
+          }
+      }
+    }
+
+
 }
 
     $init = new Users;
@@ -346,18 +388,25 @@
                 $init-> updateProfile() ;
                 break ;
             case 'addannonce': 
-                $init-> addAnnonce();    
-            default:
-            redirect("../index.php");
-        }
+                $init-> addAnnonce(); 
+            case 'rate' : 
+                $init-> sendRate();   
+            case 'changestatut': 
+                echo "<h1> insiiide case of changestatut</h1>" ; 
+/*                 $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['changestatut']);
+ */                $init->userChangeStatut() ; 
+
+/*             default : redirect("../index.php");
+ */        }
         
     }else{
         switch($_GET['q']){
+            //we add cases for get here
             case 'logout':
                 $init->logout();
                 break;
-            default:
-            redirect("../index.php");
+          /*   default:
+            redirect("../index.php"); */
         }
     }
 
