@@ -1,6 +1,7 @@
 <?php
-
- include_once 'header.php';
+/* 
+ include_once 'header.php'; */
+ include_once './controllers/affichControl.php' ;
  include_once './helpers/session_helper.php';
 
 ?>

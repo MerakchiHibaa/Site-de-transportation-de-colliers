@@ -1,14 +1,19 @@
 <?php
 include 'inc/header.php';
-Session::CheckLogin();
+Session::CheckSession();
+/* $sId =  Session::get('type');
+if ($sId === '1'
+*/ 
+if (isset($_SESSION)) { ?>
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addUser'])) {
 
-  $register = $users->userRegistration($_POST);
+  $userAdd = $users->addNewUserByAdmin($_POST);
 }
 
-if (isset($register)) {
-  echo $register;
+if (isset($userAdd)) {
+  echo $userAdd;
 }
 
 
@@ -17,7 +22,7 @@ if (isset($register)) {
 
  <div class="card ">
    <div class="card-header">
-          <h3 class='text-center'>User Registration</h3>
+          <h3 class='text-center'>Add New User</h3>
         </div>
         <div class="cad-body">
 
@@ -45,10 +50,20 @@ if (isset($register)) {
                 <div class="form-group">
                   <label for="password">Password</label>
                   <input type="password" name="password" class="form-control">
-                  <input type="hidden" name="roleid" value="3" class="form-control">
                 </div>
                 <div class="form-group">
-                  <button type="submit" name="register" class="btn btn-success">Register</button>
+                  <div class="form-group">
+                    <label for="sel1">Select user Role</label>
+                    <select class="form-control" name="roleid" id="roleid">
+                      <option value="1">Admin</option>
+                      <option value="2">Editor</option>
+                      <option value="3">User only</option>
+
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" name="addUser" class="btn btn-success">Register</button>
                 </div>
 
 
@@ -59,7 +74,15 @@ if (isset($register)) {
         </div>
       </div>
 
+<?php
+}else{
 
+  header('Location:index.php');
+
+
+
+}
+ ?>
 
   <?php
   include 'inc/footer.php';

@@ -26,7 +26,7 @@ class Users{
 
   // Check Exist Email Address Method
   public function checkExistEmail($email){
-    $sql = "SELECT email from  tbl_users WHERE email = :email";
+    $sql = "SELECT email from  users WHERE email = :email";
     $stmt = $this->db->pdo->prepare($sql);
     $stmt->bindValue(':email', $email);
      $stmt->execute();
@@ -41,26 +41,31 @@ class Users{
 
   // User Registration Method
   public function userRegistration($data){
-    $name = $data['name'];
-    $username = $data['username'];
-    $email = $data['email'];
-    $mobile = $data['mobile'];
-    $roleid = $data['roleid'];
-    $password = $data['password'];
+    $nom = $data['name'];
+/*     $prenom = $data['nom'];
+ */
+/*     $username = $data['username'];
+ */    $email = $data['email'];
+    $numero = $data['mobile'];
+    $type = $data['roleid'];
+/*     $password = $data['password'];
+ */    $password = $data['password'];
+
+
 
     $checkEmail = $this->checkExistEmail($email);
 
-    if ($name == "" || $username == "" || $email == "" || $mobile == "" || $password == "") {
+    if ($nom == "" /* || $username == "" */ || $email == "" || $numero == "" || $password == "") {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Error !</strong> Please, User Registration field must not be Empty !</div>';
         return $msg;
-    }elseif (strlen($username) < 3) {
+    }/* elseif (strlen($username) < 3) {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Error !</strong> Username is too short, at least 3 Characters !</div>';
-        return $msg;
-    }elseif (filter_var($mobile,FILTER_SANITIZE_NUMBER_INT) == FALSE) {
+        return $msg; }*/
+    elseif (filter_var($numero,FILTER_SANITIZE_NUMBER_INT) == FALSE) {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Error !</strong> Enter only Number Characters for Mobile number field !</div>';
@@ -93,14 +98,14 @@ class Users{
         return $msg;
     }else{
 
-      $sql = "INSERT INTO tbl_users(name, username, email, password, mobile, roleid) VALUES(:name, :username, :email, :password, :mobile, :roleid)";
+      $sql = "INSERT INTO users(nom, email, password, numero, type) VALUES(:nom, :email, :password, :numero, :type)";
       $stmt = $this->db->pdo->prepare($sql);
-      $stmt->bindValue(':name', $name);
-      $stmt->bindValue(':username', $username);
-      $stmt->bindValue(':email', $email);
+      $stmt->bindValue(':nom', $nom);
+/*       $stmt->bindValue(':username', $username);
+ */      $stmt->bindValue(':email', $email);
       $stmt->bindValue(':password', SHA1($password));
-      $stmt->bindValue(':mobile', $mobile);
-      $stmt->bindValue(':roleid', $roleid);
+      $stmt->bindValue(':numero', $numero);
+      $stmt->bindValue(':type', $type);
       $result = $stmt->execute();
       if ($result) {
         $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
@@ -125,26 +130,26 @@ class Users{
   }
   // Add New User By Admin
   public function addNewUserByAdmin($data){
-    $name = $data['name'];
-    $username = $data['username'];
-    $email = $data['email'];
-    $mobile = $data['mobile'];
-    $roleid = $data['roleid'];
+    $nom = $data['nom'];
+/*     $username = $data['username'];
+ */    $email = $data['email'];
+    $numero = $data['numero'];
+    $type = $data['type'];
     $password = $data['password'];
 
     $checkEmail = $this->checkExistEmail($email);
 
-    if ($name == "" || $username == "" || $email == "" || $mobile == "" || $password == "") {
+    if ($nom == "" /* || $username == ""  */|| $email == "" || $numero == "" || $password == "") {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Error !</strong> Input fields must not be Empty !</div>';
         return $msg;
-    }elseif (strlen($username) < 3) {
+    }/* elseif (strlen($username) < 3) {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Error !</strong> Username is too short, at least 3 Characters !</div>';
         return $msg;
-    }elseif (filter_var($mobile,FILTER_SANITIZE_NUMBER_INT) == FALSE) {
+    } */elseif (filter_var($numero,FILTER_SANITIZE_NUMBER_INT) == FALSE) {
       $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Error !</strong> Enter only Number Characters for Mobile number field !</div>';
@@ -177,14 +182,14 @@ class Users{
         return $msg;
     }else{
 
-      $sql = "INSERT INTO tbl_users(name, username, email, password, mobile, roleid) VALUES(:name, :username, :email, :password, :mobile, :roleid)";
+      $sql = "INSERT INTO users(nom, prenom, email, password, numero, type) VALUES(:nom, :nom, :email, :password, :numero, :type)";
       $stmt = $this->db->pdo->prepare($sql);
-      $stmt->bindValue(':name', $name);
-      $stmt->bindValue(':username', $username);
-      $stmt->bindValue(':email', $email);
+      $stmt->bindValue(':nom', $nom);
+/*       $stmt->bindValue(':username', $username);
+ */      $stmt->bindValue(':email', $email);
       $stmt->bindValue(':password', SHA1($password));
-      $stmt->bindValue(':mobile', $mobile);
-      $stmt->bindValue(':roleid', $roleid);
+      $stmt->bindValue(':numer', $numero);
+      $stmt->bindValue(':type', $type);
       $result = $stmt->execute();
       if ($result) {
         $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
@@ -212,7 +217,7 @@ class Users{
 
   // Select All User Method
   public function selectAllUserData(){
-    $sql = "SELECT * FROM tbl_users ORDER BY id DESC";
+    $sql = "SELECT * FROM users ORDER BY id DESC";
     $stmt = $this->db->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -222,7 +227,7 @@ class Users{
   // User login Autho Method
   public function userLoginAutho($email, $password){
     $password = SHA1($password);
-    $sql = "SELECT * FROM tbl_users WHERE email = :email and password = :password LIMIT 1";
+    $sql = "SELECT * FROM users WHERE email = :email and password = :password LIMIT 1";
     $stmt = $this->db->pdo->prepare($sql);
     $stmt->bindValue(':email', $email);
     $stmt->bindValue(':password', $password);
@@ -231,10 +236,10 @@ class Users{
   }
   // Check User Account Satatus
   public function CheckActiveUser($email){
-    $sql = "SELECT * FROM tbl_users WHERE email = :email and isActive = :isActive LIMIT 1";
+    $sql = "SELECT * FROM users WHERE email = :email and type = :type LIMIT 1";
     $stmt = $this->db->pdo->prepare($sql);
     $stmt->bindValue(':email', $email);
-    $stmt->bindValue(':isActive', 1);
+    $stmt->bindValue(':type', 'client');
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_OBJ);
   }
@@ -270,23 +275,25 @@ class Users{
 
 
         $logResult = $this->userLoginAutho($email, $password);
-        $chkActive = $this->CheckActiveUser($email);
+      }
+       /*  $checkType = $this->CheckActiveUser($email);
 
         if ($chkActive == TRUE) {
           $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>Error !</strong> Sorry, Your account is Diactivated, Contact with Admin !</div>';
             return $msg;
-        }elseif ($logResult) {
+        } */
+        if ($logResult) {
 
           Session::init();
           Session::set('login', TRUE);
-          Session::set('id', $logResult->id);
-          Session::set('roleid', $logResult->roleid);
-          Session::set('name', $logResult->name);
+          Session::set('ID_user', $logResult->ID_user);
+          Session::set('type', $logResult->type);
+          Session::set('nom', $logResult->nom);
           Session::set('email', $logResult->email);
-          Session::set('username', $logResult->username);
-          Session::set('logMsg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+/*           Session::set('username', $logResult->username);
+ */          Session::set('logMsg', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>Success !</strong> You are Logged In Successfully !</div>');
           echo "<script>location.href='index.php';</script>";
@@ -306,10 +313,10 @@ class Users{
 
 
     // Get Single User Information By Id Method
-    public function getUserInfoById($userid){
-      $sql = "SELECT * FROM tbl_users WHERE id = :id LIMIT 1";
+    public function getUserInfoById($ID_user){
+      $sql = "SELECT * FROM users WHERE ID_user = :ID_user LIMIT 1";
       $stmt = $this->db->pdo->prepare($sql);
-      $stmt->bindValue(':id', $userid);
+      $stmt->bindValue(':ID_user', $ID_user);
       $stmt->execute();
       $result = $stmt->fetch(PDO::FETCH_OBJ);
       if ($result) {

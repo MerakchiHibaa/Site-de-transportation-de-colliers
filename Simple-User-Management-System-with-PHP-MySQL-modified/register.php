@@ -28,24 +28,24 @@ if (isset($register)) {
             <form class="" action="" method="post">
                 <div class="form-group pt-3">
                   <label for="name">Your name</label>
-                  <input type="text" name="name"  class="form-control">
+                  <input type="text" name="nom"  class="form-control">
                 </div>
-                <div class="form-group">
+<!--                 <div class="form-group">
                   <label for="username">Your username</label>
                   <input type="text" name="username"  class="form-control">
-                </div>
+                </div> -->
                 <div class="form-group">
                   <label for="email">Email address</label>
                   <input type="email" name="email"  class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="mobile">Mobile Number</label>
-                  <input type="text" name="mobile"  class="form-control">
+                  <input type="text" name="numero"  class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
                   <input type="password" name="password" class="form-control">
-                  <input type="hidden" name="roleid" value="3" class="form-control">
+                  <input type="hidden" name="type" value="3" class="form-control">
                 </div>
                 <div class="form-group">
                   <button type="submit" name="register" class="btn btn-success">Register</button>
