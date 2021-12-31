@@ -60,7 +60,9 @@ public function selectAllUserData() {
 
 
 public function getUserInfoById($ID_user) {
+    echo "<h1> this is id in getuser ".$ID_user." </h1>" ;
    $this->db->query("SELECT * FROM users WHERE ID_user = :ID_user LIMIT 1");
+
    $this->db->bind(':ID_user', $ID_user);
    return $this->db->resultSet() ; 
   

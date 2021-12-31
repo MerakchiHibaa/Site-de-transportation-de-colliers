@@ -74,7 +74,9 @@ class Database {
     //Return a single record
     public function single(){
         $this->execute();
-        return $this->stmt->fetch(PDO::FETCH_OBJ);
+        $ARRAY=  $this->stmt->fetch(PDO::FETCH_OBJ);
+        return json_decode(json_encode($ARRAY), true) ;
+
     }
 
     //Get row count

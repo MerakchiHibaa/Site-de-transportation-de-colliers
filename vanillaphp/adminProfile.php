@@ -185,8 +185,8 @@ $allUser = $_controller->selectAllUserData();
                         </td>
 
                         <td>
-                          <a class="btn btn-success btn-sm" href="userProfile.php?id=<?php echo $value['ID_user'] ;?>">Voir</a>
-                          <a class="btn btn-info btn-sm " href="userProfile.php?id=<?php echo $value['ID_user'] ;?>">Editer</a>
+                          <a class="btn btn-success btn-sm" href="userProfileAdmin.php?id=<?php echo $value['ID_user'] ;?>">Voir</a>
+                          <a class="btn btn-info btn-sm " href="userProfileAdmin.php?id=<?php echo $value['ID_user'] ;?>">Editer</a>
                            <a onclick="return confirm('Vous voulez vraiment supprimer cet utilisateur ?')" class="btn btn-danger btn-sm " href="?remove=<?php echo $value['ID_user'];?>">Supprimer</a>
                             
                            <?php if ($value['type'] == 'transporteur') { ?> 

@@ -32,7 +32,7 @@
 
 
          function getUserInfoById($ID_user){
-            return $this-> model-> getUserInfoById($ID_user) ; 
+            return $this->model->getUserInfoById($ID_user) ; 
            
       
       
@@ -86,26 +86,7 @@
       }
 
      
-      public function userChangeStatut( $ID_user,$etat){
-        if($etat == 'en attente') {
-          return $this->model->userAttente( $ID_user) ;
-
-        }
-        if($etat == 'en cours de traitement') {
-          
-          return $this->model->userTraitement( $ID_user) ;
-
-        }
-        if($etat == 'valide') {
-          return $this->model->userValider( $ID_user) ;
-
-          
-        }
-
-        if($etat == 'refuse') {
-          return $this->model->userRefuser($ID_user) ;   
-        }
-      }
+      
 
    
   
@@ -152,10 +133,7 @@
     case 'remove' :
       $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
       $init->deleteUserById($remove) ;
-    case 'changeStatut': 
-      $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['changeStatut']);
-      $init->userChangeStatut( $ID_user,$etat) ;
-
+   
   }
 
     /*   switch($_GET['q']){
