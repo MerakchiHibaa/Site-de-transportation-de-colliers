@@ -16,8 +16,8 @@
     <title>PHP CRUD User Management</title>
     <link rel="stylesheet" href="assetss/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="assetss/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="assetss/style.css">
+    <link rel="stylesheet" href="./assetss/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./assetss/style.css">
   </head>
   <body>
 
@@ -29,9 +29,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
   // <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   // <strong>Success !</strong> You are Logged Out Successfully !</div>');
  /*  Session::destroy(); */
+
+ 
 }
 
-
+if (!empty($_SESSION['msg'])) {
+  echo $_SESSION['msg'] ;
+}
 
  ?>
 
@@ -76,7 +80,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 
       				$path = $_SERVER['SCRIPT_FILENAME'];
       				$current = basename($path, '.php');
-      				if ($current == 'profile') {
+      				if ($current == 'adminProfile') {
       					echo "active ";
       				}
 
@@ -99,6 +103,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 
         </div>
       </nav>
+
+
       <div class="card ">
         <div class="card-header">
           <h3><i class="fas fa-users mr-2"></i>User list <span class="float-right">Welcome! <strong>
@@ -245,10 +251,33 @@ $allUser = $_controller->selectAllUserData();
         </div>
       </div>
 
+<!-- footer -->
+
+ <div class="well card-footer">
+  <p
+      <span class="float-right"></span>
+  </p>
+</div>
 
 
-  <?php
-   include '../Simple-User-Management-System-with-PHP-MySQL-master/inc/footer.php' ;
 
 
-  ?>
+  </body>
+
+
+
+
+  <!-- Jquery script -->
+  <script src="assetss/jquery.min.js"></script>
+  <script src="assetss/bootstrap.min.js"></script>
+  <script src="assetss/jquery.dataTables.min.js"></script>
+  <script src="assetss/dataTables.bootstrap4.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          $("#flash-msg").delay(7000).fadeOut("slow");
+      });
+      $(document).ready(function() {
+          $('#example').DataTable();
+      } );
+  </script>
+</html>

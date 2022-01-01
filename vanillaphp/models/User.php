@@ -388,13 +388,13 @@ public function userAttente($ID_user) {
 
     $this->db->bind(':ID_user', $ID_user);
     if ($this->db->execute())  {
-       echo "<script>location.href='./adminProfile.php';</script>";
+       echo "<script>location.href='../adminProfile.php';</script>";
        $_SESSION['msg'] = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
        <strong>Success !</strong> User account Diactivated Successfully !</div>';
-
+       return $_SESSION['msg'] ;
      }else{
-       echo "<script>location.href='./adminProfile.php';</script>";
+       echo "<script>location.href='../adminProfile.php';</script>";
        $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
  <strong>Error !</strong> Data not Diactivated !</div>';

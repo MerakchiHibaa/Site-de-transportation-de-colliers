@@ -187,16 +187,46 @@ $_controller = new affichControl();
               
                 <div class="form-group">
                   <label for="sel1">Le type de l'utilisateur</label>
-                  <select class="form-control" name="type" id="type">
+                  <select class="form-control" name="type"  id="type">
 
                   <?php
 
                 if($getUinfo['type'] == 'client'){?>
-                  <option value="1" selected='selected'>Client</option>
-                  <option value="2">Transporteur</option>
-                <?php }elseif($getUinfo['type'] == 'transporteur'){?>
-                  <option value="1">Client</option>
-                  <option value="2" selected='selected'>Transporteur</option>
+                  <option id="optclientclient" value="1" selected='selected'>Client</option>
+                  <option id="optclienttrans" value="2">Transporteur</option>
+                  </select>  
+                <?php
+                
+
+                  
+
+include_once './controllers/affichControl.php';
+
+
+$_controller = new affichControl();
+$ARRAY = $_controller->affichWilaya(); 
+
+echo "<select class='form-control' id='selectClient' style='display:none;' multiple name='wilaya[]'>" ;
+
+foreach($ARRAY as $row){
+  $ID_wilaya =  $row['ID_wilaya'];                     
+  $roww = $row['wilaya'];
+  echo ("<option value='$roww' > $roww </option> ");
+  
+               
+
+   
+ }
+
+?> 
+
+</select >
+<?php
+
+              
+              }elseif($getUinfo['type'] == 'transporteur'){?>
+                  <option  id="opttransclient"  value="3">Client</option>
+                  <option id="opttranstrans" value="4" selected='selected'>Transporteur</option>
                
 
 
@@ -210,22 +240,15 @@ $_controller = new affichControl();
                   
                   $_controller = new affichControl();
                   $ARRAY = $_controller->affichWilaya(); 
-                  
-                  /* $rows = implode ("SEPARATOR", $ARRAY);
-                   */
-                  
-                  /* $array = json_decode(json_encode($ARRAY), true); */
-                  
-                  
-                   
-                  
-                  echo "<select class='form-control' multiple name='wilaya[]'>" ;
+                  ?>
+                  <select class='form-control' id='selectTransporteur' multiple name='wilaya[]'>;
+                    <?php
                   
                   foreach($ARRAY as $row){
                     $ID_wilaya =  $row['ID_wilaya'];                     
                     $roww = $row['wilaya'];
-                    echo ("<option value='$roww' > $roww </option> ");
-                    
+/*                     echo ("<option value='$roww' > $roww </option> ");
+ */                    
                     if( $_controller->userWilayaSelected($getUinfo['ID_user'] , $ID_wilaya)){
                       echo ("<option value='$roww' selected='selected' > $roww </option> ");
                     }  
@@ -236,11 +259,11 @@ $_controller = new affichControl();
                   
                      
                    }
+                  ?>
                   
+                  </select>
                   
-                  echo "</select>" ; 
-                  
-                 } ?>
+                <?php } ?>
                 </div>
               </div>
 
@@ -272,7 +295,59 @@ $_controller = new affichControl();
       </div>
     </div>
     <script> 
-    const 
+    const selectTransporteur = document.getElementById('selectTransporteur') ; 
+    const selectClient = document.getElementById('selectClient') ; 
+    const opttranstrans =  document.getElementById('opttranstrans') ; 
+    const opttransclient =  document.getElementById('opttransclient') ; 
+    const optclienttrans =  document.getElementById('optclienttrans') ; 
+    const optclientclient =  document.getElementById('optclientclient') ; 
+    if (selectTransporteur != null ){ 
+      console.log('inside boucle') ;
+
+      if (opttransclient != null )  {
+
+     
+    opttransclient.onselect = () => {
+      console.log('inside select 1') ;
+      selectTransporteur.setAttribute("style", "display: none");
+
+
+    }  }
+    if ( optclientclient !=null) {
+
+   
+    optclientclient.onselect = () => {
+      console.log('inside select 2') ;
+
+      selectTransporteur.setAttribute("style", "display: none");
+
+
+    } }
+  }
+
+
+    function hideclient(self) {
+      if (self.value == "1" || self.value == "4" ) {
+    console.log(' selected client');
+    console.log(self.value);
+
+     selectTransporteur.setAttribute("style", "display: none");
+ 
+  }else{
+    console.log(self.value);
+
+     console.log(' selected transporteur');
+     selectTransporteur.setAttribute("style", "display: block");
+
+
+  }
+
+
+    }
+
+
+
+
   </script>
 
 
