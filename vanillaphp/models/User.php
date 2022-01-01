@@ -258,6 +258,38 @@ public function updateProfile($data) {
         }
     }
 
+    public function updateUserAdmin($ID_user , $data) {
+        $sql = "UPDATE users SET
+                nom = :nom,
+                prenom = :prenom,
+                email = :email,
+                adresse = :adresse,
+                type = :type ,
+                numero = :numero,
+                WHERE ID_user = :ID_user";
+                $this->db->bind(':ID_user', $ID_user);
+
+                $this->db->bind(':nom',  $data['nom']);
+                $this->db->bind(':prenom',  $data['prenom']);
+                $this->db->bind(':email', $data['email']);
+                $this->db->bind(':numero',  $data['numero']);
+                $this->db->bind(':type',  $data['type']);
+                $this->db->bind(':adresse',  $data['adresse']);
+              if ($this->db->execute()) {
+                echo "<script>location.href='index.php';</script>";
+                $msg ='<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success !</strong> Wow, Your Information updated Successfully !</div>';
+      return $msg ;
+              }else{
+                echo "<script>location.href='index.php';</script>";
+                $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Error !</strong> Data not inserted !</div>';
+      
+      
+              }
+    }
     //Login user
     public function login($email, $password){
         $row = $this->findUserByEmail($email);

@@ -48,22 +48,22 @@ if (isset($updateUser)) {
           <form class="" action="" method="POST">
               <div class="form-group">
                 <label for="name">Your name</label>
-                <input type="text" name="name" value="<?php echo $getUinfo->name; ?>" class="form-control">
+                <input type="text" name="nom" value="<?php echo $getUinfo->name; ?>" class="form-control">
               </div>
-              <div class="form-group">
+             <!--  <div class="form-group">
                 <label for="username">Your username</label>
                 <input type="text" name="username" value="<?php echo $getUinfo->username; ?>" class="form-control">
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="email" id="email" name="email" value="<?php echo $getUinfo->email; ?>" class="form-control">
               </div>
               <div class="form-group">
                 <label for="mobile">Mobile Number</label>
-                <input type="text" id="mobile" name="mobile" value="<?php echo $getUinfo->mobile; ?>" class="form-control">
+                <input type="text" id="mobile" name="numero" value="<?php echo $getUinfo->mobile; ?>" class="form-control">
               </div>
 
-              <?php if (Session::get("roleid") == '1') { ?>
+              <?php if (Session::get("type") == '1') { ?>
 
               <div class="form-group
               <?php if (Session::get("roleid") == '1' && Session::get("id") == $getUinfo->id) {

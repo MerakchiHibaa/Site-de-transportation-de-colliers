@@ -179,6 +179,7 @@
                     'email' => trim($_POST['email']),
                     'numero' => trim($_POST['numero']),
                     'transporteur' => trim($_POST['transporteur']),
+                    //erreur
                     'wilaya' => trim($_POST['wilaya']),
                     'password' => trim($_POST['password']),
                     'passwordrepeat' => trim($_POST['passwordrepeat'])
@@ -329,6 +330,72 @@
         redirect("../index.php");
     }
 
+    public function updateUserAdmin() {
+        if (!empty($_POST['wilaya'])){ 
+        $data = [
+            'nom' => trim($_POST['nom']),
+            'prenom' => trim($_POST['prenom']),
+            'adresse' => trim($_POST['adresse']),
+            'email' => trim($_POST['email']),
+            'numero' => trim($_POST['numero']),
+            'type' => trim($_POST['type']),
+            'wilaya' => trim($_POST['wilaya'])
+
+            /* 'password' => trim($_POST['password']),
+            'passwordrepeat' => trim($_POST['passwordrepeat']) */
+        ];
+        $wilaya = $data['wilaya'];
+
+    } else {
+        $data = [
+            'nom' => trim($_POST['nom']),
+            'prenom' => trim($_POST['prenom']),
+            'adresse' => trim($_POST['adresse']),
+            'email' => trim($_POST['email']),
+            'numero' => trim($_POST['numero']),
+            'type' => trim($_POST['type']),
+        ] ;
+
+    }
+
+            $nom = $data['nom'];
+            $prenom = $data['prenom'];
+            $adresse = $data['adresse'];
+            $email = $data['email'];
+            $numero = $data['numero'];
+            $type = $data['type'];
+
+            $ID_user = $_POST['updateiduser'] ;
+      
+            if ($nom == "" || $prenom == "" ||  $adresse == ""|| $email == "" || $type == ""  || $numero == "" ||$wilaya = ""  ) {
+              $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error !</strong> Input Fields must not be Empty !</div>';
+                return $msg;
+              
+              }elseif (filter_var($numero,FILTER_SANITIZE_NUMBER_INT) == FALSE) {
+                $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Error !</strong> Enter only Number Characters for Mobile number field !</div>';
+                  return $msg;
+      
+      
+            }elseif (filter_var($email, FILTER_VALIDATE_EMAIL === FALSE)) {
+              $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error !</strong> Invalid email address !</div>';
+                return $msg;
+            }else{
+      
+              return $this->userModel->updateUserAdmin($ID_user, $data) ;
+      
+      
+            }
+      
+      
+          
+          
+    }
 
     public function userChangeStatut(){
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -362,6 +429,9 @@
             return $this->userModel->userCertifier($ID_user) ;   
           }
       }
+
+
+      
     }
 
 
@@ -390,7 +460,9 @@
             case 'addannonce': 
                 $init-> addAnnonce(); 
             case 'rate' : 
-                $init-> sendRate();   
+                $init-> sendRate(); 
+            case 'updateuseradmin':
+                $init->updateUserAdmin() ;  
             case 'changestatut': 
                 echo "<h1> insiiide case of changestatut</h1>" ; 
 /*                 $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['changestatut']);
@@ -400,14 +472,14 @@
  */        }
         
     }else{
-        switch($_GET['q']){
+       /* switch($_GET['q']){
             //we add cases for get here
             case 'logout':
                 $init->logout();
                 break;
-          /*   default:
-            redirect("../index.php"); */
-        }
+             default:
+            redirect("../index.php"); 
+        }*/
     }
 
     

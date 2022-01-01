@@ -17,8 +17,8 @@
 
                 }
 
-        public function userWilayaSelected() {
-          return $this->model->userWilayaSelected() ; 
+        public function userWilayaSelected($ID_user , $ID_wilaya) {
+          return $this->model->userWilayaSelected($ID_user , $ID_wilaya) ; 
 
 
         }

@@ -159,26 +159,28 @@ $_controller = new affichControl();
           <form class="" action="./controllers/Users.php" method="POST">
               <div class="form-group">
                 <label for="name">Nom</label>
-                <input type="text" name="nom" value="<?php echo $getUinfo['nom']; ?>" class="form-control">
+                <input required type="text" name="nom" value="<?php echo $getUinfo['nom']; ?>" class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="name">Prénom</label>
-                <input type="text" name="prenom" value="<?php echo $getUinfo['prenom']; ?>" class="form-control">
+                <input required type="text" name="prenom" value="<?php echo $getUinfo['prenom']; ?>" class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="adresse">Adresse</label>
-                <input type="text" name="adresse" value="<?php echo $getUinfo['adresse']; ?>" class="form-control">
+                <input required type="text" name="adresse" value="<?php echo $getUinfo['adresse']; ?>" class="form-control">
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php echo $getUinfo['email']; ?>" class="form-control">
+                <input required type="email" id="email" name="email" value="<?php echo $getUinfo['email']; ?>" class="form-control">
               </div>
               <div class="form-group">
                 <label for="mobile">Numéro</label>
-                <input type="text" id="numero" name="numero" value="<?php echo $getUinfo['numero']; ?>" class="form-control">
+                <input required type="text" id="numero" name="numero" value="<?php echo $getUinfo['numero']; ?>" class="form-control">
               </div>
+
+             
 
               
 
@@ -220,19 +222,17 @@ $_controller = new affichControl();
                   echo "<select class='form-control' multiple name='wilaya[]'>" ;
                   
                   foreach($ARRAY as $row){
-                    $ID_wilaya =  $row['ID_wilaya']; 
-                    
+                    $ID_wilaya =  $row['ID_wilaya'];                     
                     $roww = $row['wilaya'];
                     echo ("<option value='$roww' > $roww </option> ");
-
-                     
-                   /*  if( $_controller->userWilayaSelected($getUinfo['ID_user'] , $ID_wilaya)){
-                      echo ("<option value='$roww' selected > $roww </option> ");
+                    
+                    if( $_controller->userWilayaSelected($getUinfo['ID_user'] , $ID_wilaya)){
+                      echo ("<option value='$roww' selected='selected' > $roww </option> ");
                     }  
                     else {
                       echo ("<option value='$roww' > $roww </option> ");
 
-                    } */                  
+                    }                  
                   
                      
                    }
