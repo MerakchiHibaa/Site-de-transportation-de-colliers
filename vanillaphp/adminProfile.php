@@ -16,8 +16,8 @@
     <title>PHP CRUD User Management</title>
     <link rel="stylesheet" href="assetss/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assetss/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="./assetss/style.css">
+    <link rel="stylesheet" href="assetss/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assetss/style.css">
   </head>
   <body>
 
@@ -202,16 +202,19 @@ $allUser = $_controller->selectAllUserData();
                             <form action="./controllers/Users.php" method="POST" > 
                             <input type="hidden" name="type" value ="changestatut">
 
-                           <select  class='form-control inputstl' name="selectstatut" id="selectstatut"> 
+                           <select  onchange="selectRefuse(this);" class='form-control inputstl' name="selectstatut" id="selectstatut"> 
                            <option disabled selected value> -- Changer le statut -- </option>
 
                            <option value='1' > En attente </option>
                              <option value='2'> En cours de traitement</option>
                              <option value='3' > Validé </option>
-                             <option value='4' >Refusé</option>
+                             <option id="refus" value='4' >Refusé</option>
                              <option value='5' >Certifié</option>
 
                            </select>
+
+
+
                            <div class="from-group mb-3"> 
                               <input type="hidden" name="ID_user" value="<?php echo $value['ID_user']?>">
   
@@ -220,6 +223,34 @@ $allUser = $_controller->selectAllUserData();
 
                            </form>
                             </div>
+<!--form de justificatif debut-->
+<div id="container-justificatif" class="container-justificatif" style=" 
+
+position:relative;
+display:none ;" > 
+  <label for="" id="closebtn-justificatif" class="closer-btn fas fa-times" style="
+  position: absolute;
+ 
+  right: 1rem;
+  top: 1rem;
+
+"></label>
+
+<form action="./controllers/Users.php" method="POST" style="margin: 2rem;" > 
+<div class="text"  style="margin: 2rem;
+padding-top: 2rem ; 
+font-size: 1.2rem ; width: 80%;"> Envoyez un justificatif </div>
+<input type="hidden" name="type" value ="sendjustificatif"  required>
+<div class="from-group mb-3"> 
+  <input type="text" style="margin: 0 2rem;height: 6rem ; ">
+  </div> 
+  <input type="submit" value="Envoyer"  style="margin: 2rem; " >
+
+
+</form> 
+</div>
+<!--form de justificatif fin-->
+
                             <?php } ?>
 <!--                                <a onclick="return confirm('Vous voulez changer le statut à <En cours de traitement> ?')" class="btn btn-secondary btn-sm " href="?deactive=<?php echo $value['ID_user'];?>">Changer le statut</a>
  -->                             
@@ -260,11 +291,43 @@ $allUser = $_controller->selectAllUserData();
 </div>
 
 
+<script> 
+
+const closebtn = document.getElementById('closebtn-justificatif') ;
+const containerjust = document.getElementById('container-justificatif') ;
+closebtn.onclick = () => {
+  containerjust.style.display = 'none' ; 
+
+}
+function selectRefuse(nameselect) {
+  if(nameselect) {
+    const refus = document.getElementById('refus').value ;
+    if(refus == nameselect.value) {
+      console.log('inside selectrefuse function ') ;
+  containerjust.style.display = 'block' ; 
+    }
+    else{
+      containerjust.style.display = 'none' ; 
+
+
+    }
+   
+
+  }
+  else {
+    containerjust.style.display = 'none' ; 
+
+
+  }
+  
+
+
+}
+
+</script>
 
 
   </body>
-
-
 
 
   <!-- Jquery script -->
