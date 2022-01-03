@@ -109,13 +109,13 @@ public function getTypeUtilisateur($ID_user) {
 
 }
 
-/* public function getAnnonceInfoById($ID_annonce) {
+ public function getAnnonceInfoById($ID_annonce) {
     $this->db->query("SELECT * FROM annonces WHERE ID_annonce = :ID_annonce LIMIT 1");
 
    $this->db->bind(':ID_annonce', $ID_annonce);
    return $this->db->resultSet() ; 
 
-} */
+} 
 public function updateUserByIdInfo($ID_user ,$data) {
 
     

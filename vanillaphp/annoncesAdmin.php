@@ -280,7 +280,8 @@ $_controller = new affichControl();
                         </td>
 
                         <td>
-                        
+                        <a class="btn btn-success btn-sm" href="annonceDetailAdmin.php?id=<?php echo $value['ID_annonce'] ;?>">Voir</a>
+
                           <a   onclick="return confirm('Vous voulez vraiment archiver cette annonce? ')" class="btn btn-warning btn-sm
                           <?php  if( $value['archive'] == '1' )  {
                             echo "disabled";

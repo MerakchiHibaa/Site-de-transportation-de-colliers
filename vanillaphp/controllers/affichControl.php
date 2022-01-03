@@ -38,11 +38,11 @@
 
         }
 
-      /*   public function getAnnonceInfoById($ID_annonce) {
+         public function getAnnonceInfoById($ID_annonce) {
           return $this->model->getAnnonceInfoById($ID_annonce) ; 
 
 
-        } */
+        }
 
 
 
