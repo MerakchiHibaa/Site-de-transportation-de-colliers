@@ -13,7 +13,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>PHP CRUD User Management</title>
+    <title> </title>
     <link rel="stylesheet" href="assetss/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="assetss/dataTables.bootstrap4.min.css">
@@ -24,6 +24,12 @@
   <?php
 
 
+
+include_once './controllers/affichControl.php';
+
+
+$_controller = new affichControl();
+
 if (isset($_GET['action']) && $_GET['action'] == 'logout') {
   // Session::set('logout', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
   // <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -32,6 +38,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 
  
 }
+if (isset($_GET['removea'])) {
+    echo"<h1> insiiide remove </h1>" ;
+    $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['removea']);
+    $_controller->deleteAnnonceById($remove);
+}
+  if (isset($_GET['archivea'])) {
+    echo"<h1> insiiide archive </h1>" ;
+
+    $archive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['archivea']);
+   $_controller->archiveAnnonce($archive);
+  }
 
 if (!empty($_SESSION['msg'])) {
   echo $_SESSION['msg'] ;
@@ -126,7 +143,7 @@ if (isset($prenom)) {
                     <tr> 
                         <!--12 -->
                       <th  class="text-center">SL</th>
-                      <th  class="text-center">ID_user</th>
+                      <th  class="text-center">Utilisateur</th>
                       <th  class="text-center">Point de départ</th>
                       <th  class="text-center">Point d'arrivée</th>
                       <th  class="text-center">Type de transport</th>
@@ -167,7 +184,22 @@ $allannonces = $_controller->selectAllAnnouncements();
                       >
 
                         <td><?php echo $i; ?></td>
-                        <td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_User'] ;?>">  <?php  echo  $value['ID_User']; ?></a> </td>
+                        <td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_User'] ;?>">  <?php 
+                        
+include_once './controllers/affichControl.php';
+
+
+$_controller = new affichControl();
+                        $user = $_controller->getTypeUtilisateur($value['ID_User']) ;
+                        if($user) {
+
+                        
+                        foreach($user as $user) {
+                            echo $user['type'] ;
+                        } }
+                        else {
+                            echo 'utilisateur' ;
+                        }?></a> </td>
 
                         <td><?php echo $value['pointDepart']; ?></td>
                         
@@ -197,10 +229,15 @@ $allannonces = $_controller->selectAllAnnouncements();
 
                          <?php 
 
-                        } else {
-                            echo "Oui" ;
+                        } else { ?>
+                        
 
-                        } ?>
+                        <a class="btn btn-warning btn-sm" href="">Oui</a>
+
+
+                        
+
+                       <?php } ?>
                         </td>
 
                         <td>
@@ -243,9 +280,14 @@ $allannonces = $_controller->selectAllAnnouncements();
                         </td>
 
                         <td>
-                          <a class="btn btn-success btn-sm" href="aanonceDetailAdmin.php?id=<?php echo $value['ID_annonce'] ;?>">Voir</a>
-                          <a class="btn btn-info btn-sm " href="aanonceDetailAdmin.php?id=<?php echo $value['ID_annonce'] ;?>">Editer</a>
-                           <a onclick="return confirm('Vous voulez vraiment supprimer cet utilisateur ?')" class="btn btn-danger btn-sm " href="?remove=<?php echo $value['ID_annonce'];?>">Supprimer</a>
+                        
+                          <a   onclick="return confirm('Vous voulez vraiment archiver cette annonce? ')" class="btn btn-warning btn-sm
+                          <?php  if( $value['archive'] == '1' )  {
+                            echo "disabled";
+                          } ?>
+                          " href="?archivea=<?php echo $value['ID_annonce'];?>">Archiver </a>
+                    
+                           <a onclick="return confirm('Vous voulez vraiment supprimer cette annonce ?')" class="btn btn-danger btn-sm " href="?removea=<?php echo $value['ID_annonce'];?>">Supprimer</a>
                             
                          
 <!--                                <a onclick="return confirm('Vous voulez changer le statut à <En cours de traitement> ?')" class="btn btn-secondary btn-sm " href="?deactive=<?php echo $value['ID_user'];?>">Changer le statut</a>

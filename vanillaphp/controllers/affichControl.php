@@ -22,6 +22,27 @@
 
 
         }
+        public function deleteAnnonceById($remove){
+          return $this->model->deleteAnnonceById($remove) ;
+  
+  
+      } 
+      public function archiveAnnonce($deactive) {
+          return $this->model->archiveAnnonce($deactive) ;
+  
+  
+      }
+        public function getTypeUtilisateur($ID_user) {
+          return $this->model->getTypeUtilisateur($ID_user ) ; 
+
+
+        }
+
+      /*   public function getAnnonceInfoById($ID_annonce) {
+          return $this->model->getAnnonceInfoById($ID_annonce) ; 
+
+
+        } */
 
 
 

@@ -65,6 +65,10 @@ class User {
             }
         }
     }
+
+
+  
+
  public function AnnonceChangeEtat($data) {
     $this->db->query("UPDATE annonces SET
   

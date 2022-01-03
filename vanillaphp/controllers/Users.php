@@ -422,6 +422,18 @@ if ($_POST['selectetat'] == '1') {
         }
 
     }
+   
+    public function deleteAnnonceById($remove){
+        return $this->userModel->deleteAnnonceById($remove) ;
+
+
+    } 
+    public function archiveAnnonce($deactive) {
+        return $this->userModel->archiveAnnonce($deactive) ;
+
+
+    }
+
 
     public function userChangeStatut(){
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -496,14 +508,39 @@ if ($_POST['selectetat'] == '1') {
  */        }
         
     }else{
-       /* switch($_GET['q']){
+        switch($_GET['q']){
             //we add cases for get here
             case 'logout':
                 $init->logout();
                 break;
              default:
             redirect("../index.php"); 
-        }*/
+        }
+        if (isset($_GET['removea'])) {
+            echo"<h1> insiiide remove </h1>" ;
+            $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['removea']);
+            $removeUser =   $init->deleteAnnonceById($remove);
+        }
+          if (isset($_GET['archivea'])) {
+            echo"<h1> insiiide archive </h1>" ;
+
+            $archive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['archivea']);
+            $archiveA =   $init->archiveAnnonce($deactive);
+          }
     }
 
+
+    /*
+if (isset($_GET['remove'])) {
+  $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
+  $removeUser = $users->deleteUserById($remove);
+}
+
+if (isset($removeUser)) {
+  echo $removeUser;
+}
+if (isset($_GET['deactive'])) {
+  $deactive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['deactive']);
+  $deactiveId = $users->userDeactiveByAdmin($deactive);
+}*/
     

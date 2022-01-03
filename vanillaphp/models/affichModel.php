@@ -62,6 +62,22 @@ public function selectAllAnnouncements() {
 
 }
 
+  
+public function archiveAnnonce($deactive){
+    $this->db->query("UPDATE annonces SET
+    archive = '1'
+    where ID_annonce = $deactive ;
+    ");
+    return  $this->db->execute() ; 
+}
+
+public function deleteAnnonceById($remove){
+    $this->db->query("DELETE FROM annonces WHERE ID_annonce = :ID_annonce");
+    $this->db->bind(':ID_annonce', $remove);
+    return $this->db->execute() ;
+
+ }
+
 public  function userWilayaSelected($ID_user , $ID_wilaya) {
     $this->db->query("SELECT * FROM user_wilaya where ID_User = :ID_user and ID_wilaya = :ID_wilaya");
     $this->db->bind(':ID_user', $ID_user);
@@ -79,13 +95,27 @@ public  function userWilayaSelected($ID_user , $ID_wilaya) {
 
 
 public function getUserInfoById($ID_user) {
-    echo "<h1> this is id in getuser ".$ID_user." </h1>" ;
    $this->db->query("SELECT * FROM users WHERE ID_user = :ID_user LIMIT 1");
 
    $this->db->bind(':ID_user', $ID_user);
    return $this->db->resultSet() ; 
   
 }
+public function getTypeUtilisateur($ID_user) {
+    $this->db->query("SELECT type FROM users WHERE ID_user = :ID_user LIMIT 1");
+
+   $this->db->bind(':ID_user', $ID_user);
+   return $this->db->resultSet() ; 
+
+}
+
+/* public function getAnnonceInfoById($ID_annonce) {
+    $this->db->query("SELECT * FROM annonces WHERE ID_annonce = :ID_annonce LIMIT 1");
+
+   $this->db->bind(':ID_annonce', $ID_annonce);
+   return $this->db->resultSet() ; 
+
+} */
 public function updateUserByIdInfo($ID_user ,$data) {
 
     
