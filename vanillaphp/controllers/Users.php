@@ -396,16 +396,39 @@
           
           
     }
+    public function AnnonceChangeEtat() {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        if (!empty($_POST['selectetat'])  ) {
+            $etat ="invalide" ; 
+
+if ($_POST['selectetat'] == '1') {
+    $etat ="invalide" ; 
+} else if($_POST['selectetat'] == '2') {
+    $etat ="Valide" ; 
+
+}
+            $data = [ 
+                'ID_annonce' => trim($_POST['ID_annonce']) ,
+                'etat' => $etat ] ; 
+
+            return $this->userModel->AnnonceChangeEtat($data ) ;
+
+        
+        }
+        else {
+            echo "<h1> this iddnt woork !! </h1>" ;
+            
+        }
+
+    }
 
     public function userChangeStatut(){
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-       echo "<h1> before the empty</h1>" ;
 
         if (!empty($_POST['selectstatut'])  ) {
-            echo "<h1> inside userchange controller</h1>" ;
             $ID_user = trim($_POST['ID_user']) ;
             $etat = trim($_POST['selectstatut']) ;
-            echo "<h1> ID_user is " .$ID_user." etatt ".$etat. "</h1>" ;
 
         if($etat == '1') {
           return $this->userModel->userAttente( $ID_user) ;
@@ -464,9 +487,10 @@
             case 'updateuseradmin':
                 $init->updateUserAdmin() ;  
             case 'changestatut': 
-                echo "<h1> insiiide case of changestatut</h1>" ; 
 /*                 $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['changestatut']);
  */                $init->userChangeStatut() ; 
+            case 'changeetat': 
+                $init-> AnnonceChangeEtat() ;
 
 /*             default : redirect("../index.php");
  */        }

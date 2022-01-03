@@ -192,13 +192,13 @@ $_controller = new affichControl();
                   <?php
 
                 if($getUinfo['type'] == 'client'){?>
-                  <option id="optclientclient" value="1" selected='selected'>Client</option>
-                  <option id="optclienttrans" value="2">Transporteur</option>
+                  <option onselect="clientClient()" id="optclientclient" value="1" selected='selected'>Client</option>
+                  <option onselect="clientTrans()" id="optclienttrans" value="2">Transporteur</option>
                   </select>  
                 <?php
                 
 
-                  
+
 
 include_once './controllers/affichControl.php';
 
@@ -225,10 +225,9 @@ foreach($ARRAY as $row){
 
               
               }elseif($getUinfo['type'] == 'transporteur'){?>
-                  <option  id="opttransclient"  value="3">Client</option>
-                  <option id="opttranstrans" value="4" selected='selected'>Transporteur</option>
+                  <option onselect="transClient()" id="opttransclient"  value="3">Client</option>
+                  <option id="opttranstrans" onselect="transtrans()" value="4" selected='selected'>Transporteur</option>
                
-
 
                   </select>
 
@@ -300,7 +299,21 @@ foreach($ARRAY as $row){
     const opttranstrans =  document.getElementById('opttranstrans') ; 
     const opttransclient =  document.getElementById('opttransclient') ; 
     const optclienttrans =  document.getElementById('optclienttrans') ; 
-    const optclientclient =  document.getElementById('optclientclient') ; 
+    const optclientclient =  document.getElementById('optclientclient') ;
+    
+    function transClient(){
+
+    } 
+    function transtrans(){
+
+    } 
+    function clientClient() {
+
+    }
+    function clientTrans() {
+      
+    }
+
     if (selectTransporteur != null ){ 
       console.log('inside boucle') ;
 

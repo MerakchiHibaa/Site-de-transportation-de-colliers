@@ -133,13 +133,13 @@ if (isset($prenom)) {
                       <th  class="text-center">Fourchette de poids</th>
                       <th  class="text-center">Fourchette de volume</th>
                       <th  class="text-center">Moyen de transport</th>
-                      <th  width='25%' class="text-center">Date de création</th>
-                      <th  width='25%' class="text-center">Nombre de vues</th>
+                      <th  class="text-center">Date de création</th>
+                      <th  class="text-center">Nombre de vues</th>
 
-                      <th  width='25%' class="text-center">Archivée?</th>
+                      <th  class="text-center">Archivée?</th>
 
-                      <th  width='25%' class="text-center">Etat</th>
-                      <th  width='25%' class="text-center">Actions</th>
+                      <th  class="text-center">Etat</th>
+                      <th  class="text-center">Actions</th>
 
 
                     </tr>
@@ -204,15 +204,24 @@ $allannonces = $_controller->selectAllAnnouncements();
                         </td>
 
                         <td>
-                        <?php echo $value['etat'] ; ?>
+                        <?php if($value['etat'] == 'invalide') { ?>
+                         <a class="btn btn-danger btn-sm" href=""> <?php echo $value['etat'] ?> </a>
 
+                         <?php 
+
+                        } else { ?> 
+                            <a class="btn btn-danger btn-sm" href=""> <?php echo $value['etat'] ; ?> </a>
+
+                            
+
+                      <?php  } ?>
                         <div class="card-body">
 
 
                             <form action="./controllers/Users.php" method="POST" > 
                             <input type="hidden" name="type" value ="changeetat">
 
-                           <select   class='form-control inputstl' name="selectstatut" id="selectstatut"> 
+                           <select   class='form-control inputstl' name="selectetat" id="selectetat"> 
                            <option disabled selected value> -- Changer l'état -- </option>
 
                            <option value='1' > Invalide </option>
@@ -224,7 +233,7 @@ $allannonces = $_controller->selectAllAnnouncements();
 
 
                            <div class="from-group mb-3"> 
-                              <input type="hidden" name="ID_User" value="<?php echo $value['ID_annonce']?>">
+                              <input type="hidden" name="ID_annonce" value="<?php echo $value['ID_annonce']?>">
   
                            <input type="submit" value="Changer"  >
                            </div>

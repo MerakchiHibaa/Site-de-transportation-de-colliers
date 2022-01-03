@@ -65,7 +65,31 @@ class User {
             }
         }
     }
+ public function AnnonceChangeEtat($data) {
+    $this->db->query("UPDATE annonces SET
+  
+    etat=:etat
+    WHERE ID_annonce = :ID_annonce");
 
+    $this->db->bind(':ID_annonce', $data['ID_annonce']);
+    $this->db->bind(':etat', $data['etat']);
+
+    if ($this->db->execute())  {
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+       <strong>Success !</strong> User account Diactivated Successfully !</div>';
+
+     }else{
+       echo "<script>location.href='index.php';</script>";
+       $_SESSION['msg'] =  '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+ <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ <strong>Error !</strong> Data not Diactivated !</div>';
+
+         return $_SESSION['msg'] ;
+     }
+
+ }
     
     public function addAnnonce($data) {
         $this->db->query('INSERT INTO annonces (pointdepart,  pointarrivee, id_user, moyentransport, poidsmin, poidsmax, volumemin , volumemax , typetransport , latitudedepart , longitudedepart, latitudearrivee, longitudearrivee , creationDate ) 
