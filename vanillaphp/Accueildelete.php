@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+<?php 
+require APPROOT . '/views/partials/head.php' ; 
+require APPROOT . 'views/partials/naV.php' ; 
+?>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">            
-
-    <title>Accueil</title>
-</head>
-<body>
-    <div class="bar" >
-        <div class="logo">  <img src="assets/logo.png" alt="Logo"> </div>
-       <div class="bar-buttons"> 
-        <a  class="btn-up" > Inscription</a>
-        <a class="btn-up" >Connexion </a>
-    </div>
-    </div>
-
-    
-    <header>
+<header>
         <div class="slider">
             <div class="slides"> 
                 <input type="radio" name="ratio-btn" id="radio1">
@@ -152,7 +135,7 @@
               <!--  <div class="card-img"> 
                    <img src="../assets/bg.jpg" alt="">
                </div> -->
-               <p slot="content">Lorem ipsum dolor sit amet, <?php echo  ?> consectetur adipisicing elit.</p>
+               <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                <a href="#"> Afficher la suite</a>
             </div>
         </div>

@@ -56,6 +56,12 @@ public function selectAllUserData() {
     
 }
 
+public function selectAllAnnouncements() {
+    $this->db->query("SELECT * FROM annonces ORDER BY ID_user DESC");
+    return  $this->db->resultSet() ; 
+
+}
+
 public  function userWilayaSelected($ID_user , $ID_wilaya) {
     $this->db->query("SELECT * FROM user_wilaya where ID_User = :ID_user and ID_wilaya = :ID_wilaya");
     $this->db->bind(':ID_user', $ID_user);

@@ -8,8 +8,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Login System</title>
     <link rel="stylesheet" href="./style.css" type="text/css">
+    <link rel="stylesheet" href="assetss/bootstrap.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+    <title>Login page</title>
+
 </head>
 <body>
     <nav>

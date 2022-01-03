@@ -3,7 +3,7 @@
     include_once 'header.php';
     include_once './helpers/session_helper.php';
 ?>
-    <h1 class="header">Reset Password</h1>
+    <h1 class="header">Vous avez oublié votre mot de passe?</h1>
 
     <?php flash('reset') ?>
 

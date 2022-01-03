@@ -14,13 +14,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700&display=swap');
 
 
-.container-justificatif .close-btn {
-  position: absolute;
-  background-color: yellow;
-  right: 4rem;
-  top: 2rem;
 
-}
 body {
 
   line-height: 24px;

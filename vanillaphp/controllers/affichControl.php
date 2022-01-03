@@ -25,7 +25,9 @@
 
 
 
-                public function selectAllUserDat(){
+                 function selectAllAnnouncements(){
+                  return $this->model->selectAllAnnouncements() ; 
+
                    
                   }
                 

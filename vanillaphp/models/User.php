@@ -68,8 +68,8 @@ class User {
 
     
     public function addAnnonce($data) {
-        $this->db->query('INSERT INTO annonces (pointdepart,  pointarrivee, id_user, moyentransport, poidsmin, poidsmax, volumemin , volumemax , typetransport , latitudedepart , longitudedepart, latitudearrivee, longitudearrivee) 
-        VALUES (:pointdepart, :pointarrivee, :id_user, :moyentransport, :poidsmin, :poidsmax, :volumemin , :volumemax , :typetransport, :latitudedepart, :longitudedepart, :latitudearrivee, :longitudearrivee)');
+        $this->db->query('INSERT INTO annonces (pointdepart,  pointarrivee, id_user, moyentransport, poidsmin, poidsmax, volumemin , volumemax , typetransport , latitudedepart , longitudedepart, latitudearrivee, longitudearrivee , creationDate ) 
+        VALUES (:pointdepart, :pointarrivee, :id_user, :moyentransport, :poidsmin, :poidsmax, :volumemin , :volumemax , :typetransport, :latitudedepart, :longitudedepart, :latitudearrivee, :longitudearrivee , now())');
        
 
         $this->db->bind(':id_user', $_SESSION['userID']);
