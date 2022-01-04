@@ -292,9 +292,28 @@
     }
 
     public function createUserSession($user){
-        if ($user['typeuser'] == 'client') {
+        
+        $_SESSION['userID'] = $user['ID_user'];
+        $_SESSION['userType'] = $user['type'];
+        $_SESSION['userEmail'] = $user['email'];
+        $_SESSION['userNom'] = $user['nom'];
+        $_SESSION['userPrenom'] = $user['prenom'];
+        $_SESSION['userAdresse'] = $user['adresse'];
+        $_SESSION['userNumero'] = $user['numero'];
+        $_SESSION['userPassword'] = $user['password'];
+        $_SESSION['userPhoto'] = $user['photo'];
+        $_SESSION['userNote'] = $user['note'];
 
-            $_SESSION['userID'] = $user['user']['ID_client'];
+
+        if ($user['type'] == 'transporteur') {
+
+            $_SESSION['userStatut'] = $user['statut'];
+
+        }
+
+        /* if ($user['typeuser'] == 'client') {
+
+            $_SESSION['userID'] = $user['user']['ID_user'];
             $_SESSION['userType'] = $user['typeuser'];
             $_SESSION['userEmail'] = $user['user']['email'];
             $_SESSION['userNom'] = $user['user']['nom'];
@@ -307,14 +326,14 @@
 
             
             redirect("../signup.php");
-
+            
         }
-        else {
-            $_SESSION['usersId'] =  $user['user']['ID_transporteur'] ;
-            $_SESSION['email'] =  $user['user']['email'];
+        else { 
+            $_SESSION['userID'] =  $user['user']['ID_user'] ;
+            $_SESSION['userEmail'] =  $user['user']['email'];
             redirect("../signup.php");
 
-        }
+        } */
       
     }
 
@@ -423,16 +442,7 @@ if ($_POST['selectetat'] == '1') {
 
     }
    
-    public function deleteAnnonceById($remove){
-        return $this->userModel->deleteAnnonceById($remove) ;
-
-
-    } 
-    public function archiveAnnonce($deactive) {
-        return $this->userModel->archiveAnnonce($deactive) ;
-
-
-    }
+   
 
 
     public function userChangeStatut(){
@@ -516,17 +526,7 @@ if ($_POST['selectetat'] == '1') {
              default:
             redirect("../index.php"); 
         }
-        if (isset($_GET['removea'])) {
-            echo"<h1> insiiide remove </h1>" ;
-            $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['removea']);
-            $removeUser =   $init->deleteAnnonceById($remove);
-        }
-          if (isset($_GET['archivea'])) {
-            echo"<h1> insiiide archive </h1>" ;
-
-            $archive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['archivea']);
-            $archiveA =   $init->archiveAnnonce($deactive);
-          }
+        
     }
 
 

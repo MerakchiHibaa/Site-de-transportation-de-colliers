@@ -101,7 +101,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
       </nav>
       <div class="card ">
         <div class="card-header">
-          <h3><i class="fas fa-users mr-2"></i>User list <span class="float-right">Welcome! <strong>
+          <h3><i class="fa fa-bullhorn mr-2" aria-hidden="true" ></i>Liste des annonces <span class="float-right">Welcome! <strong>
             <span class="badge badge-lg badge-secondary text-white">
 <?php
 /* $prenom = $_SESSION['userPrenom'];

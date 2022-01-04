@@ -14,13 +14,12 @@ class User {
     //Find user by email or username
     public function findUserByEmail($email){
        
-        $typeuser='' ;
-        $this->db->query('SELECT * FROM clients WHERE email = :email');
+        $this->db->query('SELECT * FROM users WHERE email = :email');
         $this->db->bind(':email', $email);
 
         $user = $this->db->single();
       
-        
+        /* 
 
 
         
@@ -28,7 +27,7 @@ class User {
         if($this->db->rowCount() > 0){ //user is client
             $typeuser = 'client' ;
 /*             echo"<h1>content of row->user->email ".$row->user->email." and row->user->id".$row->user->ID_client." inside find by </h1>" ; 
- */      /*   $row =  ['user' => $user , 'typeuser' => $typeuser] ; */
+      /*   $row =  ['user' => $user , 'typeuser' => $typeuser] ; 
  $row = new stdClass();
 
  $row->user =  $user ;
@@ -36,8 +35,8 @@ class User {
  echo"<h1>content of row-> ".$user['email'] ." and user".$user['password']." inside find by </h1>" ; 
 
 
- $row->typeuser =  $typeuser ;
-/*    $row =json_encode(['user' => $user , 'typeuser' => $typeuser]); */
+ $row->typeuser =  $user['type'] ;
+/*    $row =json_encode(['user' => $user , 'typeuser' => $typeuser]); 
  $row =json_decode(json_encode($row), true) ; 
  echo"<h1>content of row->user->email ".$row['typeuser'] ." and row->user->id".$row['user']['password']." inside find by </h1>" ; 
 
@@ -56,14 +55,14 @@ class User {
                 $row->typeuser =  $typeuser ;
                 $row =json_decode(json_encode($row), true) ; 
 
-            /*    $row =json_encode(['user' => $user , 'typeuser' => $typeuser]); */
+            /*    $row =json_encode(['user' => $user , 'typeuser' => $typeuser]); 
             $row =json_encode($row , true ) ;
                 return $row;
             }
             else{
             return false;
             }
-        }
+        } */
     }
 
 
@@ -132,14 +131,16 @@ class User {
 
     //Register client
     public function registerClient($data){
-        $this->db->query('INSERT INTO clients (nom, prenom, numero, email, adresse, password) 
-        VALUES (:nom, :prenom, :numero , :email, :adresse, :password)');
+        $this->db->query('INSERT INTO users (nom, prenom, numero, email, adresse, type, password) 
+        VALUES (:nom, :prenom, :numero , :email, :adresse, :type, :password)');
         //Bind values
         $this->db->bind(':nom', $data['nom']);
         $this->db->bind(':prenom', $data['prenom']);
         $this->db->bind(':numero', $data['numero']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':adresse', $data['adresse']);
+        $this->db->bind(':type', 'client');
+
         $this->db->bind(':password', $data['password']);
 
         //Execute
@@ -197,6 +198,11 @@ public function updateProfile($data) {
    
     echo"<h1>data photo". $data['newphoto']." after <h1>" ;
 
+    $this->db->query('UPDATE `users` SET `nom`=:nom,`prenom`=:prenom,
+    `email`=:email,`numero`=:numero,`adresse`=:adresse,`password`=:password, `photo`=:photo where ID_user = '.$_SESSION['userID'].';' ) ;
+    
+   
+/* 
     if ($_SESSION['userType'] == "client") {
           
         $this->db->query('UPDATE `clients` SET `nom`=:nom,`prenom`=:prenom,
@@ -211,7 +217,7 @@ public function updateProfile($data) {
         `email`=:email,`numero`=:numero,`adresse`=:adresse,`password`=:password, `photo`=:photo where ID_transporteur = '.$_SESSION['userID'].';' ) ;
         
 
-    }
+    } */
 
          $this->db->bind(':nom', $data['newnom']);
         $this->db->bind(':prenom', $data['newprenom']);
@@ -267,8 +273,8 @@ public function updateProfile($data) {
 }
 
     public function registerTransporteur($data){
-        $this->db->query('INSERT INTO transporteur (nom, prenom, numero, email, adresse, password) 
-        VALUES (:nom, :prenom, :numero , :email, :adresse, :password)');
+        $this->db->query('INSERT INTO users (nom, prenom, numero, email, adresse, type, password) 
+        VALUES (:nom, :prenom, :numero , :email, :adresse, type, :password)');
         //Bind values
         
         $this->db->bind(':nom', $data['nom']);
@@ -276,10 +282,18 @@ public function updateProfile($data) {
         $this->db->bind(':numero', $data['numero']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':adresse', $data['adresse']);
+        $this->db->bind(':type', 'transporteur');
+
         $this->db->bind(':password', $data['password']);
 
         //Execute
         if($this->db->execute()){
+            //find the user in the users table and then insert the ID in user_wilaya table
+            $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya) 
+            VALUES (:ID_User, :ID_wilaya)');
+//faire une boucle pour chaque element du tableau de wilaya
+           $this->db->bind(':ID_User', $data['nom']);
+           $this->db->bind(':ID_wilaya', $data['wilaya']);
             return true;
         }else{
             return false;
@@ -323,9 +337,11 @@ public function updateProfile($data) {
         $row = $this->findUserByEmail($email);
 
         if($row == false) return false;
+        $hashedPassword = $row['password'];
 
-        $hashedPassword = $row['user']['password'];
-        if(password_verify($password, $hashedPassword)){
+
+/*         $hashedPassword = $row['user']['password'];
+ */        if(password_verify($password, $hashedPassword)){
             return $row;
         }else{
             return false;
@@ -460,7 +476,7 @@ public function userAttente($ID_user) {
 
     //Reset Password
     public function resetPassword($newPwdHash, $tokenEmail){
-        $this->db->query('UPDATE clients SET password=:password WHERE email=:email');
+        $this->db->query('UPDATE users SET password=:password WHERE email=:email');
         $this->db->bind(':password', $newPwdHash);
         $this->db->bind(':email', $tokenEmail);
 
@@ -468,12 +484,7 @@ public function userAttente($ID_user) {
         if($this->db->execute()){
             return true;
         }else{
-            $this->db->query('UPDATE transporteur SET password=:password WHERE email=:email');
-            $this->db->bind(':password', $newPwdHash);
-            $this->db->bind(':email', $tokenEmail);
-            if($this->db->execute()){
-                return true;
-            }else{
+            
 
             return false;
             }

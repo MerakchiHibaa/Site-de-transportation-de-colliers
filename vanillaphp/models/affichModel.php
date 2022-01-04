@@ -48,17 +48,38 @@ function selectAnnonce($offset) {
 
 }
 
+public function returnAttributeUser($ID_user , $attribut) {
+    $this->db->query("SELECT * FROM users where ID_user =: ID_user LIMIT 1");
+    $this->db->bind(':ID_user', $ID_user);
+    $allusers =  $this->db->resultSet() ; 
+    foreach($allusers as $user) {
+        $value = $user[$attribut] ;
+
+    }
+    return $value ;
+
+}
+
 public function selectAllUserData() {
     $this->db->query("SELECT * FROM users ORDER BY ID_user DESC");
     return  $this->db->resultSet() ; 
-    
-
-    
+   
 }
 
 public function selectAllAnnouncements() {
-    $this->db->query("SELECT * FROM annonces ORDER BY ID_user DESC");
-    return  $this->db->resultSet() ; 
+    $this->db->query("SELECT * FROM annonces ");
+    return $this->db->resultSet() ; 
+
+}
+
+public function selectAllReports2() {
+    $this->db->query("SELECT * FROM clients");
+    return $this->db->resultSet() ; 
+
+}
+public function selectAllReports() {
+    $this->db->query("SELECT * FROM signals");
+    return $this->db->resultSet() ; 
 
 }
 

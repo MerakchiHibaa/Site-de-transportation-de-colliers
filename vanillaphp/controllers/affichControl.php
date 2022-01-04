@@ -37,9 +37,25 @@
 
 
         }
+        public function selectAllReports2() {
+          return $this->model->selectAllReports2() ; 
+
+        }
 
          public function getAnnonceInfoById($ID_annonce) {
           return $this->model->getAnnonceInfoById($ID_annonce) ; 
+
+
+        }
+
+        public function returnAttributeUser($ID_user , $attribut) {
+          return $this->model->returnAttributeUser($ID_user , $attribut) ; 
+
+
+        }
+
+        public function selectAllReports() {
+          return $this->model->selectAllReports() ; 
 
 
         }
