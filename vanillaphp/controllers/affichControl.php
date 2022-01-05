@@ -11,6 +11,20 @@
             $this->model = new affichModel;
         }
 
+        public function getHistoriqueAnnonce($userID) {
+
+          return $this->model->getHistoriqueAnnonce($userID) ;
+    
+    
+        }
+    
+    
+        public function getHistoriqueTrajet($userID) {
+          return $this->model->getHistoriqueTrajet($userID) ;
+    
+    
+        }
+
         public function selectMoyenTransport() {
 
           return $this->model->selectMoyenTransport() ;
@@ -33,6 +47,8 @@
         return $this->model->selectViews() ;
 
     }
+
+    
 
 
       

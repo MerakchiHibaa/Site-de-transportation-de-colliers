@@ -351,6 +351,7 @@ public function getUsersNumber(){
 
     return $this->db->resultSet() ;
   }
+
   public function getTrajetsNumber(){
     $this->db->query("SELECT Count(*) as count 
     FROM trajets");
@@ -365,7 +366,27 @@ public function getUsersNumber(){
 
   }
 
+ //*******************************historique profile********************* */
+
+ public function getHistoriqueAnnonce($userID) {
+    $this->db->query("SELECT *  
+    FROM annonces where ID_User =:userID");
+        $this->db->bind(':userID', $userID);
+
+        return $this->db->resultSet() ;
+
+ }
+
+ public function getHistoriqueTrajet($userID) {
+    $this->db->query("SELECT *  
+    FROM trajets where ID_client =:userID");
+        $this->db->bind(':userID', $userID);
+
+        return $this->db->resultSet() ;
+
+
+
+ }
 
 
 }
-

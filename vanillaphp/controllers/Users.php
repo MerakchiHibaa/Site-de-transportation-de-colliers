@@ -11,6 +11,22 @@
             $this->userModel = new User;
         }
 
+
+        public function getHistoriqueAnnonce($userID) {
+            return $this->model->getHistoriqueAnnonce($userID) ;
+      
+      
+          }
+      
+      
+          public function getHistoriqueTrajet($userID) {
+            return $this->model->getHistoriqueTrajet($userID) ;
+      
+      
+          }
+      
+      
+
         public function addAnnonce() {
             if (isset($_POST['addannonce'])) {
                 $data = [  //Init data
@@ -272,27 +288,49 @@
             flash("login", "Please fill out all inputs");
             header("location: ../login.php");
             exit();
-        }
+        } 
 
         //Check for user/email
         if($this->userModel->findUserByEmail($data['email'])){
-            //User Found
+/*             echo"<footer> inside finduserbyemail</footer>" ;
+ */            //User Found
             $loggedInUser = $this->userModel->login($data['email'], $data['password']);
             if($loggedInUser){
                 //Create session
                 $this->createUserSession($loggedInUser);
+                                   echo"<footer> inside createUserSession</footer>" ;
+
+                                  echo $_SESSION['userID'] ;
+                                  echo $_SESSION['userType'] ;
+                                  echo $_SESSION['userEmail'] ;
+                                  echo $_SESSION['userNom'] ;
+                                  echo $_SESSION['userPrenom'] ;
+                                  echo $_SESSION['userAdresse'] ;
+                                  echo $_SESSION['userNumero'] ;
+                                  echo $_SESSION['userPassword'];
+                                  echo $_SESSION['userPhoto'] ;
+                                  echo $_SESSION['userNote'] ;
+/*                 redirect("../profile.php");
+ */ 
+/*                            echo"<footer> inside createUserSession</footer>" ;
+ */
             }else{
                 flash("login", "Password Incorrect");
                 redirect("../login.php");
             }
         }else{
-            flash("login", "No user found");
-            redirect("../login.php");
+/*             echo"<footer> outside finduserbyemail</footer>" ;
+ */
+             flash("login", "No user found");
+            redirect("../login.php"); 
         }
     }
 
+   
     public function createUserSession($user){
-        
+
+        session_start() ; 
+
         $_SESSION['userID'] = $user['ID_user'];
         $_SESSION['userType'] = $user['type'];
         $_SESSION['userEmail'] = $user['email'];
@@ -308,8 +346,13 @@
         if ($user['type'] == 'transporteur') {
 
             $_SESSION['userStatut'] = $user['statut'];
+            redirect("../profile.php");
 
         }
+
+
+/*         redirect("../profile.php");
+ */
 
         /* if ($user['typeuser'] == 'client') {
 

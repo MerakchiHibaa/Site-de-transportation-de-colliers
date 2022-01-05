@@ -14,11 +14,24 @@ class User {
     //Find user by email or username
     public function findUserByEmail($email){
        
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->query('SELECT * FROM users WHERE email = :email LIMIT 1');
         $this->db->bind(':email', $email);
+/*         $result =$this->db->resultSet() ;
+ */        /* if($result) {
+            foreach($result as $value) {
+
+            }
+        } */
 
         $user = $this->db->single();
+        if($this->db->rowCount() > 0){
       
+            $user =json_decode(json_encode($user), true) ; 
+            return $user;
+
+        } else {
+            return false ;
+        }
         /* 
 
 
@@ -128,17 +141,6 @@ class User {
         }
         
     }
-
-
-public function selectTypeTransport() {
-    $this->db->query('SELECT DISTINCT(typeTransport) FROM annonces WHERE archive = '0' ORDER BY ID_annonce DESC') ;
-
-    return $this->db->resultSet() ; 
-
-
-}
-
-    
 
 
     //Register client
@@ -347,13 +349,23 @@ public function updateProfile($data) {
     //Login user
     public function login($email, $password){
         $row = $this->findUserByEmail($email);
+/* echo"<h1> this iis row".$row['password']."  after</h1>" ;
+ *//*         if($row == false) return false;
+ */     
+if($row == false) return false;  
+ $hashedPassword = $row['password'];
 
-        if($row == false) return false;
-        $hashedPassword = $row['password'];
+
+        
 
 
 /*         $hashedPassword = $row['user']['password'];
  */        if(password_verify($password, $hashedPassword)){
+   /*  echo"<h1> this iis inside password_verify  after</h1>";
+    echo"<h1> this iis row".$row['password']."  after</h1>";
+    echo"<h1> this iis row".$row['ID_user']."  after</h1>" ;
+    echo"<h1> this iis row".$row['email']."  after</h1>"; */
+
             return $row;
         }else{
             return false;
@@ -502,4 +514,4 @@ public function userAttente($ID_user) {
             }
         }
     }
-}
+
