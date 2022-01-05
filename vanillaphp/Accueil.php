@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">            
 
     <title>Accueil</title>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+<!--     <script src="js/bootstrap.min.js"></script>
+ -->    
+<!--   <link rel="stylesheet" href="css/bootstrap.min.css">
+ -->    <link href = "css/jquery-ui.css" rel = "stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
     <div class="bar" >
@@ -127,7 +135,8 @@
 
 </section>
 
-<div class="container-annonce"> 
+<div class="container-annonce">  <!--container annonce-->
+
 <!--begin section left box-->
 <div class="leftbox-section"> 
     <div class="leftbox"> 
@@ -139,89 +148,114 @@
         </div>
     </div>
 
-
 </div><!--end section left box-->
+</div> <!-- end of container-annonce-->
 
-<div id="cardbody">
+
+ <!--filters here points de départ, points d’arrivée, type de transport, poids, volume--->
+ <div class="container-filter"> <!--container filtre + cards-->
+
+ <div class="filter" style="float:left;">    <!-- filtre -->
 
 
-    <div class="container-card"> 
-        <div class="card" style="background: url('../assets/slider1.jpg');">
-            <div class="content">
-               <h1 slot="header">Carte 1</h1>
-              <!--  <div class="card-img"> 
-                   <img src="../assets/bg.jpg" alt="">
-               </div> -->
-               <p slot="content">Lorem ipsum dolor sit amet, <?php echo  ?> consectetur adipisicing elit.</p>
-               <a href="#"> Afficher la suite</a>
+ <div class="filter-group">                    
+    <div class="list-group">
+     <h3>Poids</h3>
+     <input type="hidden" id="hidden_minimum_poids" value="0" />
+                    <input type="hidden" id="hidden_maximum_poids" value="1000" />
+                    <p id="poids_show">10 - 20</p>
+                    <div id="poids_range"></div>
+                </div>  
+                
+     <div class="list-group">
+     <h3>Volume</h3>
+     <input type="hidden" id="hidden_minimum_volume" value="0" />
+                    <input type="hidden" id="hidden_maximum_volume" value="2000" />
+                    <p id="volume_show">10 - 200</p>
+                    <div id="volume_range"></div>
+                </div>  
+
+    <div class="list-group">
+     <h3>Type de transport </h3>
+                    <div style="height: 180px; overflow-y: auto; overflow-x: hidden;">
+     <?php
+     
+include './controllers/affichControl.php';
+
+
+$_controller = new affichControl();
+$result = $_controller->selectTypeTransport() ;
+                   
+                    foreach($result as $row)
+                    {
+                    ?>
+                   
+                    <div class="list-group-item checkbox">
+                        <label><input type="checkbox" class="common_selector typeTransport" value="<?php echo $row['typeTransport']; ?>"  > <?php echo $row['typeTransport']; ?></label>
+                    </div>
+                    <?php
+                    }
+
+                    ?>
+                    <!-- </div>
+                </div> -->
+                </div>
+                </div>
+               
+
+    <div class="list-group">
+     <h3>Moyen de transport</h3>
+     <div > <!-- style="height: 180px; overflow-y: auto; overflow-x: hidden;" -->
+    
+    <?php
+      
+ include_once './controllers/affichControl.php';
+ 
+
+$_controller = new affichControl(); 
+$result = $_controller->selectMoyenTransport() ;
+                   
+                    foreach($result as $row)
+                    {
+                    ?>
+                   
+                    <div class="list-group-item checkbox">
+                        <label><input type="checkbox" class="common_selector moyenTransport" value="<?php echo $row['moyenTransport']; ?>"  > <?php echo $row['moyenTransport']; ?></label>
+                    </div>
+                    <?php
+                    }
+
+                    ?>
+                   
+                   </div>
+
+                  </div> 
+                   </div>
+
+                   
+ </div> <!-- filtre-->
+
+
+
+ <!-- class="col-md-9" -->
+                   <div  style="float:right; overflow: auto;">
+            	<br />
+                <div class="row filter_data">
+
+                </div>
             </div>
         </div>
-        <div class="card" style="background: url('https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=');" >
-           <div class="content">
-              <h1 slot="header">Carte 2</h1>
-              <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <a href="#"> Afficher la suite</a>
-           </div>
-       </div>
-       <div class="card" style="background: url('https://images.unsplash.com/photo-1479659929431-4342107adfc1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=');">
-           <div class="content">
-              <h1 slot="header">Carte 3</h1>
-              <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <a href="#"> Afficher la suite</a>
-           </div>
-       </div>
-       <div class="card" style="background: url('https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=');">
-           <div class="content">
-              <h1 slot="header">Carte 4</h1>
-              <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <a href="#"> Afficher la suite</a>
-           </div>
-       </div>
+                </div> <!--end container filtre + cards-->
+                  
+<!--end filter-->
 
 
-
-
-
-
-       <div class="card" style="background: url('../assets/slider1.jpg');">
-        <div class="content">
-           <h1 slot="header">Carte 1</h1>
-          <!--  <div class="card-img"> 
-               <img src="../assets/bg.jpg" alt="">
-           </div> -->
-           <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-           <a href="#"> Afficher la suite</a>
-        </div>
-    </div>
-    <div class="card" style="background: url('https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=');" >
-       <div class="content">
-          <h1 slot="header">Carte 2</h1>
-          <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          <a href="#"> Afficher la suite</a>
-       </div>
-   </div>
-   <div class="card" style="background: url('https://images.unsplash.com/photo-1479659929431-4342107adfc1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=');">
-       <div class="content">
-          <h1 slot="header">Carte 3</h1>
-          <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          <a href="#"> Afficher la suite</a>
-       </div>
-   </div>
-   <div class="card" style="background: url('https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=');">
-       <div class="content">
-          <h1 slot="header">Carte 4</h1>
-          <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          <a href="#"> Afficher la suite</a>
-       </div>
-   </div>
-   
-    </div> <!--container card end-->
    
 
 
 </div>
 
-</div> <!-- end of container-annonce-->
+
 
 
 
@@ -231,7 +265,7 @@
 
 <!-- </section> -->
 <footer>
-    <div class="menu-bar"> 
+    <div class="menu-bar" style="height: 0 ;"> 
         <ul> 
        <li>  <a href="#"> Page d'accueil </a></li>
        <li>  <a href="#"> Présentation </a> </li>
@@ -244,10 +278,98 @@
     </div>
      </footer>
 
+     <style>
+#loading
+{
+ text-align:center; 
+ background: url('loader.gif') no-repeat center; 
+ height: 150px;
+}
+</style>
 
-    <script  src="index.js"> </script>
+<script>
+$(document).ready(function(){
+    console.log("je suis dans script") ;
 
-    <script type="text/javascript" src="vanilla-tilt.js"></script>
+    filter_data();
+
+    function filter_data()
+    {
+        console.log("je suis dans filterdata") ;
+
+        $('.filter_data').html('<div id="loading" style="" ></div>');
+        var action = 'fetch_data';
+        var minimum_poids = $('#hidden_minimum_poids').val();
+        var maximum_poids = $('#hidden_maximum_poids').val();
+        
+        var minimum_volume = $('#hidden_minimum_volume').val();
+        var maximum_volume = $('#hidden_maximum_volume').val();
+
+        var typeTransport = get_filter('typeTransport');
+        var moyenTransport = get_filter('moyenTransport');
+
+       
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{action:action, minimum_poids:minimum_poids,  maximum_poids:maximum_poids, minimum_volume:minimum_volume, maximum_volume:maximum_volume, typeTransport:typeTransport, moyenTransport:moyenTransport},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
+        });
+    }
+
+    function get_filter(class_name)
+    {
+        var filter = [];
+        $('.'+class_name+':checked').each(function(){
+            filter.push($(this).val());
+        });
+        return filter;
+    }
+
+    $('.common_selector').click(function(){
+        filter_data();
+    });
+
+    $('#poids_range').slider({
+        range:true,
+        min:0,
+        max:1000,
+        values:[0, 1000],
+        step:1,
+        stop:function(event, ui)
+        {
+            $('#poids_show').html(ui.values[0] + ' - ' + ui.values[1]);
+            $('#hidden_minimum_poids').val(ui.values[0]);
+            $('#hidden_maximum_poids').val(ui.values[1]);
+            filter_data();
+        }
+    });
+    $('#volume_range').slider({
+        range:true,
+        min:0,
+        max:1000,
+        values:[0, 1000],
+        step:1,
+        stop:function(event, ui)
+        {
+            $('#volume_show').html(ui.values[0] + ' - ' + ui.values[1]);
+            $('#hidden_minimum_volume').val(ui.values[0]);
+            $('#hidden_maximum_volume').val(ui.values[1]);
+            filter_data();
+        }
+    });
+
+});
+</script>
+
+   <!--  <script  src="index.js"> </script>
+    <script src="jquery-1.10.2.min.js"></script>
+    <script src="jquery-ui.js"></script>
+    <script src="bootstrap.min.js"></script> -->
+<!--     <link rel="stylesheet" href="./css/bootstrap.min.css">  
+ -->      <script type="text/javascript" src="vanilla-tilt.js"></script>
     <script type="text/javascript">
        VanillaTilt.init(document.querySelectorAll(".card"), {
            max: 25,

@@ -72,14 +72,46 @@ public function selectAllAnnouncements() {
 
 }
 
-public function selectAllReports2() {
+public function selectViews() {
+   /*  $this->db->query('SELECT DISTINCT(moyenTransport) FROM annonces WHERE archive = :archive ORDER BY ID_annonce DESC') ;
+    $this->db->bind(':archive', '0');
+    return $this->db->resultSet() ;  */
+
+}
+
+public function selectMoyenTransport() {
+    $this->db->query('SELECT DISTINCT(moyenTransport) FROM annonces WHERE archive = :archive ORDER BY ID_annonce DESC') ;
+    $this->db->bind(':archive', '0');
+    return $this->db->resultSet() ; 
+}
+
+public function selectTypeTransport() {
+    $this->db->query('SELECT DISTINCT(typeTransport) FROM annonces WHERE archive = :archive ORDER BY ID_annonce DESC') ;
+
+    $this->db->bind(':archive', '0');
+
+    return $this->db->resultSet() ; 
+
+
+}
+
+
+/* public function selectAllReports2() {
     $this->db->query("SELECT * FROM clients");
     return $this->db->resultSet() ; 
 
-}
+} */
 public function selectAllReports() {
-    $this->db->query("SELECT * FROM signals");
-    return $this->db->resultSet() ; 
+    $this->db->query("SELECT * FROM admins");
+    
+    if( $this->db->resultSet() ) {
+        echo "<footer> success </footer>" ; 
+
+
+    }  else {
+        echo "<h1> failed </h1>" ; 
+
+    }
 
 }
 

@@ -129,6 +129,18 @@ class User {
         
     }
 
+
+public function selectTypeTransport() {
+    $this->db->query('SELECT DISTINCT(typeTransport) FROM annonces WHERE archive = '0' ORDER BY ID_annonce DESC') ;
+
+    return $this->db->resultSet() ; 
+
+
+}
+
+    
+
+
     //Register client
     public function registerClient($data){
         $this->db->query('INSERT INTO users (nom, prenom, numero, email, adresse, type, password) 

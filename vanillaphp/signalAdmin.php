@@ -135,6 +135,7 @@ $_controller = new affichControl();
 $allreports = $_controller->selectAllReports(); 
                    
                        if ($allreports) { 
+
                         $i = 0;
                         foreach ($allreports as  $value) {
                           $i++;
@@ -210,6 +211,7 @@ $allreports = $_controller->selectAllReports();
                   } 
                 }
 
+                       
                    else { ?>
                       <tr class="text-center">
                       <td>Il n'ya pas de signalements !</td>

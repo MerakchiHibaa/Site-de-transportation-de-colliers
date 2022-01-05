@@ -11,6 +11,32 @@
             $this->model = new affichModel;
         }
 
+        public function selectMoyenTransport() {
+
+          return $this->model->selectMoyenTransport() ;
+   }
+  
+
+        public function selectTypeTransport() {
+        
+        
+
+          return $this->model->selectTypeTransport() ;
+  
+      }
+
+      
+      public function selectViews() {
+        
+        
+
+        return $this->model->selectViews() ;
+
+    }
+
+
+      
+  
         function affichWilaya() {
 
             return $this->model->affichWilaya() ; 
@@ -37,10 +63,10 @@
 
 
         }
-        public function selectAllReports2() {
+        /* public function selectAllReports2() {
           return $this->model->selectAllReports2() ; 
 
-        }
+        } */
 
          public function getAnnonceInfoById($ID_annonce) {
           return $this->model->getAnnonceInfoById($ID_annonce) ; 
