@@ -102,16 +102,18 @@ public function selectTypeTransport() {
 
 } */
 public function selectAllReports() {
-    $this->db->query("SELECT * FROM admins");
+    $this->db->query("SELECT * FROM signals");
     
-    if( $this->db->resultSet() ) {
+    /* if( $this->db->resultSet() ) {
         echo "<footer> success </footer>" ; 
 
 
     }  else {
         echo "<h1> failed </h1>" ; 
 
-    }
+    } */
+    return $this->db->resultSet() ; 
+
 
 }
 
@@ -275,6 +277,93 @@ public function deleteUserById($remove) {
 }
 
 
+//**************************************statistics************************ */
+
+
+
+
+public function getUsersNumber(){
+    $this->db->query("SELECT Count(*) as count
+    FROM users");
+    $result = $this->db->resultSet() ;
+    foreach($result as $value) {
+        $number= $value['count'];
+
+
+    }
+    return $number;
+
+  
+  
+
+  }
+
+  public function getTransporteursNumber(){
+    
+    $this->db->query("SELECT Count(*) as count 
+    FROM users where type =:type");
+        $this->db->bind(':type', "transporteur");
+
+        $result= $this->db->resultSet() ;
+     foreach($result as $value) {
+        $number= $value['count'];
+
+
+    }
+    return $number;
+
+    
+  }
+  public function getClientsNumber(){
+  
+    $this->db->query("SELECT Count(*) as count 
+    FROM users where type =:type");
+        $this->db->bind(':type', "client");
+
+        $result= $this->db->resultSet() ;
+        foreach($result as $value) {
+           $number= $value['count'];
+   
+   
+       }
+       return $number;
+    
+  }
+  public function getAnnncesNumber(){
+    $this->db->query("SELECT Count(*) as count 
+    FROM annonces");
+
+    $result= $this->db->resultSet() ;
+     foreach($result as $value) {
+        $number= $value['count'];
+
+
+    }
+    return $number;
+  }
+
+  public function getTopAnnonces(){
+
+    $this->db->query("SELECT *
+    FROM annonces
+    ORDER BY viewsNumber DESC
+        LIMIT 4");
+
+    return $this->db->resultSet() ;
+  }
+  public function getTrajetsNumber(){
+    $this->db->query("SELECT Count(*) as count 
+    FROM trajets");
+
+    $result= $this->db->resultSet() ;
+     foreach($result as $value) {
+        $number= $value['count'];
+
+
+    }
+    return $number;
+
+  }
 
 
 

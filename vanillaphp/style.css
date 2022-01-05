@@ -1287,7 +1287,7 @@ body::after {
 
 
         .container-annonce {
-            display: block;
+            display: flex;
         }
 
 
@@ -1313,7 +1313,7 @@ body::after {
 
 
                 /*************style the filter container**********************************/
- .container-filter {
+ ./* container-filter {
      display: inline-flex ;
  }
 
@@ -1321,3 +1321,4 @@ body::after {
      float: left ;
      background-color: red ;
  }
+ */

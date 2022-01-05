@@ -80,6 +80,7 @@
 
         }
 
+
         public function selectAllReports() {
           return $this->model->selectAllReports() ; 
 
@@ -169,6 +170,43 @@
   public function logout() {
 
   }
+
+
+  //**********************statistiques*************************** */
+
+  public function getUsersNumber(){
+    return $this->model->getUsersNumber() ;
+
+
+
+  }
+
+  public function getTransporteursNumber(){
+    return $this->model->getTransporteursNumber() ;
+
+
+    
+  }
+  public function getClientsNumber(){
+    return $this->model->getClientsNumber() ;
+
+
+    
+  }
+  public function getAnnncesNumber(){
+    return $this->model->getAnnncesNumber() ;
+
+  }
+
+  public function getTopAnnonces(){
+    return $this->model->getTopAnnonces() ;
+
+  }
+  public function getTrajetsNumber(){
+    return $this->model->getTrajetsNumber() ;
+
+  }
+
 
   
   

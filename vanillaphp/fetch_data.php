@@ -109,28 +109,20 @@ $_controller = new fetch_data_model() ;
             foreach($result as $row)
             {
                 $output .= '
+                <div class="col-sm-4 col-lg-3 col-md-3">
+                    <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
 
-                <div id="cardbody" width=100%>
+                    <p align="center"><strong><a href="#">'. $row['titreAnnonce'] .'</a></strong></p>
+                    Type de transport : '. $row['typeTransport'] .' <br />
+                    <p>Point de départ : '. $row['pointDepart'].' <br />
+                        Point darrivée : '. $row['pointArrivee'] .' <br />
+                        <p style="text-align:center;" class="text-danger" > Poids entre: '. $row['poidsMin'] .' - '. $row['poidsMax'] .' KG</p>
+                        <p style="text-align:center;" class="text-danger" > Poids entre: '. $row['volumeMin'] .' - '. $row['volumeMax'] .'L</p>
 
-
-                <div class="container-card"> 
-                    <div class="card" style="background: url("../assets/slider1.jpg");">
-                        <div class="content">
-                           <h1 slot="header">'. $row['titreAnnonce'] .'</h1>
-                          <!--  <div class="card-img"> 
-                               <img src="../assets/bg.jpg" alt="">
-                           </div> -->
-                           Type de transport : '. $row['typeTransport'] .' <br />
-                           <p>Point de départ : '. $row['pointDepart'].' <br />
-                               Point darrivée : '. $row['pointArrivee'] .' <br />
-                               <p style="text-align:center;" class="text-danger" > Poids entre: '. $row['poidsMin'] .' - '. $row['poidsMax'] .' KG</p>
-                               <p style="text-align:center;" class="text-danger" > Poids entre: '. $row['volumeMin'] .' - '. $row['volumeMax'] .'L</p>
-       
-                           <p slot="content">Lorem ipsum dolor sit amet,consectetur adipisicing elit.</p>
-                           <a href="#"> Afficher la suite</a>
-                        </div>
+                        
                     </div>
-</div>             
+    
+                </div>
                 ';
             }
         }

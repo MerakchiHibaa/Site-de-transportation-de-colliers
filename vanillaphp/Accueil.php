@@ -11,10 +11,10 @@
     <title>Accueil</title>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-ui.js"></script>
-<!--     <script src="js/bootstrap.min.js"></script>
- -->    
-<!--   <link rel="stylesheet" href="css/bootstrap.min.css">
- -->    <link href = "css/jquery-ui.css" rel = "stylesheet">
+     <script src="js/bootstrap.min.js"></script>
+     
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+     <link href = "css/jquery-ui.css" rel = "stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -155,7 +155,7 @@
  <!--filters here points de départ, points d’arrivée, type de transport, poids, volume--->
  <div class="container-filter"> <!--container filtre + cards-->
 
- <div class="filter" style="float:left;">    <!-- filtre -->
+ <div class="filter" >    <!-- filtre float right-->
 
 
  <div class="filter-group">                    
@@ -238,7 +238,7 @@ $result = $_controller->selectMoyenTransport() ;
 
 
  <!-- class="col-md-9" -->
-                   <div  style="float:right; overflow: auto;">
+                   <div class="col-ms-9"  > <!--float left-->
             	<br />
                 <div class="row filter_data">
 
@@ -368,8 +368,9 @@ $(document).ready(function(){
     <script src="jquery-1.10.2.min.js"></script>
     <script src="jquery-ui.js"></script>
     <script src="bootstrap.min.js"></script> -->
-<!--     <link rel="stylesheet" href="./css/bootstrap.min.css">  
- -->      <script type="text/javascript" src="vanilla-tilt.js"></script>
+     <link rel="stylesheet" href="./css/bootstrap.min.css">  
+       
+ <script type="text/javascript" src="vanilla-tilt.js"></script>
     <script type="text/javascript">
        VanillaTilt.init(document.querySelectorAll(".card"), {
            max: 25,
