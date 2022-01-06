@@ -43,7 +43,7 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
 
 <div class="form-container"> 
 <div class="row-profile"> 
-<div class="col-4 offset-md-4 form-div"> 
+<div class="form-div">  <!-- col-4 offset-md-4 form-div -->
 
 <form class="box" action="./controllers/Users.php" method="POST" enctype="multipart/form-data">
  <div id="form-profile-div"> 

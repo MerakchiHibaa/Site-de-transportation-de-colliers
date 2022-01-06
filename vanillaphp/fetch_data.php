@@ -119,13 +119,14 @@ $_controller = new fetch_data_model() ;
                         <p style="text-align:center;" class="text-danger" > Poids entre: '. $row['poidsMin'] .' - '. $row['poidsMax'] .' KG</p>
                         <p style="text-align:center;" class="text-danger" > Poids entre: '. $row['volumeMin'] .' - '. $row['volumeMax'] .'L</p>
 
-                        
+                        <a href="annonceDetail.php?id='.$row['ID_annonce'].'"> Lire a suite </a>
                     </div>
     
                 </div>
                 ';
             }
         }
+        
         else
         {
             $output = '<h3>No Data Found</h3>';
