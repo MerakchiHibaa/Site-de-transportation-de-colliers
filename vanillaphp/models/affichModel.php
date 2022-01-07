@@ -366,6 +366,21 @@ public function getUsersNumber(){
 
   }
 
+
+  public function setViews($views , $ID_annonce){
+    $this->db->query("UPDATE annonces SET
+    viewsNumber =:viewsNumber
+    where ID_annonce =:ID_annonce;
+    ");
+            $this->db->bind(':viewsNumber', $views  );
+            $this->db->bind(':ID_annonce', $ID_annonce);
+
+    return  $this->db->execute() ;
+
+  }
+
+  
+
  //*******************************historique profile********************* */
 
  public function getHistoriqueAnnonce($userID) {

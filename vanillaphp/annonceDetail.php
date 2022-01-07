@@ -27,6 +27,9 @@ $_controller = new affichControl();
     $getAinfo = $_controller->getAnnonceInfoById($ID_annonce);
     if ($getAinfo) {
       foreach ($getAinfo as  $getUinfo) {
+          $views =  $getUinfo['viewsNumber'] + 1 ; 
+          echo"<h1> insiiide".$views." afterr</h1>" ;
+          $_controller->setViews($views , $ID_annonce);
 
      ?>
 
@@ -90,8 +93,8 @@ $_controller = new affichControl();
  --><input type="hidden" id="to" class="form-control" value="<?php echo $getUinfo['pointArrivee'] ?>"  > 
 
  </form>  
- <form> 
-     <input type="text" id="price" value=''>
+ <form > 
+     <input type="hidden" id="price" value=''>
  </form>
  
  
@@ -246,10 +249,14 @@ let distance = 0 ;
 directionService.route(request ,  (result, status) => { 
     if(status == google.maps.DirectionsStatus.OK){
         //get distance and time 
-        distance = result.routes[0].legs[0].distance.text ;
+        distance = parseFloat(result.routes[0].legs[0].distance.text) ;
+        let price =  parseFloat(distance*0.7*41.5).toFixed(2) ;
+        if(distance < 18) {
+            price = 500 ; 
+
+        }
       //nombre de kilomètres x consommation du véhicule au kilomètre x prix du carburant au litre
 
-let price =  parseFloat(parseFloat(distance)*0.7*41.5).toFixed(2) ;
 let pricevalue = document.getElementById('price') ; 
 pricevalue.value = price ; 
         const output = document.getElementById("output") ; 

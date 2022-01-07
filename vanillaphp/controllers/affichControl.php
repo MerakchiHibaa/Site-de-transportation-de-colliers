@@ -10,7 +10,10 @@
         public function __construct(){
             $this->model = new affichModel;
         }
+        public function setViews($views ,  $ID_annonce) {
+          return $this->model->setViews($views ,  $ID_annonce) ; 
 
+        }
         public function getHistoriqueAnnonce($userID) {
 
           return $this->model->getHistoriqueAnnonce($userID) ;
@@ -96,6 +99,7 @@
 
         }
 
+        
 
         public function selectAllReports() {
           return $this->model->selectAllReports() ; 
