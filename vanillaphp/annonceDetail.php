@@ -90,6 +90,9 @@ $_controller = new affichControl();
  --><input type="hidden" id="to" class="form-control" value="<?php echo $getUinfo['pointArrivee'] ?>"  > 
 
  </form>  
+ <form> 
+     <input type="text" id="price" value=''>
+ </form>
  
  
  <div class="container-map-output"> 
@@ -239,12 +242,19 @@ function calcRoute() {
 /* AIzaSyBsZrS5LkAXAqzgVYMJQQMYOoWgYCHHZTU   */
 /* AIzaSyCqd1XS0Jt-VUrhm_x1nY9bmQEk5xwf*/
 //pass the request to the root method
+let distance = 0 ;
 directionService.route(request ,  (result, status) => { 
     if(status == google.maps.DirectionsStatus.OK){
         //get distance and time 
+        distance = result.routes[0].legs[0].distance.text ;
+      //nombre de kilomètres x consommation du véhicule au kilomètre x prix du carburant au litre
+
+let price =  parseFloat(parseFloat(distance)*0.7*41.5).toFixed(2) ;
+let pricevalue = document.getElementById('price') ; 
+pricevalue.value = price ; 
         const output = document.getElementById("output") ; 
-        output.innerHTML = "<h4  style='margin: 2rem; font-size:1.5rem;' > De : " + document.getElementById('from').value + " à: " + document.getElementById('to').value + ".<br /> Distance en voiture <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + ".</h4>" ;
-     console.log(document.getElementById('from').value + ".<br /> To: " + document.getElementById('to').value + ".<br /> Driving distance <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Duration: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + ".</h3>") ;
+        output.innerHTML = "<h4  style='margin: 2rem; font-size:1.5rem;' > De : " + document.getElementById('from').value + " à: " + document.getElementById('to').value + ".<br /> Distance en voiture <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + " et le tarif est : "+price+".</h4>" ;
+     console.log(document.getElementById('from').value + ".<br /> To: " + document.getElementById('to').value + ".<br /> Driving distance <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Duration: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + " et le tarif est : "+price+".</h3>") ;
 
         directionDisplay.setDirections(result) ; 
     }
@@ -254,6 +264,7 @@ directionService.route(request ,  (result, status) => {
         //center map in spain 
         map.setCenter(mylatlng) ;
         //show error message 
+        
         output.innerHTML = "<h4 style='text-align: center; margin: 0 auto ; font-size:20rem;'> <i class='fas fa-exclamation-triangle'> </i> Impossible de calculer la distance </h4> ";
    console.log("<h4 > <i class='fas fa-exclamation-triangle'> </i> Could not retrieve driving distance </h4> ");
    
