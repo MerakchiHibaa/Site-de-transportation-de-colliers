@@ -6,44 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="css.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">            
-
-    <title>Document</title>
+<link rel="stylesheet" href="bootstrap.min.css">
+    <title>Map</title>
 </head>
 <body>
 <!--     add the class of the font awesome in the input
  -->
- <div> <i class="fas fa-directions" onclick="calcRoute()" ></i></div>
- <div class="container-map">
-     <div id="googleMap">
+<!--  <div> <i class="fas fa-directions" onclick="calcRoute()" ></i></div>
+ --> <!-- <div class="container-map">
+ <div id="googleMap">
 
-     </div>
-     <div id="output">
+</div>
+<div id="output">
 
-     </div>
- </div>
- <form action="">
-     <label for="from"  >
-         <i class="fa fa-dot-circle"></i>
-    <input type="text" id="from" placeholder="Depart"> 
-</label>
-<label for="to"   >
-    <i class="fa fa-map-marker-alt"></i>
-<input type="text" id="to" placeholder="destination"> 
-</label>
+</div>
+ </div> -->
 
- 
+ <div class="jumbotron"> 
+     <div class="container-fluid"> 
+ <form action="form-horizontal">
+     <div class="form-group"> 
+     <label class="col-xs-2 control-label" for="from"  >
+         <i class="fa fa-dot-circle"></i> </label>
+         
+         <div class="col-xs-4"> 
+    <input type="text" id="from" class="form-control" > 
+    </div>
+    </div>
+
+    <div class="form-group"> 
+<label for="to"  class="col-xs-2 control-label" >
+    <i class="fa fa-map-marker-alt"></i> </label>
+    <div class="col-xs-4"> 
+<input type="text" id="to" class="form-control"  placeholder="Destination"> 
+</div>
+</div>
 
  </form>  
+ <div class="col-xs-offset-2 col-xs-10">
+<button class="btn btn-info btn-lg">  <i class="fas fa-directions" onclick="calcRoute()" ></i></button>
+ </div> 
+ <div class="container-fluid"> 
+ <div id="googleMap">
 
+</div>
+<div id="output">
 
- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsZrS5LkAXAqzgVYMJQQMYOoWgYCHHZTU&libraries=places"></script>
+</div>
+     
+ </div>
+ </div> <!--container-fluid--->
 
-<!--   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9j4ulOm4Iw2U76rtSDNam10oWOhy0TEU&libraries=places"></script> me clé
+ </div> <!--end jumbotron-->
+ <script type="text/javascript" src="bootstrap.min.js"></script>
+
+ <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsZrS5LkAXAqzgVYMJQQMYOoWgYCHHZTU&libraries=places"></script>
+
+<!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9j4ulOm4Iw2U76rtSDNam10oWOhy0TEU&libraries=places"></script> 
  -->
  <!-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6cIUVCcSaRbVqNTES9gwZ1uZeIOrE-_o&libraries=places&callback=mapInit"></script>
  -->
-<script >
-    let mylatlng = {lat:38.3460 , lng: -0.4907 } ;
+<script  >
+    let mylatlng = {lat:36.7630648 , lng: 3.05055253 } ;
 let mapOptions = {
     center: mylatlng ,
     zoom: 7 , 

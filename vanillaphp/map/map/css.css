@@ -1,0 +1,53 @@
+/* #googleMap {
+    width: 80%;
+    height: 500px ;;
+} */
+
+body{
+    font-family: Arial;
+    margin: 5px 100px 10px 100px;
+    padding: 0;
+    color: white;
+    text-align: center;
+    background: #555; /*#555652;*/
+}
+
+
+	/***************popup Map*********************************************/
+
+    .popup {
+        visibility: hidden;
+        display: none;
+        position: fixed;
+        padding: 3rem; 
+height: 100vh ; 
+
+
+    }
+
+    #pop--click {
+        display: none;
+    }
+    .popup__content{
+        border-radius: 0 4px 40px -5px #555555ad;
+        width: 50rem;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .popup .popup__content .close {
+        position: absolute;
+        top: 2rem;
+        right: 2rem ;
+        text-decoration: none;
+        font-size: 3rem;
+        font-weight: 700;
+        transition: all .3s;
+    }
+
+    .popup .popup__content .close:hover { 
+        color: #33d9b2;
+    }
+	#voirCarte {
+		
+	}
