@@ -10,6 +10,37 @@ class User {
         
     }
 
+    public function setTrajet($ID_annonce, $ID_client ,$ID_transporteur) {
+       
+            $this->db->query('INSERT INTO trajets (ID_annonce, ID_client, ID_transporteur, creationDate) 
+            VALUES (:ID_annonce, :ID_client, :ID_transporteur , :date)'); 
+             $this->db->bind(':ID_annonce', $ID_annonce);
+             $this->db->bind(':ID_client', $ID_client);
+             $this->db->bind(':ID_transporteur', $ID_transporteur);
+             $this->db->bind(':date',  date('Y-m-d H:i:s') );
+             $this->db->execute() ;
+        
+             $this->db->query('delete from demandes where ID_client=:ID_client and ID_annonce =:ID_annonce');
+             $this->db->bind(':ID_annonce', $ID_annonce);
+             $this->db->bind(':ID_client', $ID_client);
+             //informer les autres transporteurs que leurs demandes ont été annulées et inforer le transporteur choisi que sa demaned est cnfirmée
+
+/* 
+             $_SESSION['msg'] = '<div class="alert alert-success">
+                               <strong>Success!</strong> Votre demande a été envoyée.
+                             </div>';
+                             echo "<script> alert(' Votre demande a été envoyée. ') ;</script>" ;
+        
+       
+             $_SESSION['msg'] = '<div class="alert alert-warning">
+                               <strong>Warning!</strong> Vous avez déja répondu à cette annonce.
+                             </div>' ;
+                             echo "<script> alert(' Vous avez déja répondu à cette annonce.. ') ;</script>" ;
+         */
+        
+         
+    }
+
     
     //Find user by email or username
     public function findUserByEmail($email){
@@ -313,13 +344,6 @@ try {
 
 
   }
-}
-
-public function getUnreadDemandes($ID_user) {
-    $this->db->query("SELECT * FROM demandes where ID_client = '$ID_user' and status = 'unread'") ; 
-    return $this->db->resultSet() ;
-
-
 }
 
     public function registerTransporteur($data){

@@ -28,6 +28,23 @@
             }
         }
 
+        public function setTrajet() {
+            if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
+                echo "<h1> insiiide inisertDemandes </h1>";
+                   $ID_annonce = (int) $_POST['ID_annonce']  ; //
+                   $ID_client = (int) $_POST['ID_client'] ; // client
+                   $ID_transporteur = (int) $_POST['ID_transporteur'] ; // transport
+                       
+                  
+                   $this->userModel->setTrajet($ID_annonce, $ID_client ,$ID_transporteur)  ;
+                          redirect("../annonceDetail.php?id=$ID_annonce") ; 
+   
+                      
+   
+
+        }
+    }
+
       
       
 
@@ -278,10 +295,6 @@
             
         }
 
-        public function getDemandes($ID_user) {
-           return $this->userModel->getDemandes($ID_user) ; 
-
-        }
     public function login(){
         //Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -568,6 +581,8 @@ if ($_POST['selectetat'] == '1') {
                 $init-> AnnonceChangeEtat() ;
             case 'notif' : 
                 $init-> insertDemandes() ;  
+            case 'trajet' : 
+                $init->setTrajet() ; 
 
 /*             default : redirect("../index.php");
  */        }

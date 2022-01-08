@@ -11,6 +11,11 @@
             $this->model = new affichModel;
         }
 
+        public function readNotification($ID_annonce, $ID_client, $ID_transporteur){
+          return $this->model->readNotification($ID_annonce, $ID_client, $ID_transporteur) ; 
+
+        }
+
         
         public function getUnreadDemandes($ID_user) {
           return $this->model->getUnreadDemandes($ID_user) ; 

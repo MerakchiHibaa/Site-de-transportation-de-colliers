@@ -146,7 +146,16 @@ public  function userWilayaSelected($ID_user , $ID_wilaya) {
 
 }
 
+public function readNotification($ID_annonce, $ID_client, $ID_transporteur) {
+    $this->db->query("update demandes set status='read' WHERE ID_annonce = :ID_annonce and ID_client = :ID_client and ID_transporteur = :ID_transporteur");
 
+   $this->db->bind(':ID_annonce', $ID_annonce);
+   $this->db->bind(':ID_client', $ID_client);
+   $this->db->bind(':ID_transporteur', $ID_transporteur);
+
+   return $this->db->execute() ; 
+  
+}
 
 
 public function getUserInfoById($ID_user) {

@@ -1,7 +1,7 @@
 <?php if (isset($_GET['ida']) && isset($_GET['idt']) ) {
     session_start();
   $ID_annonce = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['ida']);
-  $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['idt']);
+  $ID_transporteur = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['idt']);
 
 
 } else {
@@ -33,6 +33,8 @@ $_controller = new affichControl();
     $getAinfo = $_controller->getAnnonceInfoById($ID_annonce);
     if ($getAinfo) {
       foreach ($getAinfo as  $getUinfo) {
+        $_controller->readNotification($ID_annonce, $getUinfo['ID_User'], $ID_transporteur);
+
           $views =  $getUinfo['viewsNumber'] + 1 ; 
           $_controller->setViews($views , $ID_annonce);
 
@@ -53,7 +55,7 @@ echo $_SESSION['msg'] ;
         <div class="ann-affich_post">
 
            
-           <?php     $user = $_controller->getUserInfoById( $ID_user);
+           <?php     $user = $_controller->getUserInfoById( $ID_transporteur);
            if ($user) {
             foreach ($user as  $user) {
       

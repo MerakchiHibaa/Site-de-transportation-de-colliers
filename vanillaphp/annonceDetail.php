@@ -104,7 +104,9 @@ echo $_SESSION['msg'] ;
 
     <div id="pop--click"  class="popup"> 
      <div  class="popup__content"> 
-         <a href="#" class="close">  &times; </a>
+         <!-- <div >  -->
+         <a href="#" class="close" id="closebtn">  &times; </a>
+         
  <form >
     <input type="hidden" id="from" class="form-control"  value="<?php echo $getUinfo['pointDepart'] ?>"> 
 <!--     <?php echo "<footer>".$getUinfo['pointDepart']." </footer>" ; ?>
@@ -159,16 +161,21 @@ margin: 2rem;
          width: 70rem ;
      }
      #container-map {
-        max-width: 100%;
-
-         height:90% ; 
-         width: 80%;
-         z-index: 200;
-     }
+   display: none;  
+    max-width: 100%;
+    height: 90%;
+    width: 80%;
+    margin: 0 auto;
+    z-index: 200;
+    /* transform: translateX(12%); */
+    transform: translateY(-100%);
+}
+     
      #googleMap {
          margin :2rem ;
          padding: 1rem ;
         max-width: 100%;
+       
         height: 90% ;
 
 /*        bottom: 900px;
@@ -209,12 +216,15 @@ margin: 2rem;
 
     .popup .popup__content .close {
         position: absolute;
-        top: 0;
-        right: 0 ;
+        top: -6rem;
+        right: -2rem ;
+        /* top: 0;
+        right: 0 ; */
         text-decoration: none;
         font-size: 3rem;
         font-weight: 700;
         transition: all .3s;
+        z-index: 55;
     }
 
     .popup .popup__content .close:hover { 
@@ -234,6 +244,20 @@ margin: 2rem;
  <!-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6cIUVCcSaRbVqNTES9gwZ1uZeIOrE-_o&libraries=places&callback=mapInit"></script>
  -->
 <script  >
+  /*   let voirCarte = document.getElementById('voirCarte') ; 
+    let containermap = document.getElementById('container-map') ; 
+    voirCarte.onclick = function() {
+        containermap.style.display = 'block' ;
+
+    } */
+
+    let closebtn = document.getElementById('closebtn') ; 
+    closebtn.onclick = function() {
+        let containermap = document.getElementById('container-map') ; 
+
+        containermap.style.display = 'none' ;
+
+    }
     let mylatlng = {lat:36.7630648 , lng: 3.05055253 } ;
 let mapOptions = {
     center: mylatlng ,
@@ -252,6 +276,10 @@ let directionDisplay = new google.maps.DirectionsRenderer() ;
 directionDisplay.setMap(map) ;
 
 function calcRoute() {
+    let containermap = document.getElementById('container-map') ; 
+        containermap.style.display = 'block' ;
+
+    
     let request = {
     origin: document.getElementById("from").value,
     destination: document.getElementById('to').value,
@@ -268,7 +296,7 @@ directionService.route(request ,  (result, status) => {
     if(status == google.maps.DirectionsStatus.OK){
         //get distance and time 
         distance = parseFloat(result.routes[0].legs[0].distance.text) ;
-        let price =  parseFloat(distance*0.7*41.5).toFixed(2) ;
+        let price =  parseFloat(distance*0.4*41.5).toFixed(2) ;
         if(distance < 18) {
             price = 500 ; 
 
@@ -278,7 +306,7 @@ directionService.route(request ,  (result, status) => {
 let pricevalue = document.getElementById('price') ; 
 pricevalue.value = price ; 
         const output = document.getElementById("output") ; 
-        output.innerHTML = "<h4  style='margin: 2rem; font-size:1.5rem;' > De : " + document.getElementById('from').value + " à: " + document.getElementById('to').value + ".<br /> Distance en voiture <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + " et le tarif est : "+price+".</h4>" ;
+        output.innerHTML = "<h4  style='margin: 2rem; font-size:1.5rem;' > De : " + document.getElementById('from').value + " à: " + document.getElementById('to').value + ".<br /> Distance en voiture <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + ". <br /> Le tarif est : "+price+" DA.</h4>" ;
      console.log(document.getElementById('from').value + ".<br /> To: " + document.getElementById('to').value + ".<br /> Driving distance <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Duration: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + " et le tarif est : "+price+".</h3>") ;
 
         directionDisplay.setDirections(result) ; 
