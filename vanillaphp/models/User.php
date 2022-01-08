@@ -286,6 +286,42 @@ public function updateProfile($data) {
 
 }
 
+
+
+
+public function insertDemandes($ID_annonce , $ID_client , $ID_transporteur) {
+try {
+    $this->db->query('INSERT INTO demandes (ID_annonce, ID_client, ID_transporteur, date) 
+    VALUES (:ID_annonce, :ID_client, :ID_transporteur , :date)'); 
+     $this->db->bind(':ID_annonce', $ID_annonce);
+     $this->db->bind(':ID_client', $ID_client);
+     $this->db->bind(':ID_transporteur', $ID_transporteur);
+     $this->db->bind(':date',  date('Y-m-d H:i:s') );
+     $this->db->execute() ;
+    /*  session_start() ;  */
+
+     $_SESSION['msg'] = '<div class="alert alert-success">
+                       <strong>Success!</strong> Votre demande a été envoyée.
+                     </div>';
+                     echo "<script> alert(' Votre demande a été envoyée. ') ;</script>" ;
+
+}catch (Exception $e) {
+     $_SESSION['msg'] = '<div class="alert alert-warning">
+                       <strong>Warning!</strong> Vous avez déja répondu à cette annonce.
+                     </div>' ;
+                     echo "<script> alert(' Vous avez déja répondu à cette annonce.. ') ;</script>" ;
+
+
+  }
+}
+
+public function getUnreadDemandes($ID_user) {
+    $this->db->query("SELECT * FROM demandes where ID_client = '$ID_user' and status = 'unread'") ; 
+    return $this->db->resultSet() ;
+
+
+}
+
     public function registerTransporteur($data){
         $this->db->query('INSERT INTO users (nom, prenom, numero, email, adresse, type, password) 
         VALUES (:nom, :prenom, :numero , :email, :adresse, type, :password)');

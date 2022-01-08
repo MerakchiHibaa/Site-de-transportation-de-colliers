@@ -1,3 +1,8 @@
+<?php
+ session_start() ; 
+ /* if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
+    / */
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +10,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="./notification.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">            
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
 
     <title>Accueil</title>
     <script src="js/jquery-1.10.2.min.js"></script>
@@ -19,6 +31,8 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+    <?php if( !isset($_SESSION['userID'])) { ?>
+   
     <div class="bar" >
         <div class="logo">  <img src="assets/logo.png" alt="Logo"> </div>
        <div class="bar-buttons"> 
@@ -26,7 +40,81 @@
         <a class="btn-up" >Connexion </a>
     </div>
     </div>
+    <?php } else {?>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container"> 
 
+        
+  <div class="container-fluid">
+   <!--  <a class="navbar-brand" href="#">Navbar</a> -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+<?php 
+include "./controllers/affichControl.php"  ; 
+$_controller = new affichControl();
+$demandes = $_controller->getUnreadDemandes($_SESSION['userID']) ; 
+if ($demandes) {
+    $count = count($demandes);
+
+}
+else {
+    $count = 0 ; 
+
+}
+
+
+?>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li> -->
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" > <?php echo $count ; ?></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <?php
+              if($count > 0 ) {
+                  foreach($demandes as $demande) {
+                     $transporteur= $_controller->getUserInfoById($demande['ID_transporteur']);
+                     foreach ($transporteur as $transporteur) { 
+                    echo '<li><a class="dropdown-item text-primary " href="reponseDemande.php?idt='.$demande['ID_transporteur'].'&ida='.$demande['ID_annonce'].'"> Le transporteur '.$transporteur['nom'].' '.$transporteur['prenom'].' a répondu à votre annonce. </a>' ;
+
+                    echo ' <li><hr class="dropdown-divider"></li>' ; 
+                  }
+                }
+
+              }
+              else {
+                  
+                  echo '<li><a class="dropdown-item text-danger font-weight-bold" href="#"> <i class="fa fa-frown-o" aria-hidden="true"></i>
+                  Oops! aucune notification.</a> </li>' ;
+                  
+
+              }
+               ?>
+            <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          --> </ul>
+        </li>
+        <!-- li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li> -->
+      </ul>
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+    </div>
+  </div>
+  </div>
+</nav>
+        <?php } ?>
     
     <header>
         <div class="slider">
@@ -180,10 +268,9 @@
                     <div style="height: 180px; overflow-y: auto; overflow-x: hidden;">
      <?php
      
-include './controllers/affichControl.php';
+/* include './controllers/affichControl.php';
+ */
 
-
-$_controller = new affichControl();
 $result = $_controller->selectTypeTransport() ;
                    
                     foreach($result as $row)
@@ -212,7 +299,6 @@ $result = $_controller->selectTypeTransport() ;
  include_once './controllers/affichControl.php';
  
 
-$_controller = new affichControl(); 
 $result = $_controller->selectMoyenTransport() ;
                    
                     foreach($result as $row)
@@ -295,8 +381,8 @@ $(document).ready(function(){
 
     function filter_data()
     {
-        console.log("je suis dans filterdata") ;
-
+/*         console.log("je suis dans filterdata") ;
+ */
         $('.filter_data').html('<div id="loading" style="" ></div>');
         var action = 'fetch_data';
         var minimum_poids = $('#hidden_minimum_poids').val();
@@ -369,8 +455,10 @@ $(document).ready(function(){
     <script src="jquery-ui.js"></script>
     <script src="bootstrap.min.js"></script> -->
      <link rel="stylesheet" href="./css/bootstrap.min.css">  
-       
- <script type="text/javascript" src="vanilla-tilt.js"></script>
+<!--       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+ -->    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   <script type="text/javascript" src="vanilla-tilt.js"></script>
     <script type="text/javascript">
        VanillaTilt.init(document.querySelectorAll(".card"), {
            max: 25,

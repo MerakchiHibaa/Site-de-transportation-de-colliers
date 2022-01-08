@@ -1,4 +1,5 @@
 <?php if (isset($_GET['id'])) {
+    session_start();
   $ID_annonce = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['id']);
 
 } ?>
@@ -28,14 +29,18 @@ $_controller = new affichControl();
     if ($getAinfo) {
       foreach ($getAinfo as  $getUinfo) {
           $views =  $getUinfo['viewsNumber'] + 1 ; 
-          echo"<h1> insiiide".$views." afterr</h1>" ;
           $_controller->setViews($views , $ID_annonce);
 
      ?>
 
 <div class="container-affich"> 
 
+
     <div class="ann-affich">
+    <?php if(!empty($_SESSION['msg'])) { 
+
+echo $_SESSION['msg'] ; 
+} ?>
         <div class="ann-affich_img">
             <img src="assets/slider1.jpg" alt="">
         </div>
@@ -68,14 +73,27 @@ $_controller = new affichControl();
     <i class="fa fa-eye" aria-hidden="true">    <?php echo"   ".$getUinfo['viewsNumber'] ; ?>   </i> 
 <!--     <a  href="#" class="ann-affich_cta"> Voir sur une carte  </a>
  -->
-
+ 
  <div class="col-xs-offset-2 col-xs-10">
 <button id="voirCarte"class="btn btn-info btn-lg">  <i class="fas fa-directions"  aria-hidden="true" onclick="calcRoute()" ></i></button>
  </div> 
-        <a  href="#" class="ann-affich_cta"> Répondre à cette annonce </a>
+ <?php if(isset($_SESSION['userType'] ) ) { 
+     if ($_SESSION['userType'] == 'client') { ?> <!-- disabled -->
+     <form method="post" action="./controllers/Users.php" > 
+         <input type="hidden" name="type" value ="notif">
         
 
+         <input type="hidden" name="ID_annonce" value="<?php echo $ID_annonce ?>"> 
+         <input type="hidden" name="ID_transporteur" value="<?php echo $_SESSION['userID'] ?>"> 
+         <input type="hidden" name="ID_client" value="<?php echo $getUinfo['ID_User'] ?>"> 
+         <button type="submit" name="send"class="ann-affich_cta" > Répondre à cette annonce </button>
 
+     </form>
+        
+<?php } else if($_SESSION['userType'] =='transporteur'){ ?> 
+
+        <button  class="ann-affich_cta"> Répondre à cette annonce </button>
+<?php } }?>
         </div> <!--ann-affich_post end-->
         </div> <!--ann-affich-->
         </div>

@@ -10,6 +10,12 @@
         public function __construct(){
             $this->model = new affichModel;
         }
+
+        
+        public function getUnreadDemandes($ID_user) {
+          return $this->model->getUnreadDemandes($ID_user) ; 
+
+       }
         public function setViews($views ,  $ID_annonce) {
           return $this->model->setViews($views ,  $ID_annonce) ; 
 

@@ -404,4 +404,14 @@ public function getUsersNumber(){
  }
 
 
+ 
+public function getUnreadDemandes($ID_user) {
+    $this->db->query("SELECT * FROM demandes where ID_client = '$ID_user' and status = 'unread'") ; 
+    return $this->db->resultSet() ;
+
+
+}
+
+
+
 }

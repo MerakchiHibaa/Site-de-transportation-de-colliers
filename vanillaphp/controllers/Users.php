@@ -12,18 +12,22 @@
         }
 
 
-        public function getHistoriqueAnnonce($userID) {
-            return $this->model->getHistoriqueAnnonce($userID) ;
-      
-      
-          }
-      
-      
-          public function getHistoriqueTrajet($userID) {
-            return $this->model->getHistoriqueTrajet($userID) ;
-      
-      
-          }
+        public function insertDemandes() {
+            if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
+             echo "<h1> insiiide inisertDemandes </h1>";
+                $ID_annonce = (int) $_POST['ID_annonce']  ; //
+                $ID_client = (int) $_POST['ID_client'] ; // client
+                $ID_transporteur = (int) $_POST['ID_transporteur'] ; // transport
+                    
+               
+                $this->userModel->insertDemandes($ID_annonce, $ID_client ,$ID_transporteur)  ;
+                       redirect("../annonceDetail.php?id=$ID_annonce") ; 
+
+                   
+
+            }
+        }
+
       
       
 
@@ -274,6 +278,10 @@
             
         }
 
+        public function getDemandes($ID_user) {
+           return $this->userModel->getDemandes($ID_user) ; 
+
+        }
     public function login(){
         //Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -300,7 +308,7 @@
                 $this->createUserSession($loggedInUser);
                                    echo"<footer> inside createUserSession</footer>" ;
 
-                                  echo $_SESSION['userID'] ;
+                                /*   echo $_SESSION['userID'] ;
                                   echo $_SESSION['userType'] ;
                                   echo $_SESSION['userEmail'] ;
                                   echo $_SESSION['userNom'] ;
@@ -309,7 +317,7 @@
                                   echo $_SESSION['userNumero'] ;
                                   echo $_SESSION['userPassword'];
                                   echo $_SESSION['userPhoto'] ;
-                                  echo $_SESSION['userNote'] ;
+                                  echo $_SESSION['userNote'] ; */
 /*                 redirect("../profile.php");
  */ 
 /*                            echo"<footer> inside createUserSession</footer>" ;
@@ -341,6 +349,8 @@
         $_SESSION['userPassword'] = $user['password'];
         $_SESSION['userPhoto'] = $user['photo'];
         $_SESSION['userNote'] = $user['note'];
+         $_SESSION['msg'] ='' ;
+
 
 
         if ($user['type'] == 'transporteur') {
@@ -556,6 +566,8 @@ if ($_POST['selectetat'] == '1') {
  */                $init->userChangeStatut() ; 
             case 'changeetat': 
                 $init-> AnnonceChangeEtat() ;
+            case 'notif' : 
+                $init-> insertDemandes() ;  
 
 /*             default : redirect("../index.php");
  */        }
