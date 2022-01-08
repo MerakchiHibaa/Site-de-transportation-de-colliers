@@ -10,7 +10,21 @@ class affichModel {
     }
 
     
-
+    public function selectAllReports() {
+        $this->db->query("SELECT * FROM reports");
+        
+        /* if( $this->db->resultSet() ) {
+            echo "<footer> success </footer>" ; 
+    
+    
+        }  else {
+            echo "<h1> failed </h1>" ; 
+    
+        } */
+        return $this->db->resultSet() ; 
+    
+    
+    }
 
     public function affichWilaya() {
 
@@ -48,8 +62,8 @@ function selectAnnonce($offset) {
 
 }
 
-public function returnAttributeUser($ID_user , $attribut) {
-    $this->db->query("SELECT * FROM users where ID_user =: ID_user LIMIT 1");
+/* public function returnAttributeUser($ID_user , $attribut) {
+    $this->db->query("SELECT * FROM users where ID_user =: ID_user");
     $this->db->bind(':ID_user', $ID_user);
     $allusers =  $this->db->resultSet() ; 
     foreach($allusers as $user) {
@@ -58,7 +72,7 @@ public function returnAttributeUser($ID_user , $attribut) {
     }
     return $value ;
 
-}
+} */
 
 public function selectAllUserData() {
     $this->db->query("SELECT * FROM users ORDER BY ID_user DESC");
@@ -101,21 +115,7 @@ public function selectTypeTransport() {
     return $this->db->resultSet() ; 
 
 } */
-public function selectAllReports() {
-    $this->db->query("SELECT * FROM signals");
-    
-    /* if( $this->db->resultSet() ) {
-        echo "<footer> success </footer>" ; 
 
-
-    }  else {
-        echo "<h1> failed </h1>" ; 
-
-    } */
-    return $this->db->resultSet() ; 
-
-
-}
 
   
 public function archiveAnnonce($deactive){

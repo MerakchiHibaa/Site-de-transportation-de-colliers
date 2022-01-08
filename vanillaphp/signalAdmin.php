@@ -111,12 +111,13 @@ if (isset($prenom)) {
                       <th  class="text-center">Identifiant de l'utilisateur ayant émis le signalement</th>
                       <th  class="text-center">Nom de de l'utilisateur ayant émis le signalement</th>
                       <th  class="text-center">Type de l'utilisateur ayant émis le signalement</th>
-                      <th  class="text-center">Identifiant de l'annonce</th>
 
                       <th  class="text-center">Identifiant de l'utilisateur signalé</th>
+
                       <th  class="text-center">Nom de de l'utilisateur signalé</th>
                       <th  class="text-center">Type de l'utilisateur signalé </th>
-         
+                      <th  class="text-center">Identifiant de l'annonce</th>
+
                       <th  class="text-center">Texte du signalement</th>
 
         
@@ -147,54 +148,71 @@ $allreports = $_controller->selectAllReports();
                       >
 
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $value['ID_signal']; ?></td>
 
                         
-                        <td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_UserS'] ;?>">  <?php 
+                        <td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_userS'] ;?>">  <?php 
                         
 
 
-                        $user = $_controller->returnAttributeUser($value['ID_userS'] , 'ID_user') ;
-                        
-                            echo $user ;
+/*                         $user = $_controller->returnAttributeUser($value['ID_userS'] , 'ID_user') ;
+ */            
+/* $user = $_controller->getUserInfoById($value['ID_userS'])      ;
+foreach($user as $user) {
+
+}    */    
                          
-                        ?></a> </td>
+echo $value['ID_userS'] ; ?> </a> </td>
 
-<td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_UserS'] ;?>">  <?php 
+<td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_userS'] ;?>">  <?php 
                         
                         include_once './controllers/affichControl.php';
                         
                         
-                                                $nom = $_controller->returnAttributeUser($value['ID_userS'] , 'nom') ;
-                                                $prenom = $_controller->returnAttributeUser($value['ID_userS'] , 'prenom') ;
+                                                $user = $_controller->getUserInfoById($value['ID_userS']) ;
+                                                foreach ($user as $user) {
+                                                  $nom = $user['nom'];
+                                                  $prenom = $user['prenom'];
+                                                  echo $nom." ".$prenom ;
+                                                  $type = $user['type'];
 
-                                                    echo $nom." ".$prenom ;
+                                                }
+
                                                  
                                                 ?></a> </td>
 
 
+<td><?php echo $type; ?></td>
 
 
 
-<td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_UserS'] ;?>">  <?php 
+<td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_userSD'] ;?>">  <?php  echo $value['ID_userSD'] ;
                         
                        
-                                                $user = $_controller->returnAttributeUser($value['ID_userSD'] , 'ID_user') ;
-                                                
-                                                    echo $user ;
+/*                                                 $user = $_controller->returnAttributeUser($value['ID_userSD'] , 'ID_user') ;
+ */                                                                                           /*      $user2 = $_controller->getUserInfoById($ID_userSD) ; */
+ /* foreach ($user2 as $user) {
+   $nom = $user['nom'] ; 
+   $prenom = $user['prenom'];
+ }
+
+                                                    echo $user ; */
                                                  
                                                 ?></a> </td>
                         
-                        <td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_UserSD'] ;?>">  <?php 
+                        <td> <a href="userProfileAdmin.php?id=<?php echo $value['ID_userSD'] ;?>">  <?php 
+                         $user = $_controller->getUserInfoById($value['ID_userSD']) ;
                                                 
-                                               
-                                                                        $nom = $_controller->returnAttributeUser($value['ID_userSD'] , 'nom') ;
-                                                                        $prenom = $_controller->returnAttributeUser($value['ID_userSD'] , 'prenom') ;
-                        
-                                                                            echo $nom." ".$prenom ;
+                                                foreach ($user as $user) {
+                                                  $nom = $user['nom'] ; 
+                                                  $prenom = $user['prenom'];
+                                                  $type2 = $user['type'] ;
+                                                  echo $nom." ".$prenom ;
+
+                                                }
                                                                          
                                                                         ?></a> </td>
                         
+                        <td><?php echo $type2; ?></td>
 
                          <td> <a href="annonceDetailAdmin.php?id=<?php echo $value['ID_annonce'] ;?>"> <?php echo $value['ID_annonce']  ?> </a></td>
                        

@@ -11,6 +11,12 @@
             $this->model = new affichModel;
         }
 
+        public function selectAllReports() {
+          return $this->model->selectAllReports() ; 
+
+
+        }
+
         public function readNotification($ID_annonce, $ID_client, $ID_transporteur){
           return $this->model->readNotification($ID_annonce, $ID_client, $ID_transporteur) ; 
 
@@ -104,20 +110,15 @@
 
         }
 
-        public function returnAttributeUser($ID_user , $attribut) {
+       /*  public function returnAttributeUser($ID_user , $attribut) {
           return $this->model->returnAttributeUser($ID_user , $attribut) ; 
 
 
         }
-
+ */
         
 
-        public function selectAllReports() {
-          return $this->model->selectAllReports() ; 
-
-
-        }
-
+       
 
 
                  function selectAllAnnouncements(){
