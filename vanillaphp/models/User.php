@@ -23,6 +23,17 @@ class User {
              $this->db->query('delete from demandes where ID_client=:ID_client and ID_annonce =:ID_annonce');
              $this->db->bind(':ID_annonce', $ID_annonce);
              $this->db->bind(':ID_client', $ID_client);
+             $this->db->execute() ;
+
+             $this->db->query("UPDATE annonces SET
+             statut= 1
+             WHERE ID_annonce = :ID_annonce");
+
+            $this->db->bind(':ID_annonce', $ID_annonce);
+            $this->db->execute() ;
+
+
+
              //informer les autres transporteurs que leurs demandes ont été annulées et inforer le transporteur choisi que sa demaned est cnfirmée
 
 /* 

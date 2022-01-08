@@ -158,7 +158,7 @@ include './controllers/affichControl.php';
 $_controller = new affichControl();
 $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
               if ($result) {   ?>
-                   { ?>  
+                   
 <div class="container my-5">
   <div class="shadow-4 rounded-5 overflow-hidden">
     <table class="table align-middle mb-0 bg-white">
@@ -173,6 +173,13 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
           <th>Etat </th>
           <th>Date de création </th>
           <th>Nombre des vues </th>
+          <th> Statut </th>
+          <th> Réponses </th>
+          <th> Actions </th>
+
+
+
+
                 
                   <?php  foreach($result as $value) { ?>
  
@@ -182,54 +189,60 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
       <tbody>
         <tr>
           <td>
-            <div class="d-flex align-items-center">
-              
-              <div class="ms-3">
-                <p class="fw-bold mb-1"><?php $value['titreAnnonce']?></p>
-              </div>
-            </div>
+          <p class="fw-bold mb-1"> <?php echo $value['titreAnnonce']?></p>
           </td>
+
           <td>
             <p class="fw-bold mb-1"> <?php echo "De".$value['pointDepart']."à".$value['pointArrivee']?></p>
             
           </td>
           <td>
-            <p class="fw-bold mb-1"> <?php $value['typeTransport']?></p>
+            <p class="fw-bold mb-1"> <?php echo $value['typeTransport']?></p>
             
           </td>
 
           <td>
-            <p class="fw-bold mb-1"> <?php echo "De".$value['poidsMin']."à".$value['poidsMax']?></p>
+            <p class="fw-bold mb-1"> <?php echo "De ".$value['poidsMin']." à ".$value['poidsMax']?></p>
             
           </td>
           <td>
-            <p class="fw-bold mb-1"> <?php echo "De".$value['volumeMin']."à".$value['volumeMax']?></p>
+            <p class="fw-bold mb-1"> <?php echo "De ".$value['volumeMin']." à ".$value['volumeMax']?></p>
             
           </td>
           <td>
-            <p class="fw-bold mb-1"> <?php $value['moyenTransport']?></p>
+            <p class="fw-bold mb-1"> <?php echo $value['moyenTransport']?></p>
             
           </td>
       <?php if ($value['etat'] =="valide") {?>
           <td>
-            <span class="badge badge-success rounded-pill"> <?php $value['etat'] ?></span>
+            <span class="badge badge-success rounded-pill"> <?php echo $value['etat'] ?></span>
           </td>
           <?php } else {?>
             <td>
-            <span class="badge badge-warning rounded-pill"> <?php $value['etat'] ?></span>
+            <span class="badge badge-warning rounded-pill"> <?php echo $value['etat'] ?></span>
           </td>
             <?php } ?>
             <td>
             
             <div class="ms-3">
-                <p class="text-muted mb-0">  <?php $value['creationDate'] ?></p>
+                <p class="text-muted mb-0">  <?php echo $value['creationDate'] ?></p>
               </div>
           </td>
           <td>
               <div class="ms-3">
-                <p class="text-muted mb-0">  <?php $value['viewsNumber'] ?></p>
+                <p class="text-muted mb-0">  <?php echo $value['viewsNumber'] ?></p>
               </div>
           </td>
+
+          <?php if ($value['statut'] =="1") {?>
+          <td>
+            <span class="badge badge-success rounded-pill"> <?php echo 'confirmé' ; ?></span>
+          </td>
+          <?php } else {?>
+            <td>
+            <span class="badge badge-warning rounded-pill"> <?php echo 'En attente' ; ?></span>
+          </td>
+            <?php } ?>
               
 
           
@@ -260,7 +273,7 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
  
  $result = $_controller->getHistoriqueTrajet($_SESSION['userID']) ;
                if ($result) {   ?>
-                    { ?>  
+                    
  <div class="container my-5">
    <div class="shadow-4 rounded-5 overflow-hidden">
      <table class="table align-middle mb-0 bg-white">
@@ -286,29 +299,36 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
              <div class="d-flex align-items-center">
                
                <div class="ms-3">
-                 <p class="fw-bold mb-1"><?php $i ?></p>
+                 <p class="fw-bold mb-1"><?php echo $i ?></p>
                </div>
              </div>
            </td>
            <td>
              <p class="fw-bold mb-1"> <?php 
-             $nom = $_controller->returnAttributeUser($result['ID_transporteur'] , 'nom') ;
-             $prenom = $_controller->returnAttributeUser($result['ID_transporteur'] , 'prenom') ; 
-             echo $nom." ".$prenom ;?>
+             $user = $_controller->getUserInfoById($value['ID_transporteur'] ) ;
+             foreach ($user as $user) {
+               $nom = $user['nom'] ;
+               $prenom = $user['prenom'];
+
+             }
+              echo $nom." ".$prenom ;?>
              </p>
-             ?></p>
+             </p>
              
            </td>
            <td>
-             <p class="fw-bold mb-1"> <?php $value['ID_annonce']?></p>
+             <p class="fw-bold mb-1"> <?php echo $value['ID_annonce']?></p>
              
            </td>
  
            <td>
              <div class="ms-3">
-                 <p class="text-muted mb-0">  <?php $value['creationDate'] ?></p>
+                 <p class="text-muted mb-0">  <?php echo $value['creationDate'] ?></p>
                </div>
                     </td>
+
+                   
+
  
                
  
