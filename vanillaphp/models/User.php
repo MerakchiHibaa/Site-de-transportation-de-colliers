@@ -52,6 +52,30 @@ class User {
          
     }
 
+    public function setReport($ID_trajet, $reportText ){
+        $this->db->query('SELECT * FROM trajets WHERE ID_trajet = :ID_trajet LIMIT 1');
+        $this->db->bind(':ID_trajet', $ID_trajet);
+        $trajet = $this->db->resultSet();
+        foreach ($trajet as $trajet) {
+            $ID_annonce = $trajet['ID_annonce'];
+            $ID_userS = $trajet['ID_client'];
+            $ID_userSD = $trajet['ID_transporteur'];
+
+        }
+        $this->db->query('INSERT INTO reports (ID_annonce,  ID_userS, ID_userSD, textSignal) 
+        VALUES (:ID_annonce , :ID_userS , :ID_userSD , :textSignal ) ') ; 
+        $this->db->bind(':ID_annonce', $ID_annonce);
+        $this->db->bind(':ID_userS', $ID_userS);
+        $this->db->bind(':ID_userSD', $ID_userSD);
+        $this->db->bind(':textSignal', $reportText);
+        return $this->db->execute(); 
+
+
+
+ 
+
+    }
+
     
     //Find user by email or username
     public function findUserByEmail($email){

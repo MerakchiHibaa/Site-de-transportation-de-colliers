@@ -12,11 +12,38 @@ echo $_SESSION['userPassword'];
 echo $_SESSION['userPhoto'] ;
 echo $_SESSION['userNote'] ; */
 
+ 
+include './controllers/affichControl.php';
+
+
+$_controller = new affichControl();
+
 if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
 /*    redirect("../login.php");
  */ 
     header("Location: ./login.php");
  }
+
+
+
+ if (isset($_GET['suppriman'])) {
+
+  $archive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['suppriman']);
+ $_controller->archiveAnnonce($archive);
+}
+
+if (isset($_GET['signalFinished'])) {
+
+  $ID_trajet = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['signalFinished']);
+ $_controller->reportFinished($ID_trajet);
+/*  header("Location: ./profile.php");
+ */
+}
+
+
+
+
+
 ?> 
 
 <!DOCTYPE html>
@@ -47,7 +74,7 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
 
 <form class="box" action="./controllers/Users.php" method="POST" enctype="multipart/form-data">
  <div id="form-profile-div"> 
-      <h1 >Modifier votre profile</h1> <!-- class="text-center" style="text-align: center;" -->
+      <h1 class="text-center" style="text-align: center;" >Modifier votre profile</h1> <!-- class="text-center" style="text-align: center;" -->
      <div > <!-- class="form-group" -->
        <?php if(!empty($msg)) { ?>
          <div class="alert <?php echo $css_class ;?>">
@@ -56,7 +83,7 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
 
          <?php  } ?>
          <div class="profile-img">
-<img src="./usersImages/<?php echo $_SESSION['userPhoto'] ; ?>" onclick="triggerClick()" id="profileDisplay" alt="" width="50%" style=" display: block;
+<img src="./usersImages/<?php echo $_SESSION['userPhoto'] ; ?>" onclick="triggerClick()" id="profileDisplay" alt="" width="10%" style=" display: block;
             margin: 10px auto;
             border-radius: 50% ;
 ">
@@ -138,7 +165,8 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
   </div>
  
   <div class="historique"> 
-  <h1> Mon historique d'annonces : </h1>
+  <h1> <i class="fa fa-history" aria-hidden="true"></i>
+ Mon historique d'annonces : </h1>
 
   <!--tryy begin-->
  
@@ -151,11 +179,7 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
 <!--try end-->
 
 <?php   
- 
-include './controllers/affichControl.php';
 
-
-$_controller = new affichControl();
 $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
               if ($result) {   ?>
                    
@@ -193,7 +217,7 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
           </td>
 
           <td>
-            <p class="fw-bold mb-1"> <?php echo "De".$value['pointDepart']."à".$value['pointArrivee']?></p>
+            <p class="fw-bold mb-1"> <?php echo "De ".$value['pointDepart']." à ".$value['pointArrivee']?></p>
             
           </td>
           <td>
@@ -243,7 +267,32 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
             <span class="badge badge-warning rounded-pill"> <?php echo 'En attente' ; ?></span>
           </td>
             <?php } ?>
-              
+
+
+
+            <td>
+              <div class="ms-3">
+                <p class="text-muted mb-0">  <?php echo "Réponses"; ?></p>
+              </div>
+          </td>
+
+
+          <td>
+<!--             <a class="btn btn-success btn-sm" href="annonceDetailAdmin.php?id=<?php echo $value['ID_annonce'] ;?>"> Voir </a>
+ -->
+            <a  class="btn btn-success btn-sm <?php  if( $value['statut'] == '1' )  {
+  echo "disabled";
+} ?>
+" href="?modifan=<?php echo $value['ID_annonce'];?>"> <i class="fas fa-edit"></i> Modifier </a>
+
+
+ <a onclick="return confirm('Vous voulez vraiment supprimer cette annonce ?')" class="btn btn-danger btn-sm " href="?suppriman=<?php echo $value['ID_annonce'];?>"> <i class="fas fa-trash-alt"></i> Supprimer</a>
+  
+
+
+
+
+ </td>       
 
           
         </tr>
@@ -263,7 +312,8 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
 
   <?php } ?>
 
-  <h1> Mon historique de transactions : </h1>
+  <h1> <i class="fa fa-history" aria-hidden="true"></i>
+ Mon historique de transactions : </h1>
 
 
   
@@ -282,7 +332,10 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
            <th>Numéro de transaction </th>
            <th>Transporteur</th>
            <th>Titre de l'anonce </th>
-           <th>Date </th> 
+           <th>Date </th>
+           <th>Note </th>  
+           <th>Actions </th> 
+
            
                 
                    <?php 
@@ -299,12 +352,12 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
              <div class="d-flex align-items-center">
                
                <div class="ms-3">
-                 <p class="fw-bold mb-1"><?php echo $i ?></p>
+                 <p class="fw-primary mb-1"><?php echo $i ?></p>
                </div>
              </div>
            </td>
            <td>
-             <p class="fw-bold mb-1"> <?php 
+             <p class="fw-primary mb-1"> <?php 
              $user = $_controller->getUserInfoById($value['ID_transporteur'] ) ;
              foreach ($user as $user) {
                $nom = $user['nom'] ;
@@ -317,8 +370,14 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
              
            </td>
            <td>
-             <p class="fw-bold mb-1"> <?php echo $value['ID_annonce']?></p>
+             <?php
+             $annonces = $_controller->getAnnonceInfoById($value['ID_annonce']) ; 
+             foreach ($annonces as $annonce) {
+               $titre = $annonce['titreAnnonce'] ; 
              
+              ?>
+             <p class="fw-primary mb-1"> <?php echo $titre ?></p>
+             <?php } ?>
            </td>
  
            <td>
@@ -326,6 +385,54 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
                  <p class="text-muted mb-0">  <?php echo $value['creationDate'] ?></p>
                </div>
                     </td>
+
+
+
+                    <td>
+             <div class="d-flex align-items-center">
+               
+               <div class="ms-3">
+                 <?php if ($value['note']== '0' ) { ?>
+                  <p class="fw-primary mb-1"><?php echo "Vous n'avez pas encore noté ce trajet." ?></p>
+
+                <?php } else { ?>
+                  <p class="fw-primary mb-1"><?php echo $value['note'].'/5' ?></p>
+
+                <?php } ?>
+               </div>
+             </div>
+           </td>
+
+                    <!---actions---->
+
+                    <td>
+                      <?php if($value['termine'] == '0') {  ?>
+                        <a class="btn btn-success btn-sm" href="?signalFinished=<?php echo $value['ID_trajet'];?>" > <i class="fas fa-check"> </i> Signaler comme terminé </a>
+
+
+                      <?php } else { ?>
+                        <a class="btn btn-success btn-sm disabled"  onclick=''>  <i class="fas fa-check"></i> Terminé </a>
+
+                       <?php } ?>
+
+
+           
+
+      <a href="rate.php?id=<?php echo $value['ID_trajet'] ;?>" class="btn btn-warning btn-sm 
+      <?php if ($value['note']== '0' ) { ?> " <?php } else { echo "disabled"; echo '"' ; }?> > <i class="fas fa-star"> </i> Noter </a>
+
+               
+
+
+      <a href="report.php?id=<?php echo $value['ID_trajet'] ;?>" class="btn btn-danger btn-sm ">       <i class="fas fa-exclamation-triangle"></i> 
+  Signaler cet utilisateur </a>
+
+           
+
+ 
+        
+
+ </td>    
 
                    
 

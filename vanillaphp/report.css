@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins" , sans-serif;
+
+}
+
+body {
+    display: flex;
+    align-items: center ;
+    justify-content: center ;
+    min-height: 100vh;
+    background-color: antiquewhite;
+/*     background-color: #
+ */
+
+} 
+
+.wrapper {
+    width: 50%;
+    background: #fff;
+    border-radius: 5px ;
+    padding:25px 25px 30px ; 
+
+
+}
+
+.wrapper h2 {
+    padding: 2rem ;
+    text-align:center ;
+    font-size:1.5rem ; 
+/*     color: #
+ */
+}
+
+.wrapper textarea { 
+    width: 100%;
+    height: 59px;
+    padding : 15px ; 
+    border-radius: 5px;
+    outline: none ; 
+    resize: none ; 
+    font-size: 16px ;
+    border-color: #bfbfbf ;
+    border-radius:5px ; 
+
+
+
+}
+textarea:is(:focus, :valid) {
+    border-width: 2px ;
+    padding:14px ; /*a changer plus tard*/
+
+border-color: #4671EA ; 
+}
+textarea::-webkit-scrollbar{
+    width : 0px ; 
+}

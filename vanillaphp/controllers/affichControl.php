@@ -11,6 +11,11 @@
             $this->model = new affichModel;
         }
 
+        public function reportFinished($ID_trajet) {
+          return $this->model->reportFinished($ID_trajet) ; 
+
+        }
+
         public function selectAllReports() {
           return $this->model->selectAllReports() ; 
 
@@ -109,6 +114,7 @@
 
 
         }
+       
 
        /*  public function returnAttributeUser($ID_user , $attribut) {
           return $this->model->returnAttributeUser($ID_user , $attribut) ; 

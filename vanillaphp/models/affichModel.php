@@ -117,7 +117,15 @@ public function selectTypeTransport() {
 } */
 
 
-  
+public function reportFinished($ID_trajet) {
+    $this->db->query("UPDATE trajets SET
+    termine = '1'
+    where ID_trajet = $ID_trajet ;
+    ");
+    return  $this->db->execute() ;
+ }
+ 
+
 public function archiveAnnonce($deactive){
     $this->db->query("UPDATE annonces SET
     archive = '1'
