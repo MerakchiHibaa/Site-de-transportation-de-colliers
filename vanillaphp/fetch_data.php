@@ -53,14 +53,19 @@ case 'remove' :
 
 if(isset($_POST["action"]))
 {
+    echo "<script> console.log('insiiide action') ;</script>";
 
     if(isset($_POST["action"]))
     {
+        echo "<script> console.log('just above query') ;</script>";
+
         $query = "
             SELECT * FROM annonces WHERE archive = '0'
         ";
         if(isset($_POST["minimum_poids"], $_POST["maximum_poids"]) && !empty($_POST["minimum_poids"]) && !empty($_POST["maximum_poids"]))
         {
+            echo "<script> console.log('indife poidmax') ;</script>";
+
             $query .= "
              AND poidsMin >= '".$_POST["minimum_poids"]."' AND poidsMax <='".$_POST["maximum_poids"]."'
             ";
@@ -85,6 +90,33 @@ if(isset($_POST["action"]))
              AND moyenTransport IN('".$moyenTransport_filter."')
             ";
         }
+
+        if(isset($_POST["wilayadep"]) && !empty($_POST["wilayadep"] ) ) 
+        {
+            echo "<script> console.log('indife wilayadep') ;</script>";
+            $wilayadep_filter = trim($_POST["wilayadep"]);
+            $_POST['wilayadep'] = '' ;
+
+/*             $wilayadep_filter = implode("','", $_POST["searchwilayadep"]);
+ */            $query .= "
+             AND pointDepart IN('".$wilayadep_filter."')
+            ";
+        }
+
+        if(isset($_POST["wilayaarriv"]) && !empty($_POST["wilayaarriv"] ) ) 
+        {
+            echo "<script> console.log('indife wilayaarriv') ;</script>";
+            $wilayadep_filter = trim($_POST["wilayaarriv"]);
+            $_POST['wilayaarriv'] = '' ;
+
+
+/*             $wilayadep_filter = implode("','", $_POST["searchwilayaarriv"]);
+ */            $query .= "
+             AND pointArrivee IN('".$wilayadep_filter."')
+            ";
+        }
+
+        
        /*  if(isset($_POST["storage"]))
         {
             $storage_filter = implode("','", $_POST["storage"]);

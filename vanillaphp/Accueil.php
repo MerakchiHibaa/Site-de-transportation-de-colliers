@@ -2,6 +2,11 @@
  session_start() ; 
  /* if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
     / */
+
+    /* if(isset($_POST["searchwilayadep"]) || isset($_POST["searchwilayaarriv"])) {
+        echo filter_data();
+        return;
+    } */
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -177,12 +182,12 @@ else {
 </div>
 <section class="container"> 
 
-<div id="mainButton">
+<!-- <div id="mainButton"> -->
 
 
 
     
-    <div onclick="openForm()" class="btn-text"  >
+    <!-- <div onclick="openForm()" class="btn-text"  >
         <i class="fas fa-search"> </i>
     </div>
 
@@ -190,35 +195,11 @@ else {
 
     <div onclick="closeForm()" class="cancel-btn">
         <i class="fas fa-times"> </i>
-    </div>
+    </div> -->
 
 
 
-<div id="form-search" class="form search"> 
-    <form  action="POST" class=""> 
-   <div> 
-        <label class="custom-field recherche depart"> 
-            <input class="form__input" type="text"  required>
-            <span class="placeholder recherche"> Emplacement de départ </span>
-        </label>
-    </div>
-
-    <div> 
-
-    <label class="custom-field recherche arriver"> 
-        <input  class="form__input" type="text"  required>
-        <span class="placeholder recherche"> Emplacement d'arriver </span>
-
-    </label> 
-
-    </div>
-
-    <div>
-        <input id="rechercher" class="form__input" onclick="" type="submit" value="Rechercher">
-      </div>
-    </form>
-</div>
-</div>
+<!-- </div> -->
 
 
 </section>
@@ -242,6 +223,44 @@ else {
 
  <!--filters here points de départ, points d’arrivée, type de transport, poids, volume--->
  <div class="container-filter"> <!--container filtre + cards-->
+  
+
+ <div  > <!-- id="form-search"class="form search" -->
+    <form  method='post'  class="form-inline p-3" id="ajax-form" > <!--  ajax-form -->
+   <div> 
+        <label > <!-- custom-field recherche depart -->
+            <input  type="text" class="form-control form-control-lg rounded-0 border-info" placeholder="Emplacement de départ" value=""  id="searchwilayadep" name="searchwilayadep"> <!-- class="form__input" -->
+<!--             <span class="placeholder recherche"> Emplacement de départ </span>
+ -->        </label>
+    </div>
+
+    <div> 
+
+    <label > 
+        <input type="text" class="form-control" value='' placeholder="Emplacement d'arriver"   id="searchwilayaarriv" value='' name="searchwilayaarriv"> <!--  class="form__input"  -->
+<!--         <span class="placeholder recherche"> Emplacement d'arriver </span>
+ -->
+    </label> 
+
+    </div>
+
+    <div>
+        <input  class="btn btn btn-info "  type="submit" value=""> <!-- id="rechercher" -->
+      </div>
+    </form>
+</div>
+<div class="div col-md-5" >
+    <div class="div list-group" id="show-list">
+        <a href="#" class="list-group-item list-group-item-action"> list 1</a>
+    </div>
+</div>
+
+
+<!-- <div class="div col-md-5" style="position:relative; margin-top: 3rem; margin-left: 2rem; width: 45%;">
+    <div class="div list-group" id="show-list">
+        <a href="#" class="list-group-item list-group-item-action"> list 1</a>
+    </div>
+</div> -->
 
  <div class="filter" >    <!-- filtre float right-->
 
@@ -268,8 +287,8 @@ else {
                     <div style="height: 180px; overflow-y: auto; overflow-x: hidden;">
      <?php
      
-/* include './controllers/affichControl.php';
- */
+include './controllers/affichControl.php';
+$_controller = new affichControl();
 
 $result = $_controller->selectTypeTransport() ;
                    
@@ -385,6 +404,8 @@ $(document).ready(function(){
  */
         $('.filter_data').html('<div id="loading" style="" ></div>');
         var action = 'fetch_data';
+        var wilayadep ;
+        var wilayaarriv ;
         var minimum_poids = $('#hidden_minimum_poids').val();
         var maximum_poids = $('#hidden_maximum_poids').val();
         
@@ -393,8 +414,10 @@ $(document).ready(function(){
 
         var typeTransport = get_filter('typeTransport');
         var moyenTransport = get_filter('moyenTransport');
+        
 
-       
+/*     console.log("je suis dans default") ; 
+ */
         $.ajax({
             url:"fetch_data.php",
             method:"POST",
@@ -403,7 +426,93 @@ $(document).ready(function(){
                 $('.filter_data').html(data);
             }
         });
+
+        $('#ajax-form').on('submit', function() {
+
+   wilayadep = $('#searchwilayadep').val() ;
+    wilayaarriv = $('#searchwilayaarriv').val() ; 
+
+/*     console.log("je suis dans submit") ; 
+ */   /* 
+        }); */
+
+
+ if(wilayadep != '' ) {
+
+
+    if(wilayaarriv != '') {
+
+        console.log("je suis dans wilayadep wilayaarriv") ; 
+        console.log(wilayaarriv) ; 
+
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{action:action, wilayadep:wilayadep, wilayaarriv:wilayaarriv, minimum_poids:minimum_poids,  maximum_poids:maximum_poids, minimum_volume:minimum_volume, maximum_volume:maximum_volume, typeTransport:typeTransport, moyenTransport:moyenTransport},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
+        });
     }
+
+    $.ajax({
+
+            url:"fetch_data.php",
+            method:"POST",
+            data:{action:action, wilayadep:wilayadep, minimum_poids:minimum_poids,  maximum_poids:maximum_poids, minimum_volume:minimum_volume, maximum_volume:maximum_volume, typeTransport:typeTransport, moyenTransport:moyenTransport},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
+        });
+    }
+
+
+    else if(wilayaarriv != '') {
+        console.log("je suis dans wilayarriv wilayadep") ; 
+
+        if(wilayadep != '') { 
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{action:action, wilayadep:wilayadep, wilayaarriv:wilayaarriv, minimum_poids:minimum_poids,  maximum_poids:maximum_poids, minimum_volume:minimum_volume, maximum_volume:maximum_volume, typeTransport:typeTransport, moyenTransport:moyenTransport},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
+        });
+    }
+
+    $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{action:action,  wilayaarriv:wilayaarriv, minimum_poids:minimum_poids,  maximum_poids:maximum_poids, minimum_volume:minimum_volume, maximum_volume:maximum_volume, typeTransport:typeTransport, moyenTransport:moyenTransport},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
+        });
+
+    /* } ); */
+
+}
+
+
+
+
+return false; 
+
+});
+    
+/* 
+else {  
+
+    console.log("je suis dans default") ;  */
+
+
+
+
+    } 
+  /*   
+ }  */
+
 
     function get_filter(class_name)
     {
@@ -448,6 +557,13 @@ $(document).ready(function(){
     });
 
 });
+</script>
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+    
+
+})
 </script>
 
    <!--  <script  src="index.js"> </script>

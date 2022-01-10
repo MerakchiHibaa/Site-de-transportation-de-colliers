@@ -254,19 +254,21 @@
 
      
     $init = new affichControl;
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['type'])){
       switch($_POST['type']){
-  
           case 'updateAdmin':
               $init->updateUserByIdInfo($ID_user , $data);
               break;
           case 'loginAdmin':
               $init->loginAdmin();
               break;
+          
             
-         /*  default:
-          redirect("./index.php");*/
-      } 
+           default:
+/*           redirect("./index.php");
+ */      
+
+} 
     }
       
   else{
