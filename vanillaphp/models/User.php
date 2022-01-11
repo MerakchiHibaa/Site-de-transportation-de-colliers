@@ -174,11 +174,11 @@ class User {
  }
     
     public function addAnnonce($data) {
-        $this->db->query('INSERT INTO annonces (pointdepart,  pointarrivee, id_user, moyentransport, poidsmin, poidsmax, volumemin , volumemax , typetransport , latitudedepart , longitudedepart, latitudearrivee, longitudearrivee , creationDate ) 
-        VALUES (:pointdepart, :pointarrivee, :id_user, :moyentransport, :poidsmin, :poidsmax, :volumemin , :volumemax , :typetransport, :latitudedepart, :longitudedepart, :latitudearrivee, :longitudearrivee , now())');
+        $this->db->query('INSERT INTO annonces ( titreAnnonce, pointDepart,  pointArrivee, ID_User, moyenTransport, poidsMin, poidsMax, volumeMin , volumeMax , typeTransport , latitudedepart , longitudedepart, latitudearrivee, longitudearrivee , creationDate ) 
+        VALUES ( :titreAnnonce, :pointdepart, :pointarrivee, :id_user, :moyentransport, :poidsmin, :poidsmax, :volumemin , :volumemax , :typetransport, :latitudedepart, :longitudedepart, :latitudearrivee, :longitudearrivee , now())');
        
-
-        $this->db->bind(':id_user', $_SESSION['userID']);
+       $this->db->bind(':titreAnnonce', $data['titreAnnonce']);
+        $this->db->bind(':id_user', $data['id_user']);
         $this->db->bind(':latitudedepart', $data['latitudedepart']);
         $this->db->bind(':longitudedepart', $data['longitudedepart']);
         $this->db->bind(':latitudearrivee', $data['latitudearrivee']);
@@ -441,6 +441,8 @@ try {
       
               }
     }
+
+
     //Login user
     public function login($email, $password){
         $row = $this->findUserByEmail($email);
@@ -468,6 +470,25 @@ if($row == false) return false;
     }
 
 
+    public function annonceSuggestion($depart , $arrivee ){
+        $this->db->query(" 
+        SELECT TAB_1.ID_User FROM 
+      (SELECT * from user_wilaya
+  where ID_wilaya=:depart and type= 'depart' 
+   ) AS TAB_1, 
+      (SELECT 
+       * from user_wilaya
+  where ID_wilaya=:arrivee and type='arrivee') AS TAB_2
+      WHERE TAB_1.ID_User = TAB_2.ID_User
+  ") ;
+  $this->db->bind(':depart' , $depart) ; 
+  $this->db->bind(':arrivee' , $arrivee) ; 
+  return $this->db->resultSet() ;
+
+
+    
+
+    }
 
     //changer statut par admin
 

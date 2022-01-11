@@ -9,6 +9,13 @@ class affichModel {
         $this->db = new Database;
     }
 
+    public function selectAllNews() {
+        $this->db->query("SELECT * FROM news");
+        return $this->db->resultSet() ; 
+
+        
+
+    }
     
     public function selectAllReports() {
         $this->db->query("SELECT * FROM reports");
@@ -165,6 +172,12 @@ public function readNotification($ID_annonce, $ID_client, $ID_transporteur) {
   
 }
 
+public function getNewsInfoById($ID_news) {
+    $this->db->query("SELECT * FROM news WHERE ID_news = :ID_news LIMIT 1");
+
+    $this->db->bind(':ID_news', $ID_news);
+    return $this->db->resultSet() ; 
+}
 
 public function getUserInfoById($ID_user) {
    $this->db->query("SELECT * FROM users WHERE ID_user = :ID_user LIMIT 1");

@@ -28,6 +28,21 @@
             }
         }
 
+        public function setReport() {
+            if (isset($_POST['reportText']) && isset($_POST['ID_trajet']) )  { 
+                $ID_trajet = (int) $_POST['ID_trajet']  ; //
+                $reportText =  trim($_POST['reportText'] ) ;
+
+                $this->userModel->setReport($ID_trajet, $reportText )  ;
+
+
+
+
+            }
+
+
+        }
+
         public function setTrajet() {
             if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
                 echo "<h1> insiiide inisertDemandes </h1>";
@@ -49,10 +64,11 @@
       
 
         public function addAnnonce() {
+            echo "<script> console.log('insiiiide addanonce') ;  </script>" ;
             if (isset($_POST['addannonce'])) {
                 $data = [  //Init data
-
-                          
+                    'id_user' => trim($_POST['id_user']) ,
+                       'titreAnnonce' => trim($_POST['titreAnnonce']) ,   
                     'latitudedepart' => trim($_POST['latitudedepart']) ,
                     'longitudedepart' => trim($_POST['longitudedepart']) ,
                     'latitudearrivee' => trim($_POST['latitudearrivee']) ,
@@ -85,7 +101,7 @@
                     echo"<h1> annonce ajoutée <h1>" ;
                     
     
-                  /*   redirect("../profile.php"); */
+                     redirect("../annonces.php"); 
                 }else{
                     die("Il y'a une erreur...");
                 } 
@@ -583,6 +599,8 @@ if ($_POST['selectetat'] == '1') {
                 $init-> insertDemandes() ;  
             case 'trajet' : 
                 $init->setTrajet() ; 
+            case 'report' : 
+                $init-> setReport() ; 
 
 /*             default : redirect("../index.php");
  */        }

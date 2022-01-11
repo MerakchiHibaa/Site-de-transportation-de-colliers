@@ -109,8 +109,19 @@
 
         } */
 
+        public function selectAllNews() {
+          return $this->model->selectAllNews() ; 
+
+
+        }
          public function getAnnonceInfoById($ID_annonce) {
           return $this->model->getAnnonceInfoById($ID_annonce) ; 
+
+
+        }
+
+        public function getNewsInfoById($ID_news) {
+          return $this->model->getNewsInfoById($ID_news) ; 
 
 
         }
