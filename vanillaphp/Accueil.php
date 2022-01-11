@@ -433,7 +433,13 @@ $(document).ready(function(){
     wilayaarriv = $('#searchwilayaarriv').val() ; 
 
 /*     console.log("je suis dans submit") ; 
- */   /* 
+ */   /*  $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{action:action, wilayadep:wilayadep, wilayaarriv:wilayaarriv, minimum_poids:minimum_poids,  maximum_poids:maximum_poids, minimum_volume:minimum_volume, maximum_volume:maximum_volume, typeTransport:typeTransport, moyenTransport:moyenTransport},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
         }); */
 
 
@@ -484,7 +490,7 @@ $(document).ready(function(){
     $.ajax({
             url:"fetch_data.php",
             method:"POST",
-            data:{action:action,  wilayaarriv:wilayaarriv, minimum_poids:minimum_poids,  maximum_poids:maximum_poids, minimum_volume:minimum_volume, maximum_volume:maximum_volume, typeTransport:typeTransport, moyenTransport:moyenTransport},
+            data:{action:action,  wilayaarriv:wilayadep, minimum_poids:minimum_poids,  maximum_poids:maximum_poids, minimum_volume:minimum_volume, maximum_volume:maximum_volume, typeTransport:typeTransport, moyenTransport:moyenTransport},
             success:function(data){
                 $('.filter_data').html(data);
             }

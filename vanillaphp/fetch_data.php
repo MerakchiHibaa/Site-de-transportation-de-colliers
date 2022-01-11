@@ -53,12 +53,12 @@ case 'remove' :
 
 if(isset($_POST["action"]))
 {
-    echo "<script> console.log('insiiide action') ;</script>";
-
+/*     echo "<script> alert('insiiide action') ;</script>";
+ */
     if(isset($_POST["action"]))
     {
-        echo "<script> console.log('just above query') ;</script>";
-
+/*         echo "<script> alert('just above query') ;</script>";
+ */
         $query = "
             SELECT * FROM annonces WHERE archive = '0'
         ";
@@ -166,5 +166,9 @@ $_controller = new fetch_data_model() ;
         echo $output;
      } 
 
+
+    }
+    else {
+        echo '<h3> action is unset </h3>' ; 
 
     }

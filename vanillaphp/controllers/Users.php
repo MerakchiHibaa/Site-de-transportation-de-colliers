@@ -12,6 +12,9 @@
         }
 
 
+ 
+
+
         public function insertDemandes() {
             if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
              echo "<h1> insiiide inisertDemandes </h1>";
@@ -64,8 +67,10 @@
       
 
         public function addAnnonce() {
+            echo"<script> alert('addannonce function') ;</script>" ; 
+
             echo "<script> console.log('insiiiide addanonce') ;  </script>" ;
-            if (isset($_POST['addannonce'])) {
+       /*      if (isset($_POST['addannonce'])) { */
                 $data = [  //Init data
                     'id_user' => trim($_POST['id_user']) ,
                        'titreAnnonce' => trim($_POST['titreAnnonce']) ,   
@@ -86,6 +91,8 @@
                 if(floatval($_POST['volumemin']) > floatval($_POST['volumemax']) ) {
                     flash("addAnnonce", "le volume minimale ne peut pas etre plus grand que le volume maximal"); 
                     echo"<h1>le volume minimale ne peut pas etre plus grand que le volume maximal <h1>" ;
+                    echo"<script> alert(' vol min > vol max') ;</script>" ; 
+
                     redirect("../annonces.php");
 
 
@@ -93,19 +100,33 @@
                 if(floatval($_POST['poidsmin']) > floatval($_POST['poidsmax']) ) {
                     flash("addAnnonce", "le poids minimale ne peut pas etre plus grand que le poids maximal"); 
                     echo"<h1>le poids minimale ne peut pas etre plus grand que le poids maximal <h1>" ;
+                    echo"<script> alert('poids min > poids max ') ;</script>" ; 
+
                     redirect("../annonces.php");
 
                 }
 
                 if( $this->userModel->addAnnonce($data))  {
                     echo"<h1> annonce ajoutée <h1>" ;
+                    echo"<script> alert('annonce ajoutee') ;</script>" ; 
+
                     
     
-                     redirect("../annonces.php"); 
-                }else{
+/*                      redirect("../annonces.php"); 
+ */               /*  }else{
+    echo"<script> alert('il ya une errerur') ;</script>" ; 
+
                     die("Il y'a une erreur...");
-                } 
+
+                }  */
             }
+
+        }
+
+        public function annonceSuggestion($depart , $arrivee) {
+           return $this->userModel->annonceSuggestion($depart , $arrivee) ; 
+            
+
 
         }
 
@@ -566,13 +587,25 @@ if ($_POST['selectetat'] == '1') {
 
     $init = new Users;
 
-
+       
+     if(isset($_POST["ajaxaddannonce"]))
+    {
+        echo "<script> alert('insiiide action') ;</script>";
+    
+        if(isset($_POST["ajaxaddannonce"]))
+        {
+            $init-> addAnnonce(); 
+            echo "<script> alert('just above query') ;</script>";
+        }
+    }
+         
     
 
 
 
     //Ensure that user is sending a post request
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        echo"<script> alert('POST request') ;</script>" ; 
         switch($_POST['type']){
     
             case 'register':
@@ -585,6 +618,8 @@ if ($_POST['selectetat'] == '1') {
                 $init-> updateProfile() ;
                 break ;
             case 'addannonce': 
+                echo"<script> alert('addannonce') ;</script>" ; 
+
                 $init-> addAnnonce(); 
             case 'rate' : 
                 $init-> sendRate(); 

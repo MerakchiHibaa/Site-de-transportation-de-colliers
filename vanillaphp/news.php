@@ -23,6 +23,7 @@ $_controller = new affichControl(); ;
 
         
         $result =  $_controller->selectAllNews() ;
+        echo '<h1> this is before'.$result.' this is after </h1>' ;
         $output = '';
         if($result)
         {
