@@ -4,8 +4,10 @@ let droite = true ;
 
 
 setInterval(function() {
+    let radio =  document.getElementById('radio' + counter)  ; //
+    if (radio != NULL) { 
 
-    document.getElementById('radio' + counter).checked = true ; 
+        radio.checked = true ; 
     if(!droite && counter ==1) {
         droite =true ;
     }
@@ -25,6 +27,7 @@ setInterval(function() {
             droite= true ; 
         }
     }
+}
 
    
 } , 3000) ; 
@@ -114,7 +117,7 @@ function getCoordinatesDepart(){
             xmlHttp.onreadystatechange = function () {        // ready state event, will be executed once the server send back the data   
                 if (xmlHttp.readyState === XMLHttpRequest.DONE) {  
                     if (xmlHttp.status === 200) {  
-                        alert(xmlHttp.responseText);  
+                        console.log(xmlHttp.responseText);  
                     } else {  
                         alert('There was a problem with the request.');  
                     }  
@@ -160,7 +163,7 @@ function getCoordinatesArrivee(){
             xmlHttp2.onreadystatechange = function () {        // ready state event, will be executed once the server send back the data   
                 if (xmlHttp2.readyState === XMLHttpRequest.DONE) {  
                     if (xmlHttp2.status === 200) {  
-                        alert(xmlHttp2.responseText);  
+                        console.log(xmlHttp2.responseText);  
                     } else {  
                         alert('There was a problem with the request.');  
                     }  

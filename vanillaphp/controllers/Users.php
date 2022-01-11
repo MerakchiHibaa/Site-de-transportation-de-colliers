@@ -588,14 +588,12 @@ if ($_POST['selectetat'] == '1') {
     $init = new Users;
 
        
-     if(isset($_POST["ajaxaddannonce"]))
+     if(isset($_POST["ajaxAnnonce"]))
     {
-        echo "<script> alert('insiiide action') ;</script>";
     
         if(isset($_POST["ajaxaddannonce"]))
         {
-            $init-> addAnnonce(); 
-            echo "<script> alert('just above query') ;</script>";
+            $init->addAnnonce(); 
         }
     }
          
@@ -604,7 +602,7 @@ if ($_POST['selectetat'] == '1') {
 
 
     //Ensure that user is sending a post request
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['type'])){
         echo"<script> alert('POST request') ;</script>" ; 
         switch($_POST['type']){
     

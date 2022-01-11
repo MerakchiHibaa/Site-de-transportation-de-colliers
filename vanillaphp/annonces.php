@@ -36,9 +36,11 @@ session_start() ;
         <div class="error" style="background : red ; "> 
 
         </div>
-  <div id="ajax-success">
+  <div id="ajax-success"> </div>
+  <div id="formajax">
+          <h1> Ajouter une annonce :</h1>
 <form id="ajax-annonce" class="box" method="POST"  enctype="multipart/form-data">
- 
+
          
 
 <input class=""  type="hidden" id="id_user" name="id_user" value ="<?php echo $_SESSION['userID'] ; ?>">
@@ -102,10 +104,11 @@ session_start() ;
 
     </label>   
     
-    </div>
+    
   </form>
-
   </div>
+
+  
   <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
@@ -143,7 +146,7 @@ $('#ajax-annonce').on('submit', function() {
         console.log("je suis on submit ajaxAnnonce") ;
 
                   
-let ajaxaddannonce = 'addannonce';       
+let ajaxAnnonce = 'addannonce';       
 let  id_user  = $('#id_user').val();      
 let  titreAnnonce  = $('#titreAnnonce').val();      
 let latitudedepart = $('#latitudedepart').val();   
@@ -163,39 +166,37 @@ console.log(id_user) ;
 console.log(titreAnnonce) ; 
 console.log(latitudedepart) ; 
 console.log(volumemin) ; 
-alert(id_user) ; 
+/* alert(id_user) ; 
 alert(titreAnnonce) ; 
 alert(latitudedepart) ;
 alert(volumemin) ; 
 alert(volumemax) ; 
 alert(typetransport) ; 
-
+ */
 
 
 
                 $.ajax({
             url:"./controllers/Users.php",
             method:"POST",
-            data:{ajaxaddannonce:ajaxaddannonce, id_user:id_user, titreAnnonce, titreAnnonce, latitudedepart:latitudedepart, latitudearrivee:latitudearrivee, volumemin:volumemin, volumemax:volumemax , poidsmin:poidsmin , poidsmax:poidsmax, longitudedepart:longitudedepart, typetransport:typetransport, moyentransport:moyentransport ,pointdepart:pointdepart, pointarrivee:pointarrivee },
-            success:function(response){
-                    console.log(response) ; 
+            data:{ajaxAnnonce:ajaxAnnonce, id_user:id_user, titreAnnonce, titreAnnonce, latitudedepart:latitudedepart, latitudearrivee:latitudearrivee, volumemin:volumemin, volumemax:volumemax , poidsmin:poidsmin , poidsmax:poidsmax, longitudedepart:longitudedepart, typetransport:typetransport, moyentransport:moyentransport ,pointdepart:pointdepart, pointarrivee:pointarrivee },
+            success:function(data){
+                 
                 console.log('successs') ; 
-                alert('success') ; 
 
-                  /*   if(data!='ok') {
-                            console.log('successs') ; 
-/*                             $(".error").empty().append(data) ; 
-                    }
-                    else {
-/*                             $('#ajax-result').hide().append('successss ajax') ;
-                           console.log('error') ; 
 
-                    } */
+                $('#ajax-success').hide().append("Votre annonce sera publiée dés que les administrateurs la valident, voici quelques suggestions des transporteurs <div class='suggestions'> </div>" ).slideDown() ;
+                $('#formajax').slideUp() ;
+
+
+/*                 $('#ajax-success').html(data);
+ */                     
+                           
+                     
             }
         });
-        alert('before false') ;
-/*         return false ;
- */
+        return false ;
+
 
 
           }) ;
