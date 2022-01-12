@@ -74,6 +74,19 @@
     }
 
     
+    public function getCodeWilaya($wilaya) {
+      return $this->model->getCodeWilaya($wilaya) ;
+
+
+
+  }
+
+  public function annonceSuggestion($depart , $arrivee) {
+    return $this->model->annonceSuggestion($depart , $arrivee) ; 
+     
+
+
+ }
 
 
       

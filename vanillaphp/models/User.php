@@ -193,18 +193,30 @@ class User {
         $this->db->bind(':pointdepart', $data['pointdepart']);
 
 
+        $pointdepart = $data['pointdepart'] ; 
+        $pointarrivee = $data['pointarrivee'] ; 
 
+
+        $wilayad = $this->getCodeWilaya($pointdepart) ; 
+                foreach ($wilayad as $value){
+                        $wilayadep = $value['numwilaya'] ;
+
+                }
+        $wilayaa = $this->getCodeWilaya( $pointarrivee) ; 
+                foreach ($wilayaa as $value){
+                        $wilayarrivee = $value['numwilaya'] ;
+                }
+
+                $suggestions = $this->annonceSuggestion($wilayadep , $wilayarrivee) ; 
+            
 
        
 
          //Bind values
-      
+         $this->db->execute() ; 
+
         //Execute
-        if($this->db->execute()){
-            return true;
-        }else{
-            return false;
-        }
+           return $suggestions ; 
         
     }
 
@@ -470,6 +482,18 @@ if($row == false) return false;
     }
 
 
+   
+    public function getCodeWilaya($wilaya) {
+        $this->db->query("SELECT * from wilaya where wilaya=:wilaya");
+        $this->db->bind(':wilaya' , $wilaya) ; 
+        return $this->db->resultSet() ;
+
+
+
+
+
+    }
+
     public function annonceSuggestion($depart , $arrivee ){
         $this->db->query(" 
         SELECT TAB_1.ID_User FROM 
@@ -489,6 +513,10 @@ if($row == false) return false;
     
 
     }
+
+
+   
+    
 
     //changer statut par admin
 

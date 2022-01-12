@@ -36,6 +36,7 @@ session_start() ;
         <div class="error" style="background : red ; "> 
 
         </div>
+        <div id="result"></div>
   <div id="ajax-success"> </div>
   <div id="formajax">
           <h1> Ajouter une annonce :</h1>
@@ -162,31 +163,41 @@ let  moyentransport = $('#moyentransport').val();
 let  pointarrivee = $('#pointarrivee').val();   
 let pointdepart = $('#pointdepart').val();   
 
+
+
 console.log(id_user) ; 
 console.log(titreAnnonce) ; 
 console.log(latitudedepart) ; 
 console.log(volumemin) ; 
-/* alert(id_user) ; 
+ alert(id_user) ; 
 alert(titreAnnonce) ; 
-alert(latitudedepart) ;
-alert(volumemin) ; 
-alert(volumemax) ; 
-alert(typetransport) ; 
- */
+
 
 
 
                 $.ajax({
             url:"./controllers/Users.php",
             method:"POST",
-            data:{ajaxAnnonce:ajaxAnnonce, id_user:id_user, titreAnnonce, titreAnnonce, latitudedepart:latitudedepart, latitudearrivee:latitudearrivee, volumemin:volumemin, volumemax:volumemax , poidsmin:poidsmin , poidsmax:poidsmax, longitudedepart:longitudedepart, typetransport:typetransport, moyentransport:moyentransport ,pointdepart:pointdepart, pointarrivee:pointarrivee },
+            data:{ajaxAnnonce:ajaxAnnonce, id_user:id_user, titreAnnonce, titreAnnonce, latitudedepart:latitudedepart, latitudearrivee:latitudearrivee, volumemin:volumemin, volumemax:volumemax , poidsmin:poidsmin , poidsmax:poidsmax, longitudedepart:longitudedepart, longitudearrivee:longitudearrivee, typetransport:typetransport, moyentransport:moyentransport ,pointdepart:pointdepart, pointarrivee:pointarrivee },
             success:function(data){
-                 
-                console.log('successs') ; 
+                $('#result').html(data);
 
+                console.log("this iiiss data before "+data+"and afetr") ; 
+               
+              /*   $('#ajax-success').hide().append("Votre annonce sera publiée dés que les administrateurs la valident, voici quelques suggestions des transporteurs <div > </div>" ).slideDown() ;
+                $('#result').append(data);
 
-                $('#ajax-success').hide().append("Votre annonce sera publiée dés que les administrateurs la valident, voici quelques suggestions des transporteurs <div class='suggestions'> </div>" ).slideDown() ;
                 $('#formajax').slideUp() ;
+ */
+
+
+
+                          
+               
+/*                 $('#ajax-success').hide().append("Votre annonce sera publiée dés que les administrateurs la valident, voici quelques suggestions des transporteurs <div class='suggestions'> <?php ?> </div>" ).slideDown() ;
+                           */  
+
+
 
 
 /*                 $('#ajax-success').html(data);
@@ -195,6 +206,7 @@ alert(typetransport) ;
                      
             }
         });
+        alert("befoore false") ; 
         return false ;
 
 

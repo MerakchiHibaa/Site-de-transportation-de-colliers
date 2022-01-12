@@ -5,7 +5,7 @@
 
     class Users {
 
-        private $userModel;
+        public $userModel;
         
         public function __construct(){
             $this->userModel = new User;
@@ -105,12 +105,30 @@
                     redirect("../annonces.php");
 
                 }
+                $result = $this->userModel->addAnnonce($data) ; 
+                $output = '';
+        if($result)
+        {
+            foreach($result as $row)
+            {
+                $output .= '
+                <div class="col-sm-4 col-lg-3 col-md-3">
+                    <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
 
-                if( $this->userModel->addAnnonce($data))  {
-                    echo"<h1> annonce ajoutée <h1>" ;
-                    echo"<script> alert('annonce ajoutee') ;</script>" ; 
-
-                    
+                    <p align="center"><strong><a href="#">'. $row['ID_User'] .'</a></strong></p>
+                     </div>
+    
+                </div>
+                ';
+            }
+        }
+        
+        else
+        {
+            $output = '<h3>No Data Found</h3>';
+        }
+        echo $output;
+     
     
 /*                      redirect("../annonces.php"); 
  */               /*  }else{
@@ -119,16 +137,25 @@
                     die("Il y'a une erreur...");
 
                 }  */
-            }
-
-        }
-
-        public function annonceSuggestion($depart , $arrivee) {
-           return $this->userModel->annonceSuggestion($depart , $arrivee) ; 
             
 
-
         }
+
+         
+    public function getCodeWilaya($wilaya) {
+        return $this->userModel->getCodeWilaya($wilaya) ;
+  
+  
+  
+    }
+  
+    public function annonceSuggestion($depart , $arrivee) {
+      return $this->userModel->annonceSuggestion($depart , $arrivee) ; 
+       
+  
+  
+   }
+  
 
         public function updateProfile () {
 
@@ -518,6 +545,8 @@
           
           
     }
+
+  
     public function AnnonceChangeEtat() {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -591,9 +620,69 @@ if ($_POST['selectetat'] == '1') {
      if(isset($_POST["ajaxAnnonce"]))
     {
     
-        if(isset($_POST["ajaxaddannonce"]))
+        if(isset($_POST["ajaxAnnonce"]))
         {
-            $init->addAnnonce(); 
+            echo"<script> alert('addannonce function') ;</script>" ; 
+
+            echo "<script> console.log('insiiiide addanonce') ;  </script>" ;
+       /*      if (isset($_POST['addannonce'])) { */
+                $data = [  //Init data
+                    'id_user' => trim($_POST['id_user']) ,
+                       'titreAnnonce' => trim($_POST['titreAnnonce']) ,   
+                    'latitudedepart' => trim($_POST['latitudedepart']) ,
+                    'longitudedepart' => trim($_POST['longitudedepart']) ,
+                    'latitudearrivee' => trim($_POST['latitudearrivee']) ,
+                    'longitudearrivee' => trim($_POST['longitudearrivee']) ,
+                    'typetransport' => trim($_POST['typetransport']) ,
+                    'volumemin' => trim($_POST['volumemin'])  ,
+                    'volumemax' => trim($_POST['volumemax']) ,
+                    'poidsmin' => trim($_POST['poidsmin'])  ,
+                    'poidsmax' => trim($_POST['poidsmax']) ,
+                    'moyentransport' => trim($_POST['moyentransport']),
+                    'pointarrivee' => trim($_POST['pointarrivee']),
+                    'pointdepart' => trim($_POST['pointdepart']),
+
+                ];
+                if(floatval($_POST['volumemin']) > floatval($_POST['volumemax']) ) {
+                    flash("addAnnonce", "le volume minimale ne peut pas etre plus grand que le volume maximal"); 
+                    echo"<h1>le volume minimale ne peut pas etre plus grand que le volume maximal <h1>" ;
+                    echo"<script> alert(' vol min > vol max') ;</script>" ; 
+
+                    redirect("../annonces.php");
+
+
+                }
+                if(floatval($_POST['poidsmin']) > floatval($_POST['poidsmax']) ) {
+                    flash("addAnnonce", "le poids minimale ne peut pas etre plus grand que le poids maximal"); 
+                    echo"<h1>le poids minimale ne peut pas etre plus grand que le poids maximal <h1>" ;
+                    echo"<script> alert('poids min > poids max ') ;</script>" ; 
+
+                    redirect("../annonces.php");
+
+                }
+                $result = $init->userModel->addAnnonce($data) ; 
+                $output = '';
+        if($result)
+        {
+            foreach($result as $row)
+            {
+                $output .= '
+                <div class="col-sm-4 col-lg-3 col-md-3">
+                    <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
+
+                    <p align="center"><strong><a href="#">'. $row['ID_User'] .'</a></strong></p>
+                     </div>
+    
+                </div>
+                ';
+            }
+        }
+        
+        else
+        {
+            $output = '<h3>No Data Found</h3>';
+        }
+        echo $output;
         }
     }
          
@@ -615,10 +704,10 @@ if ($_POST['selectetat'] == '1') {
             case 'updateProfile':
                 $init-> updateProfile() ;
                 break ;
-            case 'addannonce': 
-                echo"<script> alert('addannonce') ;</script>" ; 
+            /* case 'addannonce': 
+                echo"<script> alert('addannonce') ;</script>" ;  */
 
-                $init-> addAnnonce(); 
+              /*   $init-> addAnnonce();  */
             case 'rate' : 
                 $init-> sendRate(); 
             case 'updateuseradmin':
@@ -638,15 +727,15 @@ if ($_POST['selectetat'] == '1') {
 /*             default : redirect("../index.php");
  */        }
         
-    }else{
+    }else if ($_SERVER['REQUEST_METHOD'] == 'GET'){
         switch($_GET['q']){
             //we add cases for get here
             case 'logout':
                 $init->logout();
                 break;
              default:
-            redirect("../index.php"); 
-        }
+/*             redirect("../index.php"); 
+ */        }
         
     }
 

@@ -32,6 +32,36 @@ class affichModel {
     
     
     }
+    public function getCodeWilaya($wilaya) {
+        $this->db->query("SELECT * from wilaya where wilaya=:wilaya");
+        $this->db->bind(':wilaya' , $wilaya) ; 
+        return $this->db->resultSet() ;
+
+
+
+
+
+    }
+
+    public function annonceSuggestion($depart , $arrivee ){
+        $this->db->query(" 
+        SELECT TAB_1.ID_User FROM 
+      (SELECT * from user_wilaya
+  where ID_wilaya=:depart and type= 'depart' 
+   ) AS TAB_1, 
+      (SELECT 
+       * from user_wilaya
+  where ID_wilaya=:arrivee and type='arrivee') AS TAB_2
+      WHERE TAB_1.ID_User = TAB_2.ID_User
+  ") ;
+  $this->db->bind(':depart' , $depart) ; 
+  $this->db->bind(':arrivee' , $arrivee) ; 
+  return $this->db->resultSet() ;
+
+
+    
+
+    }
 
     public function affichWilaya() {
 
