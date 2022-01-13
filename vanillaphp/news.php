@@ -23,7 +23,6 @@ $_controller = new affichControl(); ;
 
         
         $result =  $_controller->selectAllNews() ;
-        echo '<h1> this is before'.$result.' this is after </h1>' ;
         $output = '';
         if($result)
         {
@@ -34,8 +33,8 @@ $_controller = new affichControl(); ;
                     <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
 
                     <p align="center"><strong><a href="#">'. $row['article'] .'</a></strong></p>
-                    Type de transport : '. $row['contenu'] .' <br />
-                    <p>Point de départ : '. $row['creationDate'].' <br />
+                     '. $row['contenu'] .' <br />
+                    <p>Date de création : '. $row['creationDate'].' <br />
                         nombre de vues : '. $row['viewsNumber'] .' <br />
                        
                         <a href="newsDetail.php?id='.$row['ID_news'].'"> Voir en détail </a>

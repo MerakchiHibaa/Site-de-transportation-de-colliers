@@ -11,6 +11,11 @@
             $this->model = new affichModel;
         }
 
+        public function selectAllNews() {
+          return $this->model->selectAllNews() ; 
+
+
+        }
         public function reportFinished($ID_trajet) {
           return $this->model->reportFinished($ID_trajet) ; 
 
@@ -73,21 +78,7 @@
 
     }
 
-    
-    public function getCodeWilaya($wilaya) {
-      return $this->model->getCodeWilaya($wilaya) ;
-
-
-
-  }
-
-  public function annonceSuggestion($depart , $arrivee) {
-    return $this->model->annonceSuggestion($depart , $arrivee) ; 
-     
-
-
- }
-
+  
 
       
   
@@ -122,11 +113,7 @@
 
         } */
 
-        public function selectAllNews() {
-          return $this->model->selectAllNews() ; 
-
-
-        }
+       
          public function getAnnonceInfoById($ID_annonce) {
           return $this->model->getAnnonceInfoById($ID_annonce) ; 
 
