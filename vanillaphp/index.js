@@ -5,7 +5,7 @@ let droite = true ;
 
 setInterval(function() {
     let radio =  document.getElementById('radio' + counter)  ; //
-    if (radio != NULL) { 
+    if (radio != '') { 
 
         radio.checked = true ; 
     if(!droite && counter ==1) {

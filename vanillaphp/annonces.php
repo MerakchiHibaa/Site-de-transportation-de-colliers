@@ -25,9 +25,15 @@ session_start() ;
    
  
     <title>Annonce</title>
-    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  <script src="./index.js"> </script>
+
+  <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-ui.js"></script>
-     <script src="js/bootstrap.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
      
    <link rel="stylesheet" href="css/bootstrap.min.css">
      <link href = "css/jquery-ui.css" rel = "stylesheet">
@@ -110,17 +116,10 @@ session_start() ;
   </div>
 
   
-  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
-   <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
-   <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-   <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-  <script src="./index.js"> </script>
-
-  <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-     
   
-  <script type="text/javascript"> //
+  
+
+  <script type="text/javascript"> 
      $(document).ready(function() {
         console.log("je suis dans script") ;
 
@@ -180,15 +179,14 @@ alert(titreAnnonce) ;
             method:"POST",
             data:{ajaxAnnonce:ajaxAnnonce, id_user:id_user, titreAnnonce, titreAnnonce, latitudedepart:latitudedepart, latitudearrivee:latitudearrivee, volumemin:volumemin, volumemax:volumemax , poidsmin:poidsmin , poidsmax:poidsmax, longitudedepart:longitudedepart, longitudearrivee:longitudearrivee, typetransport:typetransport, moyentransport:moyentransport ,pointdepart:pointdepart, pointarrivee:pointarrivee },
             success:function(data){
-                $('#result').html(data);
-
-                console.log("this iiiss data before "+data+"and afetr") ; 
+/*                 $('#result').html(data);
+ */
                
-              /*   $('#ajax-success').hide().append("Votre annonce sera publiée dés que les administrateurs la valident, voici quelques suggestions des transporteurs <div > </div>" ).slideDown() ;
+                $('#ajax-success').hide().append("Votre annonce sera publiée dés que les administrateurs la valident, voici quelques suggestions des transporteurs <div > </div>" ).slideDown() ;
                 $('#result').append(data);
 
                 $('#formajax').slideUp() ;
- */
+ 
 
 
 

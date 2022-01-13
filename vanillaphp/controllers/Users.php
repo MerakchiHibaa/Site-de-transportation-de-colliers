@@ -111,11 +111,12 @@
         {
             foreach($result as $row)
             {
+                
                 $output .= '
                 <div class="col-sm-4 col-lg-3 col-md-3">
                     <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
 
-                    <p align="center"><strong><a href="#">'. $row['ID_User'] .'</a></strong></p>
+                    <p align="center"><strong><a href="#">'.$row['ID_User'].'</a></strong></p>
                      </div>
     
                 </div>
@@ -614,6 +615,37 @@ if ($_POST['selectetat'] == '1') {
 
 }
 
+/* 
+if($result)
+{
+    foreach($result as $row)
+    {
+        $info = $this->userModel->getUserInfoById($row['ID_User'] ) ; 
+        if($info) {
+            foreach($info as $value) {
+
+        $output .= '
+        <div class="col-sm-4 col-lg-3 col-md-3">
+            <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
+
+            <p align="center"><strong><a href="#">'. $value['nom'] .'</a></strong></p>
+            <p align="center"><strong><a href="#">'. $value['prenom'] .'</a></strong></p>
+            <p align="center"><strong><a href="#">'. $value['numero'] .'</a></strong></p>
+            <p align="center"><strong><a href="#">'. $value['email'] .'</a></strong></p>
+            <p align="center"><strong><a href="#">'. $value['type'] .'</a></strong></p>
+            <p align="center"><strong><a href="#">'. $value['certifie'] .'</a></strong></p>
+
+
+
+             </div>
+
+        </div>
+        ';
+    }
+}
+    }
+} */
+
     $init = new Users;
 
        
@@ -662,7 +694,12 @@ if ($_POST['selectetat'] == '1') {
                 }
                 $result = $init->userModel->addAnnonce($data) ; 
                 $output = '';
-        if($result)
+
+
+
+
+                
+        /* if($result)
         {
             foreach($result as $row)
             {
@@ -675,6 +712,42 @@ if ($_POST['selectetat'] == '1') {
     
                 </div>
                 ';
+            }
+        } */
+        if($result)
+        {
+            foreach($result as $row)
+            {
+                $info = $init->userModel->getUserInfoById($row['ID_User'] ) ; 
+                if($info) {
+                    foreach($info as $value) {
+                        $nom = $value['nom']  ;
+                        $prenom = $value['prenom']  ;
+                        $numero = $value['numero']  ;
+                        $email = $value['email']  ;
+                        $type = $value['type']  ;
+
+
+                   
+                $output .= '
+                <div class="col-sm-4 col-lg-3 col-md-3">
+                    <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
+        
+                    <p align="center"><strong><a href="#">'.$nom .'</a></strong></p>
+                    <p align="center"><strong><a href="#">'. $prenom.'</a></strong></p>
+                    <p align="center"><strong><a href="#">'. $numero .'</a></strong></p>
+                    <p align="center"><strong><a href="#">'. $email .'</a></strong></p>
+                    <p align="center"><strong><a href="#">'. $type .'</a></strong></p>
+        
+        
+        
+                     </div>
+        
+                </div>
+                ';
+            }
+        }
+           
             }
         }
         

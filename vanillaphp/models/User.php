@@ -52,6 +52,14 @@ class User {
          
     }
 
+    public function getUserInfoById($ID_user) {
+        $this->db->query("SELECT * FROM users WHERE ID_user = :ID_user LIMIT 1");
+     
+        $this->db->bind(':ID_user', $ID_user);
+        return $this->db->resultSet() ; 
+       
+     }
+
     public function setReport($ID_trajet, $reportText ){
         $this->db->query('SELECT * FROM trajets WHERE ID_trajet = :ID_trajet LIMIT 1');
         $this->db->bind(':ID_trajet', $ID_trajet);
@@ -195,6 +203,7 @@ class User {
 
         $pointdepart = $data['pointdepart'] ; 
         $pointarrivee = $data['pointarrivee'] ; 
+        $this->db->execute() ; 
 
 
         $wilayad = $this->getCodeWilaya($pointdepart) ; 
@@ -213,7 +222,6 @@ class User {
        
 
          //Bind values
-         $this->db->execute() ; 
 
         //Execute
            return $suggestions ; 
@@ -221,6 +229,7 @@ class User {
     }
 
 
+    
     //Register client
     public function registerClient($data){
         $this->db->query('INSERT INTO users (nom, prenom, numero, email, adresse, type, password) 
