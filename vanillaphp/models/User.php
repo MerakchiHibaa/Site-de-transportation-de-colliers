@@ -406,7 +406,7 @@ public function updateProfile($data) {
 
 
 
-public function insertDemandes($ID_annonce , $ID_client , $ID_transporteur) {
+public function insertDemandes($ID_annonce , $ID_client , $ID_transporteur , $price) {
 try {
     $this->db->query('INSERT INTO demandes (ID_annonce, ID_client, ID_transporteur, date) 
     VALUES (:ID_annonce, :ID_client, :ID_transporteur , :date)'); 
@@ -416,6 +416,12 @@ try {
      $this->db->bind(':date',  date('Y-m-d H:i:s') );
      $this->db->execute() ;
     /*  session_start() ;  */
+    $this->db->query('UPDATE annonces SET price=:price where ID_annonce=:ID_annonce') ; 
+    $this->db->bind(':ID_annonce', $ID_annonce);
+     $this->db->bind(':price', $price);
+     $this->db->execute() ;
+
+
 
      $_SESSION['msg'] = '<div class="alert alert-success">
                        <strong>Success!</strong> Votre demande a été envoyée.

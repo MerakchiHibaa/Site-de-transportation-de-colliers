@@ -41,6 +41,10 @@ public function getDemande($ID_annonce) {
           return $this->model->getUnreadDemandes($ID_user) ; 
 
        }
+       public function setViewsN($views ,  $ID_news) {
+        return $this->model->setViewsN($views ,  $ID_news) ; 
+
+      }
         public function setViews($views ,  $ID_annonce) {
           return $this->model->setViews($views ,  $ID_annonce) ; 
 
@@ -117,6 +121,8 @@ public function getDemande($ID_annonce) {
 
         } */
 
+
+       
        
          public function getAnnonceInfoById($ID_annonce) {
           return $this->model->getAnnonceInfoById($ID_annonce) ; 
@@ -246,6 +252,7 @@ public function getDemande($ID_annonce) {
 
     
   }
+  
   public function getAnnncesNumber(){
     return $this->model->getAnnncesNumber() ;
 

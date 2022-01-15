@@ -21,9 +21,10 @@
                 $ID_annonce = (int) $_POST['ID_annonce']  ; //
                 $ID_client = (int) $_POST['ID_client'] ; // client
                 $ID_transporteur = (int) $_POST['ID_transporteur'] ; // transport
+                $price = (float) $_POST['price'] ; //
                     
                
-                $this->userModel->insertDemandes($ID_annonce, $ID_client ,$ID_transporteur)  ;
+                $this->userModel->insertDemandes($ID_annonce, $ID_client ,$ID_transporteur , $price)  ;
                        redirect("../annonceDetail.php?id=$ID_annonce") ; 
 
                    
@@ -579,7 +580,7 @@ if ($_POST['selectetat'] == '1') {
             $rate = $_POST['star'];
             $user = $_POST['user'];
             $trajet = $_POST['trajet'];
-      return   $this->userModel->sendRate($rate, $user , $trajet) ;
+             $this->userModel->sendRate($rate, $user , $trajet) ;
 
 
 

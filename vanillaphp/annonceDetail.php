@@ -77,22 +77,28 @@ echo $_SESSION['msg'] ;
  <div class="col-xs-offset-2 col-xs-10">
 <button id="voirCarte"class="btn btn-info btn-lg">  <i class="fas fa-directions"  aria-hidden="true" onclick="calcRoute()" ></i></button>
  </div> 
- <?php if(isset($_SESSION['userType'] ) ) { 
-     if ($_SESSION['userType'] == 'client') { ?> <!-- disabled -->
-     <form method="post" action="./controllers/Users.php" > 
+ <form method="POST" action="./controllers/Users.php" > 
          <input type="hidden" name="type" value ="notif">
         
 
          <input type="hidden" name="ID_annonce" value="<?php echo $ID_annonce ?>"> 
          <input type="hidden" name="ID_transporteur" value="<?php echo $_SESSION['userID'] ?>"> 
          <input type="hidden" name="ID_client" value="<?php echo $getUinfo['ID_User'] ?>"> 
-         <button type="submit" name="send"class="ann-affich_cta" > Répondre à cette annonce </button>
+         <input type="hidden" name="price" id="price" value='0'>
 
-     </form>
+ <?php if(isset($_SESSION['userType'] ) ) { 
+     
+     if ($_SESSION['userType'] == 'client') { ?> <!-- disabled -->
+         </form>
+<!--          <input type="hidden" id="price" value=''>
+ -->
+
         
 <?php } else if($_SESSION['userType'] =='transporteur'){ ?> 
 
-        <button  class="ann-affich_cta"> Répondre à cette annonce </button>
+    <input type="submit" value="Répondre à cette annonce" name="send"class="ann-affich_cta " > </input>
+         </form>
+
 <?php } }?>
         </div> <!--ann-affich_post end-->
         </div> <!--ann-affich-->
@@ -109,13 +115,12 @@ echo $_SESSION['msg'] ;
          
  <form >
     <input type="hidden" id="from" class="form-control"  value="<?php echo $getUinfo['pointDepart'] ?>"> 
-<!--     <?php echo "<footer>".$getUinfo['pointDepart']." </footer>" ; ?>
- --><input type="hidden" id="to" class="form-control" value="<?php echo $getUinfo['pointArrivee'] ?>"  > 
+ <input type="hidden" id="to" class="form-control" value="<?php echo $getUinfo['pointArrivee'] ?>"  > 
 
  </form>  
- <form > 
+<!--  <form > 
      <input type="hidden" id="price" value=''>
- </form>
+ </form> -->
  
  
  <div class="container-map-output"> 
@@ -295,16 +300,18 @@ let distance = 0 ;
 directionService.route(request ,  (result, status) => { 
     if(status == google.maps.DirectionsStatus.OK){
         //get distance and time 
-        distance = parseFloat(result.routes[0].legs[0].distance.text) ;
+        distance =  parseFloat(result.routes[0].legs[0].distance.text) ;
         let price =  parseFloat(distance*0.4*41.5).toFixed(2) ;
         if(distance < 18) {
             price = 500 ; 
 
         }
+
       //nombre de kilomètres x consommation du véhicule au kilomètre x prix du carburant au litre
 
 let pricevalue = document.getElementById('price') ; 
 pricevalue.value = price ; 
+console.log(pricevalue.value) ;
         const output = document.getElementById("output") ; 
         output.innerHTML = "<h4  style='margin: 2rem; font-size:1.5rem;' > De : " + document.getElementById('from').value + " à: " + document.getElementById('to').value + ".<br /> Distance en voiture <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + ". <br /> Le tarif est : "+price+" DA.</h4>" ;
      console.log(document.getElementById('from').value + ".<br /> To: " + document.getElementById('to').value + ".<br /> Driving distance <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Duration: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + " et le tarif est : "+price+".</h3>") ;

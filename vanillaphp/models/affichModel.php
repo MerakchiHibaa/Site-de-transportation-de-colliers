@@ -400,6 +400,18 @@ public function getUsersNumber(){
 
   }
 
+  public function setViewsN($views , $ID_news){
+    $this->db->query("UPDATE news SET
+    viewsNumber =:viewsNumber
+    where ID_news =:ID_news;
+    ");
+            $this->db->bind(':viewsNumber', $views  );
+            $this->db->bind(':ID_news', $ID_news);
+
+    return  $this->db->execute() ;
+
+  }
+
 
   public function setViews($views , $ID_annonce){
     $this->db->query("UPDATE annonces SET

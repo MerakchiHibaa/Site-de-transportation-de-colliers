@@ -60,7 +60,7 @@ if(isset($_POST["action"]))
 /*         echo "<script> alert('just above query') ;</script>";
  */
         $query = "
-            SELECT * FROM annonces WHERE archive = '0'
+            SELECT * FROM annonces WHERE archive = '0' AND etat='valide'
         ";
         if(isset($_POST["minimum_poids"], $_POST["maximum_poids"]) && !empty($_POST["minimum_poids"]) && !empty($_POST["maximum_poids"]))
         {
