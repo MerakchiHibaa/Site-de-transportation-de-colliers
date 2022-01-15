@@ -58,7 +58,7 @@ $result = $_controller->getDemande($ID_annonce) ;
         <tr>
           <td>
          <div> 
-              <img src="./assets/slider3.jpg" class="bg-info rounded-circle" width="7%" style="height: 4rem ;" alt="Cinque Terre">
+              <img src="./assets/slider3.jpg" class="bg-info rounded-circle" width="70rem" style="height: 4rem ;" alt="Cinque Terre">
 
                     <span class="fw-bold mb-1"> <?php echo $user['nom']." ".$user['prenom']?></span>
                     
@@ -72,10 +72,18 @@ $result = $_controller->getDemande($ID_annonce) ;
 
 
       <?php } ?>
-         <p class="fw-bold mb-1"> <i class="fas fa-star"></i>  <?php echo $user['note']?></p>
+         <p class="fw-bold mb-1"> <i class="fas fa-star"></i>  <?php 
+         if($user['viewersNumber'] == "0") { 
+             echo $user['note'] ; 
+         }
+         else { 
 
-          <p class="fw-bold mb-1"> <?php echo $user['numero']?></p>
-          <p class="fw-bold mb-1"> <?php echo $user['email']?></p>
+         
+         echo $user['note']/$user['viewersNumber']  ;
+         }?></p>
+
+          <p class="fw-bold mb-1"> <?php echo "Numéro de téléphone :". $user['numero']?></p>
+          <p class="fw-bold mb-1"> <?php echo "Email :". $user['email']?></p>
 
 
           </td>
