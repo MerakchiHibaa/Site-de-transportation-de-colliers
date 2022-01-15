@@ -468,11 +468,7 @@
       
     }
 
-    public function sendRate() {
-        
-
-    }
-
+   
     public function logout(){
         unset($_SESSION['userID']);
         unset($_SESSION['userEmail']);
@@ -576,6 +572,22 @@ if ($_POST['selectetat'] == '1') {
     }
    
    
+    public function sendRate() {
+        echo"<script> alert('Rate') ;  </script>" ;
+/*         !empty($_POST['star'])  && 
+ */        if(!empty($_POST['user'])  && !empty($_POST['trajet']) ) {
+            $rate = $_POST['star'];
+            $user = $_POST['user'];
+            $trajet = $_POST['trajet'];
+      return   $this->userModel->sendRate($rate, $user , $trajet) ;
+
+
+
+
+        }
+        
+
+    }
 
 
     public function userChangeStatut(){
@@ -782,20 +794,20 @@ if($result)
 
               /*   $init-> addAnnonce();  */
             case 'rate' : 
-                $init-> sendRate(); 
+                $init->sendRate(); 
             case 'updateuseradmin':
                 $init->updateUserAdmin() ;  
             case 'changestatut': 
 /*                 $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['changestatut']);
  */                $init->userChangeStatut() ; 
             case 'changeetat': 
-                $init-> AnnonceChangeEtat() ;
+                $init->AnnonceChangeEtat() ;
             case 'notif' : 
-                $init-> insertDemandes() ;  
+                $init->insertDemandes() ;  
             case 'trajet' : 
                 $init->setTrajet() ; 
             case 'report' : 
-                $init-> setReport() ; 
+                $init->setReport() ; 
 
 /*             default : redirect("../index.php");
  */        }

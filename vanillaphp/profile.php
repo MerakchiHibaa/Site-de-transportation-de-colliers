@@ -427,13 +427,13 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
 
            
 
-      <a href="rate.php?id=<?php echo $value['ID_trajet'] ;?>" class="btn btn-warning btn-sm 
-      <?php if ($value['note']== '0' ) { ?> " <?php } else { echo "disabled"; echo '"' ; }?> > <i class="fas fa-star"> </i> Noter </a>
+      <a href="rate.php?id=<?php echo $value['ID_transporteur'] ;?>&idtr=<?php echo $value['ID_trajet'] ;?>" class="btn btn-warning btn-sm 
+      <?php if ($value['note']== '4' ) { ?> " <?php } else { echo "disabled"; echo '"' ; }?> > <i class="fas fa-star"> </i> Noter </a>
 
                
 
 
-      <a href="report.php?id=<?php echo $value['ID_trajet'] ;?>" class="btn btn-danger btn-sm ">       <i class="fas fa-exclamation-triangle"></i> 
+      <a href="report.php?id=<?php echo $value['ID_trajet'] ;?>&idsd=<?php echo $value['ID_transporteur'] ;?>&ids=<?php echo $_SESSION['userID'] ;?>" class="btn btn-danger btn-sm ">       <i class="fas fa-exclamation-triangle"></i> 
   Signaler cet utilisateur </a>
 
            

@@ -7,9 +7,39 @@ class User {
 
     public function __construct(){
         $this->db = new Database;
-        
+        $this->dbb = new Database;
+
     }
 
+    public function sendRate($rate , $user , $trajet) {
+        echo"<script> alert('inside rate model') ;  </script>" ;
+
+        $this->db->query('UPDATE trajets SET
+        note=:note
+        WHERE ID_trajet = :ID_trajet');
+             $this->db->bind(':note', $rate);
+             $this->db->bind(':ID_trajet', $trajet);
+            if( $this->db->execute() ){
+                echo"<script> alert('first execute') ;  </script>" ;
+            }
+            else {
+                echo"<script> alert('first execute didnt work') ;  </script>" ;
+     }
+            $this->dbb->query('UPDATE users SET
+            note=note+:note, viewersNumber=viewersNumber+1 
+            WHERE ID_user = :ID_user');
+            $this->dbb->bind(':note', $rate);
+            $this->dbb->bind(':ID_user', $user);
+        if( $this->dbb->execute()) {
+            echo"<script> alert('second execute') ;  </script>" ;
+
+            return true ; 
+        }
+        return false ; 
+
+
+
+    }
     public function setTrajet($ID_annonce, $ID_client ,$ID_transporteur) {
        
             $this->db->query('INSERT INTO trajets (ID_annonce, ID_client, ID_transporteur, creationDate) 

@@ -138,7 +138,8 @@ input:checked ~ .form-rate {
 
 }
 
-.form-rate .btn-rate button {
+#button-rate{
+    display: block;
     height: 100%;
     width: 100%;
     border: 1px solid #444;
@@ -152,7 +153,7 @@ input:checked ~ .form-rate {
     transition: all 0.3 ease;
 }
 
-.form-rate .btn-rate button:hover {
+#button-rate:hover {
      background: #1b1b1b;
 
 }
