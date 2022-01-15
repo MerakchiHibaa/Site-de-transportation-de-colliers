@@ -52,6 +52,7 @@ if (isset($_GET['signalFinished'])) {
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="assetss/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
@@ -59,11 +60,76 @@ if (isset($_GET['signalFinished'])) {
     <!-- MDB -->
     <link rel="stylesheet" href="./bootstrapDesign/css/mdb.min.css" />
 <!--     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
- -->
+ --> 
  
     <title>Profile</title>
 </head>
 <body>
+
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                alt="Avatar"
+                class="img-fluid my-5"
+                style="width: 80px;"
+              />
+              <h5 style="color: black ;" >Marie Horwitz</h5>
+              <p style="color: black ;">Web Designer</p>
+              <i style="color: black ;" class="far fa-edit mb-5"></i>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted">info@example.com</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Phone</h6>
+                    <p class="text-muted">123 456 789</p>
+                  </div>
+                </div>
+               <!--  <h6>Projects</h6> -->
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Wilayas de départ</h6>
+                    <select class="form-control"> 
+
+                    </select>
+                    <p class="text-muted">Lorem ipsum</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Wilayas d'arrivée</h6>
+                    <select class="form-control"> 
+                      
+                    </select>
+                    <p class="text-muted">Dolor sit amet</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-start">
+                  <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
 <div class="form-container"> 
 <div class="row-profile"> 
@@ -181,7 +247,7 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
               if ($result) {   ?>
                    
 <div class="container my-5">
-  <div class="shadow-4 rounded-5 overflow-hidden">
+  <div class="shadow-4 rounded-5 ">
     <table class="table align-middle mb-0 bg-white">
       <thead class="bg-light">
         <tr>
@@ -334,7 +400,7 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
                if ($result) {   ?>
                     
  <div class="container my-5">
-   <div class="shadow-4 rounded-5 overflow-hidden">
+   <div class="shadow-4 rounded-5">
      <table class="table align-middle mb-0 bg-white">
        <thead class="bg-light">
          <tr>
