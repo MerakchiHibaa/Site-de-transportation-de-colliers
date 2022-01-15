@@ -41,9 +41,6 @@ if (isset($_GET['signalFinished'])) {
 }
 
 
-
-
-
 ?> 
 
 <!DOCTYPE html>
@@ -272,7 +269,19 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
 
             <td>
               <div class="ms-3">
-                <p class="text-muted mb-0">  <?php echo "Réponses"; ?></p>
+              <a
+                <?php 
+                if($value['statut'] =="0") { ?>
+
+
+               
+                href= "annonceResponders.php?ida=<?php echo $value['ID_annonce'];?>"  > Voir qui a répondu à votre annonce </a> 
+                <?php } else { ?>
+                  class="text-muted mb-0" > Pas de réponse </a> 
+                  <?php
+                  
+                } ?>
+                
               </div>
           </td>
 

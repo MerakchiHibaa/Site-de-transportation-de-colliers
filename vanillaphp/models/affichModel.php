@@ -16,6 +16,10 @@ class affichModel {
         
 
     }
+    public function getDemande($ID_annonce) {
+        $this->db->query("SELECT * FROM demandes where ID_annonce = '$ID_annonce' ") ; 
+    return $this->db->resultSet() ;
+    }
     
     public function selectAllReports() {
         $this->db->query("SELECT * FROM reports");

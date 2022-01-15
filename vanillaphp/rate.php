@@ -15,6 +15,8 @@
             
         </div>
         <div class="star-widget">
+        <input type="hidden" name="star" id="star" ><!--  change its value selon rate -->
+
             <input type="radio" name="rate" id="rate-5">
             <label for="rate-5" class="fas fa-star"></label>
 
@@ -35,7 +37,9 @@
                 <header> </header>
                 <div class="textarea-rate">
                     <input type="hidden" name="type" value="rate">
-                    <input type="hidden" name="star" >
+                    <input type="hidden" name="star" <?php 
+                    
+                    ?> >
                     <textarea name="avis" id="" cols="30" placeholder="Que pensez-vous de cette expérience? " ></textarea>
                 </div>
                 <div class="btn-rate">

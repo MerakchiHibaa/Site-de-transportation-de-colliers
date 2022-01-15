@@ -25,11 +25,11 @@ if (isset($_GET['id'])) {
             <input type="hidden" name="ID_trajet" value="<?php echo $ID_trajet ?>">
 
 
-            <textarea name="" id="report" rows="" cols="30"  placeholder="Pourquoi souhaitez-vous signaler cet utilisateur ?" required>  </textarea>
+            <textarea name="reportText" id="report" rows="" cols="30"  placeholder="Pourquoi souhaitez-vous signaler cet utilisateur ?" required>  </textarea>
         
-            <input type="submit" name="report" value="Envoyer" id="submitreport" >
-
-        </form>
+            <input type="submit" onclick="" name="report" value="Envoyer" id="submitreport" >
+<!-- un message comme quoi on va voir et tt 
+ -->        </form>
 
     </div>
 

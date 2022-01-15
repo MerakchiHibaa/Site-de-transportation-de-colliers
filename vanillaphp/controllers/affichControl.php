@@ -31,7 +31,11 @@
           return $this->model->readNotification($ID_annonce, $ID_client, $ID_transporteur) ; 
 
         }
+public function getDemande($ID_annonce) {
+  return $this->model->getDemande($ID_annonce) ; 
 
+
+}
         
         public function getUnreadDemandes($ID_user) {
           return $this->model->getUnreadDemandes($ID_user) ; 

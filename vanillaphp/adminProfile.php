@@ -13,13 +13,24 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>PHP CRUD User Management</title>
+    <title>Espace admin</title>
     <link rel="stylesheet" href="assetss/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="assetss/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="assetss/style.css">
   </head>
   <body>
+ 
+  <div>
+    <p> hibaaaaaaaaa</p>
+    <b-avatar badge> </b-avatar>
+    <b-avatar badge badge-variant="danger" src="https://placekitten.com/300/300"></b-avatar>
+    <b-avatar badge badge-variant="warning" icon="people-fill"></b-avatar>
+    <b-avatar badge badge-variant="success" src="https://placekitten.com/300/300"></b-avatar>
+    <b-avatar badge badge-variant="dark" text="BV"></b-avatar>
+    <b-avatar square badge badge-variant="dark" text="BV"></b-avatar>
+  </div>
+
 
   <?php
 

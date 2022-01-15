@@ -56,7 +56,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 <?php 
-include "./controllers/affichControl.php"  ; 
+include_once "./controllers/affichControl.php"  ; 
 $_controller = new affichControl();
 $demandes = $_controller->getUnreadDemandes($_SESSION['userID']) ; 
 if ($demandes) {
@@ -287,7 +287,7 @@ else {
                     <div style="height: 180px; overflow-y: auto; overflow-x: hidden;">
      <?php
      
-include './controllers/affichControl.php';
+include_once './controllers/affichControl.php';
 $_controller = new affichControl();
 
 $result = $_controller->selectTypeTransport() ;
