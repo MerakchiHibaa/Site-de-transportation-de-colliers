@@ -338,12 +338,16 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
      <table class="table align-middle mb-0 bg-white">
        <thead class="bg-light">
          <tr>
-           <th>Numéro de transaction </th>
-           <th>Transporteur</th>
-           <th>Titre de l'anonce </th>
-           <th>Date </th>
-           <th>Note </th>  
-           <th>Actions </th> 
+           <th width="2%">Numéro de transaction </th>
+           <th width="15%">Transporteur</th>
+           <th width="7%">Titre de l'anonce </th>
+           <th width="15%">Date </th>
+           <th width="15%">Note </th>  
+           <?php if($_SESSION['userType'] == 'transporteur') { ?>
+             <th>Gains </th> 
+
+         <?php  } ?>
+           <th width="20%">Actions </th> 
 
            
                 
@@ -411,7 +415,24 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
                </div>
              </div>
            </td>
+<!---Gains--->
+<?php
+if($_SESSION['userType'] == 'transporteur') { ?>
+  <td>
+             <div class="d-flex align-items-center">
+               
+               <div class="ms-3">
+               <p class="fw-primary mb-1"><?php echo "Prix :".$value['price'] ?></p>
+               <p class="fw-primary mb-1"><?php echo "Gain net :" .$value['price']*(1-0.3) ?></p>
+               <p class="fw-primary mb-1"><?php echo "Le site prend 30% :" .$value['price']*0.3 ?></p>
 
+
+               </div>
+             </div>
+           </td>
+
+
+<?php }?>
                     <!---actions---->
 
                     <td>
@@ -428,7 +449,7 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
            
 
       <a href="rate.php?id=<?php echo $value['ID_transporteur'] ;?>&idtr=<?php echo $value['ID_trajet'] ;?>" class="btn btn-warning btn-sm 
-      <?php if ($value['note']== '4' ) { ?> " <?php } else { echo "disabled"; echo '"' ; }?> > <i class="fas fa-star"> </i> Noter </a>
+      <?php if ($value['note']== '0' ) { ?> " <?php } else { echo "disabled"; echo '"' ; }?> > <i class="fas fa-star"> </i> Noter </a>
 
                
 

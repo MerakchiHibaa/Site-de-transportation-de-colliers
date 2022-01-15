@@ -40,15 +40,31 @@ class User {
 
 
     }
+
+    public function getAnnonceInfoById($ID_annonce) {
+        $this->db->query("SELECT * FROM annonces WHERE ID_annonce = :ID_annonce LIMIT 1");
+    
+       $this->db->bind(':ID_annonce', $ID_annonce);
+       return $this->db->resultSet() ; 
+    
+    } 
     public function setTrajet($ID_annonce, $ID_client ,$ID_transporteur) {
-       
-            $this->db->query('INSERT INTO trajets (ID_annonce, ID_client, ID_transporteur, creationDate) 
-            VALUES (:ID_annonce, :ID_client, :ID_transporteur , :date)'); 
+       $price = 0 ; 
+       $annonce = $this->getAnnonceInfoById($ID_annonce) ; 
+       foreach($annonce as $value) {
+           $price = $value['price'];
+       }
+
+            $this->db->query('INSERT INTO trajets (ID_annonce, ID_client, ID_transporteur, creationDate , price) 
+            VALUES (:ID_annonce, :ID_client, :ID_transporteur , :date , :price)'); 
              $this->db->bind(':ID_annonce', $ID_annonce);
              $this->db->bind(':ID_client', $ID_client);
              $this->db->bind(':ID_transporteur', $ID_transporteur);
+             $this->db->bind(':price', $price);
              $this->db->bind(':date',  date('Y-m-d H:i:s') );
              $this->db->execute() ;
+
+            
         
              $this->db->query('delete from demandes where ID_client=:ID_client and ID_annonce =:ID_annonce');
              $this->db->bind(':ID_annonce', $ID_annonce);
