@@ -79,8 +79,15 @@ if (isset($_GET['signalFinished'])) {
                 class="img-fluid my-5"
                 style="width: 80px;"
               />
-              <h5 style="color: black ;" ><?php echo $_SESSION['userNom']." ". $_SESSION['userPrenom'] ;?> </h5>
+              <h5 style="color: black ; text-transform:uppercase; " ><?php echo $_SESSION['userNom']." ". $_SESSION['userPrenom'] ;?> </h5>
               <p style="color: black ;"><?php echo $_SESSION['userType']?></p> 
+              <?php if($_SESSION['userViewersNumber'] =='0') { ?>
+                <h5 style="color: black ;" > On ne vous a pas encore noté </h5>
+
+            <?php  } else { ?>
+            <p style="color: #ffff00 ; font-weight:800;">   <i class="fas fa-star"></i> <?php echo $_SESSION['userNote']/$_SESSION['userViewersNumber']."/5"; ?> </p>
+
+          <?php  } ?>
               <?php if(isset($_SESSION['userCertifie'])){
                 if($_SESSION['userCertifie'] == '0') {?>
                 
@@ -91,11 +98,11 @@ if (isset($_GET['signalFinished'])) {
               <p class="badge badge-warning rounded-pill"> Non certifié.e <br></p>
              
           <?php  }} ?>
-        <a href="#">      <i style="color: black ; margin-top: 60px ; font-size: 2.5rem;" class="far fa-edit mb-5"></i>  </a> 
+        <a href="./updateProfileUser.php?id=<?php echo $_SESSION['userID']  ?>">      <i style="color: black ; margin-top: 40px ; font-size: 2.5rem;" class="far fa-edit mb-5"></i>  </a> 
             </div>
             <div class="col-md-8">
               <div class="card-body p-4">
-                <h6>Information</h6>
+                <h6>Informations</h6>
                 <hr class="mt-0 mb-4">
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
@@ -183,7 +190,7 @@ break ;
                 </div>
             <?php  } ?>
                 <div class="d-flex justify-content-start">
-                  <a href="#!"><i class="fas fa-map-marker-alt" style="cursor: pointer ; margin-right : 10px ;"></i> <span class=""> <?php echo $_SESSION['userAdresse']?> </span></a>
+                  <a href="#" style="text-transform:uppercase; color:black ;"><i class="fas fa-map-marker-alt" style="cursor: pointer ; margin-right : 10px ;  "></i> <span class=""> <?php echo $_SESSION['userAdresse']?> </span></a>
                   <!-- <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
                   <a href="#!"><i class="fab fa-instagram fa-lg"></i></a> -->
                 </div>
@@ -198,104 +205,9 @@ break ;
 
 
 
-<div class="form-container"> 
-<div class="row-profile"> 
-<div class="form-div">  <!-- col-4 offset-md-4 form-div -->
-
-<form class="box" action="./controllers/Users.php" method="POST" enctype="multipart/form-data">
- <div id="form-profile-div"> 
-      <h1 class="text-center" style="text-align: center;" >Modifier votre profile</h1> <!-- class="text-center" style="text-align: center;" -->
-     <div > <!-- class="form-group" -->
-       <?php if(!empty($msg)) { ?>
-         <div class="alert <?php echo $css_class ;?>">
-         <?php echo $msg ; ?>
-         </div>
-
-         <?php  } ?>
-         <div class="profile-img">
-<img src="./usersImages/<?php echo $_SESSION['userPhoto'] ; ?>" onclick="triggerClick()" id="profileDisplay" alt="" width="10%" style=" display: block;
-            margin: 10px auto;
-            border-radius: 50% ;
-">
-</div>
-     <label for="profileImage"  style="
-    justify-content: center;
-    justify-self: center;
-    justify-items: center;
-    display: flex;
- ;" > Photo de profil</label>
-     <input type="file" name="newprofileImage" onchange="displayImage(this)" id="profileImage" class="form_control"  style="display: none;">
-    </div>
-     
-      <input class=""  type="hidden" name="type" value ="updateProfile">
-    
-      <label class=""> 
-      <input class=""  type="text" class="box-input" name="newnom" 
-    placeholder="<?php echo $_SESSION['userNom'] ;?>"  />
-            <span class="placeholder ">Entrez un nouveau nom</span>
-
-    </label> 
-
-    <label class=""> 
-      <input class=""  type="text" class="box-input" name="newprenom" 
-    placeholder="<?php echo $_SESSION['userPrenom'] ;?>"  />
-            <span class="placeholder"> Entrez votre prénom </span>
-
-    </label> 
-
-
-    <label class=""> 
-    <input class=""  type="email" class="box-input" name="newemail" 
-    placeholder="<?php echo $_SESSION['userEmail'] ;?>"  />
-            <span class="placeholder "> Entrez votre email </span>
-
-    </label> 
-    <label class=""> 
-    <input class=""  type="text" class="box-input" name="newnumero" 
-    placeholder="<?php echo $_SESSION['userNumero'] ;?>"  />
-            <span class="placeholder "> Entrez votre numéro de téléphone </span>
-
-    </label> 
-
-
-    <label class=""> 
-    <input class=""  type="text" class="box-input" name="newadresse" 
-    placeholder="<?php echo $_SESSION['userAdresse'] ;?>"  /><span class="placeholder"> Entrez votre adresse </span>
-
-    </label> 
-
-
-    <label class=""> 
-    <input class=""  type="password" class="box-input" name="newpassword" 
-    placeholder=""  />
-    <span class="placeholder"> Entrez un nouveau mot de passe </span>
-
-    </label> 
-
-
-    <label class=""> 
-    <input class=""  type="password" class="box-input" name="newpasswordrepeat" 
-    placeholder=""  />  
-      <span class="placeholder"> Confirmez le nouveau mot de passe </span>
-
-    </label> 
-
-    <label class=""> 
-    <input class=""  type="submit" name="updateProfile" 
-    value="Modifier" class="box-button" />
-  
-
-    </label>   
-    
-    </div>
-  </form>
-
-  </div>
-  </div>
-  </div>
  
   <div class="historique"> 
-  <h1> <i class="fa fa-history" aria-hidden="true"></i>
+  <h1 style="margin-left: 7rem ; margin-top: 3.5rem ; font-size: 2.5rem ;"> <i  style="margin: 0 15px ;" class="fa fa-history" aria-hidden="true"></i>
  Mon historique d'annonces : </h1>
 
   <!--tryy begin-->
@@ -318,7 +230,7 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
     <table class="table align-middle mb-0 bg-white">
       <thead class="bg-light">
         <tr>
-          <th>Titre d'annonce </th>
+          <th>Titre  </th>
           <th>Point de départ et d'arrivée</th>
           <th>Type de transport</th>
           <th>Poids entre </th> 
@@ -425,10 +337,10 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
             <a  class="btn btn-success btn-sm <?php  if( $value['statut'] == '1' )  {
   echo "disabled";
 } ?>
-" href="?modifan=<?php echo $value['ID_annonce'];?>"> <i class="fas fa-edit"></i> Modifier </a>
+" href="?modifan=<?php echo $value['ID_annonce'];?>"> <i class="fas fa-edit"></i>  </a>
 
 
- <a onclick="return confirm('Vous voulez vraiment supprimer cette annonce ?')" class="btn btn-danger btn-sm " href="?suppriman=<?php echo $value['ID_annonce'];?>"> <i class="fas fa-trash-alt"></i> Supprimer</a>
+ <a onclick="return confirm('Vous voulez vraiment supprimer cette annonce ?')" class="btn btn-danger btn-sm " href="?suppriman=<?php echo $value['ID_annonce'];?>"> <i class="fas fa-trash-alt"></i> </a>
   
 
 
@@ -454,10 +366,9 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
 
   <?php } ?>
 
-  <h1> <i class="fa fa-history" aria-hidden="true"></i>
+  <h1 style="margin-left: 7rem ; margin-top: 3.5rem ; font-size: 2.5rem ;"> <i style="margin: 0 15px ;"  class="fa fa-history" aria-hidden="true"></i>
  Mon historique de transactions : </h1>
-
-
+  
   
 <?php   
  
@@ -471,9 +382,9 @@ $result = $_controller->getHistoriqueAnnonce($_SESSION['userID']) ;
      <table class="table align-middle mb-0 bg-white">
        <thead class="bg-light">
          <tr>
-           <th width="2%">Numéro de transaction </th>
+           <th width="2%">Numéro  </th>
            <th width="15%">Transporteur</th>
-           <th width="7%">Titre de l'anonce </th>
+           <th width="7%">Titre  </th>
            <th width="15%">Date </th>
            <th width="15%">Note </th>  
            <?php if($_SESSION['userType'] == 'transporteur') { ?>
