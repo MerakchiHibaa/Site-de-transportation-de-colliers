@@ -1,3 +1,9 @@
+<?php if (isset($_GET['nom'])&& isset($_GET['prenom'])) {
+  $nom= preg_replace('/[^a-zA-Z0-9-]/', '', $_GET['nom']);
+  $prenom= preg_replace('/[^a-zA-Z0-9-]/', '', $_GET['prenom']);
+
+
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,14 +28,18 @@
             <div class="close-button" onclick="closeForm()">x</div>
             <div class="form-title">Envoyer une demande</div>
             <div class="input-group">
-                <input type="text" id="email" onblur="checkInput(this)" />
+                <input type="hidden" name='type' value='demandeCertifie'>
+                <input type="hidden" name='nom' value='<?php echo $nom ?>'>
+                <input type="hidden" name='prenom' value='<?php echo $prenom ?>'>
+
+                <input type="text" id="email" name="email" required onblur="checkInput(this)" />
                 <label for="name">Email</label>
             </div>
             <div class="input-group">
-                <input type="text" id="demande" onblur="checkInput(this)" />
+                <input type="text" id="demande" name="demande" required onblur="checkInput(this)" />
                 <label for="demande">Demande </label>
             </div>
-            <div class="form-button" onclick="closeForm()">Envoyer</div>
+            <input type="submit"  value="Envoyer" class="form-button" onsubmit="closeForm()"></input>
         </form>
        
     </div>

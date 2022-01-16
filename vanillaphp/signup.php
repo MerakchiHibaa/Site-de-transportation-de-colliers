@@ -87,18 +87,19 @@
               <input type="password" name="passwordrepeat" required placeholder="Confirmez votre mot de passe" />
             </div>
             <div class="input-field input-fieldd" >
-            <input type="checkbox" class="box-input" name="transporteur" id="checkTrans"
+            <input type="checkbox" class="box-input" name="transporteur" id="checkTrans" onchange="displayWilaya()"
   placeholder="Transporteur" />
 <label class="checkLabel" for ="checkTrans" placeholder="Transporteur"> Je veux être un transporteur  </label>
 </div>
+  
+
+  <div id="wilayasSelect" style="display: none;"> 
   <div class="input-field input-fieldd">
   <input type="checkbox" class="box-input" name="certifie" id="checkCertifie"
    />
   <label class="checkLabel" for ="checkCertifie"> Je veux être un transporteur certifié  </label>
 
   </div>
-
-  
  <?php 
 
 include_once './controllers/affichControl.php';
@@ -135,7 +136,7 @@ echo "</select> </div>" ;
 
 ?> 
   
-
+  </div>
 
   <input type="submit" class="btn" value="S'inscrire" />
 
@@ -186,6 +187,27 @@ echo "</select> </div>" ;
       </div>
     </div>
 
-    <script src="signup.js"></script>
+    <script type="text/javascript"> 
+/* $(document).ready(function(){ */
+    
+
+
+    let checktrans = document.getElementById('checkTrans') ; 
+    let wilayasSelect = document.getElementById('wilayasSelect') ; 
+    function displayWilaya() {
+      if (checktrans.checked) { 
+      wilayasSelect.style.display = 'block';
+    }else { wilayasSelect.style.display = 'none'}
+
+    }
+  /* }) */
+    /* checkTrans.addEventListener ('change', () => { if (this.checked) { 
+      wilayasSelect.style.display = 'block';
+    }else { wilayasSelect.style.display = 'none'} } ) ;
+     */
+
+  </script>
+      <script src="signup.js"></script>
+
   </body>
 </html>

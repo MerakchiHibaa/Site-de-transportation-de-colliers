@@ -10,13 +10,25 @@ class User {
         $this->dbb = new Database;
 
     }
+    public function sendDemandeCertifie($data) {
+        $this->db->query('INSERT INTO demande_certifie (nom, prenom, email, demande ) 
+            VALUES (:nom, :prenom, :email , :demande )'); 
+              $this->db->bind(':nom', $data['nom']);
+              $this->db->bind(':prenom', $data['prenom']);
+              $this->db->bind(':email', $data['email']);
+              $this->db->bind(':demande', $data['demande']);
+
+       return $this->db->execute() ;
+
+
+    }
 
     public function getWilayaArr($ID_user) {
         $this->db->query('SELECT * FROM user_wilaya where ID_User=:ID_user and type=:type') ;
         $this->db->bind(':ID_user', $ID_user);
         $this->db->bind(':type', "arrivee");
-        return  $this->db->resultSet() ;
-    
+        $numwilaya =  $this->db->resultSet() ;
+        
         
     }
     

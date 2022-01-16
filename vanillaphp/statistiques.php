@@ -84,7 +84,7 @@ $_controller = new affichControl() ;
  height: 150px; display:flex ;"> 
 <?php $annonces= $_controller->getTopAnnonces() ;
 foreach($annonces as $annonce) {
- echo '<div class="col-sm-3 col-lg-3 col-md-3"   >
+ echo '<div class="col-sm-3 col-lg-3 col-md-3"  >
                     <div style="border:1px solid #ccc; border-radius:5px; margin:16px; height:300px;">
 
                     <p align="center"><strong><a href="#">'. $annonce['titreAnnonce'] .'</a></strong></p>

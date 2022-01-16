@@ -11,6 +11,25 @@
             $this->userModel = new User;
         }
 
+        public function sendDemandeCertifie() {
+            if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['demande']) &&  isset($_POST['email']) )  {
+                echo "<h1> insiiide sendDemandeCertifie </h1>";
+                $data = [  
+                   'nom' => trim($_POST['nom'] ) , //
+                  'prenom' =>  trim($_POST['prenom'])  , //
+                  'demande' =>  trim($_POST['demande'])  , //
+                   'email' =>  trim($_POST['email'])  // client
+                ] ;
+
+            }
+             $this->userModel->sendDemandeCertifie($data) ;
+            redirect("../signup.php") ; 
+
+
+
+
+        }
+
 
  
         public function getWilayaArr($ID_user) {
@@ -282,6 +301,7 @@
               }
               else {   //Init data
                 $typeuser ='transporteur' ;
+                
                 $data = [
                     'nom' => trim($_POST['nom']),
                     'prenom' => trim($_POST['prenom']),
@@ -357,7 +377,7 @@
             else {
                 if($this->userModel->registerTransporteur($data)){ //return the id of the user
                     if(!empty($_POST["certifie"] )) {
-                        redirect("../certifie.php");
+                        redirect("../certifie.php?nom=".$_POST['nom']."&prenom=".$_POST['prenom']);
                     
                     }
 /*                     redirect("../signup.php");
@@ -834,6 +854,8 @@ if($result)
                 $init->setTrajet() ; 
             case 'report' : 
                 $init->setReport() ; 
+            case 'demandeCertifie' : 
+                $init->sendDemandeCertifie() ; 
 
 /*             default : redirect("../index.php");
  */        }
