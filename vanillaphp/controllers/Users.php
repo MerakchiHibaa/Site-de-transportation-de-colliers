@@ -252,10 +252,10 @@
             //Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            if( (empty($_POST["transporteur"]) || empty($_POST['wilaya']) ) ) { 
+            if( (empty($_POST["transporteur"]) || empty($_POST['wilaya']) || empty($_POST['wilayaA'])  ) ) { 
 
                 if(!empty($_POST["transporteur"] )) {
-                    flash("register", "Si vovus voulez etre un transporteur, veuillez remplir les wilayas sil vous plait");
+                    flash("register", "Si vovus voulez etre un transporteur, veuillez remplir les wilayas s'il vous plait");
 
                 }
                 else { 
@@ -283,7 +283,8 @@
                     'numero' => trim($_POST['numero']),
                     'transporteur' => trim($_POST['transporteur']),
                     //erreur
-                    'wilaya' => trim($_POST['wilaya']),
+                    'wilaya' => $_POST['wilaya'],
+                    'wilayaA' => $_POST['wilayaA'],
                     'password' => trim($_POST['password']),
                     'passwordrepeat' => trim($_POST['passwordrepeat'])
                 ];
@@ -352,8 +353,8 @@
                         redirect("../certifie.php");
                     
                     }
-                    redirect("../signup.php");
-                }else{
+/*                     redirect("../signup.php");
+ */                }else{
                     die("Il y'a une erreur...");
                 }
 

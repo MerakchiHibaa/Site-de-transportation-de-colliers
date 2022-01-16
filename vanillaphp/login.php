@@ -28,8 +28,8 @@
 <h1 class="box-title">Connexion</h1>
 <input type="hidden" name="type" value="login">
 
-<input type="email" class="box-input" name="email" placeholder="Email">
-<input type="password" class="box-input" name="password" placeholder="Mot de passe">
+<input type="email" class="box-input" name="email" required placeholder="Email">
+<input type="password" class="box-input" name="password" required placeholder="Mot de passe">
 <input type="submit" value="Connexion " name="submit" class="box-button">
 <p class="box-register">Vous êtes nouveau ici? 
   <a href="./signup.php">S'inscrire</a>

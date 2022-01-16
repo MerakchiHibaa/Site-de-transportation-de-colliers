@@ -453,10 +453,60 @@ try {
 
   }
 }
+public function insertWilaya( $wilayasDep , $wilayasAr , $data) {
+     //get the ID_user
+     $this->db->query('SELECT * FROM users where nom=:nom and email=:email and prenom=:prenom');
+     $this->db->bind(':nom', $data['nom']);
+     $this->db->bind(':email', $data['email']);
+     $this->db->bind(':prenom', $data['prenom']);
+     $users = $this->db->resultSet() ;
+     foreach ($users as $user){
+         echo "<script> alert('insiiiide foreach1 ) ; </script>" ; 
+         $ID_user = $user['ID_user'];
+     }   
+
+     //INsert wilaya depart
+
+
+
+     //Execute
+     
+         foreach ($wilayasDep as $wilDep) {
+             echo "<script> alert('insiiiide foreach wilayadep' ) ; </script>" ; 
+             echo $wilDep ;
+
+             $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya , type) 
+             VALUES (:ID_User, :ID_wilaya , :type)');
+ //faire une boucle pour chaque element du tableau de wilaya
+            $this->db->bind(':ID_User', $ID_user);
+            $this->db->bind(':ID_wilaya', $wilDep);
+            $this->db->bind(':type', 'depart');
+            $this->db->execute()  ; 
+
+
+         }
+         foreach ($wilayasAr as $wilAr) {
+             echo "<script> alert('insiiiide wilayaarriv' ) ; </script>" ; 
+             echo $wilAr ; 
+
+             $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya , type) 
+             VALUES (:ID_User, :ID_wilaya , :type)');
+ //faire une boucle pour chaque element du tableau de wilaya
+            $this->db->bind(':ID_User', $ID_user);
+            $this->db->bind(':ID_wilaya', $wilAr);
+            $this->db->bind(':type', 'arrivee');
+            $this->db->execute()    ; 
+
+
+         }   
+         
+         return true; 
+
+}
 
     public function registerTransporteur($data){
         $this->db->query('INSERT INTO users (nom, prenom, numero, email, adresse, type, password) 
-        VALUES (:nom, :prenom, :numero , :email, :adresse, type, :password)');
+        VALUES (:nom, :prenom, :numero , :email, :adresse, :type, :password)');
         //Bind values
         
         $this->db->bind(':nom', $data['nom']);
@@ -465,21 +515,25 @@ try {
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':adresse', $data['adresse']);
         $this->db->bind(':type', 'transporteur');
-
         $this->db->bind(':password', $data['password']);
+        
+        $wilayasDep = $data['wilaya'] ; 
+        $wilayasAr = $data['wilayaA'] ; 
+        echo "<script> alert('avant execuuute' ) ; </script>" ; 
 
-        //Execute
-        if($this->db->execute()){
-            //find the user in the users table and then insert the ID in user_wilaya table
-            $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya) 
-            VALUES (:ID_User, :ID_wilaya)');
-//faire une boucle pour chaque element du tableau de wilaya
-           $this->db->bind(':ID_User', $data['nom']);
-           $this->db->bind(':ID_wilaya', $data['wilaya']);
-            return true;
-        }else{
+        $this->db->execute()  ; 
+       if($this->insertWilaya($wilayasDep , $wilayasAr , $data))  {
+        echo "<script> alert('insiiiide insertwilayatrue' ) ; </script>" ; 
+
+           return true ; 
+       }
+
+
+          
+       echo "<script> alert('insiiiide return false' ) ; </script>" ; 
+
             return false;
-        }
+        
     }
 
     public function updateUserAdmin($ID_user , $data) {

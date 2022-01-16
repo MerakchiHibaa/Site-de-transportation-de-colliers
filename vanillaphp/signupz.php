@@ -1,5 +1,4 @@
 <?php 
-    include_once 'header.php';
     include_once './helpers/session_helper.php';
 
 ?>
@@ -22,15 +21,17 @@
       <div class="forms-container">
         <div class="signin-signup">
           <form action="#" class="sign-in-form">
+          <input type="hidden" name="type" value="login">
+
             <h2 class="title">Se connecter</h2>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" />
+              <input type="email" name="email" placeholder="Email" />
             </div>
            
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" name="password" placeholder="Password" />
             </div>
             <input type="submit" value="Se connecter" class="btn solid" />
             <!-- <p class="social-text">Or Sign in with social platforms</p>
@@ -69,7 +70,7 @@
             <div class="input-field">
             <i class="fa fa-phone" aria-hidden="true"></i>
 
-              <input type="text" name="numero" required placeholder="Numéro" />
+              <input type="number" name="numero" required placeholder="Numéro" />
             </div>
             <div class="input-field">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -106,13 +107,14 @@ include_once './controllers/affichControl.php';
 $_controller = new affichControl();
 $ARRAY = $_controller->affichWilaya(); 
 echo "<div>
- <select class='form-select' size='1' multiple name='wilaya[]'>" ;
+ <select  class='form-select' style='margin:5px ;' size='1' multiple name='wilaya[]'>" ;
  echo ("<option disabled > --- Chsoisissez les wilayas de départ--- </option> ");
 
 foreach($ARRAY as $row){
-  $row = $row['wilaya'];
-  echo $row ;
- echo ("<option value='$row' > $row </option> ");
+  $wilaya = $row['wilaya'];
+  $num = $row['numwilaya'] ;
+  echo $wilaya ;
+ echo ("<option value='$num' > $wilaya </option> ");
  }
 echo "</select> </div>" ; 
 
@@ -120,12 +122,13 @@ echo "</select> </div>" ;
 $ARRAY = $_controller->affichWilaya(); 
 echo "<div>
 
-<select class='form-select' style='margin:5px;' size='1' multiple aria-label='les wilayas d'arrivee' name='wilayaA[]'>" ;
+<select class='form-select' style='margin:10px;' size='1' multiple aria-label='les wilayas d'arrivee' name='wilayaA[]'>" ;
 echo ("<option disabled > ---Chsoisissez les wilayas d'arrivée--- </option> ");
 foreach($ARRAY as $row){
-  $row = $row['wilaya'];
-  echo $row ;
- echo ("<option value='$row' > $row </option> ");
+  $wilaya = $row['wilaya'];
+  $num = $row['numwilaya'] ;
+  echo $wilaya ;
+ echo ("<option value='$num' > $wilaya </option> ");
  }
 echo "</select> </div>" ; 
 
@@ -158,10 +161,9 @@ echo "</select> </div>" ;
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
-            <h3>New here ?</h3>
+            <h3>Vous êtes nouveau ici ?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+             Rejoignez notre communauté et profitez de nos services !
             </p>
             <button class="btn transparent" id="sign-up-btn">
               S'inscrire
@@ -171,10 +173,9 @@ echo "</select> </div>" ;
         </div>
         <div class="panel right-panel">
           <div class="content">
-            <h3>One of us ?</h3>
+            <h3>Vous avez déja un compte ?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+              Connectez vous maintenant.
             </p>
             <button class="btn transparent" id="sign-in-btn">
               Sign in
