@@ -186,6 +186,7 @@
   
 
         public function updateProfile () {
+            session_start();
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             if (isset($_POST['updateProfile'])) {
@@ -194,10 +195,13 @@
                     'newprenom' => trim($_POST['newprenom'])  ,
                     'newadresse' => trim($_POST['newadresse']) ,
                     'newemail' => trim($_POST['newemail']) ,
-                    'newnumero' => trim($_POST['newnumero']) ,
+                    'newWilayaDep' => trim($_POST['newnumero']) ,
                     'newpassword' => trim($_POST['newpassword']),
                     'newpasswordrepeat' => trim($_POST['newpasswordrepeat'])  ,
-                    'newphoto' => $_FILES['newprofileImage']['name'] 
+                    'newphoto' => $_FILES['newprofileImage']['name'] ,
+                    'newWilayaDep' => $_POST['newWilayaDep'] , 
+                    'newWilayaArr' => $_POST['newWilayaArr'] , 
+
 
                 ];
 
@@ -221,6 +225,10 @@
                    $data['newnumero'] = $_SESSION['userNumero'] ;
 
                 }
+                /* if(empty($_POST['newWilayaDep'])){
+                    $data['newWilayaDep'] = $_SESSION['userWilayaDep'] ;
+ 
+                 } */
                
                 
                 if(!empty($_POST['newpassword']) AND empty($_POST['newpasswordrepeat']) ){ 

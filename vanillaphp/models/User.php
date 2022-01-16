@@ -17,6 +17,15 @@ class User {
               $this->db->bind(':prenom', $data['prenom']);
               $this->db->bind(':email', $data['email']);
               $this->db->bind(':demande', $data['demande']);
+             try{ 
+              $this->db->execute() ;
+            }
+            catch(PDOException $e) {
+                flash("Votre demande a été envoyée, on vous mettra à jour dés qu'elle sera traitée") ; 
+            }
+              $this->db->query('UPDATE users set demande="1" where nom=:nom and prenom=:prenom') ;
+              $this->db->bind(':nom', $data['nom']);
+              $this->db->bind(':prenom', $data['prenom']);
 
        return $this->db->execute() ;
 
@@ -380,22 +389,7 @@ public function updateProfile($data) {
     `email`=:email,`numero`=:numero,`adresse`=:adresse,`password`=:password, `photo`=:photo where ID_user = '.$_SESSION['userID'].';' ) ;
     
    
-/* 
-    if ($_SESSION['userType'] == "client") {
-          
-        $this->db->query('UPDATE `clients` SET `nom`=:nom,`prenom`=:prenom,
-        `email`=:email,`numero`=:numero,`adresse`=:adresse,`password`=:password, `photo`=:photo where ID_client = '.$_SESSION['userID'].';' ) ;
-        
-       
-    
-
-    }
-    else  {
-        $this->db->query('UPDATE `transporteur` SET `nom`=:nom,`prenom`=:prenom,
-        `email`=:email,`numero`=:numero,`adresse`=:adresse,`password`=:password, `photo`=:photo where ID_transporteur = '.$_SESSION['userID'].';' ) ;
-        
-
-    } */
+   
 
          $this->db->bind(':nom', $data['newnom']);
         $this->db->bind(':prenom', $data['newprenom']);
@@ -420,9 +414,20 @@ public function updateProfile($data) {
            $css_class = "alert-danger" ; 
             
        }
-       if(!$this->db->execute()){
-        return false;
-      } 
+
+       $this->db->execute();
+       if(isset($data['newWilayaDep'])) {
+           $this->updateWilayaDep($data['newWilayaDep'] , $_SESSION['userID'] ) ; 
+           $_SESSION['userWilayaDep'] = $this->getWilayaDep($_SESSION['userID']) ; 
+   
+        }
+
+    if(isset($data['newWilayaArr'])) {
+        $this->updateWilayaArr($data['newWilayaArr'] , $_SESSION['userID'] ) ; 
+        $_SESSION['userWilayaArr'] = $this->getWilayaArr($_SESSION['userID']) ; 
+
+
+ }
 
 
 
@@ -498,6 +503,9 @@ public function insertWilaya( $wilayasDep , $wilayasAr , $data) {
          $ID_user = $user['ID_user'];
      }   
 
+
+
+    
      //INsert wilaya depart
 
 
@@ -537,6 +545,52 @@ public function insertWilaya( $wilayasDep , $wilayasAr , $data) {
 
 }
 
+public function updateWilayaDep( $wilayasDep , $ID_user) {
+    //get the ID_user
+    $this->db->query('DELETE FROM user_wilaya where ID_User=: ID_user and type=:"depart") ') ;
+    $this->db->bind(':ID_user', $ID_user);
+    foreach ($wilayasDep as $wilDep) {
+       /*  echo "<script> alert('insiiiide foreach wilayadep' ) ; </script>" ; 
+        echo $wilDep ; */
+
+        $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya , type) 
+        VALUES (:ID_User, :ID_wilaya , :type)');
+//faire une boucle pour chaque element du tableau de wilaya
+       $this->db->bind(':ID_User', $ID_user);
+       $this->db->bind(':ID_wilaya', $wilDep);
+       $this->db->bind(':type', 'depart');
+       $this->db->execute()  ;}
+    
+    return true; 
+    }  
+    
+    
+    public function updateWilayaArr( $wilayasAr , $ID_user) {
+        //get the ID_user
+        $this->db->query('DELETE FROM user_wilaya where ID_User=: ID_user and type=:"arrivee") ') ;
+        $this->db->bind(':ID_user', $ID_user);
+        
+        foreach ($wilayasAr as $wilAr) {
+            echo "<script> alert('insiiiide wilayaarriv' ) ; </script>" ; 
+            echo $wilAr ; 
+    
+            $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya , type) 
+            VALUES (:ID_User, :ID_wilaya , :type)');
+    //faire une boucle pour chaque element du tableau de wilaya
+           $this->db->bind(':ID_User', $ID_user);
+           $this->db->bind(':ID_wilaya', $wilAr);
+           $this->db->bind(':type', 'arrivee');
+           $this->db->execute()    ; 
+    
+    
+        }   
+        
+        return true; 
+        }  
+
+
+
+    
     public function registerTransporteur($data){
         $this->db->query('INSERT INTO users (nom, prenom, numero, email, adresse, type, password) 
         VALUES (:nom, :prenom, :numero , :email, :adresse, :type, :password)');
