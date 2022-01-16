@@ -174,6 +174,8 @@ case "en cours de traitement" : ?>
 
 case "refuse" : ?>
                       <p style='font-weight:600 ;' class="text-center text-danger" > <i style="padding: 5px" class="fas fa-times"></i>   Refusée </p>
+                      <p style='font-size:1rem ;' class="text-center " >   <?php $_controller->getJustificatif($_SESSION['userNom'] , $_SESSION['userPrenom']) ?> </p>
+
 <!-- justificatif -->
 
 <?php
@@ -181,7 +183,15 @@ break ;
 
  case "valide" : ?>
                       <p style='font-weight:600 ;' class="text-center text-success" > <i style="padding: 5px"  class="fas fa-check"></i>Validée </p>
-                      
+                      <p  style='font-weight:400 ;'  > Veuillez rapporter la liste de documents à 
+suivante au bureau de l’entreprise : <br> 
+- Deux photos  <br>
+- Photocopie de la pièce d'identité  <br>
+- Photocopie du permis de conduite  <br>
+
+
+</p>
+
 <!-- affichier les papiers
  -->
 

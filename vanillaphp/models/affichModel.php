@@ -8,6 +8,13 @@ class affichModel {
     public function __construct(){
         $this->db = new Database;
     }
+    public function getJustificatif($nom , $prenom) {
+        $this->db->query("SELECT * FROM demande_certifie where nom =:nom and prenom=:prenom ");
+        $this->db->bind(':nom', $nom);
+        $this->db->bind(':prenom', $prenom);
+        return $this->db->resultSet() ;
+
+    }
     public function getNameWilaya($ID_wilaya) {
         $this->db->query("SELECT * FROM wilaya where ID_wilaya =:ID_wilaya ");
         $this->db->bind(':ID_wilaya', $ID_wilaya);

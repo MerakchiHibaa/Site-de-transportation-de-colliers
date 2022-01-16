@@ -10,6 +10,10 @@
         public function __construct(){
             $this->model = new affichModel;
         }
+        public function getJustificatif($nom , $prenom) {
+          return $this->model->getJustificatif($nom , $prenom) ; 
+
+        }
         public function getNameWilaya($ID_wilaya) {
           return $this->model->getNameWilaya($ID_wilaya) ; 
         
