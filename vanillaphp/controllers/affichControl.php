@@ -15,6 +15,12 @@
         
         
         }
+
+        public function getCertifiedNumber() {
+          return $this->model->getCertifiedNumber() ; 
+
+
+        }
         public function selectAllNews() {
           return $this->model->selectAllNews() ; 
 

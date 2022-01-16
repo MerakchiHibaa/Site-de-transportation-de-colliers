@@ -21,6 +21,17 @@ class affichModel {
         
 
     }
+    public function getCertifiedNumber() {
+        $this->db->query("SELECT Count(*) as count FROM users where type='transporteur' and certifie ='1' ");
+        $result = $this->db->resultSet() ; 
+        foreach($result as $value) {
+            $number= $value['count'];
+    
+    
+        }
+        return $number;
+
+    }
 
     
     public function getDemande($ID_annonce) {

@@ -1,3 +1,40 @@
+<?php 
+ session_start() ; 
+ /* 
+echo $_SESSION['userID'] ;
+echo $_SESSION['userType'] ;
+echo $_SESSION['userEmail'] ;
+echo $_SESSION['userNom'] ;
+echo $_SESSION['userPrenom'] ;
+echo $_SESSION['userAdresse'] ;
+echo $_SESSION['userNumero'] ;
+echo $_SESSION['userPassword'];
+echo $_SESSION['userPhoto'] ;
+echo $_SESSION['userNote'] ; */
+
+ 
+include './controllers/affichControl.php';
+
+
+$_controller = new affichControl();
+
+if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
+/*    redirect("../login.php");
+ */ 
+    header("Location: ./login.php");
+ }
+ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
 
 <div class="form-container"> 
 <div class="row-profile"> 
@@ -94,3 +131,11 @@
   </div>
   </div>
   </div>
+
+<!--   <script type="text/javascript" src="./bootstrapDesign/js/mdb.min.js"></script>
+ -->    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  <script src="./index.js"> </script>
+
+  </body>
+</html>
