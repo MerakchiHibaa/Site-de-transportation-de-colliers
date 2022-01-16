@@ -8,6 +8,11 @@ class affichModel {
     public function __construct(){
         $this->db = new Database;
     }
+    public function getNameWilaya($ID_wilaya) {
+        $this->db->query("SELECT * FROM wilaya where ID_wilaya =:ID_wilaya ");
+        $this->db->bind(':ID_wilaya', $ID_wilaya);
+        return $this->db->resultSet() ; 
+    }
 
     public function selectAllNews() {
         $this->db->query("SELECT * FROM news ");
@@ -16,6 +21,8 @@ class affichModel {
         
 
     }
+
+    
     public function getDemande($ID_annonce) {
         $this->db->query("SELECT * FROM demandes where ID_annonce = '$ID_annonce' ") ; 
     return $this->db->resultSet() ;

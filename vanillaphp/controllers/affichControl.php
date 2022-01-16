@@ -10,7 +10,11 @@
         public function __construct(){
             $this->model = new affichModel;
         }
-
+        public function getNameWilaya($ID_wilaya) {
+          return $this->model->getNameWilaya($ID_wilaya) ; 
+        
+        
+        }
         public function selectAllNews() {
           return $this->model->selectAllNews() ; 
 
@@ -36,6 +40,7 @@ public function getDemande($ID_annonce) {
 
 
 }
+
         
         public function getUnreadDemandes($ID_user) {
           return $this->model->getUnreadDemandes($ID_user) ; 

@@ -11,6 +11,25 @@ class User {
 
     }
 
+    public function getWilayaArr($ID_user) {
+        $this->db->query('SELECT * FROM user_wilaya where ID_User=:ID_user and type=:type') ;
+        $this->db->bind(':ID_user', $ID_user);
+        $this->db->bind(':type', "arrivee");
+        return  $this->db->resultSet() ;
+    
+        
+    }
+    
+    
+    public function getWilayaDep($ID_user) {
+        $this->db->query('SELECT * FROM user_wilaya where ID_User=:ID_user and type=:type') ;
+        $this->db->bind(':ID_user', $ID_user);
+        $this->db->bind(':type', "depart");
+        return  $this->db->resultSet() ;
+    
+        
+    }
+
     public function sendRate($rate , $user , $trajet) {
         echo"<script> alert('inside rate model') ;  </script>" ;
 
@@ -418,6 +437,8 @@ public function updateProfile($data) {
 
 
 }
+
+
 
 
 

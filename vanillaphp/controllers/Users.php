@@ -13,7 +13,14 @@
 
 
  
-
+        public function getWilayaArr($ID_user) {
+            return $this->userModel->getWilayaArr($ID_user) ;
+    
+        }
+        public function getWilayaDep($ID_user) {
+            return $this->userModel->getWilayaDep($ID_user) ;
+    
+        }
 
         public function insertDemandes() {
             if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
@@ -348,7 +355,7 @@
 
             }
             else {
-                if($this->userModel->registerTransporteur($data)){
+                if($this->userModel->registerTransporteur($data)){ //return the id of the user
                     if(!empty($_POST["certifie"] )) {
                         redirect("../certifie.php");
                     
@@ -413,7 +420,10 @@
             redirect("../login.php"); 
         }
     }
+    
 
+
+    
    
     public function createUserSession($user){
 
@@ -429,6 +439,20 @@
         $_SESSION['userPassword'] = $user['password'];
         $_SESSION['userPhoto'] = $user['photo'];
         $_SESSION['userNote'] = $user['note'];
+        $_SESSION['userViewersNumber'] = $user['viewersNumber'];
+
+        if($user['type'] =='transporteur') {
+            $_SESSION['userCertifie'] = $user['certifie'];
+            $_SESSION['userStatut'] = $user['statut'];
+            $_SESSION['userDemande'] = $user['demande'];
+
+        }
+
+
+        $_SESSION['userWilayaDep'] = $this->getWilayaDep($user['ID_user']) ; 
+        $_SESSION['userWilayaArr'] = $this->getWilayaArr($user['ID_user']) ; 
+
+
          $_SESSION['msg'] ='' ;
 
 

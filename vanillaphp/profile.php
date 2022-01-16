@@ -74,14 +74,24 @@ if (isset($_GET['signalFinished'])) {
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                src= "./usersImages/<?php echo $_SESSION['userPhoto'] ; ?>"
                 alt="Avatar"
                 class="img-fluid my-5"
                 style="width: 80px;"
               />
-              <h5 style="color: black ;" >Marie Horwitz</h5>
-              <p style="color: black ;">Web Designer</p>
-              <i style="color: black ;" class="far fa-edit mb-5"></i>
+              <h5 style="color: black ;" ><?php echo $_SESSION['userNom']." ". $_SESSION['userPrenom'] ;?> </h5>
+              <p style="color: black ;"><?php echo $_SESSION['userType']?></p> 
+              <?php if(isset($_SESSION['userCertifie'])){
+                if($_SESSION['userCertifie'] == '0') {?>
+                
+                <p class="badge badge-success rounded-pill"> Certifié.e </p> <br>
+
+             <?php } else {?>
+
+              <p class="badge badge-warning rounded-pill"> Non certifié.e <br></p>
+             
+          <?php  }} ?>
+        <a href="#">      <i style="color: black ; margin-top: 60px ; font-size: 2.5rem;" class="far fa-edit mb-5"></i>  </a> 
             </div>
             <div class="col-md-8">
               <div class="card-body p-4">
@@ -90,11 +100,11 @@ if (isset($_GET['signalFinished'])) {
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>Email</h6>
-                    <p class="text-muted">info@example.com</p>
+                    <p class="text-muted"><?php echo $_SESSION['userEmail']?></p>
                   </div>
                   <div class="col-6 mb-3">
-                    <h6>Phone</h6>
-                    <p class="text-muted">123 456 789</p>
+                    <h6>Numéro de téléphone</h6>
+                    <p class="text-muted"><?php echo $_SESSION['userNumero']?></p>
                   </div>
                 </div>
                <!--  <h6>Projects</h6> -->
@@ -103,22 +113,79 @@ if (isset($_GET['signalFinished'])) {
                   <div class="col-6 mb-3">
                     <h6>Wilayas de départ</h6>
                     <select class="form-control"> 
+                      <?php foreach($_SESSION['userWilayaDep'] as $value) {
+                        $namewilaya = $_controller->getNameWilaya($value['ID_wilaya']) ; 
+                        foreach($namewilaya as $name) {
+                          $name =  $name['wilaya'] ; 
+                        } ?>
+                        <option value="<?php echo $value['ID_wilaya'] ?>"> <?php echo $name ; ?></option>
+
+                     <?php } ?>
+                       
 
                     </select>
-                    <p class="text-muted">Lorem ipsum</p>
-                  </div>
+<!--                     <p class="text-muted">Lorem ipsum</p>
+ -->                  </div>
                   <div class="col-6 mb-3">
                     <h6>Wilayas d'arrivée</h6>
                     <select class="form-control"> 
-                      
+                      <?php foreach($_SESSION['userWilayaArr'] as $value) {
+                        $namewilaya = $_controller->getNameWilaya($value['ID_wilaya']) ; 
+                        foreach($namewilaya as $name) {
+                          $name =  $name['wilaya'] ; 
+                        } ?>
+                        <option value="<?php echo $value['ID_wilaya'] ?>"> <?php echo $name ; ?></option>
+
+                     <?php } ?>
+                       
+
                     </select>
-                    <p class="text-muted">Dolor sit amet</p>
+                  
+<!--                     <p class="text-muted">Dolor sit amet</p>
+ -->                  </div>
+                </div>
+
+                <?php if($_SESSION['userType'] == 'transporteur' && $_SESSION['userDemande'] == '1' ) { ?>
+
+                
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class ="border border-dark" style="padding: 10px ; padding-top:20px ; margin-bottom: 10px ;">
+                    <h6 class="text-center"> Statut de votre demande :</h6>
+                    <!-- statue possible : en attente, en cours de traitement, validée, refusée
+et certifiée) -->
+<?php switch ( $_SESSION['userStatut']) {
+  case "en attente" : ?>
+                      <p style='font-weight:600 ;' class="text-center text-warning" > <i style="padding: 5px" class="fa fa-hourglass-end" aria-hidden="true"></i>
+ En attente </p>
+<?php 
+break ;
+case "en cours de traitement" : ?>
+                      <p  style='font-weight:600 ;' class="text-center text-warning" > <i style="padding: 5px"  class="fas fa-recycle"></i> En cours de traitement... </p>
+                      <?php 
+                      break ;
+
+case "refuse" : ?>
+                      <p style='font-weight:600 ;' class="text-center text-danger" > <i style="padding: 5px" class="fas fa-times"></i>   Refusée </p>
+<!-- justificatif -->
+
+<?php
+break ;
+
+ case "valide" : ?>
+                      <p style='font-weight:600 ;' class="text-center text-success" > <i style="padding: 5px"  class="fas fa-check"></i>Validée </p>
+                      
+<!-- affichier les papiers
+ -->
+
+<?php } ?>
                   </div>
                 </div>
+            <?php  } ?>
                 <div class="d-flex justify-content-start">
-                  <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                  <a href="#!"><i class="fas fa-map-marker-alt" style="cursor: pointer ; margin-right : 10px ;"></i> <span class=""> <?php echo $_SESSION['userAdresse']?> </span></a>
+                  <!-- <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a> -->
                 </div>
               </div>
             </div>
