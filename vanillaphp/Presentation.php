@@ -8,12 +8,28 @@
     <title>Présentation</title>
 </head>
 <body id="presentation-body">
-    <section class="presentation-section"> 
+<?php 
+include_once "./controllers/affichControl.php"  ; 
+$_controller = new affichControl(); 
+$presentation = $_controller->getpresentation() ; 
+foreach ($presentation as $value){ ?>
+
+
+    <section class="presentation-section"  style=" 
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    background: url(assets/<?php echo $value['image']?> );
+    background-size: cover;
+
+    "
+    > 
         <div class="box"> 
             <div class="content">
+            
                 <h1> Annonces </h1> 
-                <p> Cette artie explique ce qui existe dans cette partie :p</p>
-    <a id="presentation-btn" class="btn-up" href="#" onclick="playvideo('assets/video1.mp4')"> Who are we ?</a>
+                <p> <?php echo $value['contenu'] ?> </p>
+    <a id="presentation-btn" class="btn-up" href="#" onclick="playvideo('assets/<?php echo $value['video'] ?>')"> Who are we ?</a>
     
             </div>
         </div>
@@ -23,10 +39,10 @@
 
     </section>
     <div class="video" id="video-player"> 
-        <video width="100%" controls autoplay src="assets/video1.mp4" id="presentation-video">  </video>
+        <video width="100%" controls autoplay src="assets/<?php echo $value['video'] ?>" id="presentation-video">  </video>
        <img src="assets/close-icon.png" alt="" class="close-btn" onclick="stopvideo()">
     </div>
-    
+    <?php } ?>
     <script> 
 let videoplayer =  document.getElementById('video-player') ; 
 let myvideo =  document.getElementById('myvideo') ; 

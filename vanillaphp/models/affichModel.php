@@ -28,6 +28,12 @@ class affichModel {
         
 
     }
+    public function getpresentation() {
+        $this->db->query("SELECT * FROM presentation LIMIT 1");
+        return $this->db->resultSet() ; 
+
+
+    }
     public function getContact() {
         $this->db->query("SELECT * FROM contact LIMIT 1");
         return $this->db->resultSet() ; 

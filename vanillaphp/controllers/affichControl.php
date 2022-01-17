@@ -184,7 +184,10 @@ public function getDemande($ID_annonce) {
       
           }
 
-  
+  public function getpresentation() {
+    return $this->model->getpresentation() ; 
+ 
+  }
   function getContact() {
     return $this->model->getContact() ; 
 
