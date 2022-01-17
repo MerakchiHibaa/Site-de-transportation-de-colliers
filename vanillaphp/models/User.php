@@ -452,6 +452,11 @@ public function updateProfile($data) {
            $_SESSION['userWilayaDep'] = $this->getWilayaDep($_SESSION['userID']) ; 
    
         }
+        else {
+            echo"<script> alert('wilayadep is not set afteeeeer') ; <script>" ;
+
+
+        }
 
     if(isset($data['newWilayaArr'])) {
         $this->updateWilayaArr($data['newWilayaArr'] , $_SESSION['userID'] ) ; 
@@ -459,6 +464,11 @@ public function updateProfile($data) {
 
 
  }
+ else {
+    echo"<script> alert('wilayaarriv is not set afteeeeer') ; <script>" ;
+
+
+}
 
 
 
@@ -578,7 +588,7 @@ public function insertWilaya( $wilayasDep , $wilayasAr , $data) {
 
 public function updateWilayaDep( $wilayasDep , $ID_user) {
     //get the ID_user
-    $this->db->query('DELETE FROM user_wilaya where ID_User=: ID_user and type=:"depart") ') ;
+    $this->db->query('DELETE FROM user_wilaya where ID_User=:ID_user and type="depart") ') ;
     $this->db->bind(':ID_user', $ID_user);
     foreach ($wilayasDep as $wilDep) {
        /*  echo "<script> alert('insiiiide foreach wilayadep' ) ; </script>" ; 
@@ -598,7 +608,7 @@ public function updateWilayaDep( $wilayasDep , $ID_user) {
     
     public function updateWilayaArr( $wilayasAr , $ID_user) {
         //get the ID_user
-        $this->db->query('DELETE FROM user_wilaya where ID_User=: ID_user and type=:"arrivee") ') ;
+        $this->db->query('DELETE FROM user_wilaya where ID_User=: ID_user and type="arrivee") ') ;
         $this->db->bind(':ID_user', $ID_user);
         
         foreach ($wilayasAr as $wilAr) {
@@ -699,8 +709,8 @@ public function updateWilayaDep( $wilayasDep , $ID_user) {
         
         /*         $hashedPassword = $row['user']['password'];
          */        if(password_verify($password, $hashedPassword)){
-          echo"<script> console.log('this iis inside password_verify  after')</script>";
-           /*  echo"<script> this iis row".$row['password']."  after</script>";
+/*           echo"<script> console.log('this iis inside password_verify  after')</script>";
+ */           /*  echo"<script> this iis row".$row['password']."  after</script>";
             echo"<script> this iis row".$row['ID_user']."  after</script>" ;
             echo"<script> this iis row".$row['email']."  after</script>";
          */
