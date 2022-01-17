@@ -170,16 +170,29 @@ $allUser = $_controller->selectAllUserData();
                           <?php if ( $value['type']  == 'client'){
                           echo "<span class='badge badge-lg badge-info text-white'>Client</span>";
                         } else/*  if ($value['type'] == 'transporteur') */ {
-                          echo "<span class='badge badge-lg badge-dark text-white'>Transporteur</span>";
+                          if($value['certifie'] == '0') {
+                            echo "<span class='badge badge-lg badge-dark text-white'>Transporteur Non certifié.e</span>";
+                          }
+                          else {
+                            echo "<span class='badge badge-lg badge-success text-white'>Transporteur certifié.e</span>";
+
+                          }
                         } ?></td>
 
                          <td><?php echo $value['adresse']  ?></td>
                         <td><?php echo $value['numero'] ; ?></td>
                         <td><?php echo $value['email'] ; ?></td>
-                        <td><?php echo $value['note'] ; ?></td>
+                        <?php if($value['viewersNumber'] =="0") { ?>
+                          <td>Pas encore noté</td>
+
+                        <?php } else { ?>
+                          <td><?php echo $value['note']/$value['viewersNumber']."/5"; ?></td>
+
+
+                        <?php } ?>
 
                         <td>
-                        <?php if($value['type'] == 'transporteur') { ?> 
+                        <?php if($value['type'] == 'transporteur' && $value['demande'] == '1') { ?> 
                         
                           <?php if ($value['statut'] == 'certifie') { ?>
                             <span class="badge badge-lg badge-info text-white">Certifié</span>
