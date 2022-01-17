@@ -316,6 +316,22 @@ $this->db->bind(':statut', $statut);
       }   
 
 }
+public function bannirUserById($bannir) {
+    $this->db->query("UPDATE users set banni ='1' WHERE ID_user = :ID_user");
+    $this->db->bind(':ID_user', $bannir);
+    if ($this->db->resultSet())  {
+    $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<strong>Success !</strong> cet utilisateur a été banni !</div>';
+      return $msg;
+  }else{
+    $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<strong>Error !</strong> Lutilisateur na pas été banni !</div>';
+      return $msg;
+  }
+
+}
 
 
 public function deleteUserById($remove) {

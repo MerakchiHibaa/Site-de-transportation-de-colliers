@@ -180,7 +180,27 @@ class User {
  
 
     }
+public function findAdminByEmail($email) {
+    $this->db->query('SELECT * FROM admins WHERE email = :email LIMIT 1');
+    $this->db->bind(':email', $email);
+/*         $result =$this->db->resultSet() ;
+*/        /* if($result) {
+        foreach($result as $value) {
 
+        }
+    } */
+
+    $admin = $this->db->single();
+    if($this->db->rowCount() > 0){
+  
+        $admin =json_decode(json_encode($admin), true) ; 
+        return $admin;
+
+    } else {
+        return false ;
+    }
+
+}
     
     //Find user by email or username
     public function findUserByEmail($email){
@@ -667,6 +687,29 @@ public function updateWilayaDep( $wilayasDep , $ID_user) {
               }
     }
 
+    public function loginAdmin($email , $password) {
+        $row = $this->findAdminByEmail($email);
+         
+        if($row == false) return false;  
+         $hashedPassword = $row['password'];
+        
+        
+                
+        
+        
+        /*         $hashedPassword = $row['user']['password'];
+         */        if(password_verify($password, $hashedPassword)){
+          echo"<script> console.log('this iis inside password_verify  after')</script>";
+           /*  echo"<script> this iis row".$row['password']."  after</script>";
+            echo"<script> this iis row".$row['ID_user']."  after</script>" ;
+            echo"<script> this iis row".$row['email']."  after</script>";
+         */
+                    return $row;
+                }else{
+                    return false;
+                }
+
+    }
 
     //Login user
     public function login($email, $password){
@@ -683,11 +726,7 @@ if($row == false) return false;
 
 /*         $hashedPassword = $row['user']['password'];
  */        if(password_verify($password, $hashedPassword)){
-   /*  echo"<h1> this iis inside password_verify  after</h1>";
-    echo"<h1> this iis row".$row['password']."  after</h1>";
-    echo"<h1> this iis row".$row['ID_user']."  after</h1>" ;
-    echo"<h1> this iis row".$row['email']."  after</h1>"; */
-
+   
             return $row;
         }else{
             return false;

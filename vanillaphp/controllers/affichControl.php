@@ -215,7 +215,15 @@ public function getDemande($ID_annonce) {
   
       }
   
+  public function bannirUserById($bannir) {
+    if (isset($bannirUser)) {
+      echo $bannirUser;
+    
+    }
+    return $this->model->bannirUserById($bannir) ;
   
+
+  }
   
   
       // Delete User by Id Method
@@ -223,9 +231,9 @@ public function getDemande($ID_annonce) {
         if (isset($removeUser)) {
           echo $removeUser;
         
-
+        }
         return $this->model->deleteUserById($remove) ;
-      }
+     
 
 
         
@@ -316,9 +324,14 @@ public function getDemande($ID_annonce) {
      case 'ID_user':
       $ID_user = $_GET['ID_user'];
       break ; 
+     /*  switch($_SERVER['GET']) { */
     case 'remove' :
       $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
       $init->deleteUserById($remove) ;
+    case 'bannir' : 
+      $bannir = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['bannir']);
+      $init->bannirUserById($bannir) ;
+
    
   }
 

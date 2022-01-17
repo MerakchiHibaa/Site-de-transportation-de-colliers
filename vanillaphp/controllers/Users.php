@@ -408,6 +408,48 @@
             } 
             
         }
+        public function loginAdmin() {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            //Init data
+            $data=[
+                'email' => trim($_POST['email']),
+                'password' => trim($_POST['password'])
+            ];
+    
+            if(empty($data['email']) || empty($data['password'])){
+                flash("login", "Please fill out all inputs");
+                echo '<h1>veuillez remplir tous les champs</h1>' ; 
+                header("location: ../loginAdmin.php");
+                exit();
+            } 
+    
+            //Check for user/email
+            if($this->userModel->findAdminByEmail($data['email'])){
+              $loggedAdmin = $this->userModel->loginAdmin($data['email'], $data['password']);
+                if($loggedAdmin){
+                    //Create session
+                    $this->createAdminSession($loggedAdmin);
+                    echo "<script> alert('after createadminsession'); </script>";
+
+                                       echo"<footer> inside createUserSession</footer>" ;
+                                       redirect("../adminProfile.php");
+
+    
+                }else{
+                    flash("login", "Password Incorrect");
+                    echo "<script> alert('Password Incorrect'); </script>";
+                    redirect("../loginAdmin.php");
+                }
+            }else{
+    /*             echo"<footer> outside finduserbyemail</footer>" ;
+     */                    echo "<script> alert('no admin found'); </script>";
+
+                 flash("login", "No admin found");
+                redirect("../loginAdmin.php"); 
+            }
+
+        }
 
     public function login(){
         //Sanitize POST data
@@ -433,21 +475,7 @@
             if($loggedInUser){
                 //Create session
                 $this->createUserSession($loggedInUser);
-                                   echo"<footer> inside createUserSession</footer>" ;
-
-                                /*   echo $_SESSION['userID'] ;
-                                  echo $_SESSION['userType'] ;
-                                  echo $_SESSION['userEmail'] ;
-                                  echo $_SESSION['userNom'] ;
-                                  echo $_SESSION['userPrenom'] ;
-                                  echo $_SESSION['userAdresse'] ;
-                                  echo $_SESSION['userNumero'] ;
-                                  echo $_SESSION['userPassword'];
-                                  echo $_SESSION['userPhoto'] ;
-                                  echo $_SESSION['userNote'] ; */
-/*                 redirect("../profile.php");
- */ 
-/*                            echo"<footer> inside createUserSession</footer>" ;
+/*                                    echo"<footer> inside createUserSession</footer>" ;
  */
             }else{
                 flash("login", "Password Incorrect");
@@ -462,7 +490,15 @@
     }
     
 
+public function createAdminSession($admin) {
+    session_start() ; 
 
+    $_SESSION['adminID'] = $admin['ID_admin'];
+    $_SESSION['adminUsername'] = $admin['username'];
+    $_SESSION['adminEmail'] = $admin['email'];
+    redirect("../adminProfile.php");
+
+}
     
    
     public function createUserSession($user){
@@ -878,6 +914,8 @@ if($result)
                 $init->sendDemandeCertifie() ;
             case 'sendjustificatif' : 
                 $init->setJustificatif() ;
+            case 'loginAdmin' : 
+                $init->loginAdmin() ;
 
 /*             default : redirect("../index.php");
  */        }
@@ -895,7 +933,7 @@ if($result)
     }
 
 
-    /*
+  /*   
 if (isset($_GET['remove'])) {
   $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
   $removeUser = $users->deleteUserById($remove);
@@ -907,5 +945,5 @@ if (isset($removeUser)) {
 if (isset($_GET['deactive'])) {
   $deactive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['deactive']);
   $deactiveId = $users->userDeactiveByAdmin($deactive);
-}*/
+} */
     

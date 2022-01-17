@@ -1,4 +1,5 @@
 <?php 
+
     include_once './helpers/session_helper.php';
 
 ?>
@@ -46,7 +47,7 @@
             Connectez vous maintenant !
             </p>
             <a href="./signup.php" class="btn transparent" id="">
-              Se connecter
+              Utilisateur
             </a>
           </div>
           <img src="img/connectAdmin.svg" class="image" alt="" />

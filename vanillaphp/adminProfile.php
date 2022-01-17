@@ -1,4 +1,6 @@
 <?php
+ session_start() ; 
+
 /* 
  include_once 'header.php'; */
 
@@ -24,7 +26,23 @@
   
 
   <?php
+include_once './controllers/affichControl.php';
 
+
+$_controller = new affichControl();
+  
+if (isset($_GET['remove'])) {
+  $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
+  $removeUser = $_controller->deleteUserById($remove);
+}
+/* 
+if (isset($removeUser)) {
+  echo $removeUser;
+} */
+if (isset($_GET['bannir'])) {
+  $bannir = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['bannir']);
+  $bannirId = $users->bannirUserById($bannir);
+}
 
 if (isset($_GET['action']) && $_GET['action'] == 'logout') {
   // Session::set('logout', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
@@ -209,6 +227,8 @@ $allUser = $_controller->selectAllUserData();
                           <a class="btn btn-success btn-sm" href="userProfileAdmin.php?id=<?php echo $value['ID_user'] ;?>">Voir</a>
                           <a class="btn btn-info btn-sm " href="userProfileAdmin.php?id=<?php echo $value['ID_user'] ;?>">Editer</a>
                            <a onclick="return confirm('Vous voulez vraiment supprimer cet utilisateur ?')" class="btn btn-danger btn-sm " href="?remove=<?php echo $value['ID_user'];?>">Supprimer</a>
+                           <a onclick="return confirm('Vous voulez vraiment bannir cet utilisateur ?')" class="btn btn-danger btn-sm " href="?bannir=<?php echo $value['ID_user'];?>">Bannir</a>
+
                             
                            <?php if ($value['type'] == 'transporteur') { ?> 
                             <div class="card-body">
