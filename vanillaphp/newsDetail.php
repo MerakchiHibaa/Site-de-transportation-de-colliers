@@ -28,7 +28,17 @@ $_controller = new affichControl();
     if ($getNInfo) {
       foreach ($getNInfo as  $getUinfo) {
           $views =  $getUinfo['viewsNumber'] + 1 ; 
-          $_controller->setViewsN($views , $ID_news);
-      }}
+          $_controller->setViewsN($views , $ID_news); ?>
 
-     ?>
+          
+
+
+
+
+    <?php  
+    }
+}  ?>
+
+</body> 
+
+</html> 

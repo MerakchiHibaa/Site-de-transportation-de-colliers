@@ -26,30 +26,36 @@
     <div class="container">
         <header>
             <h1>Contact Us</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam totam iure vitae nesciunt quaerat sed, et ullam placeat ut? Impedit dolorem nostrum itaque molestias nemo delectus animi fuga illum magnam earum pariatur reiciendis, explicabo id velit facilis, necessitatibus cum! Magnam.</p>
+            <?php 
+include_once "./controllers/affichControl.php"  ; 
+$_controller = new affichControl(); 
+$contact = $_controller->getContact() ; 
+foreach ($contact as $value){?>
+
+            <p><?php echo $value['contenu'] ?> </p>
         </header>
         <div class="content">
             <div class="content-form">
                 <section>
                     <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                    <h2>address</h2>
+                    <h2>addresse</h2>
                     <p>
-                        Lorem ipsum dolor sit. <br>
-                        Lorem, ipsum dolor. <br>
-                        lorem
+                        <?php echo $value['adresse'] ?> <br>
+                        <!-- Lorem, ipsum dolor. <br>
+                        lorem -->
                     </p>
                 </section>
 
                 <section>
                     <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
-                    <h2>Phone</h2>
-                    <p>123-456-78901548</p>
+                    <h2>Numéro</h2>
+                    <p>  <?php echo $value['numero'] ?></p>
                 </section>
 
                 <section>
                     <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
                     <h2>E-mail</h2>
-                    <p>dghdgqd@temporary.net</p>
+                    <p>  <?php echo $value['email'] ?></p>
                 </section>
             </div>
         </div>
@@ -59,18 +65,18 @@
             <div class="right">
               <div class="contact-form">
                   <input type="text" required>
-                  <span>Full Name</span>
+                  <span>Nom complet</span>
               </div>
   
               <div class="contact-form">
                   <input type="E-mail" required>
-                  <span>E-mail Id</span>
+                  <span>E-mail </span>
               </div>
               <div class="contact-form">
                   <textarea name="text">
                     
                   </textarea>
-                  <span> Type your Message....</span>
+                  <span> Ecrivez votre message....</span>
               </div>
   
               <div class="contact-form">
@@ -78,6 +84,9 @@
               </div>
               </div>
             </div>
+            
+<?php }
+?>
           </div>
     </form>
         <div class="media">
@@ -104,7 +113,7 @@
 }
 
 body {
-  background-image: url("assets/bg.jpg");
+  background-image: url("assets/"<?php echo $value['image'] ?>"");
   width: 100%;
   height: 100vh;
   background-size: 100% 110vh;

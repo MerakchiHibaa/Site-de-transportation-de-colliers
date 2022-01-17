@@ -28,6 +28,12 @@ class affichModel {
         
 
     }
+    public function getContact() {
+        $this->db->query("SELECT * FROM contact LIMIT 1");
+        return $this->db->resultSet() ; 
+
+
+    }
     public function getCertifiedNumber() {
         $this->db->query("SELECT Count(*) as count FROM users where type='transporteur' and certifie ='1' ");
         $result = $this->db->resultSet() ; 

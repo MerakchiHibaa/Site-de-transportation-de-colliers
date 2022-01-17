@@ -185,7 +185,11 @@ public function getDemande($ID_annonce) {
           }
 
   
-  
+  function getContact() {
+    return $this->model->getContact() ; 
+
+
+  }
   
     //
     //   Get Single User Information By Id Method
@@ -325,12 +329,12 @@ public function getDemande($ID_annonce) {
       $ID_user = $_GET['ID_user'];
       break ; 
      /*  switch($_SERVER['GET']) { */
-    case 'remove' :
+    /* case 'remove' :
       $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
       $init->deleteUserById($remove) ;
     case 'bannir' : 
       $bannir = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['bannir']);
-      $init->bannirUserById($bannir) ;
+      $init->bannirUserById($bannir) ; */
 
    
   }

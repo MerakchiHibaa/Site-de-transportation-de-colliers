@@ -13,7 +13,10 @@ session_start() ;
    <link rel="stylesheet" href="style.css">
    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="./notification.css">
+   <link rel="stylesheet" href="signup.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+   <link rel="stylesheet" href="./notification.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">            
@@ -45,76 +48,78 @@ session_start() ;
         <div id="result"></div>
   <div id="ajax-success"> </div>
   <div id="formajax">
-          <h1> Ajouter une annonce :</h1>
-<form id="ajax-annonce" class="box" method="POST"  enctype="multipart/form-data">
+      <!--     <h1> Ajouter une annonce :</h1>
+        -->   
+<div class="container" >
+      <div class="forms-container">
+        <div class="signin-signup">
+<form id="ajax-annonce" class="sign-in-form" method="POST"  enctype="multipart/form-data">
 
          
+<h1 class="text-center" style="text-align: center; color: #5995FD" >Ajouter une annonce</h1> <!-- class="text-center" style="text-align: center;" -->
 
-<input class=""  type="hidden" id="id_user" name="id_user" value ="<?php echo $_SESSION['userID'] ; ?>">
+<input class="input-field"  type="hidden" id="id_user" name="id_user" value ="<?php echo $_SESSION['userID'] ; ?>">
 
-      <input class=""  type="hidden" name="type" value ="addannonce">
+      <input class="input-field"  type="hidden" name="type" value ="addannonce">
     
-      <label class="">
-      <input class=""  type="text" class="box-input"  name="titreAnnonce" id="titreAnnonce"  placeholder="titre" required />
-            <span class="placeholder ">Le titre de l'annonce </span>
-      </label>
+      
+      <input class="input-field"  type="text"   name="titreAnnonce" id="titreAnnonce"  placeholder="Titre" required />
+           
 
-
-      <label class="">
-      <input class=""  type="text" class="box-input"  name="pointdepart" id="pointdepart" onchange="getCoordinatesDepart()"  placeholder="" required />
-            <span class="placeholder ">Le point de départ</span>
-      </label> 
+      
+      <input class="input-field"  type="text"   name="pointdepart" id="pointdepart" placeholder="Point de départ" onchange="getCoordinatesDepart()"  placeholder="" required />
+           
       <input   type="hidden" id="latitudedepart" name="latitudedepart" >
       <input  type="hidden" id="longitudedepart" name="longitudedepart">
 
 
-    <label class=""> 
-      <input class=""  type="text" class="box-input" onchange="getCoordinatesArrivee()" name="pointarrivee" id="pointarrivee"  placeholder="" required  />
-            <span class="placeholder"> Le point d'arrivée </span>
-    </label> 
+     
+      <input class="input-field"  type="text"  onchange="getCoordinatesArrivee()" placeholder="Point d'arrivée" name="pointarrivee" id="pointarrivee"  placeholder="" required  />
+           
     <input   type="hidden" id="latitudearrivee" name="latitudearrivee" >
       <input  type="hidden" id="longitudearrivee" name="longitudearrivee">
 
-    <label class=""> 
-    <input class=""  type="text" class="box-input" name="typetransport" id="typetransport"  placeholder="" required  />
-            <span class="placeholder "> Le type de transport </span>
+     
+    <input class="input-field"  type="text"  name="typetransport" id="typetransport"  placeholder="Type de transport" required  />
+            
+     
+    <input class="input-field"  type="number"  step=0.01  name="poidsmin" id="poidsmin" placeholder="Poids minimal" required />
+            
+    <input class="input-field"  type="number"  step=0.01  name="poidsmax" id="poidsmax" placeholder="Poids maximal" required />
+           
 
-    </label> 
-    <label class=""> 
-    <input class=""  type="number"  step=0.01 class="box-input" name="poidsmin" id="poidsmin" placeholder="" required />
-            <span class="placeholder "> Le poids minimal </span>
+    <input class="input-field"  type="number"  step=0.01  name="volumemin" id="volumemin"  placeholder="Volume minimal" required />
+           
+    <input class="input-field"  type="number"  step=0.01  name="volumemax" id="volumemax"   placeholder="Volume maximal" required />
+            
+    <input class="input-field"  type="text"   name="moyentransport" id="moyentransport" placeholder="Moyen de transport" required  />
+           
 
-    </label> 
-    <input class=""  type="number"  step=0.01 class="box-input" name="poidsmax" id="poidsmax" placeholder="" required />
-            <span class="placeholder "> Le poids maximal </span>
-
-    </label> 
-
-    <input class=""  type="number"  step=0.01 class="box-input" name="volumemin" id="volumemin"  placeholder="" required />
-            <span class="placeholder "> Le volume minimal </span>
-
-    </label> 
-    <input class=""  type="number"  step=0.01 class="box-input" name="volumemax" id="volumemax"   placeholder="" required />
-            <span class="placeholder "> Le volume maximal  </span>
-
-    </label> 
-    <label>
-    <input class=""  type="text"  class="box-input" name="moyentransport" id="moyentransport" placeholder="" required  />
-            <span class="placeholder "> Le moyen de transport </span>
-
-    </label> 
-
-    <label class=""> 
-    <input class=""  type="submit"  name="" 
-    value="Publier" id="ajax-click" class="box-button" />
+     
+    <input class="input-field"  type="submit"  name="" 
+    value="Publier" id="ajax-click"  />
   
 
-    </label>   
+  
     
     
   </form>
   </div>
-
+  </div>
+  <!-- <div class="panels-container">
+        <div class="panel left-panel" style="z-index: -10 ;" >
+          <div class="content">
+            
+          </div>
+          <img src="img/updateProfile.svg" style="width:50% ; height:50%" class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+           
+          </div>
+        </div>
+      </div>
+  </div> -->
   
   
   

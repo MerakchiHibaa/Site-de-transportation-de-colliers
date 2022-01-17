@@ -118,7 +118,7 @@ include_once './controllers/affichControl.php';
 $_controller = new affichControl();
 $ARRAY = $_controller->affichWilaya(); 
 echo "<div'>
- <select  class='form-select' style='margin:5px ;' size='2' multiple name='wilaya[]'>" ;
+ <select  class='form-select' style='margin:5px ;' size='2' multiple name='newWilayaDep[]'>" ;
  echo ("<option disabled > --- Chsoisissez les wilayas de départ--- </option> ");
 
 foreach($ARRAY as $row){
@@ -131,7 +131,7 @@ echo "</select>" ;
 
 
 $ARRAY = $_controller->affichWilaya(); 
-echo "<select class='form-select' style='margin:10px;' size='2' multiple aria-label='les wilayas d'arrivee' name='wilayaA[]'>" ;
+echo "<select class='form-select' style='margin:10px;' size='2' multiple aria-label='les wilayas d'arrivee' name='newWilayaArr[]'>" ;
 echo ("<option disabled > ---Chsoisissez les wilayas d'arrivée--- </option> ");
 foreach($ARRAY as $row){
   $wilaya = $row['wilaya'];
