@@ -57,9 +57,9 @@ echo $_SESSION['msg'] ;
       
            ?>
 
-            <p class="ann-affich_text">  Par : <?php echo $user['username'] ?> </p>
+            <p class="ann-affich_text"  >  Par : <?php echo $user['username'] ?> </p>
             <?php } else {  ?>
-                <p class="ann-affich_text"> <a href="profileClient.php?id=<?php $user['ID_user'] ?>">   Par : <?php echo  $user['nom'].' '.$user['prenom'] ?>  </a> </p>
+                <p class="ann-affich_text" style="text-transform:uppercase;" > <a href="profileClient.php?id=<?php $user['ID_user'] ?>">   Par : <?php echo  $user['nom'].' '.$user['prenom'] ?>  </a> </p>
                 <p class="ann-affich_text">  Moyen de transport: <?php echo $getUinfo['moyenTransport'] ?> </p>
 
 
