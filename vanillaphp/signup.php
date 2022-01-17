@@ -50,6 +50,8 @@
               </a>
             </div> -->
           </form>
+          <a href="./loginAdmin.php" style="width:100%; "  class="btn solid" > Se connecter en tant qu'un administrateur</a>
+
           <form action="./controllers/Users.php" method="POST" class="sign-up-form">
           <input type="hidden" name="type" value ="register">
   
