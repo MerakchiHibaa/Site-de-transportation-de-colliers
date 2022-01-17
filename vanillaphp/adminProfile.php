@@ -30,7 +30,13 @@ include_once './controllers/affichControl.php';
 
 
 $_controller = new affichControl();
-  
+/* case 'remove' :
+  $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
+  $init->deleteUserById($remove) ;
+case 'bannir' : 
+  $bannir = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['bannir']);
+  $init->bannirUserById($bannir) ;
+   */
 if (isset($_GET['remove'])) {
   $remove = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['remove']);
   $removeUser = $_controller->deleteUserById($remove);
@@ -41,7 +47,7 @@ if (isset($removeUser)) {
 } */
 if (isset($_GET['bannir'])) {
   $bannir = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['bannir']);
-  $bannirId = $users->bannirUserById($bannir);
+  $bannirId = $_controller->bannirUserById($bannir);
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'logout') {
@@ -152,6 +158,7 @@ if (isset($prenom)) {
                       <th  class="text-center">Email</th>
                       <th  class="text-center">Note</th>
                       <th  class="text-center">Statut</th>
+                      <th  class="text-center">Banni</th>
                       <th  width='25%' class="text-center">Action</th>
                     </tr>
                   </thead>
@@ -222,12 +229,30 @@ $allUser = $_controller->selectAllUserData();
                           <?php } 
                         }  ?>
                         </td>
+                        <td> 
+                          <?php if( $value['banni'] =="1") { ?>
+                            <span class="badge badge-lg badge-danger text-white">Banni</span>
+
+                            
+
+                        <?php  } else { ?>
+                          <span class="badge badge-lg badge-success text-white">Pas banni</span>
+
+                      <?php  } ?>
+                        </td>
 
                         <td>
                           <a class="btn btn-success btn-sm" href="userProfileAdmin.php?id=<?php echo $value['ID_user'] ;?>">Voir</a>
                           <a class="btn btn-info btn-sm " href="userProfileAdmin.php?id=<?php echo $value['ID_user'] ;?>">Editer</a>
                            <a onclick="return confirm('Vous voulez vraiment supprimer cet utilisateur ?')" class="btn btn-danger btn-sm " href="?remove=<?php echo $value['ID_user'];?>">Supprimer</a>
-                           <a onclick="return confirm('Vous voulez vraiment bannir cet utilisateur ?')" class="btn btn-danger btn-sm " href="?bannir=<?php echo $value['ID_user'];?>">Bannir</a>
+                           <?php if($value['banni'] =="1") { ?>
+                            <a  class="btn btn-danger btn-sm disabled " href="?bannir=<?php echo $value['ID_user'];?>">Bannir</a>
+
+
+                          <?php } else { ?>
+                            <a onclick="return confirm('Vous voulez vraiment bannir cet utilisateur ?')" class="btn btn-danger btn-sm " href="?bannir=<?php echo $value['ID_user'];?>">Bannir</a>
+
+                        <?php  } ?>
 
                             
                            <?php if ($value['type'] == 'transporteur') { ?> 

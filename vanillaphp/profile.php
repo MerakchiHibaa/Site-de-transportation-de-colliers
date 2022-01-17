@@ -21,7 +21,7 @@ $_controller = new affichControl();
 if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
 /*    redirect("../login.php");
  */ 
-    header("Location: ./login.php");
+    header("Location: ./signup.php");
  }
 
 

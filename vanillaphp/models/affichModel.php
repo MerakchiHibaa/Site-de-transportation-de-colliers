@@ -319,7 +319,7 @@ $this->db->bind(':statut', $statut);
 public function bannirUserById($bannir) {
     $this->db->query("UPDATE users set banni ='1' WHERE ID_user = :ID_user");
     $this->db->bind(':ID_user', $bannir);
-    if ($this->db->resultSet())  {
+    if ($this->db->execute())  {
     $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Success !</strong> cet utilisateur a été banni !</div>';
@@ -338,7 +338,7 @@ public function deleteUserById($remove) {
 
     $this->db->query("DELETE FROM users WHERE ID_user = :ID_user");
     $this->db->bind(':ID_user', $remove);
-    if ($this->db->resultSet())  {
+    if ($this->db->execute())  {
     $msg = '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 <strong>Success !</strong> User account Deleted Successfully !</div>';
