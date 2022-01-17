@@ -242,7 +242,10 @@ display:none ;" >
 <div class="text"  style="margin: 2rem;
 padding-top: 2rem ; 
 font-size: 1.2rem ; width: 80%;"> Envoyez un justificatif </div>
-<input type="hidden" name="type" value ="sendjustificatif"  required>
+<input type="hidden" name="type" value ="sendjustificatif" >
+<input type="hidden" name="nom" value ="<?php  echo $value['nom'] ; ?>" >
+<input type="hidden" name="prenom" value ="<?php  echo $value['prenom'] ; ?>" >
+
 <div class="from-group mb-3"> 
   <input type="text" style="margin: 0 2rem;height: 6rem ; ">
   </div> 

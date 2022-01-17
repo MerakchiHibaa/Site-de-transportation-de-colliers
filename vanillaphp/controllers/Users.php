@@ -10,6 +10,18 @@
         public function __construct(){
             $this->userModel = new User;
         }
+        public function setJustificatif() {
+            if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['justificatif'])  )  {
+                $data = [  
+                    'nom' => trim($_POST['nom'] ) , //
+                   'prenom' =>  trim($_POST['prenom'])  , //
+                   'justificatif' =>  trim($_POST['justificatif'])  , //
+                 ] ;
+            }
+            $this->userModel->setJustificatif($data) ;
+
+
+        }
 
         public function sendDemandeCertifie() {
             if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['demande']) &&  isset($_POST['email']) )  {
@@ -863,7 +875,9 @@ if($result)
             case 'report' : 
                 $init->setReport() ; 
             case 'demandeCertifie' : 
-                $init->sendDemandeCertifie() ; 
+                $init->sendDemandeCertifie() ;
+            case 'sendjustificatif' : 
+                $init->setJustificatif() ;
 
 /*             default : redirect("../index.php");
  */        }

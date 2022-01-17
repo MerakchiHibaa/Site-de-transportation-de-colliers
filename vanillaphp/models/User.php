@@ -10,6 +10,17 @@ class User {
         $this->dbb = new Database;
 
     }
+    public function setJustificatif($data) {
+        $this->db->query('UPDATE demande_certifie set justificatif=:justificatif where nom=:nom and prenom=:prenom') ;
+        $this->db->bind(':justificatif', $data['justificatif']);
+        $this->db->bind(':nom', $data['nom']);
+        $this->db->bind(':prenom', $data['prenom']);
+ return $this->db->execute() ;
+
+
+
+
+    }
     public function sendDemandeCertifie($data) {
         $this->db->query('INSERT INTO demande_certifie (nom, prenom, email, demande ) 
             VALUES (:nom, :prenom, :email , :demande )'); 
