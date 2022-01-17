@@ -69,7 +69,7 @@ if (!empty($_SESSION['msg'])) {
     <div class="container">
 
       <nav class="navbar navbar-expand-md navbar-dark bg-dark card-header">
-        <a class="navbar-brand" href="index.php"><i class="fas fa-home mr-2"></i>Dashboard</a>
+        <a class="navbar-brand" href="adminProfile.php"><i class="fas fa-home mr-2"></i>Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -84,7 +84,7 @@ if (!empty($_SESSION['msg'])) {
            
               <li class="nav-item">
 
-                  <a class="nav-link" href="index.php"><i class="fas fa-users mr-2"></i>User lists </span></a>
+                  <a class="nav-link" href="adminProfile.php"><i class="fas fa-users mr-2"></i> Liste des utilisateurs </span></a>
               </li>
               <li class="nav-item
 
@@ -98,7 +98,7 @@ if (!empty($_SESSION['msg'])) {
 
                          ?>">
 
-                <a class="nav-link" href="addUser.php"><i class="fas fa-user-plus mr-2"></i>Add user </span></a>
+                <a class="nav-link" href="addUser.php"><i class="fas fa-user-plus mr-2"></i>Ajouter utilisateur </span></a>
               </li>
          <!--  -->
             <li class="nav-item
@@ -114,7 +114,7 @@ if (!empty($_SESSION['msg'])) {
 
             ">
 
-              <a class="nav-link" href="profile.php?id=<?php /* echo $_SESSION['ID_user'];  */?>"><i class="fab fa-500px mr-2"></i>Profile <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="adminProfile.php"><i class="fab fa-500px mr-2"></i>Profile <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item">
