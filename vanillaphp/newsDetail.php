@@ -19,6 +19,7 @@
     <title>News </title>
 </head>
 <body>
+
 <?php
 include_once './controllers/affichControl.php';
 
@@ -28,16 +29,64 @@ $_controller = new affichControl();
     if ($getNInfo) {
       foreach ($getNInfo as  $getUinfo) {
           $views =  $getUinfo['viewsNumber'] + 1 ; 
-          $_controller->setViewsN($views , $ID_news); ?>
+          $_controller->setViewsN($views , $ID_news); 
+      }}?>
 
-          
+<div class="container-affich"> 
+
+
+    <div class="ann-affich">
+    <?php if(!empty($_SESSION['msg'])) { 
+
+echo $_SESSION['msg'] ; 
+} ?>
+        <div class="ann-affich_img">
+            <img src="assets/slider1.jpg" alt="">
+        </div>
+    
+        <div class="ann-affich_post">
+            
+            
+            <?php
+include_once './controllers/affichControl.php';
+
+
+$_controller = new affichControl();
+    $getNInfo = $_controller->getNewsInfoById($ID_news);
+    if ($getNInfo) {
+      foreach ($getNInfo as  $getUinfo) {
+          ?>
+<h1 class="ann-affich_title"> <?php echo $getUinfo['article'] ?> </h1>
+<h6 class=""> <?php echo $getUinfo['contenu'] ?> </h6>
 
 
 
+            <i class="fa fa-eye" aria-hidden="true">    <?php echo"   ".$getUinfo['viewsNumber'] ; ?>   </i>
+            <p class="ann-affich_text"> Créée le : <?php echo $getUinfo['creationDate'] ?> </p>
+ 
 
-    <?php  
-    }
-}  ?>
+            <?php
+             }
+             }
+             else {  ?>
+                <p class="ann-affich_text">  <?php echo $getUinfo['contenu'] ?> </p>
+
+
+            <?php } ?>
+
+           
+<!--     <a  href="#" class="ann-affich_cta"> Voir sur une carte  </a>
+ -->
+ 
+ <
+
+        </div> <!--ann-affich_post end-->
+        </div> <!--ann-affich-->
+        </div>
+
+
+
+  
 
 </body> 
 
