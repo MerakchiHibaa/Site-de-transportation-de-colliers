@@ -571,7 +571,7 @@ $(document).ready(function(){
 
 })
 </script>
-
+<script  src="index.js"> </script>
    <!--  <script  src="index.js"> </script>
     <script src="jquery-1.10.2.min.js"></script>
     <script src="jquery-ui.js"></script>
