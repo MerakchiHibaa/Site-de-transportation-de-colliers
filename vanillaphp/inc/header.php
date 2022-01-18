@@ -5,10 +5,15 @@
   <head>
     <meta charset="utf-8">
     <title>PHP CRUD User Management</title>
-    <link rel="stylesheet" href="assetss/bootstrap.min.css">
+    <link rel="stylesheet" href="../assetss/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="assetss/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="assetss/style.css">
+    <link rel="stylesheet" href="../assetss/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assetss/style.css">
+    <link rel="stylesheet" href="../assetss/bootstrap.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assetss/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assetss/style.css">
+  
   </head>
   <body>
 
@@ -47,10 +52,22 @@ if (!empty($_SESSION['msg'])) {
 
         
            
-              <li class="nav-item">
+            <li class="nav-item">
 
-                  <a class="nav-link" href="index.php"><i class="fas fa-users mr-2"></i>User lists </span></a>
-              </li>
+<a class="nav-link" href="adminProfile.php"><i class="fas fa-users mr-2"></i> Liste des utilisateurs </span></a>
+</li>
+<li class="nav-item">
+
+<a class="nav-link" href="signalAdmin.php"><i class="fas fa-users mr-2"></i> Liste des signalements </span></a>
+</li>
+<li class="nav-item">
+
+<a class="nav-link" href="newsAdmin.php"><i class="fas fa-users mr-2"></i> Liste des publicités </span></a>
+</li>
+<li class="nav-item">
+
+<a class="nav-link" href="contenuAdmin.php"><i class="fas fa-users mr-2"></i> Gestion de contenu </span></a>
+</li>
               <li class="nav-item
 
               <?php

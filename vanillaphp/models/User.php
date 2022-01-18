@@ -21,6 +21,10 @@ class User {
 
 
     }
+
+    public function addNewUserByAdmin() {
+        
+    }
     public function sendDemandeCertifie($data) {
         $this->db->query('INSERT INTO demande_certifie (nom, prenom, email, demande ) 
             VALUES (:nom, :prenom, :email , :demande )'); 

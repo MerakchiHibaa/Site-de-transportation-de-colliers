@@ -1,7 +1,7 @@
 <?php
 
-    require_once 'models/affichModel.php';
-    require_once 'helpers/session_helper.php';
+    require_once '../models/affichModel.php';
+    require_once '../helpers/session_helper.php';
 
     class affichControl {
 
