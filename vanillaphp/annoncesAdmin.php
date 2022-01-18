@@ -142,7 +142,7 @@ if (isset($prenom)) {
                   <thead>
                     <tr> 
                         <!--12 -->
-                      <th  class="text-center">SL</th>
+                      <th  class="text-center" width="20%">SL</th>
                       <th  class="text-center">Utilisateur</th>
                       <th  class="text-center">Point de départ</th>
                       <th  class="text-center">Point d'arrivée</th>
@@ -152,6 +152,8 @@ if (isset($prenom)) {
                       <th  class="text-center">Moyen de transport</th>
                       <th  class="text-center">Date de création</th>
                       <th  class="text-center">Nombre de vues</th>
+
+                      <th  class="text-center">Tarif</th>
 
                       <th  class="text-center">Archivée?</th>
 
@@ -224,6 +226,12 @@ $_controller = new affichControl();
                         </td>
 
                         <td>
+                        tarif = distance*p+q </br>
+                        p= <?php echo $value['p'] ; ?> </br>
+                        q=<?php echo $value['q'] ; ?> </br>
+                        </td>
+
+                        <td>
                         <?php if($value['archive'] == '0') { ?>
                          <a class="btn btn-success btn-sm" href="">Non</a>
 
@@ -292,7 +300,44 @@ $_controller = new affichControl();
                             
                          
 <!--                                <a onclick="return confirm('Vous voulez changer le statut à <En cours de traitement> ?')" class="btn btn-secondary btn-sm " href="?deactive=<?php echo $value['ID_user'];?>">Changer le statut</a>
- -->                             
+ -->                                                     <a class="btn btn-primary btn-sm" onclick="SetTarif()"> <i class="far fa-edit"></i> Tarif</a>
+ <div id="container-parameters" class="container-parameters" style=" 
+
+position:relative;
+display:none ;" > 
+
+  <label onclick="closeform()" for="" id="closebtn-parameters" class="closer-btn fas fa-times" style="
+  position: absolute;
+ 
+  right: 1rem;
+  top: 1rem;
+
+"></label>
+
+<form action="./controllers/Users.php" method="POST" style="margin: 2rem;" > 
+
+<div class="text"  style="margin: 2rem;
+padding-top: 2rem ; 
+font-size: 1rem ;
+width: 120%;
+font-weight: 600;
+transform: translateX(-60px);
+"> Changer les paramètres </div>
+<input type="hidden" name="type" value ="setParameters" >
+<input type="hidden" name="ID_annonce" value ="<?php echo $value['ID_annonce'];?>" >
+
+
+<div class="from-group mb-3"> 
+  <input type="text" style="margin: .8rem 2rem; width:6rem; height: 1.5rem ; " name="p" placeholder="p">
+  <input type="text" style="margin: .8rem 2rem; width:6rem; height: 1.5rem ; "name="q" placeholder="q">
+
+  </div> 
+  <input type="submit" value="Changer"  style="margin: 2rem; " >
+
+
+</form> 
+</div>
+
 
                         </td>
                       </tr>
@@ -330,41 +375,37 @@ $_controller = new affichControl();
 </div>
 
 
-<script> 
+<script type="text/javascript"> 
+/* $(document).ready(function (  */
 
-const closebtn = document.getElementById('closebtn-justificatif') ;
-const containerjust = document.getElementById('container-justificatif') ;
-closebtn.onclick = () => {
+const closebtn = document.getElementById('closebtn-parameters') ;
+const containerjust = document.getElementById('container-parameters') ;
+function closeform() {
   containerjust.style.display = 'none' ; 
 
+
 }
-function selectRefuse(nameselect) {
-  if(nameselect) {
-    const refus = document.getElementById('refus').value ;
-    if(refus == nameselect.value) {
-      console.log('inside selectrefuse function ') ;
+/* closebtn.onclick = () => {
+  containerjust.style.display = 'none' ; 
+
+} */
+function SetTarif() {
+ 
   containerjust.style.display = 'block' ; 
-    }
-    else{
-      containerjust.style.display = 'none' ; 
-
-
-    }
+    
    
-
-  }
-  else {
-    containerjust.style.display = 'none' ; 
-
 
   }
   
 
 
-}
+  
+
+
+
+/* )) */
 
 </script>
-
 
   </body>
 

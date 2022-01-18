@@ -84,7 +84,22 @@
 
 
         }
+public function setParameters(){
+    if (isset($_POST['p']) && isset($_POST['q']) && isset($_POST['ID_annonce'])  )  {
+           $p = (float) $_POST['p']  ; //
+           $q = (float) $_POST['q'] ; // 
+           $ID_annonce = (int)  $_POST['ID_annonce'] ;
+               
+          
+           $this->userModel->setParameters($ID_annonce, $p, $q )  ;
+                  redirect("../adminProfile.php") ; 
 
+              
+
+
+}
+
+}
         public function setTrajet() {
             if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
                 echo "<h1> insiiide inisertDemandes </h1>";
@@ -916,6 +931,8 @@ if($result)
                 $init->setJustificatif() ;
             case 'loginAdmin' : 
                 $init->loginAdmin() ;
+            case 'setParameters' : 
+                $init->setParameters() ;
 
 /*             default : redirect("../index.php");
  */        }

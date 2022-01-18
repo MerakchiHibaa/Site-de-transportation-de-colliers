@@ -99,6 +99,16 @@ class User {
        return $this->db->resultSet() ; 
     
     } 
+public function setParameters($ID_annonce, $p, $q ) {
+    $this->db->query('UPDATE annonces SET p=:p, q=:q where ID_annonce = :ID_annonce'); 
+    $this->db->bind(':p', $p);
+    $this->db->bind(':q', $q);
+    $this->db->bind(':ID_annonce', $ID_annonce);
+   return $this->db->execute() ;
+
+
+}
+
     public function setTrajet($ID_annonce, $ID_client ,$ID_transporteur) {
        $price = 0 ; 
        $annonce = $this->getAnnonceInfoById($ID_annonce) ; 
