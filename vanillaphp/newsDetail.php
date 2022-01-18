@@ -41,13 +41,7 @@ $_controller = new affichControl();
 echo $_SESSION['msg'] ; 
 } ?>
         <div class="ann-affich_img">
-            <img src="assets/slider1.jpg" alt="">
-        </div>
-    
-        <div class="ann-affich_post">
-            
-            
-            <?php
+        <?php
 include_once './controllers/affichControl.php';
 
 
@@ -56,6 +50,13 @@ $_controller = new affichControl();
     if ($getNInfo) {
       foreach ($getNInfo as  $getUinfo) {
           ?>
+            <img src="assets/<?php  echo $getUinfo['image'] ;?>" alt="">
+        </div>
+    
+        <div class="ann-affich_post">
+            
+            
+           
 <h1 class="ann-affich_title"> <?php echo $getUinfo['article'] ?> </h1>
 <h6 class=""> <?php echo $getUinfo['contenu'] ?> </h6>
 

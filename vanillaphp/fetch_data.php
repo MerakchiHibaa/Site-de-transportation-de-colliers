@@ -145,13 +145,14 @@ $_controller = new fetch_data_model() ;
                     <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
 
                     <p align="center"><strong><a href="#">'. $row['titreAnnonce'] .'</a></strong></p>
+                    <img src="assets/'.$row['image'].'" alt="image" style="margin: 20px 0 ;" width="100%" height="50%"> 
                     Type de transport : '. $row['typeTransport'] .' <br />
                     <p>Point de départ : '. $row['pointDepart'].' <br />
                         Point darrivée : '. $row['pointArrivee'] .' <br />
-                        <p style="text-align:center;" class="text-danger" > Poids entre: '. $row['poidsMin'] .' - '. $row['poidsMax'] .' KG</p>
-                        <p style="text-align:center;" class="text-danger" > Poids entre: '. $row['volumeMin'] .' - '. $row['volumeMax'] .'L</p>
+                        <p > Poids entre: '. $row['poidsMin'] .' - '. $row['poidsMax'] .' KG</p>
+                        <p > Poids entre: '. $row['volumeMin'] .' - '. $row['volumeMax'] .'L</p>
 
-                        <a href="annonceDetail.php?id='.$row['ID_annonce'].'"> Lire a suite </a>
+                        <a href="annonceDetail.php?id='.$row['ID_annonce'].'"> <p align="center" style="font-weight:700;"> Lire a suite </p> </a>
                     </div>
     
                 </div>
