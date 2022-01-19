@@ -1,8 +1,21 @@
-<?php if (isset($_GET['id'])) {
+<?php
+
+
+include_once '../controllers/Users.php';
+include_once '../controllers/affichControl.php';
+
+
+class annonceDetail_view {
+
+    public function display() {
+
+if (isset($_GET['id'])) {
     session_start();
   $ID_annonce = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['id']);
 
-} ?>
+} 
+
+echo'
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +32,8 @@
 <link rel="stylesheet" href="../css/bootstrap.min.css">
     <title>Annonce </title>
 </head>
-<body>
-<?php
+<body>' ;
+
 include_once '../controllers/affichControl.php';
 
 
@@ -31,46 +44,46 @@ $_controller = new affichControl();
           $views =  $getUinfo['viewsNumber'] + 1 ; 
           $_controller->setViews($views , $ID_annonce);
 
-     ?>
+    echo'
 
 <div class="container-affich"> 
 
 
-    <div class="ann-affich">
-    <?php if(!empty($_SESSION['msg'])) { 
+    <div class="ann-affich">' ;
+     if(!empty($_SESSION['msg'])) { 
 
 echo $_SESSION['msg'] ; 
-} ?>
-        <div class="ann-affich_img">
+} 
+       echo' <div class="ann-affich_img">
             <img src="../assets/slider1.jpg" alt="">
         </div>
     
         <div class="ann-affich_post">
             
-            <h1 class="ann-affich_title"> <?php echo $getUinfo['titreAnnonce'] ?> </h1>
-            <p class="ann-affich_text"> Créée le : <?php echo $getUinfo['creationDate'] ?> </p>
+            <h1 class="ann-affich_title"> '. $getUinfo['titreAnnonce'].'</h1>
+            <p class="ann-affich_text"> Créée le : '. $getUinfo['creationDate'].'</p>' ;
 
-           <?php     $user = $_controller->getUserInfoById( $getUinfo['ID_User']);
+              $user = $_controller->getUserInfoById( $getUinfo['ID_User']);
            if ($user) {
             foreach ($user as  $user) {
                 if(!isset($_SESSION['userID'])) { 
       
-           ?>
+           
 
-            <p class="ann-affich_text"  >  Par : <?php echo $user['username'] ?> </p>
-            <?php } else {  ?>
-                <p class="ann-affich_text" style="text-transform:uppercase;" > <a href="profileClient.php?id=<?php $user['ID_user'] ?>">   Par : <?php echo  $user['nom'].' '.$user['prenom'] ?>  </a> </p>
-                <p class="ann-affich_text">  Moyen de transport: <?php echo $getUinfo['moyenTransport'] ?> </p>
+            echo '<p class="ann-affich_text"  >  Par : '. $user['username'].'</p>' ;
+           } else {  
+              echo'  <p class="ann-affich_text" style="text-transform:uppercase;" > <a href="profileClient.php?id='. $user['ID_user'] .'">   Par : '.  $user['nom'].' '.$user['prenom'].' </a> </p>
+                <p class="ann-affich_text">  Moyen de transport: '. $getUinfo['moyenTransport'].'</p>' ;
 
 
-            <?php } ?>
+           } 
 
-            <p class="ann-affich_text">  Type de transport: <?php echo $getUinfo['typeTransport'] ?> </p>
-            <p class="ann-affich_text"> Poids de l'objet entre <?php echo $getUinfo['poidsMin'] ?> à <?php echo $getUinfo['poidsMax'] ?> </p>
-            <p class="ann-affich_text">  Volume de l'objet entre <?php echo $getUinfo['volumeMin'] ?> à <?php $getUinfo['volumeMax'] ?> </p>
-        <p class="ann-affich_text">  Point de départ :  <?php echo $getUinfo['pointDepart'] ?> Point d'arrivée : <?php echo $getUinfo['pointArrivee'] ?> </p>
+           echo' <p class="ann-affich_text">  Type de transport: '. $getUinfo['typeTransport'].'</p>
+            <p class="ann-affich_text"> Poids de l\'objet entre '. $getUinfo['poidsMin'].'et '. $getUinfo['poidsMax'].'</p>
+            <p class="ann-affich_text">  Volume de l\'objet entre '. $getUinfo['volumeMin'].' et '. $getUinfo['volumeMax'].'</p>
+        <p class="ann-affich_text">  Point de départ : '. $getUinfo['pointDepart'] .' Point d\'arrivée : '. $getUinfo['pointArrivee'] .' </p>
 
-    <i class="fa fa-eye" aria-hidden="true">    <?php echo"   ".$getUinfo['viewsNumber'] ; ?>   </i> 
+    <i class="fa fa-eye" aria-hidden="true">  '.$getUinfo['viewsNumber']  .'   </i> 
 <!--     <a  href="#" class="ann-affich_cta"> Voir sur une carte  </a>
  -->
  
@@ -81,28 +94,26 @@ echo $_SESSION['msg'] ;
          <input type="hidden" name="type" value ="notif">
         
 
-         <input type="hidden" name="ID_annonce" value="<?php echo $ID_annonce ?>"> 
-         <input type="hidden" name="ID_transporteur" value="<?php echo $_SESSION['userID'] ?>"> 
-         <input type="hidden" name="ID_client" value="<?php echo $getUinfo['ID_User'] ?>"> 
-         <input type="hidden" name="price" id="price" value='0'>
-         <input type="hidden" name="p" id="p" value="<?php echo $getUinfo['p'] ?>">
-         <input type="hidden" name="q" id="q" value="<?php echo $getUinfo['q'] ?>">
+         <input type="hidden" name="ID_annonce" value="'.  $ID_annonce .'"> 
+         <input type="hidden" name="ID_transporteur" value="'. $_SESSION['userID'] .'"> 
+         <input type="hidden" name="ID_client" value="'. $getUinfo['ID_User'] .'"> 
+         <input type="hidden" name="price" id="price" value=\'0\'>
+         <input type="hidden" name="p" id="p" value="'. $getUinfo['p'] .'">
+         <input type="hidden" name="q" id="q" value="'. $getUinfo['q'] .'"> ' ;
 
 
- <?php if(isset($_SESSION['userType'] ) ) { 
+  if(isset($_SESSION['userType'] ) ) { 
      
-     if ($_SESSION['userType'] == 'client') { ?> <!-- disabled -->
-         </form>
-<!--          <input type="hidden" id="price" value=''>
- -->
+     if ($_SESSION['userType'] == 'client') { 
+        echo' </form>' ;
 
         
-<?php } else if($_SESSION['userType'] =='transporteur'){ ?> 
+ } else if($_SESSION['userType'] =='transporteur'){ 
 
-    <input type="submit" value="Répondre à cette annonce" name="send"class="ann-affich_cta " > </input>
-         </form>
+  echo'  <input type="submit" value="Répondre à cette annonce" name="send"class="ann-affich_cta " > </input>
+         </form>' ;
 
-<?php } }?>
+ } } echo'
         </div> <!--ann-affich_post end-->
         </div> <!--ann-affich-->
         </div>
@@ -117,14 +128,10 @@ echo $_SESSION['msg'] ;
          <a href="#" class="close" id="closebtn">  &times; </a>
          
  <form >
-    <input type="hidden" id="from" class="form-control"  value="<?php echo $getUinfo['pointDepart'] ?>"> 
- <input type="hidden" id="to" class="form-control" value="<?php echo $getUinfo['pointArrivee'] ?>"  > 
+    <input type="hidden" id="from" class="form-control"  value="'. $getUinfo['pointDepart'].'"> 
+ <input type="hidden" id="to" class="form-control" value="'. $getUinfo['pointArrivee'].'"  > 
 
- </form>  
-<!--  <form > 
-     <input type="hidden" id="price" value=''>
- </form> -->
- 
+ </form> 
  
  <div class="container-map-output"> 
  <div id="googleMap">
@@ -252,18 +259,18 @@ margin: 2rem;
  <!-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6cIUVCcSaRbVqNTES9gwZ1uZeIOrE-_o&libraries=places&callback=mapInit"></script>
  -->
 <script  >
-  /*   let voirCarte = document.getElementById('voirCarte') ; 
-    let containermap = document.getElementById('container-map') ; 
+  /*   let voirCarte = document.getElementById(\'voirCarte\') ; 
+    let containermap = document.getElementById(\'container-map\') ; 
     voirCarte.onclick = function() {
-        containermap.style.display = 'block' ;
+        containermap.style.display = \'block\' ;
 
     } */
 
-    let closebtn = document.getElementById('closebtn') ; 
+    let closebtn = document.getElementById(\'closebtn\') ; 
     closebtn.onclick = function() {
-        let containermap = document.getElementById('container-map') ; 
+        let containermap = document.getElementById(\'container-map\') ; 
 
-        containermap.style.display = 'none' ;
+        containermap.style.display = \'none\' ;
 
     }
     let mylatlng = {lat:36.7630648 , lng: 3.05055253 } ;
@@ -273,10 +280,10 @@ let mapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP
 } ;
 
-/* google.maps.event.addDomListener(window, 'load', initialize);
+/* google.maps.event.addDomListener(window, \'load\', initialize);
  */
 
-let map = new google.maps.Map(document.getElementById('googleMap'), mapOptions) ;
+let map = new google.maps.Map(document.getElementById(\'googleMap\'), mapOptions) ;
 
 let directionService = new google.maps.DirectionsService() ;
 let directionDisplay = new google.maps.DirectionsRenderer() ;
@@ -284,13 +291,13 @@ let directionDisplay = new google.maps.DirectionsRenderer() ;
 directionDisplay.setMap(map) ;
 
 function calcRoute() {
-    let containermap = document.getElementById('container-map') ; 
-        containermap.style.display = 'block' ;
+    let containermap = document.getElementById(\'container-map\') ; 
+        containermap.style.display = \'block\' ;
 
     
     let request = {
     origin: document.getElementById("from").value,
-    destination: document.getElementById('to').value,
+    destination: document.getElementById(\'to\').value,
     travelMode: google.maps.TravelMode.DRIVING ,  //WALKING, BYCYCLING ,TRANSIT
     unitSystem: google.maps.UnitSystem.METRIC
 
@@ -312,12 +319,12 @@ directionService.route(request ,  (result, status) => {
 
       //nombre de kilomètres x consommation du véhicule au kilomètre x prix du carburant au litre
 
-let pricevalue = document.getElementById('price') ; 
+let pricevalue = document.getElementById(\'price\') ; 
 pricevalue.value = price ; 
 console.log(pricevalue.value) ;
         const output = document.getElementById("output") ; 
-        output.innerHTML = "<h4  style='margin: 2rem; font-size:1.5rem;' > De : " + document.getElementById('from').value + " à: " + document.getElementById('to').value + ".<br /> Distance en voiture <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + ". <br /> Le tarif est : "+price+" DA.</h4>" ;
-     console.log(document.getElementById('from').value + ".<br /> To: " + document.getElementById('to').value + ".<br /> Driving distance <i class='fas fa-road'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Duration: <i class='fas fa-hourglass-start'> </i> : " + result.routes[0].legs[0].duration.text + " et le tarif est : "+price+".</h3>") ;
+        output.innerHTML = "<h4  style=\'margin: 2rem; font-size:1.5rem;\' > De : " + document.getElementById(\'from\').value + " à: " + document.getElementById(\'to\').value + ".<br /> Distance en voiture <i class=\'fas fa-road\'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class=\'fas fa-hourglass-start\'> </i> : " + result.routes[0].legs[0].duration.text + ". <br /> Le tarif est : "+price+" DA.</h4>" ;
+     console.log(document.getElementById(\'from\').value + ".<br /> To: " + document.getElementById(\'to\').value + ".<br /> Driving distance <i class=\'fas fa-road\'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Duration: <i class=\'fas fa-hourglass-start\'> </i> : " + result.routes[0].legs[0].duration.text + " et le tarif est : "+price+".</h3>") ;
 
         directionDisplay.setDirections(result) ; 
     }
@@ -328,8 +335,8 @@ console.log(pricevalue.value) ;
         map.setCenter(mylatlng) ;
         //show error message 
         
-        output.innerHTML = "<h4 style='text-align: center; margin: 0 auto ; font-size:20rem;'> <i class='fas fa-exclamation-triangle'> </i> Impossible de calculer la distance </h4> ";
-   console.log("<h4 > <i class='fas fa-exclamation-triangle'> </i> Could not retrieve driving distance </h4> ");
+        output.innerHTML = "<h4 style=\'text-align: center; margin: 0 auto ; font-size:20rem;\'> <i class=\'fas fa-exclamation-triangle\'> </i> Impossible de calculer la distance </h4> ";
+   console.log("<h4 > <i class=\'fas fa-exclamation-triangle\'> </i> Could not retrieve driving distance </h4> ");
    
     }
 }); 
@@ -338,12 +345,12 @@ console.log(pricevalue.value) ;
 
 //create autocomplete object  for all inputs
 let options = {
-    types: ['(cities)']
+    types: [\'(cities)\']
 }
-let input1 = document.getElementById('from') ; 
+let input1 = document.getElementById(\'from\') ; 
 let autocomplete1 = new google.maps.places.Autocomplete(input1 , options) ;
 
-let input2 = document.getElementById('to') ; 
+let input2 = document.getElementById(\'to\') ; 
 let autocomplete2 = new google.maps.places.Autocomplete(input2 , options) ;
 
 
@@ -351,4 +358,10 @@ let autocomplete2 = new google.maps.places.Autocomplete(input2 , options) ;
 
 </script>
 </body>
-</html>
+</html> ' ;
+
+}
+           }
+        }
+    }
+}}

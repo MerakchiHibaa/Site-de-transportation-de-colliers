@@ -6,6 +6,8 @@
     include_once '../views/annonces-view.php';
     include_once '../views/addUser-view.php';
     include_once '../views/adminProfile-view.php';
+    include_once '../views/annonceDetail_view.php';
+
 
 
 
@@ -18,6 +20,7 @@
         private $annonces ;
         private $addUser ; 
         private $adminProfile ; 
+        private $annonceDetail ; 
         
         public function __construct(){
             $this->userModel = new User;
@@ -25,6 +28,7 @@
             $this->annonces = new Annonces_view();
             $this->addUser = new addUser_view() ;
             $this->adminProfile = new adminProfile_view() ;
+            $this->annonceDetail = new annonceDetail_view() ;
 
 
             
@@ -39,6 +43,10 @@
             }
             $this->userModel->setJustificatif($data) ;
 
+
+        }
+        public function afficherAnnonceDetail() {
+            $this->annonceDetail->display() ; 
 
         }
         
