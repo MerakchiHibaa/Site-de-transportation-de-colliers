@@ -2,13 +2,23 @@
 
     require_once '../models/User.php';
     require_once '../helpers/session_helper.php';
+    include_once '../views/Accueil-view.php';
+    include_once '../views/annonces-view.php';
+
+
 
     class Users {
 
         public $userModel;
+        private $accueil ; 
+        private $annonces ;
         
         public function __construct(){
             $this->userModel = new User;
+            $this->accueil = new Accueil_view();
+            $this->annonces = new Annonces_view();
+
+            
         }
         public function setJustificatif() {
             if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['justificatif'])  )  {
@@ -20,6 +30,14 @@
             }
             $this->userModel->setJustificatif($data) ;
 
+
+        }
+        public function afficherAnnonces() {
+            $this->annonces->display() ; 
+
+        }
+        public function afficherAccueil() {
+            $this->accueil->display() ; 
 
         }
 
@@ -948,14 +966,14 @@ if($result)
  */        }
         
     }else if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-        switch($_GET['q']){
+        /* switch($_GET['q']){
             //we add cases for get here
             case 'logout':
                 $init->logout();
                 break;
              default:
-/*             redirect("../index.php"); 
- */        }
+            redirect("../routers/signup.php"); 
+        } */
         
     }
 
