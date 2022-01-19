@@ -4,6 +4,8 @@
     require_once '../helpers/session_helper.php';
     include_once '../views/Accueil-view.php';
     include_once '../views/annonces-view.php';
+    include_once '../views/addUser-view.php';
+
 
 
 
@@ -12,11 +14,13 @@
         public $userModel;
         private $accueil ; 
         private $annonces ;
+        private $addUser ; 
         
         public function __construct(){
             $this->userModel = new User;
             $this->accueil = new Accueil_view();
             $this->annonces = new Annonces_view();
+            $this->addUser = new addUser_view() ;
 
             
         }
@@ -30,6 +34,12 @@
             }
             $this->userModel->setJustificatif($data) ;
 
+
+        }
+        
+
+        public function afficherAddUser() {
+            $this->addUser->display() ; 
 
         }
         public function afficherAnnonces() {
