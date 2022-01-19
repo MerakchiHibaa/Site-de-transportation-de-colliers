@@ -5,6 +5,8 @@
     include_once '../views/Accueil-view.php';
     include_once '../views/annonces-view.php';
     include_once '../views/addUser-view.php';
+    include_once '../views/adminProfile-view.php';
+
 
 
 
@@ -15,12 +17,15 @@
         private $accueil ; 
         private $annonces ;
         private $addUser ; 
+        private $adminProfile ; 
         
         public function __construct(){
             $this->userModel = new User;
             $this->accueil = new Accueil_view();
             $this->annonces = new Annonces_view();
             $this->addUser = new addUser_view() ;
+            $this->adminProfile = new adminProfile_view() ;
+
 
             
         }
@@ -37,6 +42,11 @@
 
         }
         
+        public function afficherAdminProfile() {
+            $this->adminProfile->display() ; 
+
+
+        }
 
         public function afficherAddUser() {
             $this->addUser->display() ; 
