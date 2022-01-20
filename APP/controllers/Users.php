@@ -22,6 +22,8 @@
     include_once '../views/rate-view.php';
     include_once '../views/report-view.php';
     include_once '../views/statistiques-view.php';
+    include_once '../views/signalAdmin-view.php';
+
 
 
 
@@ -51,6 +53,7 @@
         private $rate ; 
         private $report ; 
         private $stats ; 
+        private $signalAdmin  ;
 
 
         
@@ -79,10 +82,12 @@
             $this->rate = new rate_view() ; 
             $this->report = new report_view() ; 
             $this->stats = new Statistiques_view() ; 
+            $this->signalAdmin = new signalAdmin_view() ; 
+
 
             
 
-
+            
             
 
 
@@ -109,6 +114,9 @@
         }
 
         
+        public function afficherSignalAdmin() {
+            $this->signalAdmin->display() ; 
+        }
         public function afficherStatistiques() {
             $this->stats->display() ; 
         }

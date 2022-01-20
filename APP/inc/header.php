@@ -1,5 +1,5 @@
 
-<!-- 
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -16,7 +16,7 @@
     <title>Site transport</title>
   
   </head>
-  <body> -->
+  <body>
 
   <?php
 
@@ -36,7 +36,7 @@ if (!empty($_SESSION['msg'])) {
 
  ?>
 
-<!-- 
+
     <div class="container">
 
       <nav class="navbar navbar-expand-md navbar-dark bg-dark card-header">
@@ -69,34 +69,37 @@ if (!empty($_SESSION['msg'])) {
 <a class="nav-link" href="contenuAdmin.php"><i class="fas fa-users mr-2"></i> Gestion de contenu </span></a>
 </li>
               <li class="nav-item
- -->
+ 
               <?php
 
-                         /*  $path = $_SERVER['SCRIPT_FILENAME'];
+                          $path = $_SERVER['SCRIPT_FILENAME'];
                           $current = basename($path, '.php');
                           if ($current == 'addUser') {
                             echo " active ";
-                          } */
+                          }
 
-                         ?> <!-- "> -->
+                         ?>  "> 
 
-              <!--   <a class="nav-link" href="addUser.php"><i class="fas fa-user-plus mr-2"></i>Add user </span></a>
+                 <a class="nav-link" href="addUser.php"><i class="fas fa-user-plus mr-2"></i>Add user </span></a>
               </li>
-         -->
-           <!--  <li class="nav-item --> 
+         
+             <li class="nav-item  
             <?php
 
-      				/* $path = $_SERVER['SCRIPT_FILENAME'];
+      				$path = $_SERVER['SCRIPT_FILENAME'];
       				$current = basename($path, '.php');
       				if ($current == 'adminProfile') {
       					echo "active ";
       				}
- */
+
       			 ?>
 
-            <!-- "> -->
+             "> 
 
-            <!--   <a class="nav-link" href="profile.php?id=<?php /* echo $_SESSION['ID_user'];  */?>"><i class="fab fa-500px mr-2"></i>Profile <span class="sr-only">(current)</span></a>
+               <a class="nav-link" href="profile.php?id=<?php if( isset($_SESSION['ID_user'])) {
+                 echo $_SESSION['ID_user'];
+
+               }  ?>"><i class="fab fa-500px mr-2"></i>Profile <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item">
@@ -111,4 +114,3 @@ if (!empty($_SESSION['msg'])) {
 
         </div>
       </nav>
- -->
