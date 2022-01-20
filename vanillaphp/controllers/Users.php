@@ -11,6 +11,8 @@
     include_once '../views/annoncesAdmin-view.php';
     include_once '../views/annonceResponders-view.php';
     include_once '../views/certifie-view.php';
+    include_once '../views/contact-view.php';
+
 
 
 
@@ -33,6 +35,7 @@
         private $annoncesAdmin ;
         private $annoncesResponders ; 
         private $certifie ; 
+        private $contact ; 
         
         public function __construct(){
             $this->userModel = new User;
@@ -45,6 +48,8 @@
             $this->annoncesAdmin = new annoncesAdmin_view() ;
             $this->annoncesResponders = new annoncesResponders_view() ; 
             $this->certifie = new certifie_view() ; 
+            $this->contact = new contact_view() ; 
+
 
 
 
@@ -60,6 +65,15 @@
                  ] ;
             }
             $this->userModel->setJustificatif($data) ;
+
+
+
+
+        }
+
+        
+        public function afficherContact() {
+            $this->contact->display() ; 
 
 
         }
