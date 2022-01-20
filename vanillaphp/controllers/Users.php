@@ -13,6 +13,8 @@
     include_once '../views/certifie-view.php';
     include_once '../views/contact-view.php';
     include_once '../views/contenuAdmin-view.php';
+    include_once '../views/loginAdmin-view.php';
+
 
 
 
@@ -40,6 +42,9 @@
         private $certifie ; 
         private $contact ; 
         private $contenu ;
+        private $loginAdmin ;
+
+        
         
         public function __construct(){
             $this->userModel = new User;
@@ -54,6 +59,8 @@
             $this->certifie = new certifie_view() ; 
             $this->contact = new contact_view() ; 
             $this->contenu = new contenuAdmin_view() ; 
+            $this->loginAdmin = new loginAdmin_view() ; 
+
 
 
 
@@ -76,6 +83,13 @@
 
 
         }
+        
+        public function afficherLoginAdmin() {
+            $this->loginAdmin->display() ; 
+
+
+        }
+        
         public function afficherContenuAdmin() {
             $this->contenu->display() ; 
 
