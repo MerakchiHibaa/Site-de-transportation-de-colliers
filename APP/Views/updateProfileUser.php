@@ -10,8 +10,8 @@ $_controller = new affichControl();
 if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
 /*    redirect("../login.php");
  */ 
-    header("Location: ./signup.php");
- }
+/*     header("Location: ./signup.php");
+ */ }
  ?>
 <!DOCTYPE html>
 <html lang="en">

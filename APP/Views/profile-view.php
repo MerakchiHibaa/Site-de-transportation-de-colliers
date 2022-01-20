@@ -1,6 +1,5 @@
 
 <?php 
-include_once '../controllers/affichControl.php';
 include_once '../controllers/Users.php';
 
 $_controllera = new affichControl();

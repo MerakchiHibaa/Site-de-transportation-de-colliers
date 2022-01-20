@@ -23,6 +23,8 @@
 
 
 
+   
+
     class Users {
 
         public $userModel;
@@ -89,6 +91,8 @@
 
             
         }
+        
+        
         public function afficherRate( $ID_user , $ID_trajet) {
             $this->rate->display( $ID_user , $ID_trajet) ; 
         }
@@ -199,8 +203,8 @@
 
             }
              $this->userModel->sendDemandeCertifie($data) ;
-            redirect("../views/signup.php") ; 
-
+          /*   redirect("../views/signup.php") ; 
+ */
 
 
 
@@ -227,8 +231,8 @@
                     
                
                 $this->userModel->insertDemandes($ID_annonce, $ID_client ,$ID_transporteur , $price)  ;
-                       redirect("../views/annonceDetail.php?id=$ID_annonce") ; 
-
+/*                        redirect("../views/annonceDetail.php?id=$ID_annonce") ; 
+ */
                    
 
             }
@@ -240,8 +244,8 @@
                 $reportText =  trim($_POST['reportText'] ) ;
 
                 $this->userModel->setReport($ID_trajet, $reportText )  ;
-                redirect("../views/profile.php") ;
-
+/*                 redirect("../views/profile.php") ;
+ */
 
 
 
@@ -257,8 +261,8 @@ public function setParameters(){
                
           
            $this->userModel->setParameters($ID_annonce, $p, $q )  ;
-                  redirect("../views/adminProfile.php") ; 
-
+/*                   redirect("../views/adminProfile.php") ; 
+ */
               
 
 
@@ -274,8 +278,8 @@ public function setParameters(){
                        
                   
                    $this->userModel->setTrajet($ID_annonce, $ID_client ,$ID_transporteur)  ;
-                          redirect("../annonceDetail.php?id=$ID_annonce") ; 
-   
+/*                           redirect("../annonceDetail.php?id=$ID_annonce") ; 
+ */   
                       
    
 
@@ -312,8 +316,8 @@ public function setParameters(){
                     echo"<h1>le volume minimale ne peut pas etre plus grand que le volume maximal <h1>" ;
                     echo"<script> alert(' vol min > vol max') ;</script>" ; 
 
-                    redirect("../views/annonces.php");
-
+/*                     redirect("../views/annonces.php");
+ */
 
                 }
                 if(floatval($_POST['poidsmin']) > floatval($_POST['poidsmax']) ) {
@@ -321,8 +325,8 @@ public function setParameters(){
                     echo"<h1>le poids minimale ne peut pas etre plus grand que le poids maximal <h1>" ;
                     echo"<script> alert('poids min > poids max ') ;</script>" ; 
 
-                    redirect("../views/annonces.php");
-
+/*                     redirect("../views/annonces.php");
+ */
                 }
                 $result = $this->userModel->addAnnonce($data) ; 
                 $output = '';
@@ -425,8 +429,8 @@ public function setParameters(){
                 
                 if(!empty($_POST['newpassword']) AND empty($_POST['newpasswordrepeat']) ){ 
                     echo"<h1> Veuillez confirmer votre mot de passe <h1>" ;
-                    redirect("../views/profile.php");
-                }
+/*                     redirect("../views/profile.php");
+ */                }
                 if(empty($_POST['newpassword'])){
                     $data['newpassword'] = $_SESSION['userPassword'] ;
                 }
@@ -448,8 +452,8 @@ public function setParameters(){
                 if(strlen($data['newpassword']) < 6){
                  flash("register", "Choisissez un mot de passe plus long"); 
                 echo"<h1> Choisissez un mot de passe plus long<h1>" ;
-                 redirect("../views/profile.php"); 
-                } else if($data['newpassword'] !== $data['newpasswordrepeat']){
+/*                  redirect("../views/profile.php"); 
+ */                } else if($data['newpassword'] !== $data['newpasswordrepeat']){
                  flash("register", "les mots de passe sont différents"); 
                 echo"<h1> Choisissez un mot de passe plus long<h1>" ;
 
@@ -462,8 +466,8 @@ public function setParameters(){
                 echo"<h1> UPDATEED <h1>" ;
                 
 
-                redirect("../views/profile.php");
-            }else{
+/*                 redirect("../views/profile.php");
+ */            }else{
                 die("Il y'a une erreur...");
             } 
 
@@ -541,21 +545,21 @@ public function setParameters(){
 
             if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
                 flash("register", "Email invalide");
-                redirect("../views/signup.php");
+              /*   redirect("../views/signup.php"); */
             }
 
             if(strlen($data['password']) < 6){
                 flash("register", "Choisissez un mot de passe plus long");
-                redirect("../views/signup.php");
+              /*   redirect("../views/signup.php"); */
             } else if($data['password'] !== $data['passwordrepeat']){
                 flash("register", "les mots de passe sont différents");
-                redirect("../views/signup.php");
+              /*   redirect("../views/signup.php"); */
             }
 
             //User with the same email or password already exists
             if($this->userModel->findUserByEmail($data['email'])){
                 flash("register", "Cet email est déja utilisé");
-                redirect("../views/signup.php");
+              /*   redirect("../views/signup.php"); */
             }
 
             //Passed all validation checks.
@@ -568,7 +572,7 @@ public function setParameters(){
 
             if($typeuser == 'client') {
                 if($this->userModel->registerClient($data)){
-                    redirect("../views/signup.php");
+                  /*   redirect("../views/signup.php"); */
                 }else{
                     die("Il y'a une erreur...");
                 }
@@ -577,8 +581,8 @@ public function setParameters(){
             else {
                 if($this->userModel->registerTransporteur($data)){ //return the id of the user
                     if(!empty($_POST["certifie"] )) {
-                        redirect("../views/certifie.php?nom=".$_POST['nom']."&prenom=".$_POST['prenom']);
-                    
+/*                         redirect("../views/certifie.php?nom=".$_POST['nom']."&prenom=".$_POST['prenom']);
+ */                    
                     }
 /*                     redirect("../signup.php");
  */                }else{
@@ -600,8 +604,8 @@ public function setParameters(){
             if(empty($data['email']) || empty($data['password'])){
                 flash("login", "Please fill out all inputs");
                 echo '<h1>veuillez remplir tous les champs</h1>' ; 
-                header("location: ../views/loginAdmin.php");
-                exit();
+/*                 header("location: ../views/loginAdmin.php");
+ */                exit();
             } 
     
             //Check for user/email
@@ -613,21 +617,21 @@ public function setParameters(){
                     echo "<script> alert('after createadminsession'); </script>";
 
                                        echo"<footer> inside createUserSession</footer>" ;
-                                       redirect("../views/adminProfile.php");
-
+/*                                        redirect("../views/adminProfile.php");
+ */
     
                 }else{
                     flash("login", "Password Incorrect");
                     echo "<script> alert('Password Incorrect'); </script>";
-                    redirect("../views/loginAdmin.php");
-                }
+/*                     redirect("../views/loginAdmin.php");
+ */                }
             }else{
     /*             echo"<footer> outside finduserbyemail</footer>" ;
      */                    echo "<script> alert('no admin found'); </script>";
 
                  flash("login", "No admin found");
-                redirect("../views/loginAdmin.php"); 
-            }
+/*                 redirect("../views/loginAdmin.php"); 
+ */            }
 
         }
 
@@ -643,7 +647,7 @@ public function setParameters(){
 
         if(empty($data['email']) || empty($data['password'])){
             flash("login", "Please fill out all inputs");
-            header("location: ../views/signup.php");
+           /*  header("location: ../views/signup.php"); */
             exit();
         } 
 
@@ -659,13 +663,13 @@ public function setParameters(){
  */
             }else{
                 flash("login", "Password Incorrect");
-                redirect("../views/signup.php");
+              /*   redirect("../views/signup.php"); */
             }
         }else{
 /*             echo"<footer> outside finduserbyemail</footer>" ;
  */
              flash("login", "No user found");
-            redirect("../views/signup.php"); 
+            /* redirect("../views/signup.php"); */ 
         }
     }
     
@@ -676,8 +680,8 @@ public function createAdminSession($admin) {
     $_SESSION['adminID'] = $admin['ID_admin'];
     $_SESSION['adminUsername'] = $admin['username'];
     $_SESSION['adminEmail'] = $admin['email'];
-    redirect("../views/adminProfile.php");
-
+/*     redirect("../views/adminProfile.php");
+ */
 }
     
    
@@ -716,8 +720,8 @@ public function createAdminSession($admin) {
         if ($user['type'] == 'transporteur') {
 
             $_SESSION['userStatut'] = $user['statut'];
-            redirect("../views/profile.php");
-
+/*             redirect("../views/profile.php");
+ */
         }
 
 
@@ -755,7 +759,7 @@ public function createAdminSession($admin) {
         unset($_SESSION['userID']);
         unset($_SESSION['userEmail']);
         session_destroy();
-        redirect("../views/signup.php");
+       /*  redirect("../views/signup.php"); */
     }
 
     public function updateUserAdmin() {
@@ -862,8 +866,8 @@ if ($_POST['selectetat'] == '1') {
             $user = $_POST['user'];
             $trajet = $_POST['trajet'];
              $this->userModel->sendRate($rate, $user , $trajet) ;
-             redirect("../views/profile.php") ;
-
+/*              redirect("../views/profile.php") ;
+ */
 
 
 
@@ -903,8 +907,8 @@ if ($_POST['selectetat'] == '1') {
           }
       }
 
-      redirect('../views/adminProfile.php');
-
+/*       redirect('../views/adminProfile.php');
+ */
 
       
     }
@@ -986,8 +990,8 @@ if($result)
                     echo"<h1>le poids minimale ne peut pas etre plus grand que le poids maximal <h1>" ;
                     echo"<script> alert('poids min > poids max ') ;</script>" ; 
 
-                    redirect("../views/annonces.php");
-
+/*                     redirect("../views/annonces.php");
+ */
                 }
                 $result = $init->userModel->addAnnonce($data) ; 
                 $output = '';
@@ -1105,7 +1109,7 @@ if($result)
 /*             default : redirect("../index.php");
  */        }
         
-    }else if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+    }/* else if ($_SERVER['REQUEST_METHOD'] == 'GET'){
         /* switch($_GET['q']){
             //we add cases for get here
             case 'logout':
@@ -1113,9 +1117,9 @@ if($result)
                 break;
              default:
             redirect("../routers/signup.php"); 
-        } */
+        } 
         
-    }
+    } */
 
 
   /*   

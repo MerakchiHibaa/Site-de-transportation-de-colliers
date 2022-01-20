@@ -1,8 +1,8 @@
 
 <?php 
 
- include '../controllers/Users.php';
- 
+/* include_once '../controllers/Users.php';
+ */
 if (isset($_GET['id']) && isset($_GET['idtr'])) { 
     $ID_user = $_GET['id'];
     $ID_trajet = $_GET['idtr'] ;
