@@ -7,7 +7,14 @@ include_once '../controllers/affichControl.php';
 
 class Accueil_view {
 
-   
+    private $userController;
+    private $affichController;
+
+    public function __construct(){
+       /*  $this->userController = new Users;
+        $this->affichController = new affichControl; */
+
+    }
     public function display() {
 
         session_start() ; 
