@@ -17,6 +17,8 @@
     include_once '../views/news-view.php';
     include_once '../views/newsAdmin-view.php';
     include_once '../views/newsDetail-view.php';
+    include_once '../views/presentation-view.php';
+
 
 
 
@@ -70,6 +72,8 @@
             $this->newsAdmin =  new newsAdmin_view() ; 
             $this->news = new news_view() ; 
             $this->newsDetail = new newsDetail_view() ; 
+            $this->presentation = new presentation_view() ; 
+
 
 
 
@@ -94,6 +98,11 @@
 
         }
         
+        public function afficherPresentation() {
+            $this->presentation->display() ; 
+
+
+        }
         public function afficherNewsDetail($ID_news) {
             $this->newsDetail->display($ID_news) ; 
 
