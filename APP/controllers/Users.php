@@ -20,6 +20,8 @@
     include_once '../views/presentation-view.php';
     include_once '../views/profile-view.php';
     include_once '../views/rate-view.php';
+    include_once '../views/report-view.php';
+
 
 
 
@@ -45,6 +47,9 @@
         private $newsDetail ; 
         private $profile ;
         private $rate ; 
+        private $report ; 
+
+        
 
         
         
@@ -68,6 +73,10 @@
             $this->presentation = new presentation_view() ; 
             $this->profile = new profile_view() ; 
             $this->rate = new rate_view() ; 
+            $this->report = new report_view() ; 
+
+
+            
 
 
 
@@ -92,6 +101,9 @@
             
         }
         
+        public function afficherReport($ID_trajet) {
+            $this->report->display($ID_trajet) ; 
+        }
         
         public function afficherRate( $ID_user , $ID_trajet) {
             $this->rate->display( $ID_user , $ID_trajet) ; 

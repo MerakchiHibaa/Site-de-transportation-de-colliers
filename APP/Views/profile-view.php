@@ -8,8 +8,8 @@ $_controllera = new affichControl();
 if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
   /*    redirect("../login.php");
    */ 
-      header("Location: ./signup.php");
-   }
+/*       header("Location: ./signup.php");
+ */   }
   
    if (isset($_GET['modifan'])) {
   

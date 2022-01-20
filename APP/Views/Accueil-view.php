@@ -1,9 +1,6 @@
 <?php
 
 
-include_once '../controllers/Users.php';
-include_once '../controllers/affichControl.php';
-
 
 class Accueil_view {
 
