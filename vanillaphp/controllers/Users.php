@@ -16,6 +16,8 @@
     include_once '../views/loginAdmin-view.php';
     include_once '../views/news-view.php';
     include_once '../views/newsAdmin-view.php';
+    include_once '../views/newsDetail-view.php';
+
 
 
 
@@ -47,6 +49,8 @@
         private $loginAdmin ;
         private $newsAdmin ;
         private $news ; 
+        private $newsDetail ; 
+
         
         
         public function __construct(){
@@ -65,6 +69,7 @@
             $this->loginAdmin = new loginAdmin_view() ; 
             $this->newsAdmin =  new newsAdmin_view() ; 
             $this->news = new news_view() ; 
+            $this->newsDetail = new newsDetail_view() ; 
 
 
 
@@ -89,6 +94,11 @@
 
         }
         
+        public function afficherNewsDetail($ID_news) {
+            $this->newsDetail->display($ID_news) ; 
+
+
+        }
         public function afficherNewsAdmin() {
             $this->newsAdmin->display() ; 
 
