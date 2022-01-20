@@ -18,6 +18,7 @@
     include_once '../views/newsAdmin-view.php';
     include_once '../views/newsDetail-view.php';
     include_once '../views/presentation-view.php';
+    include_once '../views/profile-view.php';
 
 
 
@@ -52,6 +53,7 @@
         private $newsAdmin ;
         private $news ; 
         private $newsDetail ; 
+        private $profile ;
 
         
         
@@ -73,7 +75,7 @@
             $this->news = new news_view() ; 
             $this->newsDetail = new newsDetail_view() ; 
             $this->presentation = new presentation_view() ; 
-
+            $this->profile = new profile_view() ; 
 
 
 
@@ -98,6 +100,11 @@
 
         }
         
+        public function afficherProfile() {
+            $this->profile->display() ; 
+
+
+        }
         public function afficherPresentation() {
             $this->presentation->display() ; 
 
