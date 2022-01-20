@@ -21,6 +21,8 @@
     include_once '../views/profile-view.php';
     include_once '../views/rate-view.php';
     include_once '../views/report-view.php';
+    include_once '../views/statistiques-view.php';
+
 
 
 
@@ -48,6 +50,8 @@
         private $profile ;
         private $rate ; 
         private $report ; 
+        private $stats ; 
+
 
         
 
@@ -74,6 +78,9 @@
             $this->profile = new profile_view() ; 
             $this->rate = new rate_view() ; 
             $this->report = new report_view() ; 
+            $this->stats = new Statistiques_view() ; 
+
+            
 
 
             
@@ -99,6 +106,11 @@
 
 
             
+        }
+
+        
+        public function afficherStatistiques() {
+            $this->stats->display() ; 
         }
         
         public function afficherReport($ID_trajet) {
