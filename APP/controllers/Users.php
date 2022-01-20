@@ -23,6 +23,8 @@
     include_once '../views/report-view.php';
     include_once '../views/statistiques-view.php';
     include_once '../views/signalAdmin-view.php';
+    include_once '../views/updateProfileUser-view.php';
+
 
 
 
@@ -54,6 +56,8 @@
         private $report ; 
         private $stats ; 
         private $signalAdmin  ;
+        private $updateProfileUser  ;
+
 
 
         
@@ -83,7 +87,9 @@
             $this->report = new report_view() ; 
             $this->stats = new Statistiques_view() ; 
             $this->signalAdmin = new signalAdmin_view() ; 
+            $this->updateProfileUser = new updateProfileUser_view() ; 
 
+            
 
             
 
@@ -112,7 +118,10 @@
 
             
         }
-
+        
+        public function afficherUpdateProfileUser() {
+            $this->updateProfileUser->display() ; 
+        }
         
         public function afficherSignalAdmin() {
             $this->signalAdmin->display() ; 
