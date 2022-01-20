@@ -14,8 +14,9 @@
     include_once '../views/contact-view.php';
     include_once '../views/contenuAdmin-view.php';
     include_once '../views/loginAdmin-view.php';
-
     include_once '../views/news-view.php';
+    include_once '../views/newsAdmin-view.php';
+
 
 
 
@@ -44,6 +45,7 @@
         private $contact ; 
         private $contenu ;
         private $loginAdmin ;
+        private $newsAdmin ;
         private $news ; 
         
         
@@ -61,7 +63,7 @@
             $this->contact = new contact_view() ; 
             $this->contenu = new contenuAdmin_view() ; 
             $this->loginAdmin = new loginAdmin_view() ; 
-
+            $this->newsAdmin =  new newsAdmin_view() ; 
             $this->news = new news_view() ; 
 
 
@@ -83,6 +85,12 @@
             $this->userModel->setJustificatif($data) ;
 
 
+
+
+        }
+        
+        public function afficherNewsAdmin() {
+            $this->newsAdmin->display() ; 
 
 
         }
