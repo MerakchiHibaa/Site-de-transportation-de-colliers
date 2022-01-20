@@ -12,6 +12,9 @@
     include_once '../views/annonceResponders-view.php';
     include_once '../views/certifie-view.php';
     include_once '../views/contact-view.php';
+    include_once '../views/contenuAdmin-view.php';
+
+
 
 
 
@@ -36,6 +39,7 @@
         private $annoncesResponders ; 
         private $certifie ; 
         private $contact ; 
+        private $contenu ;
         
         public function __construct(){
             $this->userModel = new User;
@@ -49,6 +53,8 @@
             $this->annoncesResponders = new annoncesResponders_view() ; 
             $this->certifie = new certifie_view() ; 
             $this->contact = new contact_view() ; 
+            $this->contenu = new contenuAdmin_view() ; 
+
 
 
 
@@ -70,7 +76,12 @@
 
 
         }
+        public function afficherContenuAdmin() {
+            $this->contenu->display() ; 
 
+
+        }
+        
         
         public function afficherContact() {
             $this->contact->display() ; 
