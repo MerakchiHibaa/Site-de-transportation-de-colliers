@@ -1,12 +1,18 @@
-<?php if (isset($_GET['ida']) ) {
-    session_start();
-  $ID_annonce = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['ida']);
 
 
-} else {
-    echo '<h1> im outside </h1>' ;
 
-}?>
+<?php
+
+
+include_once '../controllers/Users.php';
+include_once '../controllers/affichControl.php';
+
+
+class annoncesResponders_view {
+
+   
+    public function display($ID_annonce) {
+echo '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +24,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="assetss/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../assetss/dataTables.bootstrap4.min.css">
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
@@ -41,16 +47,16 @@
       <thead class="bg-light">
         <tr>
           <th> Transporteur </th>
-          <th>Actions</th>
-          <?php   
-include_once "./controllers/affichControl.php" ;
+          <th>Actions</th> ' ;
+         
+include_once "../controllers/affichControl.php" ;
 $_controller = new affichControl();
 $result = $_controller->getDemande($ID_annonce) ;
               if ($result) {  
               foreach($result as $value) {
                  $user =  $_controller->getUserInfoById($value['ID_transporteur']) ; 
                  if ($user) {
-                     foreach($user as $user) { ?>       
+                     foreach($user as $user) { echo'      
 </tr>
       </thead>
       <tbody>
@@ -58,21 +64,24 @@ $result = $_controller->getDemande($ID_annonce) ;
         <tr>
           <td>
          <div> 
-              <img src="./assets/slider3.jpg" class="bg-info rounded-circle" width="70rem" style="height: 4rem ;" alt="Cinque Terre">
+              <img src="../assets/slider3.jpg" class="bg-info rounded-circle" width="70rem" style="height: 4rem ;" alt="Cinque Terre">
 
-                    <span class="fw-bold mb-1"> <?php echo $user['nom']." ".$user['prenom']?></span>
+                    <span class="fw-bold mb-1">'. $user['nom'].' '.$user['prenom'].' </span>
                     
-                     </div>
-          <?php if ($user['certifie']=="1" ) {?>
-            <p class="badge badge-success rounded-pill"> <?php echo "Certifié.e"?></p>
+                     </div>' ;
+          if ($user['certifie']=="1" ) {
+            echo'
+            <p class="badge badge-success rounded-pill"> "Certifié.e"</p>' ;
 
 
-       <?php   } else { ?>
-        <p class="badge badge-warning rounded-pill">  <?php echo "Non certifié"?></p>
+         } else { 
+           echo'
+        <p class="badge badge-warning rounded-pill">  "Non certifié"</p>' ;
 
 
-      <?php } ?>
-         <p class="fw-bold mb-1"> <i class="fas fa-star"></i>  <?php 
+      } 
+      echo'
+         <p class="fw-bold mb-1"> <i class="fas fa-star"></i>  ' ;
          if($user['viewersNumber'] == "0") { 
              echo $user['note'] ; 
          }
@@ -80,10 +89,11 @@ $result = $_controller->getDemande($ID_annonce) ;
 
          
          echo $user['note']/$user['viewersNumber']  ;
-         }?></p>
+         } 
+         echo'</p>
 
-          <p class="fw-bold mb-1"> <?php echo "Numéro de téléphone :". $user['numero']?></p>
-          <p class="fw-bold mb-1"> <?php echo "Email :". $user['email']?></p>
+          <p class="fw-bold mb-1"> "Numéro de téléphone : '. $user['numero'] .'</p>
+          <p class="fw-bold mb-1"> "Email : '. $user['email']. '</p>
 
 
           </td>
@@ -92,16 +102,18 @@ $result = $_controller->getDemande($ID_annonce) ;
           <a class="btn btn-success btn-sm" href="#" > <i class="fas fa-check"> </i> Confirmer </a>
             
           </td>
-</tbody>
-<?php }
-                 } ?>
+</tbody>' ;
+ }
+                 }
             
-<?php } ?>
-<?php } ?>
+ }
+ }
+ echo'
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     </body>
 
-</html>
+</html>' ;
+    }}
