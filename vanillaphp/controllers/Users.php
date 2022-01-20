@@ -60,8 +60,8 @@
 
         }
         
-        public function afficherAnnonceDetailAdmin() {
-            $this->annonceDetailAdmin->display() ; 
+        public function afficherAnnonceDetailAdmin($ID_annonce) {
+            $this->annonceDetailAdmin->display($ID_annonce) ; 
 
         }
         public function afficherAnnonceDetail() {

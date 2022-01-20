@@ -7,13 +7,8 @@ include_once '../controllers/affichControl.php';
 
 class annonceDetailAdmin_view {
 
-    public function display() {
+    public function display($ID_annonce) {
 
-if (isset($_GET['id'])) {
-    session_start();
-  $ID_annonce = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['id']);
-
-} 
 
 echo'
 
@@ -23,7 +18,7 @@ echo'
   <head>
     <meta charset="utf-8">
     <title>Detail annonce</title>
-    <link rel="stylesheet" href="assetss/bootstrap.min.css">
+    <link rel="stylesheet" href="../assetss/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="../assetss/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../assetss/style.css">
@@ -32,17 +27,6 @@ echo'
 
 
 
-if (isset($_GET['action']) && $_GET['action'] == 'logout') {
-  // Session::set('logout', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
-  // <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  // <strong>Success !</strong> You are Logged Out Successfully !</div>');
- /*  Session::destroy(); */
-}
-
- if (isset($_GET['id'])) {
-  $ID_annonce = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['id']);
-
-}
 /*
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
@@ -146,23 +130,25 @@ $_controller = new affichControl();
               </div>
 
               <div class="form-group">
-                <label for="">Archivée?</label>
+                <label for="">Archivée?</label>' ;
+                if($getUinfo['archive'] == '1')
+                {
+                echo'  <input required type="text" id="" name="" value="OUI">' ;
 
-                <input required type="text" id="" name="" value="';if($getUinfo['archive'] == '1')
- {
-    echo "Oui"; } else {
-      echo "Non"; 
-
-    } '" class="form-control">
-              </div>
-             
-             
+                }
+                else {
+                  echo'  <input required type="text" id="" name="" value="NON"  class="form-control">
+                  </div>
+                  ' ;
 
 
+                }
+echo'
           </form>
         </div>' ;
 
-      } }else{
+      }
+     }else{
         echo '<h1> couldnt get the page  </h1>' ;
 
        /*  header('Location:index.php'); */
