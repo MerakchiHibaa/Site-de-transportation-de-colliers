@@ -334,10 +334,12 @@ public function display() {
     
                     if($value['statut'] =="0") {
     
-                     echo'<td>
-                     <div class="ms-3"> <a href= "annonceResponders.php?ida='. $value['ID_annonce'].' > Voir qui a répondu à votre annonce </a> </div>
+                     echo'
+                     <td>
+                     <div class="ms-3"> <a href="annonceResponders.php?ida='.$value['ID_annonce'].'"> Voir qui a répondu à votre annonce </a> </div>
                      </td>';
-                    } else {
+                    }
+                     else {
                       echo'<td>
                       <div class="ms-3">  <a  class="text-muted mb-0" > Pas de réponse </a> </div>
                       </td> ';
@@ -347,13 +349,19 @@ public function display() {
     
     
               <td>
-    <!--             <a class="btn btn-success btn-sm" href="annonceDetailAdmin.php?id='. $value['ID_annonce'] .'> Voir </a>
+    <!--             <a class="btn btn-success btn-sm" href="annonceDetailAdmin.php?id='. $value['ID_annonce'] .'"> Voir </a>
      --> ';
                if( $value['statut'] == '1' )  {
-             echo'   <a  class="btn btn-success btn-sm disabled href="?modifan='. $value['ID_annonce'].'> <i class="fas fa-edit"></i>  </a>';
+             echo'  
+
+              <a  class="btn btn-success btn-sm disabled href="?modifan='. $value['ID_annonce'].'"> <i class="fas fa-edit"></i>  </a>
+              <a onclick="return confirm(\'Vous voulez vraiment supprimer cette annonce ?\')" class="btn btn-danger btn-sm " href="?suppriman='. $value['ID_annonce'].'"> <i class="fas fa-trash-alt"></i> </a>
+              ';
     }
     else {
-    echo'  <a onclick="return confirm(\'Vous voulez vraiment supprimer cette annonce ?\')" class="btn btn-danger btn-sm " href="?suppriman='. $value['ID_annonce'].'> <i class="fas fa-trash-alt"></i> </a>' ;
+    
+    echo'   <a  class="btn btn-success btn-sm href="?modifan='. $value['ID_annonce'].'"> <i class="fas fa-edit"></i>  </a>
+      <a onclick="return confirm(\'Vous voulez vraiment supprimer cette annonce ?\')" class="btn btn-danger btn-sm " href="?suppriman='. $value['ID_annonce'].'"> <i class="fas fa-trash-alt"></i> </a>' ;
 
 
     } 
@@ -368,21 +376,28 @@ public function display() {
      } echo' 
     </tbody>
         </table>
-      </div>
-    </div>' ;
+      </div>  
+       
+  ' ;
       }  
        else {
          echo'
       <div class="ms-3">
                     <p class="text-muted mb-0"> Vous n\'avez pas encore publier des annonces. </p>
-                  </div> ' ;
+                 ' ;
     
-       } echo'
-    
-      <h1 style="margin-left: 7rem ; margin-top: 3.5rem ; font-size: 2.5rem ;"> <i style="margin: 0 15px ;"  class="fa fa-history" aria-hidden="true"></i>
-     Mon historique de transactions : </h1>
+       }
+        echo'
+
+        
       
-      
+        <div>
+        <h1 style="margin-left: 7rem ; margin-top: 3.5rem ; font-size: 2.5rem ;"> <i style="margin: 0 15px ;"  class="fa fa-history" aria-hidden="true"></i>
+        Mon historique de transactions : </h1>
+         
+         
+        </div>
+     
        
      
     ' ;
@@ -406,7 +421,10 @@ public function display() {
     
                } 
                echo'
-               <th width="20%">Actions </th> ' ;
+               <th width="20%">Actions </th> 
+               </tr>
+               </thead>
+               <tbody>' ;
     
                
                     
@@ -416,9 +434,7 @@ public function display() {
                           $i ++ ;  
       
      
-  echo' </tr>
-           </thead>
-           <tbody>
+  echo'
              <tr>
                <td>
                  <div class="d-flex align-items-center">
@@ -429,7 +445,7 @@ public function display() {
                  </div>
                </td>
                <td>
-                 <p class="fw-primary mb-1"> '.  
+                 <p class="fw-primary mb-1"> ';  
                  $user = $_controllera->getUserInfoById($value['ID_transporteur'] ) ;
                  foreach ($user as $user) {
                    $nom = $user['nom'] ;
@@ -530,7 +546,8 @@ public function display() {
      </tbody>
          </table>
        </div>
-     </div>' ;
+     </div>
+  ' ;
       }   else {
         echo'
        <div class="ms-3">
@@ -539,6 +556,8 @@ public function display() {
      
         } 
      echo'
+       </div>
+       </div>
        </div>
        <script type="text/javascript" src="../bootstrapDesign/js/mdb.min.js"></script>
         <!-- Custom scripts -->
