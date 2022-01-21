@@ -15,11 +15,20 @@ class User {
         $this->db->bind(':justificatif', $data['justificatif']);
         $this->db->bind(':nom', $data['nom']);
         $this->db->bind(':prenom', $data['prenom']);
- return $this->db->execute() ;
+ return $this->db->execute() ;}
 
+    
 
+    public function updateContactPage($data) {
+        $this->db->query('UPDATE contact set adresse=:adresse, numero=:numero, email=:email, contenu=:contenu, image=:image') ;
+        $this->db->bind(':adresse', $data['adresse']);
+        $this->db->bind(':numero', $data['numero']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':contenu', $data['contenu']);
+        $this->db->bind(':image', $data['image']);
+        return $this->db->execute() ;
 
-
+        
     }
 
     public function addNewUserByAdmin() {

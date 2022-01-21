@@ -434,11 +434,27 @@ public function setParameters(){
   
     public function annonceSuggestion($depart , $arrivee) {
       return $this->userModel->annonceSuggestion($depart , $arrivee) ; 
-       
-  
   
    }
-  
+
+
+   public function updateContactPage() {
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+        $data = [  //Init data
+            'adresse' => trim($_POST['adresse']) ,
+            'numero' => trim($_POST['numero'])  ,
+            'contenu' => trim($_POST['contenu']) ,
+            'image' => trim($_POST['image']) ,
+            'email' => trim($_POST['email']) ,
+
+        ];
+
+    return $this->userModel->updateContactPage($data) ; 
+
+
+     
+}
 
         public function updateProfile () {
             session_start();
@@ -1164,6 +1180,9 @@ if($result)
                 $init->loginAdmin() ;
             case 'setParameters' : 
                 $init->setParameters() ;
+            case 'contactPage' : 
+                $init->updateContactPage() ;
+                
 
 /*             default : redirect("../index.php");
  */        }
