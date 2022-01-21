@@ -25,6 +25,7 @@
     include_once '../views/signalAdmin-view.php';
     include_once '../views/updateProfileUser-view.php';
     include_once '../views/userProfileAdmin-view.php';
+    include_once '../views/reponseDemande-view.php';
 
 
 
@@ -61,6 +62,9 @@
         private $signalAdmin  ;
         private $updateProfileUser  ;
         private $userProfileAdmin ;
+        private $responseDemande ;
+
+        
 
 
 
@@ -93,10 +97,11 @@
             $this->signalAdmin = new signalAdmin_view() ; 
             $this->updateProfileUser = new updateProfileUser_view() ; 
             $this->userProfileAdmin = new userProfileAdmin_view() ; 
+            $this->responseDemande = new responseDemande_view() ; 
 
             
             
-
+            
             
 
             
@@ -123,6 +128,10 @@
 
 
             
+        }
+        
+        public function afficherResponseDemande($ID_annonce , $ID_transporteur) {
+            $this->responseDemande->display($ID_annonce , $ID_transporteur) ; 
         }
         
         public function afficheruserPofileAdmin($ID_user) {
