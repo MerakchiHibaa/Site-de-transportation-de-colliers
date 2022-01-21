@@ -24,6 +24,9 @@
     include_once '../views/statistiques-view.php';
     include_once '../views/signalAdmin-view.php';
     include_once '../views/updateProfileUser-view.php';
+    include_once '../views/userProfileAdmin-view.php';
+
+
 
 
 
@@ -57,6 +60,7 @@
         private $stats ; 
         private $signalAdmin  ;
         private $updateProfileUser  ;
+        private $userProfileAdmin ;
 
 
 
@@ -88,7 +92,9 @@
             $this->stats = new Statistiques_view() ; 
             $this->signalAdmin = new signalAdmin_view() ; 
             $this->updateProfileUser = new updateProfileUser_view() ; 
+            $this->userProfileAdmin = new userProfileAdmin_view() ; 
 
+            
             
 
             
@@ -119,6 +125,9 @@
             
         }
         
+        public function afficheruserPofileAdmin($ID_user) {
+            $this->userProfileAdmin->display($ID_user) ; 
+        }
         public function afficherUpdateProfileUser() {
             $this->updateProfileUser->display() ; 
         }
