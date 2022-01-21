@@ -298,16 +298,16 @@
 
         public function insertDemandes() {
             if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
-/*              echo "<h1> insiiide inisertDemandes </h1>";
- */                $ID_annonce = (int) $_POST['ID_annonce']  ; //
+             echo "<h1> insiiide inisertDemandes </h1>";
+                $ID_annonce = (int) $_POST['ID_annonce']  ; //
                 $ID_client = (int) $_POST['ID_client'] ; // client
                 $ID_transporteur = (int) $_POST['ID_transporteur'] ; // transport
                 $price = (float) $_POST['price'] ; //
                     
                
                 $this->userModel->insertDemandes($ID_annonce, $ID_client ,$ID_transporteur , $price)  ;
-/*                        redirect("../routers/annonceDetail.php?id=$ID_annonce") ; 
- */
+                       redirect("../routers/annonceDetail.php?id=$ID_annonce") ; 
+
                    
 
             }
@@ -319,8 +319,8 @@
                 $reportText =  trim($_POST['reportText'] ) ;
 
                 $this->userModel->setReport($ID_trajet, $reportText )  ;
-/*                 redirect("../routers/profile.php") ;
- */
+                redirect("../routers/profile.php") ;
+
 
 
 

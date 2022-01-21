@@ -24,7 +24,7 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
     
       $ID_trajet = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['signalFinished']);
      $_controller->reportFinished($ID_trajet);
-     header("Location: ./profile.php");
+     header("Location: profile.php");
     
     }
   

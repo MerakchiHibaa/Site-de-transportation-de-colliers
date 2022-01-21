@@ -470,9 +470,9 @@ public function display() {
                  <div class="d-flex align-items-center">
                    
                    <div class="ms-3">
-                   <p class="fw-primary mb-1"> "Prix : '.$value['price'] .'</p>
-                   <p class="fw-primary mb-1"> "Gain net :' .$value['price']*(1-0.3) .'</p>
-                   <p class="fw-primary mb-1"> "Le site prend 30% :' .$value['price']*0.3 .'</p>
+                   <p class="fw-primary mb-1"> "Prix : '. $value['price'] .' DA</p>
+                   <p class="fw-primary mb-1"> "Gain net : ' . $value['price']*(1-$value['pourcentage']) .'DA</p>
+                   <p class="fw-primary mb-1"> "Le site prend '. $value['pourcentage']*100 .'% : '.  $value['price']*$value['pourcentage'] .'DA</p>
     
     
                    </div>
@@ -494,7 +494,7 @@ public function display() {
     
                             } 
                             if ($value['note']== '0' ) {
-                              echo'  <a href="rate.php?id='. $value['ID_transporteur'] .'&idtr='. $value['ID_trajet'] .'" class="btn btn-warning btn-sm "  > <i class="fas fa-star"> </i> Noter </a> ';
+                              echo'  <a href="./rate.php?id='. $value['ID_transporteur'] .'&idtr='. $value['ID_trajet'] .'" class="btn btn-warning btn-sm "  > <i class="fas fa-star"> </i> Noter </a> ';
 
                             }
                             else {
