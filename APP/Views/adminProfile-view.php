@@ -48,10 +48,10 @@ class AdminProfile_view {
  
   
  }
- 
+ /* 
  if (!empty($_SESSION['msg'])) {
    echo $_SESSION['msg'] ;
- }
+ } */
 
  echo'     
  

@@ -5,33 +5,6 @@ include_once '../controllers/Users.php';
 $_controllera = new affichControl();
 
 
-if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
-  /*    redirect("../login.php");
-   */ 
-/*       header("Location: ./signup.php");
- */   }
-  
-   if (isset($_GET['modifan'])) {
-  
-    $modif = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['modifan']);
-  /*  $_controller->archiveAnnonce($archive);
-   */}
-  
-   if (isset($_GET['suppriman'])) {
-  
-    $archive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['suppriman']);
-   $_controllera->archiveAnnonce($archive);
-  }
-  
-  if (isset($_GET['signalFinished'])) {
-  
-    $ID_trajet = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['signalFinished']);
-   $_controllera->reportFinished($ID_trajet);
-  /*  header("Location: ./profile.php");
-   */
-  }
-
-
 
 
 class profile_view {
@@ -41,8 +14,8 @@ class profile_view {
    
 public function display() {
   include_once '../controllers/affichControl.php';
-  session_start() ; 
-  $_controllera = new affichControl();
+/*   session_start() ; 
+ */  $_controllera = new affichControl();
 
  /*  $_controller = new affichControl(); */
 
@@ -354,13 +327,13 @@ public function display() {
                if( $value['statut'] == '1' )  {
              echo'  
 
-              <a  class="btn btn-success btn-sm disabled href="?modifan='. $value['ID_annonce'].'"> <i class="fas fa-edit"></i>  </a>
+              <a  class="btn btn-success btn-sm disabled" href="?modifan='. $value['ID_annonce'].'"> <i class="fas fa-edit"></i>  </a>
               <a onclick="return confirm(\'Vous voulez vraiment supprimer cette annonce ?\')" class="btn btn-danger btn-sm " href="?suppriman='. $value['ID_annonce'].'"> <i class="fas fa-trash-alt"></i> </a>
               ';
     }
     else {
     
-    echo'   <a  class="btn btn-success btn-sm href="?modifan='. $value['ID_annonce'].'"> <i class="fas fa-edit"></i>  </a>
+    echo'   <a  class="btn btn-success btn-sm" href="./updateAnnonce?modifan='. $value['ID_annonce'].'"> <i class="fas fa-edit"></i>  </a>
       <a onclick="return confirm(\'Vous voulez vraiment supprimer cette annonce ?\')" class="btn btn-danger btn-sm " href="?suppriman='. $value['ID_annonce'].'"> <i class="fas fa-trash-alt"></i> </a>' ;
 
 

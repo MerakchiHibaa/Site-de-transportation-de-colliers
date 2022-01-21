@@ -1,11 +1,11 @@
 
 <?php 
 
-include_once '../controllers/SignupController.php';
+include_once '../controllers/Users.php';
 /* include_once '../controllers/affichControl.php'; */
 
 
-$_controllerSignup = new SignupController() ; 
+$_controllerSignup = new Users(); ; 
 $_controllerSignup->afficherSignup() ; 
 
 

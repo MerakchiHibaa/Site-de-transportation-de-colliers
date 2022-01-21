@@ -22,9 +22,9 @@ include_once '../controllers/affichControl.php';
      $_controller->archiveAnnonce($archive);
     }
   
-  if (!empty($_SESSION['msg'])) {
+  /* if (!empty($_SESSION['msg'])) {
     echo $_SESSION['msg'] ;
-  }
+  } */
 
 include_once '../controllers/Users.php';
 include_once '../controllers/affichControl.php';

@@ -29,10 +29,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
 
  
 }
-
+/* 
 if (!empty($_SESSION['msg'])) {
   echo $_SESSION['msg'] ;
-}
+} */
 
  ?>
 

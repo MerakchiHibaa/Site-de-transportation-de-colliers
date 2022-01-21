@@ -34,7 +34,17 @@ class signup_view{
             <div class="forms-container">
               <div class="signin-signup">
                 <form action="../controllers/Users.php" method="post" name="login" class="sign-in-form">
-                <input type="hidden" name="type" value="login">
+                <input type="hidden" name="type" value="login"> ' ;
+                
+                if(isset($_SESSION['msg']) && isset($_SESSION['status'])) {
+                  echo'  <div class="alert alert-'.$_SESSION['status'].'" role="alert">'.$_SESSION['msg'].
+'                </div>
+' ; 
+unset($_SESSION['status']);
+unset($_SESSION['msg']);
+
+                } echo'
+
       
                   <h2 class="title">Se connecter</h2>
                   <div class="input-field">
@@ -67,8 +77,18 @@ class signup_view{
       
                 <form action="../controllers/Users.php" method="POST" class="sign-up-form">
                 <input type="hidden" name="type" value ="register">
-        
-                <h2 class="title">S\'inscrire</h2>
+                ';
+                if(isset($_SESSION['msg']) && isset($_SESSION['status'])) {
+                  echo'  <div class="alert alert-'.$_SESSION['status'].'" role="alert">'.$_SESSION['msg'].
+'                </div>
+' ; 
+unset($_SESSION['status']);
+unset($_SESSION['msg']);
+
+  
+
+                }
+              echo'                <h2 class="title">S\'inscrire</h2>
                   
                   <div class="input-field">
                     <i class="fas fa-user"></i>

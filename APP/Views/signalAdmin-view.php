@@ -1,14 +1,6 @@
 
 <?php
 
-include_once '../inc/header.php';
-/* Session::CheckSession(); */
-/* $sId =  Session::get('type');
-if ($sId === '1'
-*/ 
-/* if (isset($_SESSION)) {  */
- 
-
 
 class signalAdmin_view {
 
@@ -21,7 +13,8 @@ class signalAdmin_view {
 
     }
     public function display() {
-      
+      include_once '../inc/header.php';
+
       echo '
     
       <div class="card ">

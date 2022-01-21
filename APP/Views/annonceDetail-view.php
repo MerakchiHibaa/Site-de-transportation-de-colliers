@@ -50,10 +50,10 @@ $_controller = new affichControl();
 
 
     <div class="ann-affich">' ;
-     if(!empty($_SESSION['msg'])) { 
+     /* if(!empty($_SESSION['msg'])) { 
 
 echo $_SESSION['msg'] ; 
-} 
+}  */
        echo' <div class="ann-affich_img">
             <img src="../assets/slider1.jpg" alt="">
         </div>

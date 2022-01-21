@@ -26,9 +26,9 @@ if (isset($_GET['removea'])) {
    $_controller->archiveAnnonce($archive);
   }
 
-if (!empty($_SESSION['msg'])) {
+/* if (!empty($_SESSION['msg'])) {
   echo $_SESSION['msg'] ;
-}
+} */
 
 
 

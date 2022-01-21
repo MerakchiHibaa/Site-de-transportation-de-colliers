@@ -484,7 +484,7 @@ public function getUsersNumber(){
 
  public function getHistoriqueAnnonce($userID) {
     $this->db->query("SELECT *  
-    FROM annonces where ID_User =:userID");
+    FROM annonces where ID_User =:userID and archive='0'");
         $this->db->bind(':userID', $userID);
 
         return $this->db->resultSet() ;

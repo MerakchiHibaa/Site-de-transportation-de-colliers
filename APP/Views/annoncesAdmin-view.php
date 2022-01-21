@@ -59,10 +59,10 @@ if (isset($_GET['removea'])) {
     $archive = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['archivea']);
    $_controller->archiveAnnonce($archive);
   }
-
+/* 
 if (!empty($_SESSION['msg'])) {
   echo $_SESSION['msg'] ;
-}
+} */
 
  echo'
 

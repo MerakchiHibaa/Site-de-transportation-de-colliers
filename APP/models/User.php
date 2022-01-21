@@ -1,5 +1,6 @@
 <?php
 require_once '../libraries/Database.php';
+session_start()  ; 
 
 class User {
 
@@ -45,11 +46,16 @@ class User {
               $this->db->execute() ;
             }
             catch(PDOException $e) {
-                flash("Votre demande a été envoyée, on vous mettra à jour dés qu'elle sera traitée") ; 
+                $_SESSION['msg'] = "Votre demande a été envoyée, on vous mettra à jour dés qu'elle sera traitée" ; 
+             $_SESSION['status'] = "success" ; 
+             return ; 
+              
             }
               $this->db->query('UPDATE users set demande="1" where nom=:nom and prenom=:prenom') ;
               $this->db->bind(':nom', $data['nom']);
               $this->db->bind(':prenom', $data['prenom']);
+              $_SESSION['msg'] = "Votre demande a été envoyée, on vous mettra à jour dés qu'elle sera traitée" ; 
+             $_SESSION['status'] = "success" ;
 
        return $this->db->execute() ;
 
@@ -924,6 +930,52 @@ public function userAttente($ID_user) {
 
  }
 
+/* 
+ $data = [  //Init data
+    'titreAnnonce' => trim($_POST['titreAnnonce']) ,
+    'pointDepart' => trim($_POST['pointDepart'])  ,
+    'pointArrivee' => trim($_POST['pointArrivee']) ,
+    'volumeMin' => trim($_POST['volumeMin']) ,
+    'volumeMax' => trim($_POST['volumeMax']) ,
+    'poidsMin' => trim($_POST['poidsMin']),
+    'poidsMax' => trim($_POST['poidsMax'])  ,
+    'typeTransport' => trim($_POST['typeTransport']) , 
+    'moyenTransport' => trim($_POST['moyenTransport']) , 
+    'ID_annonce' => (int) $_POST['ID_annonce'] , 
+    
+
+
+]; */
+public function updateAnnonceUser($data) {
+    $this->db->query('UPDATE annonces SET titreAnnonce=:titreAnnonce ,pointDepart=:pointDepart, pointArrivee=:pointArrivee, volumeMin=:volumeMin, volumeMax=:volumeMax, poidsMin=:poidsMin , poidsMax=:poidsMax, typeTransport=:typeTransport , moyenTransport=:moyenTransport WHERE ID_annonce=:ID_annonce');
+    $this->db->bind(':titreAnnonce', $data['titreAnnonce']);
+    $this->db->bind(':pointDepart', $data['pointDepart']);
+    $this->db->bind(':pointArrivee', $data['pointArrivee']);
+
+    $this->db->bind(':volumeMin', $data['volumeMin']);
+    $this->db->bind(':volumeMax', $data['volumeMax']);
+    $this->db->bind(':poidsMin', $data['poidsMin']);
+
+    $this->db->bind(':poidsMax', $data['poidsMax']);
+    $this->db->bind(':typeTransport', $data['typeTransport']);
+    $this->db->bind(':moyenTransport', $data['moyenTransport']);
+    $this->db->bind(':ID_annonce', $data['ID_annonce']);
+
+    if($this->db->execute()) {
+        return true ; 
+    }
+    else {
+        return false ;
+    }
+
+
+
+
+
+
+
+
+}
 
 
 
