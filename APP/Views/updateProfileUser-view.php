@@ -15,8 +15,8 @@ class updateProfileUser_view {
     }
     public function display() {
 
-       session_start() ; 
- 
+/*        session_start() ; 
+ */ 
  
       include_once '../controllers/affichControl.php';
       
@@ -47,20 +47,25 @@ class updateProfileUser_view {
       
       <div class="container" >
             <div class="forms-container">
-              <div class="signin-signup">
+              <div class="signin-signup">' ;
+              echo' <div style="width:600px; margin:0px auto">';
+         if(isset($_SESSION['msg']) && isset($_SESSION['status'])) {
+            echo'  <div class="alert alert-'.$_SESSION['status'].'" role="alert">'.$_SESSION['msg'].
+'                </div>
+</div>
+' ; 
+unset($_SESSION['status']);
+unset($_SESSION['msg']);
+         }
+         echo'
       <form class="sign-in-form" action="../controllers/Users.php" method="POST" enctype="multipart/form-data">
+      <input  type="hidden" name="type" value="updateProfile">
+
         
             <h1 class="text-center" style="text-align: center; color: #5995FD" >Modifier votre profile</h1> <!-- class="text-center" style="text-align: center;" -->
            <div > <!-- class="form-group" -->' ;
-            if(!empty($msg)) { 
-              echo' <div class="alert' .$css_class .'">'.
-               $msg .' 
-               </div>
-      
-               ' ; 
-              } 
-
-               echo '
+           
+echo'
                <div class="profile-img">
       <img src="../usersImages/'. $_SESSION['userPhoto'] .'" onclick="triggerClick()" id="profileDisplay" alt="" width="10%" style=" display: block;
                   margin: 10px auto;
@@ -78,17 +83,16 @@ class updateProfileUser_view {
            <input type="file" name="newprofileImage" onchange="displayImage(this)" id="profileImage" class="form_control"  style="display: none;">
           </div>
            
-            <input class="input-field"   type="hidden" name="type" value ="updateProfile">
           
             <!-- <label class="">  -->
-            <input class="input-field"  type="text" style="margin: 6px 0 ;"name="newnom" 
+            <input required class="input-field"  type="text" style="margin: 6px 0 ;"name="newnom" 
           placeholder="'.$_SESSION['userNom'] .'"  />
                   <!-- <span class="placeholder ">Entrez un nouveau nom</span> -->
       
          <!--  </label>  -->
       
         <!--   <label class=""> label -->
-            <input class="input-field"   type="text"  name="newprenom" 
+            <input required class="input-field"   type="text"  name="newprenom" 
           placeholder="'.$_SESSION['userPrenom'] .'"  />
                  <!--  <span class="placeholder"> Entrez votre prénom </span>
       
@@ -96,13 +100,13 @@ class updateProfileUser_view {
        -->
       
          <!--  <label class="">  -->
-          <input class="input-field"   type="email" style="margin: 6px 0 ;"name="newemail" 
+          <input required class="input-field"   type="email" style="margin: 6px 0 ;" name="newemail" 
           placeholder="'.$_SESSION['userEmail'] .'"  />
                   <!-- <span class="placeholder "> Entrez votre email </span>
       
           </label> 
           <label class="">  -->
-          <input class="input-field"   type="text" style="margin: 6px 0 ;"name="newnumero" 
+          <input required class="input-field"   type="text" style="margin: 6px 0 ;" name="newnumero" 
           placeholder="'. $_SESSION['userNumero'] .'"  />
                  <!--  <span class="placeholder "> Entrez votre numéro de téléphone </span>
       
@@ -110,14 +114,14 @@ class updateProfileUser_view {
       
       
           <label class="">  -->
-          <input class="input-field"   type="text" style="margin: 6px 0 ;"name="newadresse" 
+          <input required class="input-field"   type="text" style="margin: 6px 0 ;"name="newadresse" 
           placeholder="'. $_SESSION['userAdresse'] .'"  /><!-- <span class="placeholder"> Entrez votre adresse </span>
       
           </label> 
       
       
           <label class="">  -->
-          <input class="input-field"   type="password" style="margin: 6px 0 ;"name="newpassword" 
+          <input required class="input-field"   type="password" style="margin: 6px 0 ;"name="newpassword" 
           placeholder="Entrez un nouveau mot de passe"  />
          <!--  <span class="placeholder"> Entrez un nouveau mot de passe </span>
       
@@ -125,7 +129,7 @@ class updateProfileUser_view {
        -->
       
          <!--  <label class="">  -->
-          <input class="input-field"   type="password" style="margin: 6px 0 ;"name="newpasswordrepeat" 
+          <input required class="input-field"   type="password" style="margin: 6px 0 ;"name="newpasswordrepeat" 
           placeholder="Confirmez votre mot de passe"  />' ;  
           
            
@@ -156,11 +160,10 @@ class updateProfileUser_view {
         echo $wilaya ;
        echo ("<option value='$num' > $wilaya </option> ");
        }
-      echo "</select>" ; 
+      echo '</select>
       
       
-      echo' 
-          <input class="input-field"   type="submit" name="updateProfile" 
+          <input class="input-field" type="submit" name="" 
           value="Modifier" class="box-button" />
         
       

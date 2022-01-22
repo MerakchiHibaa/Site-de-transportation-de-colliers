@@ -5,12 +5,172 @@ session_start()  ;
 class User {
 
     private $db;
+    private $dbb;
+    private $dbbb;
+    private $dbbbb;
+
+
 
     public function __construct(){
         $this->db = new Database;
         $this->dbb = new Database;
+        $this->dbbb = new Database;
+        $this->dbbbb = new Database;
+
+
 
     }
+
+    /* public function updateProfile($data) {
+        
+    } */
+
+    
+public function updateProfile($data) {
+    /*  GLOBAL $msg ;
+     $msg = '' ;
+     GLOBAL $css_class;
+     $css_class = ''; */
+ 
+     
+     //Bind values
+ 
+       
+        /*  $newnom = $_POST['newnom'] ;
+         $newprenom = $_POST['newprenom'] ;
+         $newemail = $_POST['newemail'] ;
+         $newadresse = $_POST['newadresse'] ;
+         $newnumero = $_POST['newnumero'] ; */
+        
+       /*   $newpassword = $_POST['newpassword'] ; */
+ 
+ /*         $newrepeatpassword = $_POST['newpasswordrepeat'] ;
+ 
+  */       
+ /* $newprofileImage = time() . '_' . $_FILES['newprofileImage']['name'] ;
+  $target ="../usersImages/" . $newprofileImage ; */
+         //Bind values
+        /*  echo"<h1>data nom". $data['newnom']." after <h1>" ;
+         echo"<h1>data prenom". $data['newprenom']." after <h1>" ;
+         echo"<h1>data adresse". $data['newadresse']." after <h1>" ;
+         echo"<h1>data numero". $data['newnumero']." after <h1>" ;
+         echo"<h1>data email". $data['newemail']." after <h1>" ;
+         echo"<h1>data password". $data['newpassword']."  after <h1>" ;
+         echo"<h1>data repeat". $data['newpasswordrepeat']."  after <h1>" ;
+         echo"<h1>data photo". $data['newphoto']." after <h1>" ;
+     
+      */
+    
+ /*     echo"<h1>data photo". $data['newphoto']." after <h1>" ;
+  */
+   
+ 
+    /*  $newprofileImage = time() . '_' . $_FILES['newprofileImage']['name'] ;
+     $target ="../usersImages/" . $newprofileImage ;
+ 
+         if( move_uploaded_file($_FILES['newprofileImage']['tmp_name'] , $target) ) {
+         echo"<h1> photoooooooooooo $newprofileImage afteeeeer <h1>" ;
+         
+ 
+         $msg ="Image téléchargée avec succés !" ; 
+         $css_class = "alert-success" ; 
+ 
+        }
+        
+        else {
+         echo"<h1> photoooooooooooo $newprofileImage probleeeeme <h1>" ;
+ 
+            $msg ="OOPS, il y'avait un problème avec le téléchargement de la photo..." ; 
+            $css_class = "alert-danger" ; 
+             
+ 
+        } */
+        /* echo"<h1>data nom". $data['newnom']." after <h1>" ;
+        echo"<h1>data prenom". $data['newprenom']." after <h1>" ;
+        echo"<h1>data adresse". $data['newadresse']." after <h1>" ;
+        echo"<h1>data numero". $data['newnumero']." after <h1>" ;
+        echo"<h1>data email". $data['newemail']." after <h1>" ;
+        echo"<h1>data password". $data['newpassword']."  after <h1>" ;
+        echo"<h1>data repeat". $data['newpasswordrepeat']."  after <h1>" ;
+        echo"<h1>data photo". $data['newphoto']." after <h1>" ;
+        echo"<h1> alert('before select') ; <h1>" ; */
+ 
+        
+   
+        /* echo"<h1> alert('before binding') ; <h1>" ;
+ */
+ 
+        $this->dbb->query('UPDATE users SET nom=:nom , prenom=:prenom , email=:email , numero=:numero , adresse=:adresse , password=:password ,  photo=:photo where ID_user =:ID_user ;' ) ;
+     
+    
+       /*  echo"<h1> alert('before binding') ; <h1>" ;
+  */
+        $this->dbb->bind(':ID_user', $_SESSION['userID']);
+ 
+        $this->dbb->bind(':nom', $data['newnom']);
+       $this->dbb->bind(':prenom', $data['newprenom']);
+       $this->dbb->bind(':numero', $data['newnumero']);
+       $this->dbb->bind(':email', $data['newemail']);
+       $this->dbb->bind(':adresse', $data['newadresse']);
+       $this->dbb->bind(':password', $data['newpassword']);
+       $this->dbb->bind(':photo',  $data['newphoto'] );
+       $this->dbb->execute();
+      
+ 
+       
+        if(!empty($data['newWilayaDep'])) {
+         echo"<h1> alert('wilayadep is  set') ; <h1>" ;
+ 
+            $this->updateWilayaDep($data['newWilayaDep'] , $_SESSION['userID'] ) ; 
+            $_SESSION['userWilayaDep'] = $this->getWilayaDep($_SESSION['userID']) ; 
+    
+         }
+         else {
+ 
+ 
+         }
+ 
+     if(!empty($data['newWilayaArr'])) {
+ 
+         $this->updateWilayaArr($data['newWilayaArr'] , $_SESSION['userID'] ) ; 
+
+         $_SESSION['userWilayaArr'] = $this->getWilayaArr($_SESSION['userID']) ; 
+ 
+ 
+  }
+  else {
+     
+ 
+ 
+ }
+ 
+ 
+ 
+ 
+       
+         $_SESSION['userEmail'] = $data['newemail'];
+         $_SESSION['userNom'] =  $data['newnom'] ;;
+         $_SESSION['userPrenom'] = $data['newprenom'];
+         $_SESSION['userAdresse'] =  $data['newadresse'];
+         $_SESSION['userNumero'] = $data['newnumero'];
+         $_SESSION['userPassword'] = $data['newpassword'];
+         $_SESSION['userPhoto'] =  $data['newphoto'];
+ 
+ 
+     return true ;
+   
+ 
+          //Execute
+          
+ 
+ 
+ 
+     
+ 
+ 
+ }
+ 
+ 
     public function setJustificatif($data) {
         $this->db->query('UPDATE demande_certifie set justificatif=:justificatif where nom=:nom and prenom=:prenom') ;
         $this->db->bind(':justificatif', $data['justificatif']);
@@ -82,7 +242,7 @@ class User {
     }
 
     public function sendRate($rate , $user , $trajet) {
-        echo"<script> alert('inside rate model') ;  </script>" ;
+        echo"<script> alert('inside rate model') ;  </h>" ;
 
         $this->db->query('UPDATE trajets SET
         note=:note
@@ -90,7 +250,7 @@ class User {
              $this->db->bind(':note', $rate);
              $this->db->bind(':ID_trajet', $trajet);
             if( $this->db->execute() ){
-                echo"<script> alert('first execute') ;  </script>" ;
+                echo"<script> alert('first execute') ;  </h>" ;
             }
             else {
                 echo"<script> alert('first execute didnt work') ;  </script>" ;
@@ -400,132 +560,6 @@ public function findAdminByEmail($email) {
 //register transporteur
 
 
-public function updateProfile($data) {
-    GLOBAL $msg ;
-    $msg = '' ;
-    GLOBAL $css_class;
-    $css_class = '';
-
-    echo"<h1>data nom". $data['newnom']." after <h1>" ;
-    echo"<h1>data prenom". $data['newprenom']." after <h1>" ;
-    echo"<h1>data adresse". $data['newadresse']." after <h1>" ;
-    echo"<h1>data numero". $data['newnumero']." after <h1>" ;
-    echo"<h1>data email". $data['newemail']." after <h1>" ;
-    echo"<h1>data password". $data['newpassword']."  after <h1>" ;
-    echo"<h1>data repeat". $data['newpasswordrepeat']."  after <h1>" ;
-    echo"<h1>data photo". $data['newphoto']." after <h1>" ;
-
-
-
-    
-    //Bind values
-
-       if (isset($_POST['updateProfile'])) {
-       /*  $newnom = $_POST['newnom'] ;
-        $newprenom = $_POST['newprenom'] ;
-        $newemail = $_POST['newemail'] ;
-        $newadresse = $_POST['newadresse'] ;
-        $newnumero = $_POST['newnumero'] ; */
-        $newprofileImage = time() . '_' . $_FILES['newprofileImage']['name'] ;
-      /*   $newpassword = $_POST['newpassword'] ; */
-
-/*         $newrepeatpassword = $_POST['newpasswordrepeat'] ;
- */        $target ="../usersImages/" . $newprofileImage ;
-        //Bind values
-       /*  echo"<h1>data nom". $data['newnom']." after <h1>" ;
-        echo"<h1>data prenom". $data['newprenom']." after <h1>" ;
-        echo"<h1>data adresse". $data['newadresse']." after <h1>" ;
-        echo"<h1>data numero". $data['newnumero']." after <h1>" ;
-        echo"<h1>data email". $data['newemail']." after <h1>" ;
-        echo"<h1>data password". $data['newpassword']."  after <h1>" ;
-        echo"<h1>data repeat". $data['newpasswordrepeat']."  after <h1>" ;
-        echo"<h1>data photo". $data['newphoto']." after <h1>" ;
-    
-     */
-   
-    echo"<h1>data photo". $data['newphoto']." after <h1>" ;
-
-    $this->db->query('UPDATE `users` SET `nom`=:nom,`prenom`=:prenom,
-    `email`=:email,`numero`=:numero,`adresse`=:adresse,`password`=:password, `photo`=:photo where ID_user = '.$_SESSION['userID'].';' ) ;
-    
-   
-   
-
-         $this->db->bind(':nom', $data['newnom']);
-        $this->db->bind(':prenom', $data['newprenom']);
-        $this->db->bind(':numero', $data['newnumero']);
-        $this->db->bind(':email', $data['newemail']);
-        $this->db->bind(':adresse', $data['newadresse']);
-        $this->db->bind(':password', $data['newpassword']);
-        $this->db->bind(':photo',  $data['newphoto'] );
-
-          
-
-       if( move_uploaded_file($_FILES['newprofileImage']['tmp_name'] , $target) ) {
-        echo"<h1> photoooooooooooo $newprofileImage afteeeeer <h1>" ;
-
-        $msg ="Image téléchargée avec succés !" ; 
-        $css_class = "alert-success" ; 
-
-       }
-       
-       else {
-           $msg ="OOPS, il y'avait un problème avec le téléchargement de la photo..." ; 
-           $css_class = "alert-danger" ; 
-            
-       }
-
-       $this->db->execute();
-       if(isset($data['newWilayaDep'])) {
-           $this->updateWilayaDep($data['newWilayaDep'] , $_SESSION['userID'] ) ; 
-           $_SESSION['userWilayaDep'] = $this->getWilayaDep($_SESSION['userID']) ; 
-   
-        }
-        else {
-            echo"<script> alert('wilayadep is not set afteeeeer') ; <script>" ;
-
-
-        }
-
-    if(isset($data['newWilayaArr'])) {
-        $this->updateWilayaArr($data['newWilayaArr'] , $_SESSION['userID'] ) ; 
-        $_SESSION['userWilayaArr'] = $this->getWilayaArr($_SESSION['userID']) ; 
-
-
- }
- else {
-    echo"<script> alert('wilayaarriv is not set afteeeeer') ; <script>" ;
-
-
-}
-
-
-
-
-      
-        $_SESSION['userEmail'] = $data['newemail'];
-        $_SESSION['userNom'] =  $data['newnom'] ;;
-        $_SESSION['userPrenom'] = $data['newprenom'];
-        $_SESSION['userAdresse'] =  $data['newadresse'];
-        $_SESSION['userNumero'] = $data['newnumero'];
-        $_SESSION['userPassword'] = $data['newpassword'];
-        $_SESSION['userPhoto'] =  $data['newphoto'];
-
-
-    return true ;
-  
-
-         //Execute
-         
-
-
-
-    }
-
-
-}
-
-
 
 
 
@@ -547,17 +581,15 @@ try {
 
 
 
-     $_SESSION['msg'] = '<div class="alert alert-success">
-                       <strong>Success!</strong> Votre demande a été envoyée.
-                     </div>';
-                     echo "<script> alert(' Votre demande a été envoyée. ') ;</script>" ;
-
+     $_SESSION['msg'] = 'Votre demande a été envoyée.
+                     ';
+/*                      echo "<script> alert(' Votre demande a été envoyée. ') ;</script>" ;
+ */
 }catch (Exception $e) {
-     $_SESSION['msg'] = '<div class="alert alert-warning">
-                       <strong>Warning!</strong> Vous avez déja répondu à cette annonce.
-                     </div>' ;
-                     echo "<script> alert(' Vous avez déja répondu à cette annonce.. ') ;</script>" ;
-
+     $_SESSION['msg'] = ' Vous avez déja répondu à cette annonce.
+                     ' ;
+/*                      echo "<script> alert(' Vous avez déja répondu à cette annonce.. ') ;</script>" ;
+ */
 
   }
 }
@@ -569,7 +601,7 @@ public function insertWilaya( $wilayasDep , $wilayasAr , $data) {
      $this->db->bind(':prenom', $data['prenom']);
      $users = $this->db->resultSet() ;
      foreach ($users as $user){
-         echo "<script> alert('insiiiide foreach1 ) ; </script>" ; 
+       /*   echo "<script> alert('insiiiide foreach1 ) ; </script>" ;  */
          $ID_user = $user['ID_user'];
      }   
 
@@ -583,8 +615,8 @@ public function insertWilaya( $wilayasDep , $wilayasAr , $data) {
      //Execute
      
          foreach ($wilayasDep as $wilDep) {
-             echo "<script> alert('insiiiide foreach wilayadep' ) ; </script>" ; 
-             echo $wilDep ;
+            /*  echo "<script> alert('insiiiide foreach wilayadep' ) ; </script>" ; 
+             echo $wilDep ; */
 
              $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya , type) 
              VALUES (:ID_User, :ID_wilaya , :type)');
@@ -597,8 +629,8 @@ public function insertWilaya( $wilayasDep , $wilayasAr , $data) {
 
          }
          foreach ($wilayasAr as $wilAr) {
-             echo "<script> alert('insiiiide wilayaarriv' ) ; </script>" ; 
-             echo $wilAr ; 
+             /* echo "<script> alert('insiiiide wilayaarriv' ) ; </script>" ; 
+             echo $wilAr ;  */
 
              $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya , type) 
              VALUES (:ID_User, :ID_wilaya , :type)');
@@ -617,8 +649,12 @@ public function insertWilaya( $wilayasDep , $wilayasAr , $data) {
 
 public function updateWilayaDep( $wilayasDep , $ID_user) {
     //get the ID_user
-    $this->db->query('DELETE FROM user_wilaya where ID_User=:ID_user and type="depart") ') ;
+    $this->db->query('DELETE FROM user_wilaya where ID_User=:ID_user and type=:type ') ;
     $this->db->bind(':ID_user', $ID_user);
+    $this->db->bind(':type', 'depart');
+
+    $this->db->execute()  ;
+
     foreach ($wilayasDep as $wilDep) {
        /*  echo "<script> alert('insiiiide foreach wilayadep' ) ; </script>" ; 
         echo $wilDep ; */
@@ -637,12 +673,15 @@ public function updateWilayaDep( $wilayasDep , $ID_user) {
     
     public function updateWilayaArr( $wilayasAr , $ID_user) {
         //get the ID_user
-        $this->db->query('DELETE FROM user_wilaya where ID_User=: ID_user and type="arrivee") ') ;
+        $this->db->query('DELETE FROM user_wilaya where ID_User=:ID_user and type=:type') ;
         $this->db->bind(':ID_user', $ID_user);
-        
+        $this->db->bind(':type', 'arrivee');
+
+        $this->db->execute()  ;
+
         foreach ($wilayasAr as $wilAr) {
-            echo "<script> alert('insiiiide wilayaarriv' ) ; </script>" ; 
-            echo $wilAr ; 
+           /*  echo "<script> alert('insiiiide wilayaarriv' ) ; </script>" ; 
+            echo $wilAr ;  */
     
             $this->db->query('INSERT INTO user_wilaya (ID_User, ID_wilaya , type) 
             VALUES (:ID_User, :ID_wilaya , :type)');
@@ -676,19 +715,19 @@ public function updateWilayaDep( $wilayasDep , $ID_user) {
         
         $wilayasDep = $data['wilaya'] ; 
         $wilayasAr = $data['wilayaA'] ; 
-        echo "<script> alert('avant execuuute' ) ; </script>" ; 
-
+       /*  echo "<script> alert('avant execuuute' ) ; </script>" ; 
+ */
         $this->db->execute()  ; 
        if($this->insertWilaya($wilayasDep , $wilayasAr , $data))  {
-        echo "<script> alert('insiiiide insertwilayatrue' ) ; </script>" ; 
-
+/*         echo "<script> alert('insiiiide insertwilayatrue' ) ; </script>" ; 
+ */
            return true ; 
        }
 
 
           
-       echo "<script> alert('insiiiide return false' ) ; </script>" ; 
-
+/*        echo "<script> alert('insiiiide return false' ) ; </script>" ; 
+ */
             return false;
         
     }

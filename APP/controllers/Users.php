@@ -479,7 +479,7 @@ public function setParameters(){
 }
 
 
-public function updateAnnonceUser () {
+public function updateAnnonceUser() {
     
 
     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -510,11 +510,9 @@ public function updateAnnonceUser () {
 }
 
 
-        public function updateProfile () {
+        public function updateProfile() {
             
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            if (isset($_POST['updateProfile'])) {
+        
                 $data = [  //Init data
                     'newnom' => trim($_POST['newnom']) ,
                     'newprenom' => trim($_POST['newprenom'])  ,
@@ -526,9 +524,35 @@ public function updateAnnonceUser () {
                     'newphoto' => $_FILES['newprofileImage']['name'] ,
                     'newWilayaDep' => $_POST['newWilayaDep'] , 
                     'newWilayaArr' => $_POST['newWilayaArr'] , 
+                    'newnumero' => trim($_POST['newnumero']) , 
+
 
 
                 ];
+
+                if(empty($_FILES['newprofileImage']['name'])){
+                    $data['newphoto'] = $_SESSION['userPhoto'] ;
+
+                }
+
+                else {
+
+                    $newprofileImage = time() . '_' . $_FILES['newprofileImage']['name'] ;
+                    $target ="../usersImages/" . $newprofileImage ;
+                
+                        if( move_uploaded_file($_FILES['newprofileImage']['tmp_name'] , $target) ) {
+                        echo"<h1> photoooooooooooo $newprofileImage afteeeeer <h1>" ;
+                        $data['newphoto'] = $newprofileImage ;
+
+            
+                       }
+                       
+                       else {
+                        $data['newphoto'] ='1640725304_standard.jpg' ;
+
+                
+                       }
+                }
 
                 if(empty($_POST['newnom'])){
                  $data['newnom'] = $_SESSION['userNom'] ;
@@ -550,18 +574,13 @@ public function updateAnnonceUser () {
                    $data['newnumero'] = $_SESSION['userNumero'] ;
 
                 }
-                /* if(empty($_POST['newWilayaDep'])){
-                    $data['newWilayaDep'] = $_SESSION['userWilayaDep'] ;
- 
-                 } */
+               
                
                 
                 if(!empty($_POST['newpassword']) AND empty($_POST['newpasswordrepeat']) ){
                     $_SESSION['msg'] = "Veuillez confirmer votre mot de passe" ; 
                     $_SESSION['status'] = "warning" ; 
-     
-/*                     echo"<h1> Veuillez confirmer votre mot de passe <h1>" ;
- */                     redirect("../routers/profile.php");
+                       redirect("../routers/profile.php");
                  }
                 if(empty($_POST['newpassword'])){
                     $data['newpassword'] = $_SESSION['userPassword'] ;
@@ -571,10 +590,7 @@ public function updateAnnonceUser () {
                    $data['newpasswordrepeat'] = $_SESSION['userPassword'] ;
 
                 }
-                if(empty($_FILES['newprofileImage']['name'])){
-                    $data['newphoto'] = $_SESSION['userPhoto'] ;
-
-                }
+                
 
                 
                
@@ -587,7 +603,7 @@ public function updateAnnonceUser () {
      
                 /*  flash("register", "Choisissez un mot de passe plus long"); 
                 echo"<h1> Choisissez un mot de passe plus long<h1>" ; */
-                  redirect("../routers/profile.php"); 
+                  redirect("../routers/updateProfileUser.php"); 
                 } else if($data['newpassword'] !== $data['newpasswordrepeat']){
                     $_SESSION['msg'] = "Les mots de passe sont différents" ; 
                     $_SESSION['status'] = "warning" ; 
@@ -595,24 +611,43 @@ public function updateAnnonceUser () {
                  /* flash("register", "les mots de passe sont différents"); 
                 echo"<h1> Choisissez un mot de passe plus long<h1>" ;
  */
-                 redirect("../routers/profile.php");    
-            }
+                 redirect("../routers/updateProfileUser.php");  }  
+            
                        
-            echo"<h1>je vais appeler le model  <h1>" ;
+           if($this->userModel->updateProfile($data))  {
+            $_SESSION['msg'] = "Votre profile a été modifié avec succés!" ; 
+            $_SESSION['status'] = "success" ; 
+            redirect("../routers/updateProfileUser.php"); 
 
-            if( $this->userModel->updateProfile($data))  {
-/*                 echo"<h1> UPDATEED <h1>" ;
- */                
+
+
+           }
+           else {
+            $_SESSION['msg'] = "OOPS! ERREUR" ; 
+            $_SESSION['status'] = "danger" ; 
+            redirect("../routers/updateProfileUser.php"); 
+
+
+
+           }
+                
+           
+            
+
+
+          /*   if( )  {
+                echo"<h1> UPDATEED <h1>" ;
+                
 $_SESSION['msg'] = "Votre profile a été modifié avec succés!" ; 
-$_SESSION['status'] = "succes" ; 
+$_SESSION['status'] = "success" ; 
 
 
                  redirect("../routers/profile.php");
              }else{
-                die("Il y'a une erreur...");
-            } 
+                die("Il y'a une erreur UPDATE...");
+            }  */
 
-        }  
+         
 
         }
         
@@ -772,7 +807,7 @@ $_SESSION['status'] = "succes" ;
                 if($loggedAdmin){
                     //Create session
                     $this->createAdminSession($loggedAdmin);
-/*                     echo "<script> alert('after createadminsession'); </script>";
+/*                     echo "<script> alert('after createadminsession'); </>";
  */
 /*                                        echo"<footer> inside createUserSession</footer>" ;
  */                                       redirect("../routers/adminProfile.php");
@@ -1239,7 +1274,8 @@ if($result)
                 $init->login();
                 break;
             case 'updateProfile':
-                $init-> updateProfile() ;
+                echo "<script> alert('insiiiiide updateProfile') ; </script>" ;
+                $init->updateProfile() ;
                 break ;
             /* case 'addannonce': 
                 echo"<script> alert('addannonce') ;</script>" ;  */
@@ -1271,6 +1307,7 @@ if($result)
             case 'contactPage' : 
                 $init->updateContactPage() ;
             case 'updateAnnonceUser' : 
+                
                     $init->updateAnnonceUser() ;
 
                 
