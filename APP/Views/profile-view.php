@@ -101,6 +101,8 @@ public function display() {
                         <h6>Wilayas de départ</h6>
                         <select class="form-control"> ' ;
                           foreach($_SESSION['userWilayaDep'] as $value) {
+                            
+                            
                             $namewilaya = $_controllera->getNameWilaya($value['ID_wilaya']) ; 
                             foreach($namewilaya as $name) {
                               $name =  $name['wilaya'] ; 
@@ -118,11 +120,12 @@ public function display() {
                         <h6>Wilayas d\'arrivée</h6>
                         <select class="form-control"> ' ;
                            foreach($_SESSION['userWilayaArr'] as $value) {
+
                             $namewilaya = $_controllera->getNameWilaya($value['ID_wilaya']) ; 
-                            foreach($namewilaya as $name) {
-                              $name =  $name['wilaya'] ; 
+                            foreach($namewilaya as $nameA) {
+                              $nameA =  $nameA['wilaya'] ; 
                             } 
-                            echo'<option value="'.$value['ID_wilaya'].' "> '. $name .' </option>' ;
+                            echo'<option value="'.$value['ID_wilaya'].' "> '. $nameA .' </option>' ;
     
                           } 
                            

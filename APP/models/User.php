@@ -227,7 +227,7 @@ public function updateProfile($data) {
         $this->db->query('SELECT * FROM user_wilaya where ID_User=:ID_user and type=:type') ;
         $this->db->bind(':ID_user', $ID_user);
         $this->db->bind(':type', "arrivee");
-        $numwilaya =  $this->db->resultSet() ;
+      return $this->db->resultSet() ;
         
         
     }
