@@ -212,6 +212,16 @@ public function readNotification($ID_annonce, $ID_client, $ID_transporteur) {
    return $this->db->execute() ; 
   
 }
+public function getPapiers($userNom , $userPrenom){
+    $this->db->query("SELECT * FROM demande_certifie WHERE nom = :nom and prenom = :prenom LIMIT 1");
+
+    $this->db->bind(':nom', $userNom);
+    $this->db->bind(':prenom', $userPrenom);
+
+    return $this->db->resultSet() ; 
+    
+}
+
 
 public function getNewsInfoById($ID_news) {
     $this->db->query("SELECT * FROM news WHERE ID_news = :ID_news LIMIT 1");

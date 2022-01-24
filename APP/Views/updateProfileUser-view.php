@@ -85,14 +85,14 @@ echo'
            
           
             <!-- <label class="">  -->
-            <input required class="input-field"  type="text" style="margin: 6px 0 ;"name="newnom" 
+            <input  class="input-field"  type="text" style="margin: 6px 0 ;"name="newnom" 
           placeholder="'.$_SESSION['userNom'] .'"  />
                   <!-- <span class="placeholder ">Entrez un nouveau nom</span> -->
       
          <!--  </label>  -->
       
         <!--   <label class=""> label -->
-            <input required class="input-field"   type="text"  name="newprenom" 
+            <input  class="input-field"   type="text"  name="newprenom" 
           placeholder="'.$_SESSION['userPrenom'] .'"  />
                  <!--  <span class="placeholder"> Entrez votre prénom </span>
       
@@ -100,13 +100,13 @@ echo'
        -->
       
          <!--  <label class="">  -->
-          <input required class="input-field"   type="email" style="margin: 6px 0 ;" name="newemail" 
+          <input  class="input-field"   type="email" style="margin: 6px 0 ;" name="newemail" 
           placeholder="'.$_SESSION['userEmail'] .'"  />
                   <!-- <span class="placeholder "> Entrez votre email </span>
       
           </label> 
           <label class="">  -->
-          <input required class="input-field"   type="text" style="margin: 6px 0 ;" name="newnumero" 
+          <input  class="input-field"   type="text" style="margin: 6px 0 ;" name="newnumero" 
           placeholder="'. $_SESSION['userNumero'] .'"  />
                  <!--  <span class="placeholder "> Entrez votre numéro de téléphone </span>
       
@@ -114,14 +114,14 @@ echo'
       
       
           <label class="">  -->
-          <input required class="input-field"   type="text" style="margin: 6px 0 ;"name="newadresse" 
+          <input  class="input-field"   type="text" style="margin: 6px 0 ;"name="newadresse" 
           placeholder="'. $_SESSION['userAdresse'] .'"  /><!-- <span class="placeholder"> Entrez votre adresse </span>
       
           </label> 
       
       
           <label class="">  -->
-          <input required class="input-field"   type="password" style="margin: 6px 0 ;"name="newpassword" 
+          <input  class="input-field"   type="password" style="margin: 6px 0 ;"name="newpassword" 
           placeholder="Entrez un nouveau mot de passe"  />
          <!--  <span class="placeholder"> Entrez un nouveau mot de passe </span>
       
@@ -129,7 +129,7 @@ echo'
        -->
       
          <!--  <label class="">  -->
-          <input required class="input-field"   type="password" style="margin: 6px 0 ;"name="newpasswordrepeat" 
+          <input  class="input-field"   type="password" style="margin: 6px 0 ;"name="newpasswordrepeat" 
           placeholder="Confirmez votre mot de passe"  />' ;  
           
            
@@ -176,7 +176,9 @@ echo'
         <div class="panels-container">
               <div class="panel left-panel">
                 <div class="content">
-                  
+                <a href="../routers/profile.php" class="btn transparent" id="sign-up-btn">
+               Retour
+              </a>
                 </div>
                 <img src="../img/updateProfile.svg" class="image" alt="" />
               </div>

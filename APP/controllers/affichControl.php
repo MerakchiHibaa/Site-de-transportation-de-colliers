@@ -49,6 +49,11 @@ public function getDemande($ID_annonce) {
 
 
 }
+public function getPapiers($userNom , $userPrenom) {
+  return $this->model->getPapiers($userNom , $userPrenom) ; 
+
+
+}
 
         
         public function getUnreadDemandes($ID_user) {

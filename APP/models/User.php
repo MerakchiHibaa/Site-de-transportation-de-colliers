@@ -112,12 +112,15 @@ public function updateProfile($data) {
        $this->dbb->bind(':numero', $data['newnumero']);
        $this->dbb->bind(':email', $data['newemail']);
        $this->dbb->bind(':adresse', $data['newadresse']);
-       $this->dbb->bind(':password', $data['newpassword']);
+       $this->dbb->bind(':password',  password_hash($data['newpassword'], PASSWORD_DEFAULT) );
        $this->dbb->bind(':photo',  $data['newphoto'] );
        $this->dbb->execute();
       
- 
+ /* 
+       $data['newpassword'] = password_hash($_POST['newpassword'], PASSWORD_DEFAULT) ;
+       $data['newpasswordrepeat'] = password_hash($_POST['newpasswordrepeat'], PASSWORD_DEFAULT) ;
        
+        */
         if(!empty($data['newWilayaDep'])) {
          echo"<h1> alert('wilayadep is  set') ; <h1>" ;
  
@@ -138,13 +141,11 @@ public function updateProfile($data) {
  
  
   }
-  else {
+  /* else {
      
  
  
- }
- 
- 
+ } */
  
  
        
@@ -153,7 +154,7 @@ public function updateProfile($data) {
          $_SESSION['userPrenom'] = $data['newprenom'];
          $_SESSION['userAdresse'] =  $data['newadresse'];
          $_SESSION['userNumero'] = $data['newnumero'];
-         $_SESSION['userPassword'] = $data['newpassword'];
+         $_SESSION['userPassword'] =  password_hash($data['newpassword'], PASSWORD_DEFAULT) ;
          $_SESSION['userPhoto'] =  $data['newphoto'];
  
  

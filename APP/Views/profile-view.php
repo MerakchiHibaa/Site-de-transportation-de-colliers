@@ -105,7 +105,7 @@ public function display() {
                             foreach($namewilaya as $name) {
                               $name =  $name['wilaya'] ; 
                             } 
-                          echo'  <option value="'. $value['ID_wilaya'].'">'. $name.' </option>' ;
+                          echo'  <option value="'.$value['ID_wilaya'].'">'. $name.' </option>' ;
     
                          }
                          echo'
@@ -122,7 +122,7 @@ public function display() {
                             foreach($namewilaya as $name) {
                               $name =  $name['wilaya'] ; 
                             } 
-                            echo'<option value="'. $value['ID_wilaya'].' "> '. $name .' </option>' ;
+                            echo'<option value="'.$value['ID_wilaya'].' "> '. $name .' </option>' ;
     
                           } 
                            
@@ -157,23 +157,34 @@ public function display() {
                         echo'  <p style=\'font-weight:600 ;\' class="text-center text-danger" > <i style="padding: 5px" class="fas fa-times"></i>   Refusée </p>
                           <p style=\'font-size:1rem ;\' class="text-center " > ' ; 
 
-                             $_controllera->getJustificatif($_SESSION['userNom'] , $_SESSION['userPrenom']) .' </p>
+                            $justificatif= $_controllera->getJustificatif($_SESSION['userNom'] , $_SESSION['userPrenom'])  ;
     
-    <!-- justificatif -->
-    ' ;
+  
+    if($justificatif) {
+  
+      foreach($justificatif as $value) {
+        echo  $value['justificatif'].' </p>' ;
+      }
+    }
+    
     
     break ;
     
      case "valide" : 
                        echo'   <p style=\'font-weight:600 ;\' class="text-center text-success" > <i style="padding: 5px"  class="fas fa-check"></i>Validée </p>
-                          <p  style=\'font-weight:400 ;\'  > Veuillez rapporter la liste de documents à 
-    suivante au bureau de l’entreprise : <br> 
-    - Deux photos  <br>
-    - Photocopie de la pièce d\'identité  <br>
-    - Photocopie du permis de conduite  <br>
+                          <p  style=\'font-weight:400 ;\'  > <strong>  Veuillez rapporter la liste de documents à 
+    suivante au bureau de l’entreprise : </strong> <br> ' ;
+    $papiers = $_controllera->getPapiers($_SESSION['userNom'] , $_SESSION['userPrenom']);
+if($papiers) {
+  
+    foreach($papiers as $value) {
+      echo  $value['papiers'].' </p>' ;
+    }
+  }
+    echo'
     
     
-    </p>
+    
     
     <!-- affichier les papiers
      -->' ;

@@ -519,6 +519,7 @@ public function updateAnnonceUser() {
                     'newadresse' => trim($_POST['newadresse']) ,
                     'newemail' => trim($_POST['newemail']) ,
                     'newWilayaDep' => trim($_POST['newnumero']) ,
+                    
                     'newpassword' => trim($_POST['newpassword']),
                     'newpasswordrepeat' => trim($_POST['newpasswordrepeat'])  ,
                     'newphoto' => $_FILES['newprofileImage']['name'] ,
@@ -598,6 +599,7 @@ public function updateAnnonceUser() {
  */
 
                 if(strlen($data['newpassword']) < 6){
+
                     $_SESSION['msg'] = "Choisissez un mot de passe plus long" ; 
                     $_SESSION['status'] = "warning" ; 
      
@@ -611,7 +613,10 @@ public function updateAnnonceUser() {
                  /* flash("register", "les mots de passe sont différents"); 
                 echo"<h1> Choisissez un mot de passe plus long<h1>" ;
  */
-                 redirect("../routers/updateProfileUser.php");  }  
+                 redirect("../routers/updateProfileUser.php");  
+                
+                }  
+                
             
                        
            if($this->userModel->updateProfile($data))  {
@@ -1274,8 +1279,8 @@ if($result)
                 $init->login();
                 break;
             case 'updateProfile':
-                echo "<script> alert('insiiiiide updateProfile') ; </script>" ;
-                $init->updateProfile() ;
+/*                 echo "<script> alert('insiiiiide updateProfile') ; </script>" ;
+ */                $init->updateProfile() ;
                 break ;
             /* case 'addannonce': 
                 echo"<script> alert('addannonce') ;</script>" ;  */
