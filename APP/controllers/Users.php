@@ -484,6 +484,31 @@ public function updateAnnonceUser() {
 
     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     
+       
+        if(floatval($_POST['volumeMin']) > floatval($_POST['volumeMax']) ) {
+            $_SESSION['msg'] = "Le volume minimale ne peut pas être plus grand que le volume maximal" ; 
+            $_SESSION['status'] = "warning" ; 
+
+           /*  flash("addAnnonce", "le volume minimale ne peut pas etre plus grand que le volume maximal"); 
+            echo"<h1>le volume minimale ne peut pas etre plus grand que le volume maximal <h1>" ;
+            echo"<script> alert(' vol min > vol max') ;</script>" ; 
+*/
+            redirect("../routers/annonces.php");
+
+
+        }
+        if(floatval($_POST['poidsMin']) > floatval($_POST['poidsMax']) ) {
+            $_SESSION['msg'] = "Le poids minimale ne peut pas être plus grand que le poids maximal" ; 
+            $_SESSION['status'] = "warning" ; 
+
+            /* flash("addAnnonce", "le poids minimale ne peut pas etre plus grand que le poids maximal"); 
+            echo"<h1>le poids minimale ne peut pas etre plus grand que le poids maximal <h1>" ;
+            echo"<script> alert('poids min > poids max ') ;</script>" ; 
+*/
+redirect("../routers/updateAnnonce?modifan=".$_POST['ID_annonce']);
+
+
+        }
         $data = [  //Init data
             'titreAnnonce' => trim($_POST['titreAnnonce']) ,
             'pointDepart' => trim($_POST['pointDepart'])  ,
@@ -499,6 +524,7 @@ public function updateAnnonceUser() {
 
 
         ];
+
     
   if($this->userModel->updateAnnonceUser($data)) {
     $_SESSION['msg'] = "Votre annonce a été modifiée" ; 

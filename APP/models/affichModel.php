@@ -15,6 +15,15 @@ class affichModel {
         return $this->db->resultSet() ;
 
     }
+    public function getPopoularNews() {
+        $this->db->query("SELECT *
+    FROM news
+    ORDER BY viewsNumber DESC
+        LIMIT 4");
+
+    return $this->db->resultSet() ;
+
+    }
     public function getNameWilaya($ID_wilaya) {
         $this->db->query("SELECT * FROM wilaya where ID_wilaya =:ID_wilaya ");
         $this->db->bind(':ID_wilaya', $ID_wilaya);

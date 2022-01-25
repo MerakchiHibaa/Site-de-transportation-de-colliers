@@ -14,7 +14,7 @@ class Accueil_view {
     }
     public function display() {
 
-        session_start() ; 
+     /*    session_start() ;  */
             echo '<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -126,22 +126,29 @@ class Accueil_view {
                         <input type="radio" name="ratio-btn" id="radio1">
                         <input type="radio" name="ratio-btn" id="radio2">
                         <input type="radio" name="ratio-btn" id="radio3">
-                        <input type="radio" name="ratio-btn" id="radio4">
+                        <input type="radio" name="ratio-btn" id="radio4">' ;
         
-        
+                        include_once "../controllers/affichControl.php"  ; 
+                        $_controller = new affichControl();
+                       $popularNews = $_controller->getPopoularNews() ; 
+                       $i = 0 ; 
+                       foreach($popularNews as $value) {
+                           if($i==0) {
+                               echo' <div class="slide first">
+                               <a>  <img class="slider-img" src="../assets/'.$value['image'].'" alt="" /> </a>
+                            </div>' ;
+                           }
+                           else {
+                               echo' <div class="slide"> 
+                               <a>  <img class="slider-img" src="../assets/'.$value['image'].'" alt="" /> </a>
+                            </div>
+                            ' ;
+                           }
+                           $i ++ ;
+      
+                       }
+                  echo'
                   
-                    <div class="slide first">
-                   <a>  <img class="slider-img" src="../assets/slider1.jpg" alt="" /> </a>
-                </div>
-                <div class="slide"> 
-                   <a>  <img class="slider-img" src="../assets/slider2.jpeg" alt="" /> </a>
-                </div>
-                <div class="slide"> 
-                   <a>  <img class="slider-img" src="../assets/slider3.jpg" alt="" /> </a>
-                </div>
-                <div class="slide"> 
-                   <a>  <img class="slider-img" src="../assets/slider4.jpg" alt="" /> </a>
-                </div>
                 <!-------automatic naviation-->
                 <div class="navigation-auto">
                     <div class="auto-btn1"> </div>

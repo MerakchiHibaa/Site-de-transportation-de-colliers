@@ -11,8 +11,8 @@ class AdminProfile_view {
     public function display() {
 
 
- session_start() ; 
-
+/*  session_start() ; 
+ */
  
   
    
@@ -53,18 +53,34 @@ class AdminProfile_view {
    echo $_SESSION['msg'] ;
  } */
 
+ echo'
+
+ <!DOCTYPE html>
+ <html lang="en" dir="ltr">
+   <head>
+     <meta charset="utf-8">
+     <title> </title>
+     <link rel="stylesheet" href="../assetss/bootstrap.min.css">
+     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+     <link rel="stylesheet" href="../assetss/dataTables.bootstrap4.min.css">
+     <link rel="stylesheet" href="../assetss/style.css">
+   </head>
+   <body>' ;
+ 
  echo'     
  
  
        <div class="card ">
          <div class="card-header">
-           <h3><i class="fas fa-users mr-2"></i>User list <span class="float-right">Welcome! <strong>
+           <h3><i class="fas fa-users mr-2"></i>Liste des utilisateurs <span class="float-right">Welcome! <strong>
              <span class="badge badge-lg badge-secondary text-white"> ' ;
+ if(isset($_SESSION['username'])) {
+
  
- /* $prenom = $_SESSION[\'userPrenom\'];
- if (isset($prenom)) {
-   echo $prenom;
- } */
+ $username = $_SESSION['username'];
+ echo $username;
+ 
+}
  echo '</span>
  
            </strong></span></h3>

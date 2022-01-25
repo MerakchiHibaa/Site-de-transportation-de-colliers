@@ -13,6 +13,12 @@
           return $this->model->getJustificatif($nom , $prenom) ; 
 
         }
+
+        public function getPopoularNews(){
+          return $this->model->getPopoularNews() ; 
+
+        }
+
         public function getNameWilaya($ID_wilaya) {
           return $this->model->getNameWilaya($ID_wilaya) ; 
         

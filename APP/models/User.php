@@ -391,11 +391,11 @@ public function findAdminByEmail($email) {
     }
 
 }
-    
+
     //Find user by email or username
     public function findUserByEmail($email){
        
-        $this->db->query('SELECT * FROM users WHERE email = :email LIMIT 1');
+        $this->db->query('SELECT * FROM users WHERE email = :email AND banni="0" LIMIT 1');
         $this->db->bind(':email', $email);
 /*         $result =$this->db->resultSet() ;
  */        /* if($result) {
@@ -789,6 +789,7 @@ public function updateWilayaDep( $wilayasDep , $ID_user) {
                 }
 
     }
+   
 
     //Login user
     public function login($email, $password){
