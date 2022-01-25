@@ -158,7 +158,7 @@ $_controller = new fetch_data_model() ;
                 <div class="col-sm-4 col-lg-3 col-md-3" >
                     <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:500px;">
 
-                    <p align="center"><strong><a href="#">'. $row['titreAnnonce'] .'</a></strong></p>
+                    <p align="center"><strong><a style="text-decoration:none; font-size:1.5rem; color:#4481eb ;">'. $row['titreAnnonce'] .'</a></strong></p>
                     <img src="../assets/'.$row['image'].'" alt="image" style="margin: 20px 0 ;" width="100%" height="40%"> 
                     Type de transport : '. $row['typeTransport'] .' <br />
                     <p>Point de départ : '. $row['pointDepart'].' <br />
@@ -166,7 +166,7 @@ $_controller = new fetch_data_model() ;
                         <p > Poids entre: '. $row['poidsMin'] .' - '. $row['poidsMax'] .' KG</p>
                         <p > Volume entre: '. $row['volumeMin'] .' - '. $row['volumeMax'] .'L</p>
 
-                        <a href="./annonceDetail.php?id='.$row['ID_annonce'].'"> <p align="center" style="font-weight:700;"> Lire la suite </p> </a>
+                        <a style="text-decoration: none;" href="./annonceDetail.php?id='.$row['ID_annonce'].'"> <p align="center" style="font-weight:700;"> Lire la suite </p> </a>
                     </div>
     
                 </div>
@@ -176,14 +176,11 @@ $_controller = new fetch_data_model() ;
         
         else
         {
-            $output = '<h3>No Data Found</h3>';
+            $output = '<a style="margin: 2rem ; text-align: center ; font-weight: 700; text-decoration: none ; font-size:2rem ;"> <i class="far fa-meh"></i> Aucune annonce ne correspond à ces critères ! </a>';
         }
         echo $output;
      } 
 
 
     }
-    else {
-        echo '<h3> action is unset </h3>' ; 
-
-    }
+    

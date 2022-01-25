@@ -229,7 +229,7 @@ class Accueil_view {
         </style>
         <!--begin section left box-->
         <div class="leftbox-section" style="margin: 6rem;
-            margin-left: 2rem;"> 
+            margin-left: 2rem; margin-bottom:1.4rem ;"> 
             <div class="leftbox"> 
                 <div class="content" style="width: 30rem;
             height: 16rem;">
@@ -248,31 +248,31 @@ class Accueil_view {
         <!-- end of container-annonce-->
         
          <!--filters here points de départ, points d’arrivée, type de transport, poids, volume--->
-         <div class="container-filter" > <!--container filtre + cards-->
+         <div class="container-filter" style="margin-bottom: 4rem ;" > <!--container filtre + cards-->
           
-         <div class="wrapper-filter" style="float:left ; margin: 30px ; width: 20%"> 
+         <div class="wrapper-filter" style="float:left ; margin: 30px ; width: 100%"> 
         
          <div  > <!-- id="form-search" class="form search" -->
             <form  method="post"  class="form-inline p-3" id="ajax-form" > <!--  ajax-form -->
-           <div> 
+           <div style="width:50% ; margin: 1.3rem 0 ;"> 
                 <label> <!-- custom-field recherche depart -->
-                    <input  type="text" class="form-control form-control-lg rounded-0 border-info" style="width:100% ; padding:0 ; margin:0.5rem;" placeholder="Départ"   id="searchwilayadep" name="searchwilayadep" > 
+                    <input  type="text" class="form-control form-control-lg rounded-0 border-info" style="width:100% ; padding:0 ; margin:0.5rem;" placeholder="Emplacement de départ"   id="searchwilayadep" name="searchwilayadep" > 
         <!--             <span class="placeholder recherche"> Emplacement de départ </span>
          -->        </label>
             </div>
         
-            <div> 
+            <div style="width:50% ; margin: 1.3rem 0 ;"> 
         
             <label> 
-                <input type="text" class="form-control form-control-lg rounded-0 border-info" value="" placeholder="Destination"   style="width:100% ; padding:0 ; margin:0.5rem;" id="searchwilayaarriv" value="" name="searchwilayaarriv"> <!--  class="form__input"  -->
+                <input type="text" class="form-control form-control-lg rounded-0 border-info" value="" placeholder="Emplacement d\'arrivée"   style="width:100% ; padding:0 ; margin:0.5rem;" id="searchwilayaarriv" value="" name="searchwilayaarriv"> <!--  class="form__input"  -->
         <!--         <span class="placeholder recherche"> Emplacement d\'arriver </span>
          -->
             </label> 
         
             </div>
         
-            <div  style="width:91% ;" >
-                <input  class="btn btn-primary "  style="width:100% ;margin:0.5rem;" type="submit" value="Rechercher"> <!-- id="rechercher" -->
+            <div  style="width: 100% ;" >
+                <input  class="btn btn-primary "  style="width:100% ;margin:0.5rem; font-size:1.4rem; height:3rem ;  margin-bottom: 2rem ;" type="submit" value="Rechercher"> <!-- id="rechercher" -->
               </div>
             </form>
         </div>
@@ -280,28 +280,28 @@ class Accueil_view {
          
         
         
-         <div class="filter" >    <!-- filtre float right-->
+         <div class="filter" style="display:flex ;" >    <!-- filtre float right-->
         
         
-         <div class="filter-group">                    
-            <div class="list-group">
-             <h3>Poids</h3>
+         <div class="filter-group" style="width:100%; display:flex ;">                    
+            <div style="margin:0 3rem; width:25%" class="list-group">
+             <h3 style="font-size:1.3rem ; margin-bottom:2rem; color: #4481eb">Poids</h3>
              <input type="hidden" id="hidden_minimum_poids" value="0" />
                             <input type="hidden" id="hidden_maximum_poids" value="1000" />
                             <p id="poids_show">10 - 20</p>
                             <div id="poids_range"></div>
                         </div>  
                         
-             <div class="list-group">
-             <h3>Volume</h3>
+             <div style="margin:0 3rem; width:25%" class="list-group">
+             <h3 style="font-size:1.3rem ; margin-bottom:2rem; color: #4481eb" >Volume</h3>
              <input type="hidden" id="hidden_minimum_volume" value="0" />
                             <input type="hidden" id="hidden_maximum_volume" value="2000" />
                             <p id="volume_show">10 - 200</p>
                             <div id="volume_range"></div>
                         </div>  
         
-            <div class="list-group">
-             <h3>Type de transport </h3>
+            <div style="margin:0 3rem; width:25%" class="list-group">
+             <h3 style="font-size:1.3rem ; margin-bottom:2rem; color: #4481eb">Type de transport </h3>
                             <div style="height: 180px; overflow-y: auto; overflow-x: hidden;">' ;
             
              
@@ -314,7 +314,7 @@ class Accueil_view {
                             {
                            
                            
-                           echo' <div class="list-group-item checkbox">
+                           echo' <div  class="list-group-item checkbox">
                                 <label><input type="checkbox" class="common_selector typeTransport" value="'.$row["typeTransport"].'" >' .$row["typeTransport"] .'</label>
                             </div> ' ;
                             
@@ -326,8 +326,8 @@ class Accueil_view {
                         </div>
                        
         
-            <div class="list-group">
-             <h3>Moyen de transport</h3>
+            <div style="margin:0 3rem; width:25%" class="list-group">
+             <h3 style="font-size:1.3rem ; margin-bottom:2rem; color: #4481eb"> Moyen de transport</h3>
              <div > <!-- style="height: 180px; overflow-y: auto; overflow-x: hidden;" -->' ;
             
             
@@ -373,22 +373,11 @@ class Accueil_view {
                  
                         <!--end container filtre + cards-->
                         </div>
-                        </div>
+                        
                           
         <!--end filter-->
         
-        
-           
-        
-        
-        <!-- </div> -->
-        
-        
-        
-        <!-- </section> -->
-        
-        
-        <!--   <div class="buttons"> 
+        <div class="buttons"> 
         <a href="./presentation.php" class="btn-up"  > Comment cela fonctionne </a>
         </div>
         
@@ -404,7 +393,19 @@ class Accueil_view {
             </ul>
             
             </div>
-             </footer> -->
+             </footer> 
+        
+           
+        
+        
+        <!-- </div> -->
+        
+        
+        
+        <!-- </section> -->
+          
+        
+        
         
              <style>
         #loading
