@@ -47,8 +47,8 @@ body {
 
 .logo img {
    
-background-color: brown;
-
+/* background-color: brown;
+ */
 width: 5rem;
 
 float: left;
@@ -60,7 +60,7 @@ filter: invert(0);
     vertical-align: middle;
     overflow: hidden;
 
-  background-color: yellowgreen;
+ /*  background-color: yellowgreen; */
     height: 5rem ;
    margin: 0px;
     padding: 2rem ;
@@ -121,15 +121,18 @@ filter: invert(0);
 
 }
 .btn-up:hover::after {
+    color :#000 ; 
     transform: translate(-7px, -7px);
 }
 .btn-up:hover::before {
+    color :#000 ; 
     transform: translate(7px, 7px);
 }
 
 
 .bar {
-background-color: transparent;
+    height: 5rem;
+background-color: #4481eb;
 opacity: 1;
 
 }
@@ -142,7 +145,7 @@ opacity: 1;
     color: white;
 }
 .menu-bar ul li{
-background-color: yellowgreen;
+background-color: transparent;
   float: right;
 
     width: 10rem;
@@ -431,7 +434,6 @@ background-color: yellowgreen;
 /*Style for manual slide navigation*/
 
 .navigation-manual {
-    background-color: #0084a5;
     position: absolute;
     overflow: hidden;
     width: 800px;
@@ -849,8 +851,8 @@ select {
     margin-top: 10px;
     font-family: cursive, sans-serif;
     outline: 0;
-    background: #2ecc71;
-    color: #fff;
+/*     background: #2ecc71;
+ */    color: #fff;
     border: 1px solid crimson;
     padding: 4px;
     border-radius: 9px;
@@ -1039,7 +1041,7 @@ i{
   
   #mainButton .btn-text {
 
-    background-color: #2ecc71;
+    /* background-color: #2ecc71; */
     height: 5rem;
     width: 5rem;
   /*  position: absolute;*/
@@ -1064,8 +1066,8 @@ i{
   }
   
   #mainButton:after {
-
-    background-color: #2ecc71;
+/* 
+    background-color: #2ecc71; */
             height: 5rem;
             width: 5rem;
             position: absolute;
