@@ -216,41 +216,27 @@ class Accueil_view {
         </ul>
         
         </div>
-        <section class="container"> 
         
-        <!-- <div id="mainButton"> -->
-        
-        
-        
-            
-            <!-- <div onclick="openForm()" class="btn-text"  >
-                <i class="fas fa-search"> </i>
-            </div>
-        
-            <div class="modal"> 
-        
-            <div onclick="closeForm()" class="cancel-btn">
-                <i class="fas fa-times"> </i>
-            </div> -->
-        
-        
-        
-        <!-- </div> -->
-        
-        
-        </section>
         
         
         
         <div class="container-annonce">  <!--container annonce-->
+        <style> 
+        .leftbox .content:hover {
+            background: #4481eb;
+        }
         
+        </style>
         <!--begin section left box-->
-        <div class="leftbox-section" style="margin:70px;"> 
+        <div class="leftbox-section" style="margin: 6rem;
+            margin-left: 2rem;"> 
             <div class="leftbox"> 
                 <div class="content" style="width: 30rem;
-            height: 10rem;">
+            height: 16rem;">
                     <h1> Annonces </h1> 
-                    <p> Cette artie explique ce qui existe dans cette partie :p</p>
+                    <p> Vous pouvez rechercher, filtrer et consulter des annonces ! </br> 
+                    Connectez-vous pour pouvoir répondre aux annonces ou publier des annonces ! 
+                    </p>
         
         
                 </div>
@@ -266,11 +252,11 @@ class Accueil_view {
           
          <div class="wrapper-filter" style="float:left ; margin: 30px ; width: 20%"> 
         
-         <div  > <!-- id="form-search"class="form search" -->
+         <div  > <!-- id="form-search" class="form search" -->
             <form  method="post"  class="form-inline p-3" id="ajax-form" > <!--  ajax-form -->
            <div> 
                 <label> <!-- custom-field recherche depart -->
-                    <input  type="text" class="form-control form-control-lg rounded-0 border-info" placeholder="Emplacement de départ"   id="searchwilayadep" name="searchwilayadep" > 
+                    <input  type="text" class="form-control form-control-lg rounded-0 border-info" style="width:100% ; padding:0 ; margin:0.5rem;" placeholder="Départ"   id="searchwilayadep" name="searchwilayadep" > 
         <!--             <span class="placeholder recherche"> Emplacement de départ </span>
          -->        </label>
             </div>
@@ -278,15 +264,15 @@ class Accueil_view {
             <div> 
         
             <label> 
-                <input type="text" class="form-control" value="" placeholder="Emplacement d\'arriver"   id="searchwilayaarriv" value="" name="searchwilayaarriv"> <!--  class="form__input"  -->
+                <input type="text" class="form-control form-control-lg rounded-0 border-info" value="" placeholder="Destination"   style="width:100% ; padding:0 ; margin:0.5rem;" id="searchwilayaarriv" value="" name="searchwilayaarriv"> <!--  class="form__input"  -->
         <!--         <span class="placeholder recherche"> Emplacement d\'arriver </span>
          -->
             </label> 
         
             </div>
         
-            <div>
-                <input  class="btn btn btn-info "  type="submit" value=""> <!-- id="rechercher" -->
+            <div  style="width:91% ;" >
+                <input  class="btn btn-primary "  style="width:100% ;margin:0.5rem;" type="submit" value="Rechercher"> <!-- id="rechercher" -->
               </div>
             </form>
         </div>
@@ -372,7 +358,7 @@ class Accueil_view {
                            </div>
           <!-- filtre-->
         
-          </div>
+         
         
         
         
@@ -384,8 +370,10 @@ class Accueil_view {
         
                         </div>
                     </div>
-                    </div>
+                 
                         <!--end container filtre + cards-->
+                        </div>
+                        </div>
                           
         <!--end filter-->
         
@@ -397,13 +385,13 @@ class Accueil_view {
         
         
         
+        <!-- </section> -->
         
         
-        <div class="buttons"> 
+        <!--   <div class="buttons"> 
         <a href="./presentation.php" class="btn-up"  > Comment cela fonctionne </a>
         </div>
         
-        <!-- </section> -->
         <footer>
             <div class="menu-bar" style="height: 0 ;"> 
                 <ul> 
@@ -416,7 +404,7 @@ class Accueil_view {
             </ul>
             
             </div>
-             </footer>
+             </footer> -->
         
              <style>
         #loading

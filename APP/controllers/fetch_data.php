@@ -56,11 +56,24 @@ if(isset($_POST["action"]))
     {
 /*         echo "<script> alert('just above query') ;</script>";
  */
-        $query = "
+$query = "
+            SELECT * FROM annonces WHERE archive = '0' AND etat='valide' LIMIT 8
+        ";
+
+        if((isset($_POST["minimum_poids"], $_POST["maximum_poids"]) && !empty($_POST["minimum_poids"]) && !empty($_POST["maximum_poids"]))|| (isset($_POST["minimum_volume"], $_POST["maximum_volume"]) && !empty($_POST["minimum_volume"]) && !empty($_POST["maximum_volume"]) ) || isset($_POST["typeTransport"]) || isset($_POST["moyenTransport"])
+        
+        || (isset($_POST["wilayadep"]) && !empty($_POST["wilayadep"] )) || (isset($_POST["wilayaarriv"]) && !empty($_POST["wilayaarriv"] ))  )
+        {
+            $query = "
             SELECT * FROM annonces WHERE archive = '0' AND etat='valide'
         ";
+
+        
+        
         if(isset($_POST["minimum_poids"], $_POST["maximum_poids"]) && !empty($_POST["minimum_poids"]) && !empty($_POST["maximum_poids"]))
         {
+           
+           
             echo "<script> console.log('indife poidmax') ;</script>";
 
             $query .= "
@@ -69,12 +82,14 @@ if(isset($_POST["action"]))
         }
         if(isset($_POST["minimum_volume"], $_POST["maximum_volume"]) && !empty($_POST["minimum_volume"]) && !empty($_POST["maximum_volume"]))
         {
+          
             $query .= "
              AND volumeMin >= '".$_POST["minimum_volume"]."' AND volumeMax <='".$_POST["maximum_volume"]."'
             ";
         }
         if(isset($_POST["typeTransport"]))
         {
+            
             $typeTransport_filter = implode("','", $_POST["typeTransport"]);
             $query .= "
              AND typeTransport IN('".$typeTransport_filter."')
@@ -82,6 +97,7 @@ if(isset($_POST["action"]))
         }
         if(isset($_POST["moyenTransport"]))
         {
+          
             $moyenTransport_filter = implode("','", $_POST["moyenTransport"]);
             $query .= "
              AND moyenTransport IN('".$moyenTransport_filter."')
@@ -112,7 +128,8 @@ if(isset($_POST["action"]))
              AND pointArrivee IN('".$wilayadep_filter."')
             ";
         }
-
+    }
+        
         
        /*  if(isset($_POST["storage"]))
         {
