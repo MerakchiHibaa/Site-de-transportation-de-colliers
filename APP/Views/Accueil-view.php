@@ -135,12 +135,13 @@ class Accueil_view {
                        foreach($popularNews as $value) {
                            if($i==0) {
                                echo' <div class="slide first">
-                               <a>  <img class="slider-img" src="../assets/'.$value['image'].'" alt="" /> </a>
+                               <a href="newsDetail?id='.$value['ID_news'].'">  <img class="slider-img" src="../assets/'.$value['image'].'" alt="" /> </a>
                             </div>' ;
                            }
                            else {
-                               echo' <div class="slide"> 
-                               <a>  <img class="slider-img" src="../assets/'.$value['image'].'" alt="" /> </a>
+                               echo'
+                                <div class="slide"> 
+                               <a href="newsDetail?id='.$value['ID_news'].'">  <img class="slider-img" src="../assets/'.$value['image'].'" alt="" /> </a>
                             </div>
                             ' ;
                            }
@@ -148,6 +149,7 @@ class Accueil_view {
       
                        }
                   echo'
+                  
                   
                 <!-------automatic naviation-->
                 <div class="navigation-auto">
