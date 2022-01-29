@@ -156,7 +156,7 @@ $_controller = new fetch_data_model() ;
             {
                 $output .= '
                 <div class="col-sm-4 col-lg-3 col-md-3" >
-                    <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:500px;">
+                    <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:35rem;">
 
                     <p align="center"><strong><a style="text-decoration:none; font-size:1.5rem; color:#4481eb ;">'. $row['titreAnnonce'] .'</a></strong></p>
                     <img src="../assets/'.$row['image'].'" alt="image" style="margin: 20px 0 ;" width="100%" height="40%"> 

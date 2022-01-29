@@ -37,7 +37,7 @@ class Accueil_view {
             <script src="../js/jquery-ui.js"></script>
              <script src="../js/bootstrap.min.js"></script>
              
-           <link rel="stylesheet" href="./css/bootstrap.min.css">
+           <link rel="stylesheet" href="../css/bootstrap.min.css">
              <link href = "../css/jquery-ui.css" rel = "stylesheet">
             <!-- Custom CSS -->
         <!--     <link href="../css/style.css" rel="stylesheet">
@@ -373,23 +373,28 @@ class Accueil_view {
                  
                         <!--end container filtre + cards-->
                         </div>
+                     
+                        
                         
                           
         <!--end filter-->
+        <div style ="margin: 112rem ; position: relative;"> 
+                        
+                        </div>
         
-        <div class="buttons"> 
-        <a href="./presentation.php" class="btn-up"  > Comment cela fonctionne </a>
+        <div style ="margin : 0 36%  ;" class="buttons"> 
+        <a href="./presentation.php" class="btn-up" style="text-decoration : none; position: relative ; margin-top: 20rem ;  " > Comment cela fonctionne </a>
         </div>
         
-        <footer>
+        <footer style="margin-top: 6rem;">
             <div class="menu-bar" style="height: 0 ;"> 
                 <ul> 
-               <li>  <a href="#"> Accueil </a></li>
-               <li>  <a href="presentation.php"> Présentation </a> </li>
-               <li>   <a href="news.php"> News</a> </li>
-               <li>  <a href="signup.php"> Inscription</a> </li>
-               <li>  <a href="statistiques.php"> Statistiques</a> </li>
-               <li>  <a href="contact.php"> Contact</a> </li>
+               <li>  <a  style="text-decoration : none;" href="#"> Accueil </a></li>
+               <li>  <a  style="text-decoration : none;" href="presentation.php"> Présentation </a> </li>
+               <li>   <a  style="text-decoration : none;" href="news.php"> News</a> </li>
+               <li>  <a  style="text-decoration : none;" href="signup.php"> Inscription</a> </li>
+               <li>  <a  style="text-decoration : none;" href="statistiques.php"> Statistiques</a> </li>
+               <li>  <a  style="text-decoration : none;" href="contact.php"> Contact</a> </li>
             </ul>
             
             </div>
@@ -411,7 +416,7 @@ class Accueil_view {
         #loading
         {
          text-align:center; 
-         background: url(\'./loader.gif\') no-repeat center; 
+         background: url(\'../views/loader.gif\') no-repeat center; 
          height: 150px;
         }
         </style>
@@ -599,12 +604,12 @@ class Accueil_view {
            <!--  <script  src="index.js"> </script>
             <script src="jquery-1.10.2.min.js"></script>
             <script src="jquery-ui.js"></script>
-            <script src="bootstrap.min.js"></script> -->
-             <link rel="stylesheet" href="./css/bootstrap.min.css">  
+            <script src="../css/bootstrap.min.js"></script> -->
+             <link rel="stylesheet" href="../css/bootstrap.min.css">  
         <!--       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
          -->    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-           <script type="text/javascript" src="vanilla-tilt.js"></script>
+           <script type="text/javascript" src="../js/vanilla-tilt.js"></script>
             <script type="text/javascript">
                VanillaTilt.init(document.querySelectorAll(".card"), {
                    max: 25,

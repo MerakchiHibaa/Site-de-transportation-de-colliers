@@ -10,7 +10,7 @@ class annonceDetail_view {
     public function display() {
 
 if (isset($_GET['id'])) {
-    session_start();
+   /*  session_start(); */
   $ID_annonce = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['id']);
 
 } 
@@ -71,6 +71,7 @@ echo $_SESSION['msg'] ;
            
 
             echo '<p class="ann-affich_text"  >  Par : '. $user['username'].'</p>' ;
+
            } else {  
               echo'  <p class="ann-affich_text" style="text-transform:uppercase;" > <a href="profileClient.php?id='. $user['ID_user'] .'">   Par : '.  $user['nom'].' '.$user['prenom'].' </a> </p>
                 <p class="ann-affich_text">  Moyen de transport: '. $getUinfo['moyenTransport'].'</p>' ;
@@ -89,19 +90,26 @@ echo $_SESSION['msg'] ;
  
  <div class="col-xs-offset-2 col-xs-10">
 <button id="voirCarte"class="btn btn-info btn-lg">  <i class="fas fa-directions"  aria-hidden="true" onclick="calcRoute()" ></i></button>
- </div> 
+ </div>
+ 
  <form method="POST" action="../controllers/Users.php" > 
          <input type="hidden" name="type" value ="notif">
         
 
-         <input type="hidden" name="ID_annonce" value="'.  $ID_annonce .'"> 
+         <input type="hidden" name="ID_annonce" value="'.  $ID_annonce .'"> ' ;
+         if(isset($_SESSION['userID'] ))  {
+
+            echo'
          <input type="hidden" name="ID_transporteur" value="'. $_SESSION['userID'] .'"> 
+         ' ;
+         }
+         echo'
          <input type="hidden" name="ID_client" value="'. $getUinfo['ID_User'] .'"> 
          <input type="hidden" name="price" id="price" value=\'0\'>
          <input type="hidden" name="p" id="p" value="'. $getUinfo['p'] .'">
          <input type="hidden" name="q" id="q" value="'. $getUinfo['q'] .'"> ' ;
 
-
+        
   if(isset($_SESSION['userType'] ) ) { 
      
      if ($_SESSION['userType'] == 'client') { 
