@@ -143,7 +143,10 @@
 
         
         public function afficherResponseDemande($ID_annonce , $ID_transporteur) {
+           
             $this->responseDemande->display($ID_annonce , $ID_transporteur) ; 
+          
+
         }
         
         public function afficheruserPofileAdmin($ID_user) {
@@ -298,7 +301,6 @@
 
         public function insertDemandes() {
             if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
-             echo "<h1> insiiide inisertDemandes </h1>";
                 $ID_annonce = (int) $_POST['ID_annonce']  ; //
                 $ID_client = (int) $_POST['ID_client'] ; // client
                 $ID_transporteur = (int) $_POST['ID_transporteur'] ; // transport
@@ -345,7 +347,7 @@ public function setParameters(){
 
 }
         public function setTrajet() {
-            if (isset($_POST['ID_annonce']) && isset($_POST['ID_client']) && isset($_POST['ID_transporteur']) )  {
+           
 /*                 echo "<h1> insiiide inisertDemandes </h1>";
  */                   $ID_annonce = (int) $_POST['ID_annonce']  ; //
                    $ID_client = (int) $_POST['ID_client'] ; // client
@@ -353,12 +355,12 @@ public function setParameters(){
                        
                   
                    $this->userModel->setTrajet($ID_annonce, $ID_client ,$ID_transporteur)  ;
-/*                           redirect("../annonceDetail.php?id=$ID_annonce") ; 
- */   
+                          redirect("../routers/responseDemande.php?idt=$ID_transporteur&ida=$ID_annonce") ; 
+   
                       
    
 
-        }
+        
     }
 
       

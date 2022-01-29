@@ -108,7 +108,7 @@ class Accueil_view {
                           foreach($demandes as $demande) {
                              $transporteur= $_controller->getUserInfoById($demande["ID_transporteur"]);
                              foreach ($transporteur as $transporteur) { 
-                            echo '<li><a class="dropdown-item text-primary " href="reponseDemande.php?idt='.$demande["ID_transporteur"].'&ida='.$demande["ID_annonce"].'"> Le transporteur '.$transporteur["nom"].' '.$transporteur["prenom"].' a répondu à votre annonce. </a>
+                            echo '<li><a class="dropdown-item text-primary " href="responseDemande.php?idt='.$demande["ID_transporteur"].'&ida='.$demande["ID_annonce"].'"> Le transporteur '.$transporteur["nom"].' '.$transporteur["prenom"].' a répondu à votre annonce. </a>
                             <li><hr class="dropdown-divider"></li>' ;
                             
                            

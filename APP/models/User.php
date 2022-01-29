@@ -323,18 +323,15 @@ public function setParameters($ID_annonce, $p, $q ) {
 
              //informer les autres transporteurs que leurs demandes ont été annulées et inforer le transporteur choisi que sa demaned est cnfirmée
 
-/* 
-             $_SESSION['msg'] = '<div class="alert alert-success">
-                               <strong>Success!</strong> Votre demande a été envoyée.
-                             </div>';
-                             echo "<script> alert(' Votre demande a été envoyée. ') ;</script>" ;
+
+             $_SESSION['msg'] = ' Le trajet a été confirmé.
+                             ';
+                             $_SESSION['status'] = "success" ;
+                             
         
        
-             $_SESSION['msg'] = '<div class="alert alert-warning">
-                               <strong>Warning!</strong> Vous avez déja répondu à cette annonce.
-                             </div>' ;
-                             echo "<script> alert(' Vous avez déja répondu à cette annonce.. ') ;</script>" ;
-         */
+            
+        
         
          
     }

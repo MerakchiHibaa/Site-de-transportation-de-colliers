@@ -43,6 +43,7 @@ if (isset($updateUser)) {
 
  echo'
 
+
  <div class="card ">
    <div class="card-header">
           <h3>Modifier l\'annonce <span class="float-right"> <a href="profile.php" class="btn btn-primary">Retour</a> </h3>
