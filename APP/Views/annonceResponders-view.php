@@ -64,7 +64,7 @@ $result = $_controller->getDemande($ID_annonce) ;
         <tr>
           <td>
          <div> 
-              <img src="../assets/slider3.jpg" class="bg-info rounded-circle" width="70rem" style="height: 4rem ;" alt="Cinque Terre">
+              <img src="../usersImages/'.$user['photo'].'" class="bg-info rounded-circle" width="70rem" style="height: 4rem ;" alt="Cinque Terre">
 
                     <span class="fw-bold mb-1">'. $user['nom'].' '.$user['prenom'].' </span>
                     

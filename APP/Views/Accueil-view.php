@@ -126,13 +126,12 @@ class Accueil_view {
             </ul>
 
             <ul class="navbar-nav ml-auto">' ;
-            if($_SESSION['userType'] == "transporteur") {
+            
                 echo'
                 <a style="color: white ; font-size : 1rem;" class="navbar-brand" href="./annonces.php"> <i style="text-align: center ; font-size : 1.7rem; margin-top: 0.1rem ;  padding-top : 1remm ;" class="fas fa-plus"></i> </a>' ;
   
 
-              }
-              echo'
+                            echo'
                 <li class="nav-item dropdown" style="color : white ;">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i style ="color : white ; font-size : 1.8rem;" class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" >'. $count.' </span>
@@ -145,6 +144,11 @@ class Accueil_view {
                              foreach ($transporteur as $transporteur) { 
                             echo '<li><a class="dropdown-item text-primary " href="responseDemande.php?idt='.$demande["ID_transporteur"].'&ida='.$demande["ID_annonce"].'"> Le transporteur '.$transporteur["nom"].' '.$transporteur["prenom"].' a répondu à votre annonce. </a>
                             <li><hr class="dropdown-divider"></li>' ;
+                            if( $_SESSION['userType'] =="transporteur") {
+                                echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$demande["ID_annonce"].'"> Le client '.$transporteur["nom"].' '.$transporteur["prenom"].' a demandé votre service. </a>
+                            <li><hr class="dropdown-divider"></li>' ;
+
+                            }
                             
                            
                           }

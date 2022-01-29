@@ -315,6 +315,24 @@
             }
         }
 
+        public function insertDemandesTrans() {
+         
+                $ID_annonce = (int) $_POST['ID_annonce']  ; //
+                $ID_client = (int) $_POST['ID_client'] ; // client
+                $ID_transporteur = (int) $_POST['ID_transporteur'] ; // transport
+
+               
+                $this->userModel->insertDemandesTrans($ID_annonce, $ID_client ,$ID_transporteur  )  ;
+
+                       redirect("../routers/accueil.php") ; 
+
+                   
+
+            
+        }
+
+        
+
         public function setReport() {
             if (isset($_POST['reportText']) && isset($_POST['ID_trajet']) )  { 
                 $ID_trajet = (int) $_POST['ID_trajet']  ; //
@@ -1267,7 +1285,7 @@ if($result)
                         $numero = $value['numero']  ;
                         $email = $value['email']  ;
                         $type = $value['type']  ;
-                        $image = $value['image']  ;
+                        $image = $value['photo']  ;
                         $certifie = $value['certifie']  ;
                         $note = $value['note']  ;
                         $viewersNumber = $value['viewersNumber']  ;
@@ -1397,32 +1415,36 @@ if($result)
 
           }
           else {
-            echo'<h4 class="title" style ="color: green ;"> Certifié.e</h4>' ;
+            echo'<h3 class="name" style ="color: green ;"> Certifié.e</h3>' ;
           }
           echo'
-          <h4 class="title">'.$adresse.'</h4>
-          <h4 class="title">'.$numero.'</h4>
-          <h4 class="title">'.$email.'</h4>
+          <h3 class="name">'.$adresse.'</h3>
+          <h3 class="name">'.$numero.'</h3>
+          <h3 class="name">'.$email.'</h3>
         </div>
-        <ul class="social">
+
+       
         <form method="POST" action="../controllers/Users.php" > 
         <input type="hidden" name="type" value ="notifTrans">
-        <input type="hidden" name="transporteur" value ="'.$ID_user.'">
-        '; if(isset($_SESSION['ID_annonce'])) {
-            echo'  <input type="hidden" name="transporteur" value ="'.$_SESSION['ID_annonce'].'">
-            ' ;
+        <input type="hidden" name="ID_transporteur" value ="'.$ID_user.'">
+        
+            <input type="hidden" name="ID_annonce" value ="'.$_SESSION['ID_annonce'].'">
+            
 
-        }
-        echo'
+        
+        
       
-        <input type="hidden" name="type" value ="'.$_SESSION['userID'].'">
+        <input type="hidden" name="ID_client" value ="'.$_SESSION['userID'].'">
+        <input type="submit" value="Demander">  </input>
 
-        <input type="submit"> Demander</input>
+        
+
 
 
         </form>
           
-          
+        <ul class="social">
+
         </ul>
       </div>
     </div>
@@ -1478,7 +1500,9 @@ if($result)
                 $init->AnnonceChangeEtat() ;
             case 'notif' : 
                 $init->insertDemandes() ;  
+              
             case 'notifTrans' : 
+                echo"<script> alert('insiide insertDemandesTrans') ;</script>" ;
                 $init->insertDemandesTrans() ;  
 
 

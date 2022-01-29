@@ -518,7 +518,7 @@ public function findAdminByEmail($email) {
      }
 
  }
-    public function returnAnnonceID( $titreAnnonce , $pointDepart , $pointArrivee , $ID_User ) {
+   /*  public function returnAnnonceID( $titreAnnonce , $pointDepart , $pointArrivee , $ID_User ) {
         $this->db->query('SELECT * FROM annonces where titreAnnonce=:titreAnnonce and pointDepart=:pointDepart and pointArrivee=:pointArrivee and ID_User=:ID_User LIMIT 1' );
         $this->db->bind(':titreAnnonce', $titreAnnonce);
         $this->db->bind(':pointDepart', $pointDepart);
@@ -530,7 +530,7 @@ public function findAdminByEmail($email) {
             $_SESSION['ID_annonce'] =$value['ID_annonce'];
         }
 
-    }
+    } */
     public function addAnnonce($data) {
         $this->db->query('INSERT INTO annonces ( titreAnnonce, pointDepart,  pointArrivee, ID_User, moyenTransport, poidsMin, poidsMax, volumeMin , volumeMax , typeTransport , latitudedepart , longitudedepart, latitudearrivee, longitudearrivee , creationDate ) 
         VALUES ( :titreAnnonce, :pointdepart, :pointarrivee, :id_user, :moyentransport, :poidsmin, :poidsmax, :volumemin , :volumemax , :typetransport, :latitudedepart, :longitudedepart, :latitudearrivee, :longitudearrivee , now())');
@@ -550,26 +550,31 @@ public function findAdminByEmail($email) {
         $this->db->bind(':pointarrivee', $data['pointarrivee']);
         $this->db->bind(':pointdepart', $data['pointdepart']);
 
-        //recuper lID de lannonce
-        $this->db->query('SELECT * FROM annonces where titreAnnonce=:titreAnnonce and pointDepart=:pointDepart and pointArrivee=:pointArrivee and ID_User=:ID_user LIMIT 1' );
-        $this->db->bind(':titreAnnonce', $data['titreAnnonce']);
-        $this->db->bind(':pointarrivee', $data['pointarrivee']);
-        $this->db->bind(':pointdepart', $data['pointdepart']);
-
-        $this->db->bind(':id_user', $data['id_user']);
-
-        $LastAnnonce = $this->db->resultSet()  ;
-        foreach($LastAnnonce as $value) {
-            $_SESSION['ID_annonce'] =$value['ID_annonce'];
-        }
-    
-                //recuper lID de lannonce
+        
 
 
+$titre= $data['titreAnnonce'] ; 
 
+$id_user= $data['id_user'] ; 
         $pointdepart = $data['pointdepart'] ; 
         $pointarrivee = $data['pointarrivee'] ; 
         $this->db->execute() ; 
+
+        //recuper lID de lannonce
+/*         $this->dbbb->query('SELECT * FROM annonces where titreAnnonce= :titreAnnonce and pointDepart= :pointDepart and pointArrivee= :pointArrivee and ID_User= :ID_user LIMIT 1' );
+ */        $this->dbbb->query('SELECT * FROM annonces where titreAnnonce= :titreAnnonce AND pointDepart= :pointDepart AND pointArrivee= :pointArrivee AND ID_User= :ID_User LIMIT 1' );
+
+        $this->dbbb->bind(':titreAnnonce', $titre);
+        $this->dbbb->bind(':pointDepart', $pointdepart);
+         $this->dbbb->bind(':pointArrivee', $pointarrivee); 
+         $this->dbbb->bind(':ID_User', $id_user);
+
+        $LastAnnonce = $this->dbbb->resultSet()  ;
+        foreach($LastAnnonce as $value) {
+            $_SESSION['ID_annonce'] = $value['ID_annonce'];
+        }
+    
+                //recuper lID de lannonce
 
 
         
@@ -626,7 +631,24 @@ public function findAdminByEmail($email) {
 
 
 
+public function insertDemandesTrans($ID_annonce, $ID_client ,$ID_transporteur ) {
+    $this->db->query('INSERT INTO demandestrans (ID_annonce, ID_client, ID_transporteur, date) 
+    VALUES (:ID_annonce, :ID_client, :ID_transporteur , :date)'); 
+     $this->db->bind(':ID_annonce', $ID_annonce);
+     $this->db->bind(':ID_transporteur', $ID_transporteur);
+     $this->db->bind(':ID_client', $ID_client);
+     $this->db->bind(':date',  date('Y-m-d H:i:s') );
+     $this->db->execute() ;
 
+    /*  session_start() ;  */
+  
+
+
+
+     $_SESSION['msg'] = 'Votre demande a été envoyée.
+                     ';
+
+}
 
 public function insertDemandes($ID_annonce , $ID_client , $ID_transporteur , $price) {
 try {
