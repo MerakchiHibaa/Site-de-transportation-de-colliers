@@ -76,15 +76,37 @@ class Accueil_view {
         include_once "../controllers/affichControl.php"  ; 
         $_controller = new affichControl();
         $demandes = $_controller->getUnreadDemandes($_SESSION["userID"]) ; 
+        if( $_SESSION['userType'] =="transporteur") {
+            $demandetrans =  $_controller->getUnreadDemandesTrans($_SESSION["userID"]) ; 
+            if ($demandetrans) {
+                $count2 = count($demandetrans);
+            
+            }
+            else {
+                $count2 = 0 ; 
+            }
+        }
+        else {
+            $count2 = 0 ; 
+        }
+        
+        
+      
         if ($demandes) {
-            $count = count($demandes);
+            $count = count($demandes) + $count2 ;
         
         }
         else {
-            $count = 0 ; 
+            $count = 0 + $count2 ; 
         
 
         }
+
+      /*   if( $_SESSION['userType'] =="transporteur") {
+            echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$demande["ID_annonce"].'"> Le client '.$transporteur["nom"].' '.$transporteur["prenom"].' a demandé votre service. </a>
+        <li><hr class="dropdown-divider"></li>' ;
+
+        } */
     
             
            /*  else {
@@ -144,15 +166,27 @@ class Accueil_view {
                              foreach ($transporteur as $transporteur) { 
                             echo '<li><a class="dropdown-item text-primary " href="responseDemande.php?idt='.$demande["ID_transporteur"].'&ida='.$demande["ID_annonce"].'"> Le transporteur '.$transporteur["nom"].' '.$transporteur["prenom"].' a répondu à votre annonce. </a>
                             <li><hr class="dropdown-divider"></li>' ;
-                            if( $_SESSION['userType'] =="transporteur") {
-                                echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$demande["ID_annonce"].'"> Le client '.$transporteur["nom"].' '.$transporteur["prenom"].' a demandé votre service. </a>
-                            <li><hr class="dropdown-divider"></li>' ;
-
-                            }
+                            
                             
                            
                           }
                         }
+                        if( $_SESSION['userType'] == "transporteur") {
+                            foreach($demandetrans as $demande) {
+                                $client= $_controller->getUserInfoById($demande["ID_client"]);
+                                foreach ($client as $client) { 
+                               echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$demande["ID_annonce"].'"> Le client '.$client["nom"].' '.$client["prenom"].' a demandé votre service. </a>
+                               <li><hr class="dropdown-divider"></li>' ;
+                               
+                               
+                              
+                             }
+                           }
+                            
+
+                        }
+
+                        
         
                       }
                       else {
@@ -162,6 +196,7 @@ class Accueil_view {
                           
         
                       }
+
                     } 
                    echo'
                    </ul>
