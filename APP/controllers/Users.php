@@ -347,6 +347,7 @@ public function setParameters(){
 
 }
 public function informRefuse($ID_annonce , $ID_transporteur ) {
+    $this->userModel->informRefuse($ID_annonce, $ID_transporteur) ;
 
 }
         public function setTrajet() {
@@ -425,7 +426,7 @@ public function informRefuse($ID_annonce , $ID_transporteur ) {
                 <div class="col-sm-4 col-lg-3 col-md-3">
                     <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
 
-                    <p align="center"><strong><a href="#">'.$row['ID_User'].'</a></strong></p>
+                    <p align="center"><strong><a href="#"> '.$row['ID_User'].'</a></strong></p>
                      </div>
     
                 </div>
@@ -435,7 +436,7 @@ public function informRefuse($ID_annonce , $ID_transporteur ) {
         
         else
         {
-            $output = '<h3>No Data Found</h3>';
+            $output = '<h3 style="margin: 2rem ; text-align: center ; font-weight: 700; text-decoration: none ; font-size:2rem ;> <i class="far fa-meh" style="margin: 0 1rem ;"> </i> Aucune Suggestion  </h3>';
         }
         echo $output;
      
@@ -951,7 +952,7 @@ public function createAdminSession($admin) {
         if ($user['type'] == 'transporteur') {
 
             $_SESSION['userStatut'] = $user['statut'];
-            redirect("../routers/profile.php");
+            redirect("../routers/accueil.php");
 
         }
 
@@ -1257,29 +1258,178 @@ if($result)
                 $info = $init->userModel->getUserInfoById($row['ID_User'] ) ; 
                 if($info) {
                     foreach($info as $value) {
+                        $ID_user = $value['ID_user']  ;
+
                         $nom = $value['nom']  ;
+                        $adresse = $value['adresse']  ;
+                       
                         $prenom = $value['prenom']  ;
                         $numero = $value['numero']  ;
                         $email = $value['email']  ;
                         $type = $value['type']  ;
+                        $image = $value['image']  ;
+                        $certifie = $value['certifie']  ;
+                        $note = $value['note']  ;
+                        $viewersNumber = $value['viewersNumber']  ;
+
+
+
 
 
                    
                 $output .= '
-                <div class="col-sm-4 col-lg-3 col-md-3">
-                    <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
-        
-                    <p align="center"><strong><a href="#">'.$nom .'</a></strong></p>
-                    <p align="center"><strong><a href="#">'. $prenom.'</a></strong></p>
-                    <p align="center"><strong><a href="#">'. $numero .'</a></strong></p>
-                    <p align="center"><strong><a href="#">'. $email .'</a></strong></p>
-                    <p align="center"><strong><a href="#">'. $type .'</a></strong></p>
-        
-        
-        
-                     </div>
-        
-                </div>
+                <style> 
+                .our-team {
+                    padding: 30px 0 40px;
+                    margin-bottom: 30px;
+                    background-color: #f7f5ec;
+                    text-align: center;
+                    overflow: hidden;
+                    position: relative;
+                  }
+                  
+                  .our-team .picture {
+                    display: inline-block;
+                    height: 130px;
+                    width: 130px;
+                    margin-bottom: 50px;
+                    z-index: 1;
+                    position: relative;
+                  }
+                  
+                  .our-team .picture::before {
+                    content: "";
+                    width: 100%;
+                    height: 0;
+                    border-radius: 50%;
+                    background-color: #1369ce;
+                    position: absolute;
+                    bottom: 135%;
+                    right: 0;
+                    left: 0;
+                    opacity: 0.9;
+                    transform: scale(3);
+                    transition: all 0.3s linear 0s;
+                  }
+                  
+                  .our-team:hover .picture::before {
+                    height: 100%;
+                  }
+                  
+                  .our-team .picture::after {
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    background-color: #1369ce;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: -1;
+                  }
+                  
+                  .our-team .picture img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 50%;
+                    transform: scale(1);
+                    transition: all 0.9s ease 0s;
+                  }
+                  
+                  .our-team:hover .picture img {
+                    box-shadow: 0 0 0 14px #f7f5ec;
+                    transform: scale(0.7);
+                  }
+                  
+                  .our-team .title {
+                    display: block;
+                    font-size: 15px;
+                    color: #4e5052;
+                    text-transform: capitalize;
+                  }
+                  
+                  .our-team .social {
+                    width: 100%;
+                    padding: 0;
+                    margin: 0;
+                    background-color: #1369ce;
+                    position: absolute;
+                    bottom: -100px;
+                    left: 0;
+                    transition: all 0.5s ease 0s;
+                  }
+                  
+                  .our-team:hover .social {
+                    bottom: 0;
+                  }
+                  
+                  .our-team .social li {
+                    display: inline-block;
+                  }
+                  
+                  .our-team .social li a {
+                    display: block;
+                    padding: 10px;
+                    font-size: 17px;
+                    color: white;
+                    transition: all 0.3s ease 0s;
+                    text-decoration: none;
+                  }
+                  
+                  .our-team .social li a:hover {
+                    color: #1369ce;
+                    background-color: #f7f5ec;
+                  }
+                  </style>
+
+
+               
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="our-team">
+        <div class="picture">
+          <img class="img-fluid" src="../usersImages/'.$image .'">
+        </div>
+        <div class="team-content">
+          <h3 class="name">'.$nom.' '.$prenom.'</h3>
+          '; 
+          if($certifie =="0") {
+              echo'<h4 class="title" style ="color: orange ;"> Non Certifié.e </h4>' ;
+
+          }
+          else {
+            echo'<h4 class="title" style ="color: green ;"> Certifié.e</h4>' ;
+          }
+          echo'
+          <h4 class="title">'.$adresse.'</h4>
+          <h4 class="title">'.$numero.'</h4>
+          <h4 class="title">'.$email.'</h4>
+        </div>
+        <ul class="social">
+        <form method="POST" action="../controllers/Users.php" > 
+        <input type="hidden" name="type" value ="notifTrans">
+        <input type="hidden" name="transporteur" value ="'.$ID_user.'">
+        '; if(isset($_SESSION['ID_annonce'])) {
+            echo'  <input type="hidden" name="transporteur" value ="'.$_SESSION['ID_annonce'].'">
+            ' ;
+
+        }
+        echo'
+      
+        <input type="hidden" name="type" value ="'.$_SESSION['userID'].'">
+
+        <input type="submit"> Demander</input>
+
+
+        </form>
+          
+          
+        </ul>
+      </div>
+    </div>
+    
+       
+       
+   
                 ';
             }
         }
@@ -1289,7 +1439,7 @@ if($result)
         
         else
         {
-            $output = '<h3>No Data Found</h3>';
+            $output = '<h3 style="margin: 2rem ; text-align: center ; font-weight: 700; text-decoration: none ; font-size:2rem ;>Aucune Suggestion ! </h3>';
         }
         echo $output;
         }
@@ -1328,6 +1478,11 @@ if($result)
                 $init->AnnonceChangeEtat() ;
             case 'notif' : 
                 $init->insertDemandes() ;  
+            case 'notifTrans' : 
+                $init->insertDemandesTrans() ;  
+
+
+                
             case 'trajet' : 
                 $init->setTrajet() ; 
             case 'report' : 

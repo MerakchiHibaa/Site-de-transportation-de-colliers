@@ -518,7 +518,19 @@ public function findAdminByEmail($email) {
      }
 
  }
-    
+    public function returnAnnonceID( $titreAnnonce , $pointDepart , $pointArrivee , $ID_User ) {
+        $this->db->query('SELECT * FROM annonces where titreAnnonce=:titreAnnonce and pointDepart=:pointDepart and pointArrivee=:pointArrivee and ID_User=:ID_User LIMIT 1' );
+        $this->db->bind(':titreAnnonce', $titreAnnonce);
+        $this->db->bind(':pointDepart', $pointDepart);
+        $this->db->bind(':pointArrivee', $pointArrivee);
+        $this->db->bind(':ID_User', $ID_User);
+
+        $LastAnnonce = $this->db->resultSet()  ;
+        foreach($LastAnnonce as $value) {
+            $_SESSION['ID_annonce'] =$value['ID_annonce'];
+        }
+
+    }
     public function addAnnonce($data) {
         $this->db->query('INSERT INTO annonces ( titreAnnonce, pointDepart,  pointArrivee, ID_User, moyenTransport, poidsMin, poidsMax, volumeMin , volumeMax , typeTransport , latitudedepart , longitudedepart, latitudearrivee, longitudearrivee , creationDate ) 
         VALUES ( :titreAnnonce, :pointdepart, :pointarrivee, :id_user, :moyentransport, :poidsmin, :poidsmax, :volumemin , :volumemax , :typetransport, :latitudedepart, :longitudedepart, :latitudearrivee, :longitudearrivee , now())');
@@ -538,10 +550,30 @@ public function findAdminByEmail($email) {
         $this->db->bind(':pointarrivee', $data['pointarrivee']);
         $this->db->bind(':pointdepart', $data['pointdepart']);
 
+        //recuper lID de lannonce
+        $this->db->query('SELECT * FROM annonces where titreAnnonce=:titreAnnonce and pointDepart=:pointDepart and pointArrivee=:pointArrivee and ID_User=:ID_user LIMIT 1' );
+        $this->db->bind(':titreAnnonce', $data['titreAnnonce']);
+        $this->db->bind(':pointarrivee', $data['pointarrivee']);
+        $this->db->bind(':pointdepart', $data['pointdepart']);
+
+        $this->db->bind(':id_user', $data['id_user']);
+
+        $LastAnnonce = $this->db->resultSet()  ;
+        foreach($LastAnnonce as $value) {
+            $_SESSION['ID_annonce'] =$value['ID_annonce'];
+        }
+    
+                //recuper lID de lannonce
+
+
 
         $pointdepart = $data['pointdepart'] ; 
         $pointarrivee = $data['pointarrivee'] ; 
         $this->db->execute() ; 
+
+
+        
+
 
 
         $wilayad = $this->getCodeWilaya($pointdepart) ; 

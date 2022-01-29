@@ -202,11 +202,16 @@ body {
                      <i class="material-icons">place</i>'.   $user['adresse'].' 
                      </div>
                      <div class="bottom">
-                     <span class="following">
-                       <span class="count">'.   $user['note'].' </span>
-                       <i class="fa fa-star" aria-hidden="true"></i>
-
-                       </span>
+                     ';
+                     if( $user['viewersNumber'] != "0") {
+echo' <span class="following"> <span class="count">'.   $user['note']/ $user['viewersNumber'].' </span>
+<i class="fa fa-star" aria-hidden="true"></i>
+</span>
+' ;
+                     }
+                     echo'
+                       
+                       
                        ' ; 
                        if($user['certifie'] =="1") {
                            echo'

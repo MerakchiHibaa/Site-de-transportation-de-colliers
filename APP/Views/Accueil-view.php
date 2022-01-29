@@ -109,6 +109,7 @@ class Accueil_view {
         
           echo'  <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
+
              <a href="./profile.php">  <img
   src="../usersImages/'. $_SESSION['userPhoto'] .'"
   class="rounded-circle shadow-4"
@@ -116,10 +117,22 @@ class Accueil_view {
   alt="Avatar"
 />
 </a>
-              <a style="color: white ;" class="navbar-brand" href="./profile.php">'. $_SESSION['userNom'].' '.  $_SESSION['userPrenom'].'</a> 
+              <a style="color: white ;" class="navbar-brand" href="./profile.php">'. $_SESSION['userNom'].' '.  $_SESSION['userPrenom'].'</a>
+              ' ;
+              
+              echo'
+              
+
             </ul>
 
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto">' ;
+            if($_SESSION['userType'] == "transporteur") {
+                echo'
+                <a style="color: white ; font-size : 1rem;" class="navbar-brand" href="./annonces.php"> <i style="text-align: center ; font-size : 1.7rem; margin-top: 0.1rem ;  padding-top : 1remm ;" class="fas fa-plus"></i> </a>' ;
+  
+
+              }
+              echo'
                 <li class="nav-item dropdown" style="color : white ;">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i style ="color : white ; font-size : 1.8rem;" class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" >'. $count.' </span>

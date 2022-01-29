@@ -8,7 +8,6 @@ include_once '../controllers/affichControl.php';
 class Annonces_view {
 
     public function display() { 
-      session_start() ; 
 
       echo '<!DOCTYPE html>
       <html lang="en">
@@ -179,14 +178,14 @@ class Annonces_view {
       console.log(titreAnnonce) ; 
       console.log(latitudedepart) ; 
       console.log(volumemin) ; 
-       alert(id_user) ; 
-      alert(titreAnnonce) ; 
+       console.log(id_user) ; 
+      console.log(titreAnnonce) ; 
       
       
       
       
                       $.ajax({
-                  url:"./controllers/Users.php",
+                  url:"../controllers/Users.php",
                   method:"POST",
                   data:{ajaxAnnonce:ajaxAnnonce, id_user:id_user, titreAnnonce, titreAnnonce, latitudedepart:latitudedepart, latitudearrivee:latitudearrivee, volumemin:volumemin, volumemax:volumemax , poidsmin:poidsmin , poidsmax:poidsmax, longitudedepart:longitudedepart, longitudearrivee:longitudearrivee, typetransport:typetransport, moyentransport:moyentransport ,pointdepart:pointdepart, pointarrivee:pointarrivee },
                   success:function(data){
@@ -201,7 +200,7 @@ class Annonces_view {
       
                                 
                      
-      /*                 $(\'#ajax-success\').hide().append("Votre annonce sera publiée dés que les administrateurs la valident, voici quelques suggestions des transporteurs <div class=\'suggestions\'> <?php ?> </div>" ).slideDown() ;
+      /*                 $(\'#ajax-success\').hide().append("Votre annonce sera publiée dés que les administrateurs la valident, voici quelques suggestions des transporteurs " ).slideDown() ;
                                  */  
       
       
@@ -213,7 +212,7 @@ class Annonces_view {
                            
                   }
               });
-              alert("befoore false") ; 
+              console.log("befoore false") ; 
               return false ;
       
       
