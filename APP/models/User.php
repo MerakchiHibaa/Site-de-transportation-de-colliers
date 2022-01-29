@@ -24,7 +24,36 @@ class User {
     /* public function updateProfile($data) {
         
     } */
+   public function informRefuse($ID_annonce, $ID_transporteur) {
+       //inserer dans notif le transporteur accepté
 
+    $this->db->query('INSERT INTO notifications (ID_user, text) 
+    VALUES (:ID_transporteur, :text)'); 
+     $this->db->bind(':ID_transporteur', $ID_transporteur);
+     $this->db->bind(':text', "0");
+     $this->db->execute() ;
+
+       //selectionner les transporteurs refusés
+
+     $this->db->query("SELECT * FROM demandes where ID_annonce = '$ID_annonce' and ID_transporteur != '$ID_transporteur' ") ; 
+     $refus = $this->db->resultSet() ;
+       //pour chaque transporteur refusé
+     foreach ($refus as $ref) {
+           //inserer dans notif le transporteur refusé
+        $this->db->query('INSERT INTO notifications (ID_user, text) 
+        VALUES (:ID_user, :text)'); 
+         $this->db->bind(':ID_user', $ref['ID_transporteur']);
+         $this->db->bind(':text', "1");
+         $this->db->execute() ;
+ 
+ 
+     }
+     
+
+   
+   
+
+    }
     
 public function updateProfile($data) {
     /*  GLOBAL $msg ;
@@ -295,7 +324,7 @@ public function setParameters($ID_annonce, $p, $q ) {
        foreach($annonce as $value) {
            $price = $value['price'];
        }
-
+//set trajet
             $this->db->query('INSERT INTO trajets (ID_annonce, ID_client, ID_transporteur, creationDate , price) 
             VALUES (:ID_annonce, :ID_client, :ID_transporteur , :date , :price)'); 
              $this->db->bind(':ID_annonce', $ID_annonce);
@@ -305,8 +334,13 @@ public function setParameters($ID_annonce, $p, $q ) {
              $this->db->bind(':date',  date('Y-m-d H:i:s') );
              $this->db->execute() ;
 
+//push noification
             
-        
+
+$this->informRefuse($ID_annonce, $ID_transporteur) ;
+
+            
+//delete from demandes        
              $this->db->query('delete from demandes where ID_client=:ID_client and ID_annonce =:ID_annonce');
              $this->db->bind(':ID_annonce', $ID_annonce);
              $this->db->bind(':ID_client', $ID_client);

@@ -338,12 +338,15 @@ public function setParameters(){
                
           
            $this->userModel->setParameters($ID_annonce, $p, $q )  ;
-/*                   redirect("../routers/adminProfile.php") ; 
- */
+                  redirect("../routers/adminProfile.php") ; 
+
               
 
 
 }
+
+}
+public function informRefuse($ID_annonce , $ID_transporteur ) {
 
 }
         public function setTrajet() {

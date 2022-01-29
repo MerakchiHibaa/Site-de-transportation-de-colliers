@@ -69,10 +69,12 @@ class Accueil_view {
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>';
+           /*  if( $_SESSION['userType'] == 'client') { */
+
+            
        /*  <?php  */
         include_once "../controllers/affichControl.php"  ; 
         $_controller = new affichControl();
-        $_SESSION["userID"] ="5" ;
         $demandes = $_controller->getUnreadDemandes($_SESSION["userID"]) ; 
         if ($demandes) {
             $count = count($demandes);
@@ -82,8 +84,27 @@ class Accueil_view {
             $count = 0 ; 
         
 
-        } 
+        }
     
+            
+           /*  else {
+
+                include_once "../controllers/affichControl.php"  ; 
+                $_controller = new affichControl();
+                $demandes = $_controller->getUnreadDemandes($_SESSION["userID"]) ; 
+                if ($demandes) {
+                    $count = count($demandes);
+                
+                }
+                else {
+                    $count = 0 ; 
+                
+        
+                }
+
+
+
+            } */
         
         
           echo'  <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -97,6 +118,7 @@ class Accueil_view {
 </a>
               <a style="color: white ;" class="navbar-brand" href="./profile.php">'. $_SESSION['userNom'].' '.  $_SESSION['userPrenom'].'</a> 
             </ul>
+
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown" style="color : white ;">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -123,7 +145,7 @@ class Accueil_view {
                           
         
                       }
-                       
+                    } 
                    echo'
                    </ul>
                    
@@ -131,7 +153,7 @@ class Accueil_view {
           </div>
           </div>
         </nav> ' ;
-                 } 
+                
             
            echo' <header style="margin-top: 10rem ;">
                 <div class="slider">
