@@ -60,7 +60,7 @@ class Accueil_view {
            } else {
                 echo'
                
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar" style ="background-color : #4481eb ;">
                     <div class="container"> 
         
                 
@@ -88,13 +88,19 @@ class Accueil_view {
         
           echo'  <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li> -->
-                
-                <li class="nav-item dropdown">
+             <a href="./profile.php">  <img
+  src="../usersImages/'. $_SESSION['userPhoto'] .'"
+  class="rounded-circle shadow-4"
+  style="width: 2.7rem; height: 2.5rem;margin: 0 1.8rem ;"
+  alt="Avatar"
+/>
+</a>
+              <a style="color: white ;" class="navbar-brand" href="./profile.php">'. $_SESSION['userNom'].' '.  $_SESSION['userPrenom'].'</a> 
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown" style="color : white ;">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" >'. $count.' </span>
+                  <i style ="color : white ; font-size : 1.8rem;" class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" >'. $count.' </span>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> ' ;
                      
@@ -119,6 +125,8 @@ class Accueil_view {
                       }
                        
                    echo'
+                   </ul>
+                   
             </div>
           </div>
           </div>
@@ -180,42 +188,44 @@ class Accueil_view {
             
             </div> <!--slider-->
             </header>  
-        
+            <footer style=" width: 100% ;"> 
+            <div class="menu-bar" style="width: 100% ;"> 
+            <ul style="background-color: #4481eb; height:5rem ; "> 
+               <li style="background-color: transparent;" >  <a style="color: white; font-size:1.7rem;
+               text-decoration: none ;
+               background-color: transparent;" href="#"> Accueil </a> </li>
+               <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
+               text-decoration: none;
+               background-color: transparent;"  href="presentation.php"> Présentation </a> </li>
+               <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
+               text-decoration: none;
+               background-color: transparent;"  href="news.php"> News </a> </li>
+             <!--   
+             <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
+               text-decoration: none;
+               background-color: transparent;"  href="signup.php"> Inscription </a> </li>
+               <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
+               text-decoration: none;
+               background-color: transparent;"  href="statistiques.php"> Statistiques </a> </li>
+               <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
+               text-decoration: none;
+               background-color: transparent;"  href="contact.php"> Contact </a> </li>
+             -->
+               <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
+               text-decoration: none;
+               background-color: transparent;"  href="signup.php"> Inscription </a> </li>
+               <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
+               text-decoration: none;
+               background-color: transparent;"  href="statistiques.php"> Statistiques </a> </li>
+               <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
+               text-decoration: none;
+               background-color: transparent;"  href="contact.php"> Contact </a> </li>
+            </ul>
             
-        <div class="menu-bar"> 
-        <ul style="background-color: #4481eb; height:5rem ;"> 
-           <li style="background-color: transparent;" >  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;" href="#"> Accueil </a> </li>
-           <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;"  href="presentation.php"> Présentation </a> </li>
-           <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;"  href="news.php"> News </a> </li>
-         <!--   
-         <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;"  href="signup.php"> Inscription </a> </li>
-           <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;"  href="statistiques.php"> Statistiques </a> </li>
-           <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;"  href="contact.php"> Contact </a> </li>
-         -->
-           <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;"  href="signup.php"> Inscription </a> </li>
-           <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;"  href="statistiques.php"> Statistiques </a> </li>
-           <li style="background-color: transparent;">  <a style="color: white; font-size:1.7rem;
-           text-decoration: none;
-           background-color: transparent;"  href="contact.php"> Contact </a> </li>
-        </ul>
-        
-        </div>
+            </div>
+            </footer>
+            
+       
         
         
         
@@ -378,7 +388,7 @@ class Accueil_view {
                         
                           
         <!--end filter-->
-        <div style ="margin: 112rem ; position: relative;"> 
+        <div style ="margin-bottom: 112rem ; position: relative;"> 
                         
                         </div>
         
@@ -386,7 +396,7 @@ class Accueil_view {
         <a href="./presentation.php" class="btn-up" style="text-decoration : none; position: relative ; margin-top: 20rem ;  " > Comment cela fonctionne </a>
         </div>
         
-        <footer style="margin-top: 6rem;">
+        <footer style="margin-top: 6rem;  width: 100% ;">
             <div class="menu-bar" style="height: 0 ;"> 
                 <ul> 
                <li>  <a  style="text-decoration : none;" href="#"> Accueil </a></li>
