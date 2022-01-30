@@ -221,6 +221,20 @@ public function readNotification($ID_annonce, $ID_client, $ID_transporteur) {
    return $this->db->execute() ; 
   
 }
+
+
+
+
+public function readNotifi($ID_annonce, $ID_user, $text) {
+    $this->db->query("update notifications set status='1' WHERE ID_annonce = :ID_annonce and ID_user = :ID_user and text = :text");
+
+   $this->db->bind(':ID_annonce', $ID_annonce);
+   $this->db->bind(':ID_user', $ID_user);
+   $this->db->bind(':text', $text);
+
+   return $this->db->execute() ; 
+  
+}
 public function getPapiers($userNom , $userPrenom){
     $this->db->query("SELECT * FROM demande_certifie WHERE nom = :nom and prenom = :prenom LIMIT 1");
 
@@ -526,7 +540,7 @@ public function getUsersNumber(){
 
  }
  public function getNotifications($ID_user) { 
-    $this->db->query("SELECT * FROM notifications where ID_user = '$ID_user'") ; 
+    $this->db->query("SELECT * FROM notifications where ID_user = '$ID_user' and status='0'") ; 
     return $this->db->resultSet() ;
  }
  public function getUnreadDemandesTrans($ID_user) {

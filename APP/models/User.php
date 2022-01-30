@@ -24,6 +24,16 @@ class User {
     /* public function updateProfile($data) {
         
     } */
+    public function readNotificationTrans($ID_annonce, $ID_client, $ID_transporteur) {
+        $this->db->query("update demandestrans set status='read' WHERE ID_annonce = :ID_annonce and ID_client = :ID_client and ID_transporteur = :ID_transporteur");
+    
+       $this->db->bind(':ID_annonce', $ID_annonce);
+       $this->db->bind(':ID_client', $ID_client);
+       $this->db->bind(':ID_transporteur', $ID_transporteur);
+    
+       return $this->db->execute() ; 
+      
+    }
    public function informRefuse($ID_annonce, $ID_transporteur) {
        //inserer dans notif le transporteur accepté (0)
 
@@ -41,6 +51,7 @@ class User {
      
       
     }
+
 
        //selectionner les transporteurs refusés
 

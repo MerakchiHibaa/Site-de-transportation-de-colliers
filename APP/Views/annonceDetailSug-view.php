@@ -36,6 +36,10 @@ include_once '../controllers/affichControl.php';
 $_controller = new affichControl();
     $getAinfo = $_controller->getAnnonceInfoById($ID_annonce);
     if ($getAinfo) {
+/*         readNotificationTrans($ID_annonce, $ID_client, $ID_transporteur)
+ */       /*  $getAinfo = $_controller->readNotificationTrans($ID_annonce ); */
+
+        
       foreach ($getAinfo as  $getUinfo) {
          
 

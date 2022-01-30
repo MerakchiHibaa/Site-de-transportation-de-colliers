@@ -27,6 +27,22 @@ if (!isset($_SESSION["userID"]) or !isset($_SESSION["userEmail"])) {
      header("Location: profile.php");
     
     }
+
+
+    if (isset($_GET['ida'])&&isset($_GET['idu']) &&isset($_GET['idt'])) {
+    
+      $ID_annonce = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['ida']);
+      $ID_user = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['idu']);
+      $text = preg_replace('/[^a-zA-Z0-9-]/', '', (int)$_GET['idt']);
+
+      $_controllera->readNotifi($ID_annonce, $ID_user, $text) ;
+  
+    
+    }
+
+
+
+
   
   
 

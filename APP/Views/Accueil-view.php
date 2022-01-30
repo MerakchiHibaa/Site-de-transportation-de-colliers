@@ -166,7 +166,8 @@ class Accueil_view {
                         if($notifications) { 
                             foreach($notifications as $notification) { /* accepted or not*/
                                 if($notification['text'] =="0") { 
-                                    echo '<li><a class="dropdown-item text-primary " href="profile.php">  Votre trajet a été confirmé. </a>
+
+                                    echo '<li><a class="dropdown-item text-primary " href="profile.php?ida='.$notification["ID_annonce"].'&idu='.$notification["ID_user"].'&idt='.$notification["text"].'">  Votre trajet a été confirmé. </a>
                                <li><hr class="dropdown-divider"></li>' ;
 
                                 }

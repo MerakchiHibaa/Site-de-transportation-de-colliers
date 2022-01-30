@@ -45,6 +45,15 @@
 
 
         }
+        
+        public function readNotifi($ID_annonce, $ID_user, $text){
+          return $this->model->readNotifi($ID_annonce, $ID_user, $text) ; 
+
+        }
+        public function readNotificationTrans($ID_annonce, $ID_client, $ID_transporteur){
+          return $this->model->readNotification($ID_annonce, $ID_client, $ID_transporteur) ; 
+
+        }
 
         public function readNotification($ID_annonce, $ID_client, $ID_transporteur){
           return $this->model->readNotification($ID_annonce, $ID_client, $ID_transporteur) ; 
