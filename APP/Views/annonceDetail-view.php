@@ -73,7 +73,7 @@ echo $_SESSION['msg'] ;
             echo '<p class="ann-affich_text"  >  Par : '. $user['username'].'</p>' ;
 
            } else {  
-              echo'  <p class="ann-affich_text" style="text-transform:uppercase;" > <a href="profileClient.php?id='. $user['ID_user'] .'">   Par : '.  $user['nom'].' '.$user['prenom'].' </a> </p>
+              echo'  <p class="ann-affich_text" style="text-transform:uppercase;" > <a >   Par : '.  $user['nom'].' '.$user['prenom'].' </a> </p>
                 <p class="ann-affich_text">  Moyen de transport: '. $getUinfo['moyenTransport'].'</p>' ;
 
 
