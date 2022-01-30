@@ -49,7 +49,7 @@ $_controller = new affichControl();
 <div class="container-affich"> 
 
 
-    <div class="ann-affich">' ;
+    <div class="ann-affich" style="background-color:#F4F5FF ;">' ;
      /* if(!empty($_SESSION['msg'])) { 
 
 echo $_SESSION['msg'] ; 
@@ -84,12 +84,13 @@ echo $_SESSION['msg'] ;
             <p class="ann-affich_text">  Volume de l\'objet entre '. $getUinfo['volumeMin'].' et '. $getUinfo['volumeMax'].'</p>
         <p class="ann-affich_text">  Point de départ : '. $getUinfo['pointDepart'] .' Point d\'arrivée : '. $getUinfo['pointArrivee'] .' </p>
 
-    <i class="fa fa-eye" aria-hidden="true">  '.$getUinfo['viewsNumber']  .'   </i> 
+    <i style="margin: 1rem 0; font-size:1.5rem;" class="fa fa-eye" aria-hidden="true">  '.$getUinfo['viewsNumber']  .'   </i> 
 <!--     <a  href="#" class="ann-affich_cta"> Voir sur une carte  </a>
  -->
  
  <div class="col-xs-offset-2 col-xs-10">
-<button id="voirCarte"class="btn btn-info btn-lg">  <i class="fas fa-directions"  aria-hidden="true" onclick="calcRoute()" ></i></button>
+<button style="margin: 1rem 13rem;
+    font-size: 2rem;" id="voirCarte"class="btn btn-info btn-lg">  <i class="fas fa-directions"  aria-hidden="true" onclick="calcRoute()" ></i></button>
  </div>
  
  <form method="POST" action="../controllers/Users.php" > 
@@ -118,7 +119,7 @@ echo $_SESSION['msg'] ;
         
  } else if($_SESSION['userType'] =='transporteur'){ 
 
-  echo'  <input type="submit" value="Répondre à cette annonce" name="send"class="ann-affich_cta " > </input>
+  echo'  <input type="submit" style="margin: 3rem 3rem ;" value="Répondre à cette annonce" name="send"class="ann-affich_cta " > </input>
          </form>' ;
 
  } } echo'
@@ -331,7 +332,7 @@ let pricevalue = document.getElementById(\'price\') ;
 pricevalue.value = price ; 
 console.log(pricevalue.value) ;
         const output = document.getElementById("output") ; 
-        output.innerHTML = "<h4  style=\'margin: 2rem; font-size:1.5rem;\' > De : " + document.getElementById(\'from\').value + " à: " + document.getElementById(\'to\').value + ".<br /> Distance en voiture <i class=\'fas fa-road\'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class=\'fas fa-hourglass-start\'> </i> : " + result.routes[0].legs[0].duration.text + ". <br /> Le tarif est : "+price+" DA.</h4>" ;
+        output.innerHTML = "<h4  style=\'margin: 2rem; font-size:1.2rem;\' > De : " + document.getElementById(\'from\').value + " à: " + document.getElementById(\'to\').value + ".<br /> Distance en voiture <i class=\'fas fa-road\'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Durée: <i class=\'fas fa-hourglass-start\'> </i> : " + result.routes[0].legs[0].duration.text + ". <br /> Le tarif est : "+price+" DA.</h4>" ;
      console.log(document.getElementById(\'from\').value + ".<br /> To: " + document.getElementById(\'to\').value + ".<br /> Driving distance <i class=\'fas fa-road\'> </i> : " + result.routes[0].legs[0].distance.text + ".<br /> Duration: <i class=\'fas fa-hourglass-start\'> </i> : " + result.routes[0].legs[0].duration.text + " et le tarif est : "+price+".</h3>") ;
 
         directionDisplay.setDirections(result) ; 
