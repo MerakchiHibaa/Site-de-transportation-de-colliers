@@ -1,6 +1,13 @@
 
 <?php
 
+/*  *//* Session::CheckSession(); */
+/* $sId =  Session::get('type');
+if ($sId === '1'
+*/ 
+/* if (isset($_SESSION)) {  */
+ 
+
 
 class signalAdmin_view {
 
@@ -130,7 +137,7 @@ $allreports = $_controller->selectAllReports();
 
                          <td> <a href="annonceDetailAdmin.php?id='. $value['ID_annonce'] .'"> '. $value['ID_annonce'] .'  </a></td>
                        
-                         <td> <a href="textSignal.php?id='. $value['textSignal'] .'">  Lien </a></td>
+                         <td> <a href="textSignal.php?id='. $value['ID_report'] .'">  Lien </a></td>
 </tr>
                        
                  ' ; 

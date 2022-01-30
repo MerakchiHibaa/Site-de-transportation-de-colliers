@@ -67,14 +67,93 @@ class AdminProfile_view {
    </head>
    <body>' ;
  
- echo'     
+ echo'
+ 
+ <div class="container">
+
+ <nav class="navbar navbar-expand-md navbar-dark bg-dark card-header">
+   <a class="navbar-brand" href="index.php"><i class="fas fa-home mr-2"></i>Dashboard</a>
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+   </button>
+
+   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+     <ul class="navbar-nav ml-auto">
+
+
+
+   
+      
+       <li class="nav-item">
+
+<a class="nav-link" href="adminProfile.php"><i class="fas fa-users mr-2"></i> Liste des utilisateurs </span></a>
+</li>
+<li class="nav-item">
+
+<a class="nav-link" href="signalAdmin.php"><i class="fas fa-users mr-2"></i> Liste des signalements </span></a>
+</li>
+<li class="nav-item">
+
+<a class="nav-link" href="newsAdmin.php"><i class="fas fa-users mr-2"></i> Liste des publicités </span></a>
+</li>
+<li class="nav-item">
+
+<a class="nav-link" href="contenuAdmin.php"><i class="fas fa-users mr-2"></i> Gestion de contenu </span></a>
+</li>
+         <li class="nav-item
+
+         <?php
+
+                     $path = $_SERVER[\'SCRIPT_FILENAME\'];
+                     $current = basename($path, \'.php\');
+                     if ($current == \'addUser\') {
+                       echo " active ";
+                     }
+
+                    ?>  "> 
+
+            <a class="nav-link" href="addUser.php"><i class="fas fa-user-plus mr-2"></i>Ajouter </span></a>
+         </li>
+    
+        <li class="nav-item  
+       <?php
+
+         $path = $_SERVER[\'SCRIPT_FILENAME\'];
+         $current = basename($path, \'.php\');
+         if ($current == \'adminProfile\') {
+           echo "active ";
+         }
+
+        ?>
+
+        "> 
+
+          <a class="nav-link" href="adminProfile.php?id=<?php if( isset($_SESSION[\'ID_user\'])) {
+            echo $_SESSION[\'ID_user\'];
+
+          }  ?>"><i class="fab fa-500px mr-2"></i>Profile <span class="sr-only">(current)</span></a>
+       </li>
+
+       <li class="nav-item">
+         <a class="nav-link" href="?action=logout"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+       </li>
+     
+
+     
+
+
+     </ul>
+
+   </div>
+ </nav>     
  
  
        <div class="card ">
          <div class="card-header">
            <h3><i class="fas fa-users mr-2"></i>Liste des utilisateurs <span class="float-right">Welcome! <strong>
-             <span class="badge badge-lg badge-secondary text-white"> ' ;
+           ' ;
  if(isset($_SESSION['username'])) {
+   echo'  <span class="badge badge-lg badge-secondary text-white"> ';
 
  
  $username = $_SESSION['username'];

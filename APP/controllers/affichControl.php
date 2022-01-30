@@ -19,6 +19,13 @@
 
         }
 
+        public function getReportById($ID_report){
+          return $this->model->getReportById($ID_report) ; 
+
+        }
+
+        
+
         public function getNameWilaya($ID_wilaya) {
           return $this->model->getNameWilaya($ID_wilaya) ; 
         

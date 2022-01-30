@@ -30,6 +30,7 @@
     include_once '../views/reponseDemande-view.php';
     include_once '../views/updateAnnonce-view.php';
     include_once '../views/signup-view.php';
+    include_once '../views/textSignal-view.php';
     /* session_start() ; */
 
 
@@ -70,6 +71,7 @@
         private $responseDemande ;
         private $signup ;
         private $updateAnnonceUser ; 
+    private $textSignal ; 
 
         
 
@@ -107,7 +109,8 @@
             $this->responseDemande = new responseDemande_view() ; 
             $this->updateAnnonceUser = new updateAnnonce_view() ; 
             $this->annonceDetailSug = new annonceDetailSug_view() ; 
-
+            $this->textSignal = new textSignal_view() ; 
+            
             
 
             
@@ -141,6 +144,10 @@
 
 
             
+        }
+        
+        public function afficherTextSignal($ID_annonce) {
+            $this->textSignal->display($ID_annonce ) ; 
         }
         
         public function afficherUpdateAnnonce($ID_annonce ) {
@@ -1164,30 +1171,30 @@ if ($_POST['selectetat'] == '1') {
             $etat = trim($_POST['selectstatut']) ;
 
         if($etat == '1') {
-          return $this->userModel->userAttente( $ID_user) ;
+           $this->userModel->userAttente( $ID_user) ;
 
         }
         if($etat == '2') {
           
-          return $this->userModel->userTraitement( $ID_user) ;
+           $this->userModel->userTraitement( $ID_user) ;
 
         }
         if($etat == '3') {
-          return $this->userModel->userValider( $ID_user) ;
+           $this->userModel->userValider( $ID_user) ;
 
           
         }
 
         if($etat == '4') {
-          return $this->userModel->userRefuser($ID_user) ;   
+           $this->userModel->userRefuser($ID_user) ;   
         }
         if($etat == '5') {
-            return $this->userModel->userCertifier($ID_user) ;   
+             $this->userModel->userCertifier($ID_user) ;   
           }
       }
 
-/*       redirect('../routers/adminProfile.php');
- */
+      redirect('../routers/adminProfile.php');
+
 
       
     }

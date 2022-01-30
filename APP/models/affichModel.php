@@ -223,7 +223,14 @@ public function readNotification($ID_annonce, $ID_client, $ID_transporteur) {
 }
 
 
+public function getReportById($ID_report) {
+    $this->db->query("SELECT * FROM reports WHERE ID_report = :ID_report LIMIT 1");
 
+    $this->db->bind(':ID_report', $ID_report);
+
+    return $this->db->resultSet() ; 
+
+}
 
 public function readNotifi($ID_annonce, $ID_user, $text) {
     $this->db->query("update notifications set status='1' WHERE ID_annonce = :ID_annonce and ID_user = :ID_user and text = :text");
