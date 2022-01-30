@@ -133,7 +133,11 @@ class Accueil_view {
         
           echo'  <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown" style="color : white ;">
 
+              <a style="color: white ; font-size : 1rem;" class="navbar-brand" href="?q=logout" > <i style="text-align: center ; font-size : 1.7rem; margin-top: 0.1rem ;  " class="fas fa-sign-out-alt"></i> </a>
+</li>
+              
              <a href="./profile.php">  <img
   src="../usersImages/'. $_SESSION['userPhoto'] .'"
   class="rounded-circle shadow-4"
@@ -156,15 +160,17 @@ class Accueil_view {
   
 
                             echo'
-                <li class="nav-item dropdown" style="color : white ;">
+                                          
+                           
+                           
+                            
+                            
+                            <li class="nav-item dropdown" style="color : white ;">
                   <a style="margin: 0 2rem ;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i style ="color : white ; font-size : 1.8rem; " class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" >'. $count.' </span>
                   </a>
 
-                  <li class="nav-item dropdown" style="color : white ;">
-
-                <a style="color: white ; font-size : 1rem;" class="navbar-brand" href="?q=logout" > <i style="text-align: center ; font-size : 1.7rem; margin-top: 0.1rem ;  " class="fas fa-sign-out-alt"></i> </a>
-</li>
+                 
                  
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> ' ;
                      
