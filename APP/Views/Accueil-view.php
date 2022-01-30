@@ -157,8 +157,8 @@ class Accueil_view {
 
                             echo'
                 <li class="nav-item dropdown" style="color : white ;">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i style ="color : white ; font-size : 1.8rem;" class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" >'. $count.' </span>
+                  <a style="margin: 0 2rem ;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i style ="color : white ; font-size : 1.8rem; " class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" >'. $count.' </span>
                   </a>
 
                   <li class="nav-item dropdown" style="color : white ;">

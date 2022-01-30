@@ -1490,33 +1490,40 @@ if($result)
 
 
                
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" style ="height: 100%">
       <div class="our-team">
         <div class="picture">
           <img class="img-fluid" src="../usersImages/'.$image .'">
         </div>
         <div class="team-content">
-          <h3 class="name">'.$nom.' '.$prenom.'</h3>
-          '; 
-          if($certifie =="0") {
-              echo'<h4 class="title" style ="color: orange ;"> Non Certifié.e </h4>' ;
+        ' ;
+        if($certifie =="0") {
+              
+            echo'
+            <div class="team-content"> <h3 class="name">'.$nom.' '.$prenom.' </br> 
+            '.$adresse.' </br>'.$numero.' </br> ' .$email.' </br> Non Certifié.e 
+            </h3> </div>  ' ;
 
-          }
-          else {
-            echo'<h3 class="name" style ="color: green ;"> Certifié.e</h3>' ;
-          }
+        }
+        else {
+            echo'
+            <div class="team-content"> <h3 class="name">'.$nom.' '.$prenom.' </br> 
+            '.$adresse.' </br>'.$numero.' </br> ' .$email.' </br>  Certifié.e 
+            </h3>  ' ;
+        }
+          
+         
+          
           echo'
-          <h3 class="name">'.$adresse.'</h3>
-          <h3 class="name">'.$numero.'</h3>
-          <h3 class="name">'.$email.'</h3>
-        </div>
+       
+        
 
        
         <form method="POST" action="../controllers/Users.php" > 
         <input type="hidden" name="type" value ="notifTrans">
         <input type="hidden" name="ID_transporteur" value ="'.$ID_user.'">
         
-            <input type="hidden" name="ID_annonce" value ="'.$_SESSION['ID_annonce'].'">
+        <div class="team-content"> <input type="hidden" name="ID_annonce" value ="'.$_SESSION['ID_annonce'].'"> </div>
             
 
         
@@ -1530,7 +1537,7 @@ if($result)
 
 
         </form>
-          
+        </div>
         <ul class="social">
 
         </ul>

@@ -274,7 +274,7 @@ class AdminProfile_view {
                            } 
  
                              
-                             if ($value['type'] == 'transporteur') {  
+                             if ($value['type'] == 'transporteur' && $value['demande'] == '1') {  
                            echo'  <div class="card-body">
  
  
