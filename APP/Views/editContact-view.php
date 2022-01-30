@@ -1,3 +1,18 @@
+<?php
+
+
+include_once '../controllers/Users.php';
+include_once '../controllers/affichControl.php';
+
+
+class editContact_view{
+
+    public function display() {
+
+
+
+echo'
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,4 +75,6 @@
              </div>
            </div>
 </body>
-</html>
+</html>' ;
+    }
+}

@@ -128,14 +128,11 @@ class AdminProfile_view {
 
         "> 
 
-          <a class="nav-link" href="adminProfile.php?id=<?php if( isset($_SESSION[\'ID_user\'])) {
-            echo $_SESSION[\'ID_user\'];
-
-          }  ?>"><i class="fab fa-500px mr-2"></i>Profile <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="adminProfile.php"><i class="fab fa-500px mr-2"></i>Profile <span class="sr-only">(current)</span></a>
        </li>
 
        <li class="nav-item">
-         <a class="nav-link" href="?action=logout"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+         <a class="nav-link" href="?q=logoutA"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
        </li>
      
 

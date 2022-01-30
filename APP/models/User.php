@@ -232,6 +232,17 @@ public function updateProfile($data) {
 
     
 
+ public function  updatePresentationPage ($data) {
+    $this->db->query('UPDATE presentation se contenu=:contenu, image=:image , video=:video') ;
+  
+    $this->db->bind(':contenu', $data['contenu']);
+    $this->db->bind(':image', $data['image']);
+    $this->db->bind(':video', $data['video']);
+
+    return $this->db->execute() ;
+
+    
+}
     public function updateContactPage($data) {
         $this->db->query('UPDATE contact set adresse=:adresse, numero=:numero, email=:email, contenu=:contenu, image=:image') ;
         $this->db->bind(':adresse', $data['adresse']);

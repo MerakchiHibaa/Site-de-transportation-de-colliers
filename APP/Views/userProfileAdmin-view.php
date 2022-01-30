@@ -40,12 +40,11 @@ class userProfileAdmin_view {
       ' ;
        
       
-      if (isset($_GET['action']) && $_GET['action'] == 'logout') {
         // Session::set('logout', '<div class="alert alert-success alert-dismissible mt-3" id="flash-msg">
         // <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         // <strong>Success !</strong> You are Logged Out Successfully !</div>');
        /*  Session::destroy(); */
-      }
+      
       
       
       
@@ -212,8 +211,8 @@ class userProfileAdmin_view {
       
       
                     <div class="form-group">
-                      <button type="submit" name="updateuseradmin" class="btn btn-success">Modifier</button>
-                      <a class="btn btn-primary" href="changepass?id='. $getUinfo['ID_user'].'">Changer le mot de passe</a>
+                      <button type="submit" name="updateuseradmin" class="btn btn-primary">Modifier</button>
+                      <!--<a class="btn btn-primary" href="changepass?id='. $getUinfo['ID_user'].'">Changer le mot de passe</a> -->
                     </div>
                    
       

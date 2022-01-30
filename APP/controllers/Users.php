@@ -31,6 +31,10 @@
     include_once '../views/updateAnnonce-view.php';
     include_once '../views/signup-view.php';
     include_once '../views/textSignal-view.php';
+    include_once '../views/editPresentation-view.php';
+    include_once '../views/editContact-view.php';
+
+
     /* session_start() ; */
 
 
@@ -72,6 +76,11 @@
         private $signup ;
         private $updateAnnonceUser ; 
     private $textSignal ; 
+    private $editPres ;
+    private $editContact ; 
+ 
+
+    
 
         
 
@@ -110,6 +119,12 @@
             $this->updateAnnonceUser = new updateAnnonce_view() ; 
             $this->annonceDetailSug = new annonceDetailSug_view() ; 
             $this->textSignal = new textSignal_view() ; 
+            $this->editPres = new editPresentation_view() ; 
+            $this->editContact = new editContact_view() ; 
+
+            
+
+            
             
             
 
@@ -149,6 +164,14 @@
         public function afficherTextSignal($ID_annonce) {
             $this->textSignal->display($ID_annonce ) ; 
         }
+        
+        public function afficherEditContact() {
+            $this->editContact->display( ) ; 
+        }
+        public function afficherEditPresentation() {
+            $this->editPres->display( ) ; 
+        }
+        
         
         public function afficherUpdateAnnonce($ID_annonce ) {
             $this->updateAnnonceUser->display($ID_annonce ) ; 
@@ -515,7 +538,21 @@ public function informRefuse($ID_annonce , $ID_transporteur ) {
   
    }
 
+   public function updatePresentationPage() {
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+    $data = [  //Init data
+       
+        'contenu' => trim($_POST['contenu']) ,
+        'image' => trim($_POST['image']) ,
+        'video' => trim($_POST['video']) ,
 
+    ];
+
+return $this->userModel->updatePresentationPage($data) ; 
+
+
+   }
    public function updateContactPage() {
     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     
@@ -1048,6 +1085,20 @@ public function createAdminSession($admin) {
         redirect("../routers/signup.php");
     }
 
+    public function logoutA(){
+
+       
+        unset($_SESSION['adminID']);
+        unset($_SESSION['adminUsername']);
+        unset($_SESSION['adminEmail']);
+        
+        session_destroy();
+        redirect("../routers/signup.php");
+    }
+
+
+    
+
     public function updateUserAdmin() {
         if (!empty($_POST['wilaya'])){ 
         $data = [
@@ -1057,7 +1108,7 @@ public function createAdminSession($admin) {
             'email' => trim($_POST['email']),
             'numero' => trim($_POST['numero']),
             'type' => trim($_POST['type']),
-            'wilaya' => trim($_POST['wilaya'])
+            'wilaya' => $_POST['wilaya']
 
             /* 'password' => trim($_POST['password']),
             'passwordrepeat' => trim($_POST['passwordrepeat']) */
@@ -1086,26 +1137,27 @@ public function createAdminSession($admin) {
             $ID_user = $_POST['updateiduser'] ;
       
             if ($nom == "" || $prenom == "" ||  $adresse == ""|| $email == "" || $type == ""  || $numero == "" ||$wilaya = ""  ) {
-              $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+             /*  $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error !</strong> Input Fields must not be Empty !</div>';
-                return $msg;
+                return $msg; */
               
               }elseif (filter_var($numero,FILTER_SANITIZE_NUMBER_INT) == FALSE) {
-                $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+               /*  $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <strong>Error !</strong> Enter only Number Characters for Mobile number field !</div>';
-                  return $msg;
+                  return $msg; */
       
       
             }elseif (filter_var($email, FILTER_VALIDATE_EMAIL === FALSE)) {
-              $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
+             /*  $msg = '<div class="alert alert-danger alert-dismissible mt-3" id="flash-msg">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error !</strong> Invalid email address !</div>';
-                return $msg;
+                return $msg; */
             }else{
       
-              return $this->userModel->updateUserAdmin($ID_user, $data) ;
+               $this->userModel->updateUserAdmin($ID_user, $data) ;
+               redirect('../routers/adminProfile.php') ; 
       
       
             }
@@ -1557,6 +1609,11 @@ if($result)
                 $init->setParameters() ;
             case 'contactPage' : 
                 $init->updateContactPage() ;
+                case 'PresentationPage' : 
+                    $init->updatePresentationPage() ;
+
+
+                
             case 'updateAnnonceUser' : 
                 
                     $init->updateAnnonceUser() ;
@@ -1574,6 +1631,11 @@ if($result)
             case 'logout':
                 $init->logout();
                 break;
+                case 'logoutA':
+                    $init->logoutA();
+                    break;
+
+                
             /*  default:
             redirect("../routers/signup.php");  */
         } 
