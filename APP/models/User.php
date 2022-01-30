@@ -32,7 +32,15 @@ class User {
      $this->db->bind(':ID_transporteur', $ID_transporteur);
      $this->db->bind(':ID_annonce', $ID_annonce);
      $this->db->bind(':text', "0");
+     try{ 
      $this->db->execute() ;
+     }
+     catch(PDOException $e) {
+        $_SESSION['msg'] = "Vous avez déja confirmé ce trajet" ; 
+     $_SESSION['status'] = "warning" ; 
+     
+      
+    }
 
        //selectionner les transporteurs refusés
 

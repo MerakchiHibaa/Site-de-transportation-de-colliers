@@ -164,14 +164,14 @@ class Accueil_view {
                      
                       if($count > 0 ) {
                         if($notifications) { 
-                            foreach($notifications as $notification) {
+                            foreach($notifications as $notification) { /* accepted or not*/
                                 if($notification['text'] =="0") { 
-                                    echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$notification["ID_annonce"].'" Votre trajet a été confirmé. </a>
+                                    echo '<li><a class="dropdown-item text-primary " href="profile.php">  Votre trajet a été confirmé. </a>
                                <li><hr class="dropdown-divider"></li>' ;
 
                                 }
                                 else { 
-                                    echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$notification["ID_annonce"].'" Votre demande a été refusée. </a>
+                                    echo '<li><a class="dropdown-item text-primary " >  Votre demande a été refusée. </a>
                                     <li><hr class="dropdown-divider"></li>' ;
 
                                 }  
@@ -192,7 +192,7 @@ class Accueil_view {
                             foreach($demandetrans as $demande) {
                                 $client= $_controller->getUserInfoById($demande["ID_client"]);
                                 foreach ($client as $client) { 
-                               echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$demande["ID_annonce"].'"> Le client '.$client["nom"].' '.$client["prenom"].' a demandé votre service. </a>
+                               echo '<li><a class="dropdown-item text-primary " href="annonceDetailSug.php?id='.$demande["ID_annonce"].'"> Le client '.$client["nom"].' '.$client["prenom"].' a demandé votre service. </a>
                                <li><hr class="dropdown-divider"></li>' ;
                                
                                

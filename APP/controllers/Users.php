@@ -7,6 +7,8 @@
     include_once '../views/addUser-view.php';
     include_once '../views/adminProfile-view.php';
     include_once '../views/annonceDetail-view.php';
+    include_once '../views/annonceDetailSug-view.php';
+
     include_once '../views/annonceDetailAdmin-view.php';
     include_once '../views/annoncesAdmin-view.php';
     include_once '../views/annonceResponders-view.php';
@@ -33,7 +35,7 @@
 
 
 
-
+    
 
 
 
@@ -47,6 +49,7 @@
         private $addUser ; 
         private $adminProfile ; 
         private $annonceDetail ; 
+        private $annonceDetailSug ;
         private $annonceDetailAdmin ; 
         private $annoncesAdmin ;
         private $annoncesResponders ; 
@@ -103,6 +106,9 @@
             $this->userProfileAdmin = new userProfileAdmin_view() ; 
             $this->responseDemande = new responseDemande_view() ; 
             $this->updateAnnonceUser = new updateAnnonce_view() ; 
+            $this->annonceDetailSug = new annonceDetailSug_view() ; 
+
+            
 
             
             $this->signup = new signup_view() ; 
@@ -224,6 +230,13 @@
 
 
         }
+        
+        public function  afficherAnnonceDetailSug($ID_annonce)
+
+        {
+            $this->annonceDetailSug->display($ID_annonce) ; 
+
+        }
         public function  afficherAnnonceResponders($ID_annonce)
 
         {
@@ -240,8 +253,8 @@
             $this->annonceDetailAdmin->display($ID_annonce) ; 
 
         }
-        public function afficherAnnonceDetail() {
-            $this->annonceDetail->display() ; 
+        public function afficherAnnonceDetail($ID_annonce) {
+            $this->annonceDetail->display($ID_annonce) ; 
 
         }
         
@@ -378,8 +391,17 @@ public function informRefuse($ID_annonce , $ID_transporteur ) {
                        
                   
                    $this->userModel->setTrajet($ID_annonce, $ID_client ,$ID_transporteur)  ;
-                          redirect("../routers/responseDemande.php?idt=$ID_transporteur&ida=$ID_annonce") ; 
+
+
+                         
    
+                          if(isset($_POST['type']) &&  $_POST['type'] ="trajetTrans") {
+                            $_SESSION['msg'] = "Le trajet a été confirmé" ; 
+                            $_SESSION['status'] = "Success" ; 
+                            redirect("../routers/annonceDetailSug.php?id=$ID_annonce") ; 
+
+                          }
+                          redirect("../routers/responseDemande.php?idt=$ID_transporteur&ida=$ID_annonce") ; 
                       
    
 
@@ -1504,7 +1526,8 @@ if($result)
               
             case 'notifTrans' : 
                 $init->insertDemandesTrans() ;  
-
+                case 'trajetTrans' : 
+                    $init->setTrajet() ; 
 
                 
             case 'trajet' : 
