@@ -314,6 +314,7 @@
 
             }
         }
+        
 
         public function insertDemandesTrans() {
          
@@ -1502,7 +1503,6 @@ if($result)
                 $init->insertDemandes() ;  
               
             case 'notifTrans' : 
-                echo"<script> alert('insiide insertDemandesTrans') ;</script>" ;
                 $init->insertDemandesTrans() ;  
 
 

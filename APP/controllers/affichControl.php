@@ -61,6 +61,11 @@ public function getPapiers($userNom , $userPrenom) {
 
 }
 
+public function getNotifications($ID_user) {
+  return $this->model->getNotifications($ID_user) ; 
+
+}
+
 public function getUnreadDemandesTrans($ID_user) {
   return $this->model->getUnreadDemandesTrans($ID_user) ; 
 

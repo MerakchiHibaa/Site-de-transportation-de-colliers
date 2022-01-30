@@ -76,6 +76,8 @@ class Accueil_view {
         include_once "../controllers/affichControl.php"  ; 
         $_controller = new affichControl();
         $demandes = $_controller->getUnreadDemandes($_SESSION["userID"]) ; 
+        $notifications = $_controller->getNotifications($_SESSION["userID"]) ;
+        $count3 = count($notifications);
         if( $_SESSION['userType'] =="transporteur") {
             $demandetrans =  $_controller->getUnreadDemandesTrans($_SESSION["userID"]) ; 
             if ($demandetrans) {
@@ -93,11 +95,11 @@ class Accueil_view {
         
       
         if ($demandes) {
-            $count = count($demandes) + $count2 ;
+            $count = count($demandes) + $count2 + $count3;
         
         }
         else {
-            $count = 0 + $count2 ; 
+            $count = 0 + $count2 +$count3 ; 
         
 
         }
@@ -161,6 +163,21 @@ class Accueil_view {
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> ' ;
                      
                       if($count > 0 ) {
+                        if($notifications) { 
+                            foreach($notifications as $notification) {
+                                if($notification['text'] =="0") { 
+                                    echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$notification["ID_annonce"].'" Votre trajet a été confirmé. </a>
+                               <li><hr class="dropdown-divider"></li>' ;
+
+                                }
+                                else { 
+                                    echo '<li><a class="dropdown-item text-primary " href="annonceDetail.php?id='.$notification["ID_annonce"].'" Votre demande a été refusée. </a>
+                                    <li><hr class="dropdown-divider"></li>' ;
+
+                                }  
+                           }
+
+                        }
                           foreach($demandes as $demande) {
                              $transporteur= $_controller->getUserInfoById($demande["ID_transporteur"]);
                              foreach ($transporteur as $transporteur) { 
@@ -187,7 +204,7 @@ class Accueil_view {
                         }
 
                         
-        
+                        
                       }
                       else {
                           

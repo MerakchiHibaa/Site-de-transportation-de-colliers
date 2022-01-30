@@ -25,11 +25,12 @@ class User {
         
     } */
    public function informRefuse($ID_annonce, $ID_transporteur) {
-       //inserer dans notif le transporteur accepté
+       //inserer dans notif le transporteur accepté (0)
 
-    $this->db->query('INSERT INTO notifications (ID_user, text) 
-    VALUES (:ID_transporteur, :text)'); 
+    $this->db->query('INSERT INTO notifications (ID_user, ID_annonce, text) 
+    VALUES (:ID_transporteur, :ID_annonce , :text)'); 
      $this->db->bind(':ID_transporteur', $ID_transporteur);
+     $this->db->bind(':ID_annonce', $ID_annonce);
      $this->db->bind(':text', "0");
      $this->db->execute() ;
 
@@ -39,10 +40,12 @@ class User {
      $refus = $this->db->resultSet() ;
        //pour chaque transporteur refusé
      foreach ($refus as $ref) {
-           //inserer dans notif le transporteur refusé
-        $this->db->query('INSERT INTO notifications (ID_user, text) 
-        VALUES (:ID_user, :text)'); 
+           //inserer dans notif le transporteur refusé (1)
+        $this->db->query('INSERT INTO notifications (ID_user, ID_annonce, text) 
+        VALUES (:ID_user, :ID_annonce , :text)'); 
          $this->db->bind(':ID_user', $ref['ID_transporteur']);
+         $this->db->bind(':ID_annonce', $ID_annonce);
+
          $this->db->bind(':text', "1");
          $this->db->execute() ;
  
@@ -332,7 +335,12 @@ public function setParameters($ID_annonce, $p, $q ) {
              $this->db->bind(':ID_transporteur', $ID_transporteur);
              $this->db->bind(':price', $price);
              $this->db->bind(':date',  date('Y-m-d H:i:s') );
+             try { 
              $this->db->execute() ;
+             }
+             catch (Exception $e) {
+                $_SESSION['msg'] = ' Ce trajet a été déja confirmé.
+                                ' ; }
 
 //push noification
             
@@ -632,6 +640,7 @@ $id_user= $data['id_user'] ;
 
 
 public function insertDemandesTrans($ID_annonce, $ID_client ,$ID_transporteur ) {
+    try { 
     $this->db->query('INSERT INTO demandestrans (ID_annonce, ID_client, ID_transporteur, date) 
     VALUES (:ID_annonce, :ID_client, :ID_transporteur , :date)'); 
      $this->db->bind(':ID_annonce', $ID_annonce);
@@ -639,14 +648,17 @@ public function insertDemandesTrans($ID_annonce, $ID_client ,$ID_transporteur ) 
      $this->db->bind(':ID_client', $ID_client);
      $this->db->bind(':date',  date('Y-m-d H:i:s') );
      $this->db->execute() ;
+    }
 
     /*  session_start() ;  */
   
 
 
 
-     $_SESSION['msg'] = 'Votre demande a été envoyée.
-                     ';
+    catch (Exception $e) {
+        $_SESSION['msg'] = ' Vous avez déja répondu à cette annonce.
+                        ' ;
+    }
 
 }
 

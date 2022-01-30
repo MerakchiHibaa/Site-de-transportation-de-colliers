@@ -525,7 +525,10 @@ public function getUsersNumber(){
  public function pushNotification() {
 
  }
-
+ public function getNotifications($ID_user) { 
+    $this->db->query("SELECT * FROM notifications where ID_user = '$ID_user'") ; 
+    return $this->db->resultSet() ;
+ }
  public function getUnreadDemandesTrans($ID_user) {
     $this->db->query("SELECT * FROM demandestrans where ID_client = '$ID_user' and status = 'unread'") ; 
     return $this->db->resultSet() ;
