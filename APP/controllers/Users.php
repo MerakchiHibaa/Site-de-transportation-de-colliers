@@ -1032,9 +1032,13 @@ public function createAdminSession($admin) {
    
     public function logout(){
         unset($_SESSION['userID']);
+        unset($_SESSION['userNom']);
+        unset($_SESSION['userPrenom']);
+        unset($_SESSION['userNumero']);
+        unset($_SESSION['userType']);
         unset($_SESSION['userEmail']);
         session_destroy();
-       /*  redirect("../routers/signup.php"); */
+        redirect("../routers/signup.php");
     }
 
     public function updateUserAdmin() {
@@ -1557,17 +1561,17 @@ if($result)
            $init->afficherSignup() ;
         }
         
-    }/* else if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-        /* switch($_GET['q']){
+    }else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['q'])){
+         switch($_GET['q']){
             //we add cases for get here
             case 'logout':
                 $init->logout();
                 break;
-             default:
-            redirect("../routers/signup.php"); 
+            /*  default:
+            redirect("../routers/signup.php");  */
         } 
         
-    } */
+    }
 
 
   /*   

@@ -152,7 +152,7 @@ class Accueil_view {
             <ul class="navbar-nav ml-auto">' ;
             
                 echo'
-                <a style="color: white ; font-size : 1rem;" class="navbar-brand" href="./annonces.php"> <i style="text-align: center ; font-size : 1.7rem; margin-top: 0.1rem ;  padding-top : 1remm ;" class="fas fa-plus"></i> </a>' ;
+                <a style="color: white ; font-size : 1rem;" class="navbar-brand" href="./annonces.php"> <i style="text-align: center ; font-size : 1.7rem; margin-top: 0.1rem ; " class="fas fa-plus"></i> </a>' ;
   
 
                             echo'
@@ -160,6 +160,12 @@ class Accueil_view {
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i style ="color : white ; font-size : 1.8rem;" class="fas fa-envelope"></i>  <span class="badge bg-secondary" id="count" >'. $count.' </span>
                   </a>
+
+                  <li class="nav-item dropdown" style="color : white ;">
+
+                <a style="color: white ; font-size : 1rem;" class="navbar-brand" href="?q=logout" > <i style="text-align: center ; font-size : 1.7rem; margin-top: 0.1rem ;  " class="fas fa-sign-out-alt"></i> </a>
+</li>
+                 
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> ' ;
                      
                       if($count > 0 ) {
