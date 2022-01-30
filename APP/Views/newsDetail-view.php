@@ -39,10 +39,10 @@ class newsDetail_view {
               }
             }
         
-      echo'  <div class="container-affich"> 
+      echo'  <div class="container-affich" > 
         
         
-            <div class="ann-affich">' ;
+            <div class="ann-affich" style="background-color: #F4F5FF ;">' ;
              /* if(!empty($_SESSION['msg'])) { 
         
         echo $_SESSION['msg'] ; 
@@ -72,8 +72,8 @@ class newsDetail_view {
         
         
         
-                    <i class="fa fa-eye" aria-hidden="true"> '.$getUinfo['viewsNumber'] .'  </i>
-                    <p class="ann-affich_text"> Créée le : '. $getUinfo['creationDate'] .' </p>';
+                    <i style="margin-top: 10rem ;" class="fa fa-eye" aria-hidden="true"> <strong> '.$getUinfo['viewsNumber'] .' </strong> </i>
+                    <p  class="ann-affich_text"> Créée le : '. $getUinfo['creationDate'] .' </p>';
          
         
                     

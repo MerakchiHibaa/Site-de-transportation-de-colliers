@@ -28,8 +28,10 @@ class news_view{
             <title>News</title>
         </head>
         <body>
+        <h3 style="margin: 20px ;"> <i style="font-size:3rem; margin:10px ;" class="far fa-newspaper"></i>  Nos Publicités:</h3>
+
+        <div style="display:flex;"> ' ;
         
-        <h3 style="margin: 20px ;"> <i style="font-size:3rem; margin:10px ;" class="far fa-newspaper"></i>  Nos Publicités:</h3>' ;
         
      
         include_once '../controllers/affichControl.php';
@@ -46,16 +48,17 @@ class news_view{
                     {
                         $output .= '
                         <div class="col-sm-4 col-lg-3 col-md-3">
-                            <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
+                            <div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:40rem;">
         
                             <p align="center"><strong><a href="#">'. $row['article'] .'</a></strong></p>
-                             '. $row['contenu'] .' <br />
                              <img src="../assets/'.$row['image'].'" style="margin: 20px 0 ;" alt="" width="100%" height="50%" >
+                             <p align="center"> </p>
+                             '. $row['contenu'] .' <br />
         
                             <p>Date de création : '. $row['creationDate'].' <br />
-                                nombre de vues : '. $row['viewsNumber'] .' <br />
+                                nombre de vues : <strong> '. $row['viewsNumber'] .' </strong> <br />
                                
-                                <a href="newsDetail.php?id='.$row['ID_news'].'"> Voir en détail </a>
+                                <a style="margin-bottom:0 ; text-decoration: none ;" href="newsDetail.php?id='.$row['ID_news'].'"> Voir en détail </a>
                             </div>
             
                         </div>
@@ -65,7 +68,7 @@ class news_view{
                 
                 else
                 {
-                    $output = '<h3>No Data Found</h3>';
+                    $output = '<h3>Aucune publicité n\'est disponible.</h3>';
                 }
                 echo $output;
             
@@ -81,6 +84,7 @@ class news_view{
                         </div>
                     </div>
         </body>
+        </div>
         </html>' ; 
 
 
