@@ -398,8 +398,9 @@ public function informRefuse($ID_annonce , $ID_transporteur ) {
                           if(isset($_POST['type']) &&  $_POST['type'] ="trajetTrans") {
                             $_SESSION['msg'] = "Le trajet a été confirmé" ; 
                             $_SESSION['status'] = "Success" ; 
-                            redirect("../routers/annonceDetailSug.php?id=$ID_annonce") ; 
                             $this->userModel->readNotificationTrans($ID_annonce, $ID_client, $ID_transporteur) ; 
+
+                            redirect("../routers/annonceDetailSug.php?id=$ID_annonce") ; 
 
                           }
                           redirect("../routers/responseDemande.php?idt=$ID_transporteur&ida=$ID_annonce") ; 
